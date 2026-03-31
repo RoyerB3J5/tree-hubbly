@@ -1,0 +1,29 @@
+---
+import en from '../../../i18n/en';
+import es from '../../../i18n/es';
+import Layout from '../../../layouts/Layout.astro';
+import Funcionality from '../../../sections/Funcionality.astro';
+import CallAction from '../../../sections/main/CallAction.astro';
+import Hero from '../../../sections/main/Hero.astro';
+import Questions from '../../../sections/main/Questions.astro';
+import Pillars from '../../../sections/Pillars.astro';
+import Reason from '../../../sections/Reason.astro';
+import type { Language } from '../../../types/language.type';
+export function getStaticPaths() {
+  return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+}
+
+export const defaultRedirect = '/en';
+
+const lang = Astro.params.lang as Language;
+const translations = { es, en };
+const t = translations[lang];
+---
+<Layout lang={lang} t={t}>
+  <Hero content={t.systemPage.hero} />
+  <Reason content={t.systemPage.reason} />
+  <Pillars content={t.systemPage.pilars} />
+  <Funcionality content={t.systemPage.functionality} />
+  <Questions content={t.main.questions} />
+  <CallAction content={t.systemPage.call} />
+</Layout>

@@ -1,0 +1,47 @@
+---
+type Translations = typeof import("../../i18n/en").default;
+type PathContent = Translations["main"]["path"];
+interface Props {
+  content: PathContent;
+}
+const { content } = Astro.props as Props;
+---
+<section class="w-full flex justify-center items-center bg-back relative overflow-hidden py-10 md:py-20 lg:py-30">
+  <div class="w-full relative flex justify-center items-center">
+    <div class="absolute left-0 top-0 bottom-0 h-full w-full z-4 hidden lg:block">
+      <div class="flex flex-col justify-between items-start pl-16 3xl:pl-30 rounded-tr-3xl rounded-br-3xl aspect-506/828 3xl:aspect-606/828 h-full w-auto relative pb-10 pt-15 overflow-hidden animation-zoom-out">
+        <img src="/images/path.webp" alt="Path" class="w-full h-full absolute object-center object-cover inset-0 -z-20" width="700" height="467">
+        <div class="absolute w-full h-full inset-0 -z-10 back-path"></div>
+        <img src="/images/path.svg" alt="Icono PathSSS" class="w-9 h-9" width="16" height="16">
+        <p set:html={content.description} class="text-paragraph text-[48px] font-bold leading-[120%]"></p>
+      </div>
+    </div>
+    <div class="w-full max-w-screen xl:max-w-7xl px-5 xl:px-0  flex flex-col lg:flex-row justify-center lg:justify-end items-center relative z-5 gap-8 lg:gap-0">
+      <p set:html={content.description} class="text-primary text-[32px] font-bold leading-[120%] block lg:hidden text-center"></p>
+      <div class="flex flex-col justify-center items-end gap-8 py-0 lg:py-10.5 relative">
+        <div class="absolute w-0.5 h-[85%] md:h-full bg-[#D7DADC] md:top-0 left-5 md:left-6.75"></div>
+        {
+          content.items.map((item,index)=>( 
+            <div class="flex justify-center items-center gap-4 md:gap-6 3xl:gap-12 w-full z-5 animation-fade-left-2
+            " >
+              <div class="w-10 md:w-13.5 h-10 md:h-13.5 bg-secondary border-2 md:border-4 border-white rounded-full flex justify-center items-center box-border shrink-0">
+                <p class="text-primary text-[20px] md:text-[24px] font-bold leading-[140%]">{index+1}</p>
+              </div>
+              <div class="flex flex-col md:flex-row justify-center items-start gap-2 md:gap-4 bg-white border border-[#DEDEDE] rounded-2xl md:rounded-3xl box-content p-4 md:p-6 3xl:p-10 w-full">
+                <div class="flex justify-start items-center gap-2">
+                  <img src={`/images/${item.icon}.svg`} alt={`Icono ${item.icon}`} width="24" height="24" class="w-6 h-6 mt-0 md:mt-1">
+                  <h3 class="text-[16px] font-bold leading-[150%] text-primary block md:hidden">{item.title}</h3>
+                </div>
+                <div class="w-full flex flex-col justify-center items-start gap-2">
+                  <h3 class="text-[16px] font-bold leading-[150%] text-primary hidden md:block">{item.title}</h3>
+                  <p class="text-[12px] md:text-[14px] leading-[150%] text-primary " set:html={item.description}></p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+  
+</section>

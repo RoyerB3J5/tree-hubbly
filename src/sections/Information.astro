@@ -1,0 +1,21 @@
+---
+import type { SystemPage } from "../types/system.type";
+import Dashboard from "./Dashboard.astro";
+import Lists from "./Lists.astro";
+
+type InformationSection = SystemPage["information"];
+interface Props {
+  content: InformationSection;
+}
+const { content } = Astro.props as Props;
+---
+<section class="w-full flex justify-center items-center bg-back">
+  <div class="flex flex-col justify-center items-center gap-8 md:gap-20 lg:gap-30 py-10 md:py-20 lg:py-30 container-full">
+    {
+      content && <>
+        <Lists content={content.lists}/>
+        <Dashboard content={content.dashboard}/>
+      </>
+    }
+  </div>
+</section>

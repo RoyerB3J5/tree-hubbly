@@ -1,0 +1,15 @@
+---
+type Translations = typeof import("../i18n/en").default;
+type OpinionContent = Translations["about"]["opinion"];
+interface Props {
+  content: OpinionContent;
+}
+const { content } = Astro.props as Props;
+---
+<section class="container-full flex flex-col justify-center items-center gap-4 py-10 md:py-20 lg:py-30">
+  <div class="bg-secondary rounded-full py-1 px-4 flex justify-center items-center animation-fade-down">
+    <p class="text-[14px] font-bold md:font-semibold leading-[150%] text-primary">{content.tag}</p>
+  </div>
+  <h3 set:html={content.title} class="text-[20px] md:text-[32px] lg:text-[48px] font-bold leading-[140%] md:leading-[120%] text-primary text-center animation-up-fast-2"></h3>
+  </h3>
+</section>

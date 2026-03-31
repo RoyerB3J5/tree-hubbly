@@ -1,0 +1,69 @@
+---
+type Translations = typeof import("../i18n/en").default;
+type PhilosophyContent = Translations["about"]["philosophy"];
+interface Props {
+  content: PhilosophyContent;
+}
+const { content } = Astro.props as Props;
+---
+<section class="w-full flex justify-center items-center bg-primary back-content">
+  <div class="container-full flex flex-col md:flex-row justify-between items-center py-10 md:py-28.5 lg:py-38.5 gap-8 md:gap-10 xl:gap-23">
+    <div class="w-full md:w-[45%] flex flex-col justify-center items-start gap-8 order-2 md:order-1">
+      <h2 set:html={content.title} class="text-[32px] md:text-[48px] font-bold text-paragraph leading-[130%] md:leading-[120%] animation-zoom-in-3"></h2>
+      <div class="flex flex-col justfiy-center items-start gap-8">
+        {
+          content.items.map((item)=>( 
+            <div class="flex flex-col justify-center items-start gap-2 animation-zoom-in-3">
+              <div class="flex justify-start items-center gap-4">
+                <div class="w-10 md:w-14 h-10 md:h-14 rounded-lg bg-secondary/10 flex justify-center items-center">
+                  <img src={`/images/${item.icon}.svg`} alt={item.title} width="24" height="24" class="w-6 h-6">
+                </div>
+                <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-paragraph">{item.title}</h3>
+              </div>
+              <p class="text-[12px] md:text-[14px] leading-[150%] text-paragraph">{item.description}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="flex justify-center items-center border-[1.5px] border-[#263A4B] rounded-2xl md:rounded-3xl px-4 py-8 lg:p-10 animation-zoom-in-3">
+        <p set:html={content.review} class="text-[14px] md:text-[20px] text-paragraph font-bold md:font-medium leading-[150%] text-center"></p>
+      </div>
+    </div>
+    <div class="w-full md:w-[55%] grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-6 order-1 md:order-2">
+      <!-- Columna 1 -->
+      <div class="hidden md:flex flex-col gap-3 lg:gap-6 translate-y-8.5 ">
+        <div class="aspect-282/359 relative rounded-3xl overflow-hidden container-image-fade">
+          <img src="/images/philo-1.webp" alt="Architecture" width="282" height="359" class="w-full h-full absolute inset-0 object-cover object-center ">
+          <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
+        </div>
+        <div class="aspect-square relative rounded-3xl overflow-hidden container-image-fade">
+          <img src="/images/philo-2.webp" alt="Architecture" width="282" height="359" class="w-full h-full absolute inset-0 object-cover object-center ">
+          <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
+        </div>
+      </div>
+      
+      <!-- Columna 2 -->
+      <div class="flex flex-col gap-4 md:gap-3 lg:gap-6 translate md:-translate-y-8.5  ">
+        <div class="aspect-square relative rounded-3xl overflow-hidden container-image-fade">
+          <img src="/images/philo-3.webp" alt="Architecture" width="500" height="500" class="w-full h-full absolute inset-0 object-cover object-center ">
+          <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
+        </div>
+        <div class="aspect-343/237 md:aspect-282/359 relative rounded-3xl overflow-hidden container-image-fade">
+          <img src="/images/philo-4.webp" alt="Architecture" width="282" height="359" class="w-full h-full absolute inset-0 object-cover object-center ">
+          <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
+        </div>
+      </div>
+    </div>
+    <div class=" flex flex-col gap-3 w-full md:hidden order-3">
+        <div class="aspect-343/237 md:aspect-282/359 relative rounded-3xl overflow-hidden container-image-fade">
+          <img src="/images/philo-1.webp" alt="Architecture" width="282" height="359" class="w-full h-full absolute inset-0 object-cover object-center ">
+          <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
+        </div>
+        <div class="aspect-square relative rounded-3xl overflow-hidden container-image-fade">
+          <img src="/images/philo-2.webp" alt="Architecture" width="282" height="359" class="w-full h-full absolute inset-0 object-cover object-center ">
+          <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
+        </div>
+      </div>
+  </div>
+  
+</section>

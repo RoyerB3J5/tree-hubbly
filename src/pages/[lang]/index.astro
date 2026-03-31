@@ -1,0 +1,39 @@
+---
+import en from '../../i18n/en';
+import es from '../../i18n/es';
+import Layout from '../../layouts/Layout.astro';
+import BannerImages from '../../sections/main/BannerImages.astro';
+import Banners from '../../sections/main/Banners.astro';
+import CallAction from '../../sections/main/CallAction.astro';
+import Companies from '../../sections/main/Companies.astro';
+import Hero from '../../sections/main/Hero.astro';
+import Path from '../../sections/main/Path.astro';
+import Questions from '../../sections/main/Questions.astro';
+import Results from '../../sections/main/Results.astro';
+import Scale from '../../sections/main/Scale.astro';
+import Traditional from '../../sections/main/Traditional.astro';
+import Vento from '../../sections/main/Vento.astro';
+import type { Language } from '../../types/language.type';
+export function getStaticPaths() {
+  return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+}
+
+export const defaultRedirect = '/en';
+
+const lang = Astro.params.lang as Language;
+const translations = { es, en };
+const t = translations[lang];
+---
+<Layout lang={lang} t={t}>
+  <Hero content={t.main.hero} />
+  <Companies content={t.main.companies} />
+  <Scale content={t.main.scale} />
+  <Vento content={t.main.vento} />
+  <Banners content={t.main.banners} />
+  <Results content={t.main.results} />
+  <Path content={t.main.path} />
+  <Traditional content={t.main.traditional} />
+  <BannerImages content={t.main.bannerImage} />
+  <CallAction content={t.main.call} />
+  <Questions content={t.main.questions} />
+</Layout>

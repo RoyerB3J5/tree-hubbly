@@ -1,0 +1,92 @@
+---
+type Translations = typeof import("../i18n/en").default;
+type BusinessContent = Translations["caseStudies"]["business"];
+interface Props {
+  content: BusinessContent;
+}
+const { content } = Astro.props;
+---
+<section class="w-full bg-primary flex justify-center items-center ">
+  <div class="container-full py-10 md:py-20 lg:py-30 flex flex-col md:flex-row justify-center items-start lg:items-center gap-8 md:gap-6 xl:gap-20">
+    <div class="flex flex-col justify-center items-center w-full md:w-[35%] gap-8 md:gap-6 self-stretch">
+      <div class="w-full flex flex-col justify-center items-start gap-4 md:gap-10 py-6 px-4 md:p-6 rounded-2xl md:rounded-3xl border border-[#263A4B] back-content container-image-fade">
+        <h3 class="text-[12px] md:text-[18px] font-bold leading-[150%] text-secondary">{content.iverview.title}</h3>
+        <div class="md:flex flex-col justify-center items-start gap-4 md:gap-10 hidden ">
+          {
+            content.iverview.items.map((item)=>( 
+              <div class="flex flex-col justify-center items-start gap-2">
+                <h4 class="text-[12px] md:text-[14px] font-normal leading-[150%] text-secondary">{item.tag}</h4>
+                <p class="text-[14px] md:text-[18px] font-bold leading-[150%] text-paragraph">{item.title}</p>
+              </div>
+            ))
+          }
+        </div>
+        <div class="flex flex-col justify-center items-start gap-4 md:gap-10 md:hidden">
+          <div class="flex flex-col justify-center items-start gap-2">
+                <h4 class="text-[12px] md:text-[14px] font-normal leading-[150%] text-secondary">{content.iverview.items[0].tag}</h4>
+                <p class="text-[14px] md:text-[18px] font-bold leading-[150%] text-paragraph">{content.iverview.items[0].title}</p>
+              </div>
+          <div class="flex justify-start items-center gap-10">
+            {
+            content.iverview.items.slice(1).map((item)=>( 
+              <div class="flex flex-col justify-center items-start gap-2">
+                <h4 class="text-[12px] md:text-[14px] font-normal leading-[150%] text-secondary">{item.tag}</h4>
+                <p class="text-[14px] md:text-[18px] font-bold leading-[150%] text-paragraph">{item.title}</p>
+              </div>
+            ))
+          }
+          </div>
+          
+        </div>
+        <div class="flex flex-col justify-center items-start gap-2">
+          <h3 class="text-[12px] md:text-[14px] font-normal leading-[150%] text-secondary">{content.iverview.services.title}</h3>
+          <ul class="flex flex-col justify-center items-start gap-1 list-disc list-inside">
+            {
+              content.iverview.services.lists.map((item)=>(
+                <li class="text-[12px] md:text-[14px] font-bold leading-[150%] text-paragraph ">{item}</li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+      <div class="w-full h-auto md:grow lg:grow-0  aspect-square md:aspect-auto lg:aspect-384/376 relative rounded-3xl overflow-hidden container-image-fade">
+        <img src="/images/business.webp" alt="Business Case Study" class="w-full h-full object-cover object-right absolute inset-0" width="384" height="376" decoding="async" loading="lazy"/>
+        <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
+      </div>
+    </div>
+    <div class="flex flex-col justify-between items-start  w-full md:w-[65%] self-stretch gap-8 lg:gap-0">
+      <div class="flex flex-col justify-center items-start gap-8">
+        <h2 set:html={content.title} class="text-[32px] md:text-[48px] text-paragraph font-bold leading-[120%] animation-zoom-in-3"></h2>
+        <p set:html={content.description} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal animation-zoom-in-3 "></p>
+      </div>
+      <div class="flex flex-col justify-center items-center gap-8">
+        {
+          content.items.map((item)=>( 
+            <div class="flex flex-col justify-center items-start gap-4 md:gap-8 animation-zoom-in-3">
+              <div class="flex justify-start items-center gap-4 md:gap-6">
+                <div class="w-10 md:w-14 h-10 md:h-14 bg-secondary/10 flex justify-center items-center rounded-lg ">
+                  <img src={`/images/${item.icon}.svg`} alt={item.title} width="24" height="24" class="w-6 h-6"/>
+                </div>
+                <h3 set:html={item.title} class="text-[14px] md:text-[18px] font-bold leading-[150%] text-paragraph"></h3>
+              </div>
+              <p set:html={item.description} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal"></p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="w-full grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-4 md:gap-6">
+        {
+          content.disadvantages.map((item)=>(
+            <div class="w-full flex justify-start items-start gap-4 p-4 md:p-6 rounded-2xl md:rounded-3xl border border-[#263A4B] self-stretch animation-zoom-in-3">
+              <img src={`/images/${item.icons}.svg`} alt={item.title} width="24" height="24" class="w-6 h-6"/>
+              <div class="flex flex-col justify-center items-start gap-2 md:gap-4">
+                <h3 set:html={item.title} class="text-[14px] md:text-[16px] font-bold leading-[150%] text-paragraph"></h3>
+                <p set:html={item.description} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal"></p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

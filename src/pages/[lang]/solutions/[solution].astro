@@ -1,0 +1,76 @@
+---
+import en from "../../../i18n/en";
+import es from "../../../i18n/es";
+import Layout from "../../../layouts/Layout.astro";
+import Expectations from "../../../sections/Expectations.astro";
+import Lists from "../../../sections/Lists.astro";
+import CallAction from "../../../sections/main/CallAction.astro";
+import Charasteristic from "../../../sections/Charasteristic.astro";
+import Hero from "../../../sections/main/Hero.astro";
+import type { Language } from "../../../types/language.type";
+
+
+import type { SolutionPage } from "../../../types/system.type";
+import Matters from "../../../sections/Matters.astro";
+import Stadistic from "../../../sections/Stadistic.astro";
+import VentoMarketing from "../../../sections/VentoMarketing.astro";
+import VentoMove1 from "../../../sections/ventoMove1.astro";
+
+export function getStaticPaths() {
+  const solutions = ["marketing", "seo","google-ads","website-funnels","crm-automation"];
+  const languages = ["es", "en"];
+
+  return languages.flatMap((lang) =>
+    solutions.map((solution) => ({
+      params: { lang, solution },
+    }))
+  );
+}
+
+export const defaultRedirect = "/en";
+
+const { lang, solution } = Astro.params as { lang: Language; solution: string };
+const translations = { es, en };
+const t = translations[lang];
+const solutionData = (t.solutions as Record<string, SolutionPage>)[solution] ?? ({} as SolutionPage);
+---
+
+<Layout lang={lang} t={t}>
+  <Hero content={solutionData.hero}/>
+  <section class="w-full flex justify-center items-center bg-paragraph">
+    <div class="container-full flex justify-center items-center py-10 md:py-20 lg:py-30">
+      <Lists content={solutionData.lists}/>
+    </div>
+  </section>
+  {
+    solutionData.ventoMarketing && (
+      <VentoMarketing content={solutionData.ventoMarketing}/>
+    )
+  }
+  {
+    solutionData.ventoMove1 && (
+      <VentoMove1 content={solutionData.ventoMove1}/>
+    )
+  }
+  {
+    solutionData.expectations && (
+      <Expectations content={solutionData.expectations}/>
+    )
+  }
+  {
+    solutionData.matters && (
+      <Matters content={solutionData.matters}/>
+    )
+  }
+  {
+    solutionData.characteristics && (
+      <Charasteristic content={solutionData.characteristics}/>
+    )
+  }
+  {
+    solutionData.stadistic && (
+      <Stadistic content={solutionData.stadistic}/>
+    )
+  }
+  <CallAction content={solutionData.call}/>
+</Layout>

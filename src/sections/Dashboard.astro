@@ -1,0 +1,33 @@
+---
+import type { InformationSection } from "../types/system.type";
+
+type DashboardSection = InformationSection["dashboard"];
+interface Props {
+  content: DashboardSection;
+}
+const { content } = Astro.props as Props;
+---
+<div class="w-full flex justify-center items-center gap-6 ">
+  <div class="rounded-2xl md:rounded-3xl w-full md:w-1/2 relative overflow-hidden aspect-588/419">
+    <div class="container-image-fade border-inherit absolute inset-0">
+      <img src="/images/dashboard.webp" alt="Dashboard" width="588" height="419" class="object-cover h-full w-full  absolute inset-0">
+    </div>
+  </div>
+  
+  <div class="w-1/2 md:flex flex-col justify-center items-start gap-8 hidden ">
+    <h2 set:html={content.title} class="text-primary text-[48px] font-bold leading-[120%] text-start animation-zoom-in-3"></h2>
+    <div class="flex flex-col justify-center items-start gap-4">
+      <p set:html={content.description} class="text-primary text-[14px] font-normal leading-[150%] text-start animation-zoom-in-3"></p>
+      <div class="flex flex-col justify-center items-start gap-4 animation-zoom-in-3">
+        {
+          content.items.map((item)=>( 
+            <div class="flex justify-start items-center gap-4">
+              <img src="/images/check.svg" alt="Check" width="24" height="24" class="w-6 h-6"/>
+              <p class="text-[14px] font-normal leading-[150%] text-primary">{item}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</div>

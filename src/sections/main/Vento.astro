@@ -1,0 +1,66 @@
+---
+type Translations = typeof import("../../i18n/en").default;
+type VentoContent = Translations["main"]["vento"];
+interface Props {
+  content: VentoContent;
+}
+const { content } = Astro.props as Props;
+---
+<section class="w-full max-w-screen xl:max-w-7xl px-5 xl:px-0 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-3 lg:gap-6 py-10 md:py-20 lg:py-30 ">
+  <div class="col-start-1 col-end-3 row-start-1 row-end-2 md:row-end-3 rounded-2xl md:rounded-3xl bg-primary back-content w-full aspect-square h-auto flex flex-col justify-between items-start px-4 py-6 md:p-7 lg:p-10 animation-zoom-in-2">
+    <img src={`/images/${content.item1.icon}.svg`} alt={content.item1.title} class="w-13.5 h-13.5 self-end" />
+    <p set:html={content.item1.title} class="text-[32px] md:text-[24px] lg:text-[48px] font-bold leading-[120%] text-paragraph w-[75%]"></p>
+  </div>
+  <div class="row-start-2 md:row-start-3 row-end-3 md:row-end-4 col-start-1 col-end-3 rounded-2xl md:rounded-3xl h-full w-full relative px-4 py-10 md:p-8 lg:py-10 lg:px-13 flex justify-start items-end overflow-hidden aspect-343/265 md:aspect-588/282 animation-zoom-in-2">
+    <img src={`/images/${content.item2.image}.webp`} alt={content.item2.title} class="w-full h-full object-cover absolute inset-0 object-center -z-20" />
+    <div class="absolute w-full h-full inset-0 -z-10 back-hero-3"></div>
+    <p set:html={content.item2.title} class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph z-0"></p>
+  </div>
+  <div class="row-start-6 md:row-start-4 row-end-7 md:row-end-5 col-start-1 col-end-3 rounded-2xl md:rounded-3xl h-full w-full bg-primary aspect-343/149 md:aspect-588/282 relative p-4 md:p-6 lg:px-8 lg:py-10 flex justify-start items-end overflow-hidden back-content animation-zoom-in-2">
+    <img src={`/images/${content.item8.image}.webp`} alt={content.item8.title} class="w-full h-full object-cover absolute inset-0 object-center z-0" />
+    <div class="flex flex-col justify-between md:justify-center items-start gap-10 h-full md:h-auto">
+      <img src={`/images/${content.item8.icon}.svg`} alt={content.item8.title} class="w-16 h-16" />
+      <p class="text-[14px] md:text-[16px] text-paragraph font-bold leading-[150%]">{content.item8.title}</p>
+    </div>
+  </div>
+  <div class="col-start-1 md:col-start-3 col-end-2 md:col-end-4 row-start-3 md:row-start-1 row-end-4 md:row-end-2 rounded-2xl md:rounded-3xl h-auto w-full relative aspect-163/149 md:aspect-square overflow-hidden animation-zoom-in-2">
+    <img src={`/images/vento-3.webp`} alt={content.item3.title} class="w-full h-full object-cover object-center absolute inset-0 -z-20" decoding="async" loading="lazy"/>
+    <div class="absolute w-full h-full inset-0 -z-10 back-hero-3"></div>
+    <div class="flex flex-col justify-between items-start p-4 md:p-6 lg:py-10 lg:px-8 h-full">
+      <div class="p-4 md:p-3 lg:p-4 rounded-full flex justify-center items-center bg-secondary self-start md:self-end">
+        <img src={`/images/${content.item3.icon}.svg`} alt={content.item3.title} width="32" height="32" class="w-8 h-8"/>
+      </div>
+      <p set:html={content.item3.title} class="text-[14px] md:text-[16px] font-bold leading-[150%] text-paragraph z-0"></p>
+    </div>
+  </div>
+  <div class="col-start-2 md:col-start-4 col-end-3 md:col-end-5 row-start-3 md:row-start-1 row-end-4 md:row-end-2 rounded-2xl md:rounded-3xl bg-secondary h-auto w-full relative  aspect-163/149 md:aspect-square overflow-hidden flex flex-col justify-between md:justify-end items-start p-4 md:p-6 lg:py-10 lg:px-8 gap-10 animation-zoom-in-2">
+    <img src={`/images/${content.item4.icon}.svg`} alt={content.item4.title} class="w-14 md:w-8 h-14 md:h-8" width="8" height="8" decoding="async" loading="lazy"/>
+    <p set:html={content.item4.title} class="text-[14px] md:text-[16px] font-bold leading-[150%] text-[#565656] z-0"></p>
+  </div>
+  <div class="row-start-4 md:row-start-2 row-end-5 md:row-end-4 col-start-1 md:col-start-3 col-end-3 md:col-end-4 rounded-2xl md:rounded-3xl h-full w-full aspect-343/153 md:aspect-282/588 relative overflow-hidden animation-zoom-in-2" >
+    <img src={`/images/vento-5.webp`} alt={content.item5.title} class="w-full h-full object-cover object-[0%_30%] md:object-center absolute inset-0 -z-20 " decoding="async" loading="lazy"/>
+    <div class="absolute w-full h-full inset-0 -z-10 back-hero-3"></div>
+    <div class="flex flex-col justify-end items-start md:items-center p-4 md:p-6 lg:py-10 lg:px-8 h-full gap-10">
+      <img src={`/images/${content.item5.icon}.svg`} alt={content.item5.title} width="32" height="32" class="w-14 md:w-20 h-14 md:h-20"/>
+      <p set:html={content.item5.title} class="text-[14px] md:text-[16px] font-bold leading-[150%] text-paragraph z-0"></p>
+    </div>
+  </div>
+  <div class="cols-start-1 md:col-start-4 col-end-2 md:col-end-5 row-start-5 md:row-start-2 row-end-6 md:row-end-3 rounded-2xl md:rounded-3xl bg-[#F3F3F4] h-auto w-full aspect-163/149 md:aspect-square border border-[#D3D3D3] overflow-hidden flex flex-col justify-between md:justify-end items-start p-4 md:p-6 lg:py-10 lg:px-8 gap-6 lg:gap-10 animation-zoom-in-2">
+    <img src={`/images/${content.item6.icon}.svg`} alt={content.item6.title} class="w-14 md:w-8 h-14 md:h-8" width="8" height="8" decoding="async" loading="lazy"/>
+    <p set:html={content.item6.title} class="text-[14px] md:text-[16px] font-bold leading-[150%] text-[#565656] z-0"></p>
+  </div>
+  <div class="col-start-2 md:col-start-4 col-end-3 md:col-end-5 row-start-5 md:row-start-3 row-end-6 md:row-end-4 rounded-2xl md:rounded-3xl bg-[#0798F0] h-auto w-full aspect-163/149 md:aspect-square overflow-hidden flex flex-col justify-between md:justify-end items-start p-4 md:p-6 lg:py-10 lg:px-8 gap-6 lg:gap-10 animation-zoom-in-2">
+    <img src={`/images/${content.item7.icon}.svg`} alt={content.item7.title} class="w-14 md:w-8 h-14 md:h-8" width="8" height="8" decoding="async" loading="lazy"/>
+    <p set:html={content.item7.title} class="text-[14px] md:text-[16px] font-bold leading-[150%] text-[#023554] z-0"></p>
+  </div>
+  <div class="col-start-1 md:col-start-3 col-end-3 md:col-end-5 row-start-7 md:row-start-4 row-end-8 md:row-end-5 rounded-2xl md:rounded-3xl h-full w-full overflow-hidden aspect-343/149 md:aspect-588/282 relative animation-zoom-in-2" >
+    <img src={`/images/vento-9.webp`} alt={content.item9.title} class="w-full h-full object-cover object-center absolute inset-0 -z-20" decoding="async" loading="lazy"/>
+    <div class="absolute w-full h-full inset-0 -z-10 back-hero-3"></div>
+    <div class="flex flex-col justify-between items-start p-4 md:p-6 lg:py-10 lg:px-8 h-full">
+      <div class="p-4 md:p-3 lg:p-4 rounded-full flex justify-center items-center bg-secondary self-end">
+        <img src={`/images/${content.item9.icon}.svg`} alt={content.item9.title} width="32" height="32" class="w-8 h-8"/>
+      </div>
+      <p set:html={content.item9.title} class="text-[14px] md:text-[16px] font-bold leading-[150%] text-paragraph z-0"></p>
+    </div>
+  </div>
+</section>

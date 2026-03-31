@@ -1,0 +1,37 @@
+---
+import type { SolutionPage } from "../types/system.type";
+
+type MattersSection = SolutionPage["matters"];
+interface Props {
+  content: MattersSection;
+}
+const { content } = Astro.props as Props;
+---
+<section class="w-full flex justify-center items-center bg-white">
+  <div class="container-full py-10 md:py-20 lg:py-30 flex flex-col md:flex-row justify-center items-center gap-8 md:gap-6">
+    <div class="w-full md:w-1/2 flex flex-col justify-center items-start gap-8">
+      <div class="flex flex-col justify-center items-start gap-8">
+        <h2 set:html={content?.title} class="text-[32px] md:text-[48px] font-bold leading-[130%] md:leading-[120%] text-primary animation-zoom-in-3"></h2>
+        <p class="text-[12px] md:text-[14px] text-primary font-normal leading-[150%] animation-zoom-in-3">{content?.description}</p>
+      </div>
+      <div class="flex flex-col justify-center items-start gap-4 md:gap-6 w-full lg:w-auto">
+        {
+          content?.items.map((item)=>( 
+            <div class="w-full flex justify-center items-center gap-4 p-6 bg-[#F3F3F4] border border-[#D3D3D3] rounded-2xl md:rounded-3xl animation-zoom-in-3">
+              <img src={`/images/${item.icon}.svg`} alt={item.label} class="w-6 aspect-square h-6" decoding="async" loading="lazy" height="24" width="24">
+              <p class="flex-1 text-[16px] text-primary font-bold leading-[150%]">{item.label}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="text-[12px] md:text-[14px] text-primary font-normal leading-[150%] w-full lg:w-[80%] animation-zoom-in-3">{content?.description2}</p>
+    </div>
+    
+
+    <div class="rounded-2xl md:rounded-3xl w-full md:w-1/2 relative overflow-hidden aspect-square">
+      <div class="container-image-fade border-inherit absolute inset-0">
+        <img src="/images/matters.webp" alt="Importancia Treehubbly" class="object-cover h-full w-full  absolute inset-0" decoding="async" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>

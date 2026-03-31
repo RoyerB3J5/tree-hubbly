@@ -1,0 +1,45 @@
+---
+import Button from "../components/Button.astro";
+
+type Translations = typeof import("../i18n/en").default;
+type PillarsContent = Translations["systemPage"]["pilars"];
+interface Props {
+  content: PillarsContent;
+}
+const { content } = Astro.props as Props;
+---
+<section class="w-full flex justify-center items-center bg-back">
+  <div class="container-full flex flex-col justify-center items-center gap-8 md:gap-11 lg:gap-14 py-10 md:py-20 lg:py-30">
+    <div class="flex flex-col justify-center ites-start md:items-center gap-8">
+      <h2 set:html={content.title} class="text-[32px] lg:text-[48px] text-primary font-bold leading-[130%] lg:leading-[120%] text-strat md:text-center animation-up-fast-2"></h2>
+      <p set:html={content.description} class="text-primary text-[12px] lg:text-[14px] leading-[150%] font-normal text-start md:text-center animation-up-fast-2"></p>
+    </div>
+    <div class="w-full flex flex-col md:flex-row justify-center md:items-start items-center gap-4 lg:gap-6">
+      {
+        content.items.map((item, index)=>( 
+          <div class="w-full md:w-1/3 flex flex-col justify-center items-center rounded-3xl overflow-hidden border border-[#DEDEDE] self-stretch animation-up-fast-2" style={{animationDelay: `${index * 0.2}s`}}>
+            <div class="w-full aspect-343/180 md:aspect-384/280 relative">
+              <img src={`/images/${item.image}.webp`} alt={item.title} width="384" height="280" class="w-full h-full absolute inset-0 object-cover object-center "/>
+              <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
+            </div>
+            <div class="flex flex-col justify-start items-start p-4 md:p-5 xl:py-10 xl:px-8 gap-4 lg:gap-6 grow self-stretch">
+              <h3 class="text-[14px] lg:text-[16px] font-bold leading-[150%] text-primary">{item.title}</h3>
+              <p class="text-primary text-[12px] lg:text-[14px] font-normal leading-[150%] flex-1">{item.description}</p>
+              <div class="flex flex-col justify-center items-start gap-4 md:gap-6">
+                {
+                  item.list.map((i)=>( 
+                    <div class="flex justify-start items-center gap-2 md:gap-4">
+                      <img src="/images/check.svg" alt="Check" width="16" height="16" class="w-6 h-6" decoding="async" loading="lazy"/>
+                      <p class="text-primary text-[12px] lg:text-[14px] font-normal leading-[150%]">{i}</p>
+                    </div>
+                  ))
+                }
+              </div>
+              <Button text={item.button.label} href={item.button.href} textClass={item.button.textButton} extraBtnClass={item.button.classButton}/>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

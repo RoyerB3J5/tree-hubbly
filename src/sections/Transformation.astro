@@ -1,0 +1,66 @@
+---
+type Translations = typeof import("../i18n/en").default;
+type TransformationContent = Translations["caseStudies"]["transformation"];
+interface Props {
+  content: TransformationContent;
+}
+const { content } = Astro.props;
+---
+<section class="w-full flex justify-center items-center  bg-primary">
+  <div class="container-full flex flex-col justify-center items-center gap-8 md:gap-11 lg:gap-14 py-10 md:py-20 lg:py-30">
+    <div class="flex flex-col justify-center items-start md:items-center gap-8">
+      <h2 set:html={content.title} class="text-[32px] md:text-[48px] text-paragraph font-bold leading-[120%] animation-zoom-in"></h2>
+      <p set:html={content.description} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal text-start md:text-center animation-zoom-in"></p>
+    </div>
+    <div class="w-full flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6">
+      {
+        content.lists.map((list)=>( 
+          <div class={`${list.border} w-full md:w-1/2 flex flex-col justify-start lg:justify-center items-start gap-8 py-8 md:py-14 px-4 md:px-12 rounded-2xl md:rounded-3xl border box-border back-content self-stretch animation-zoom-in`}>
+            <div class="flex justify-start items-center gap-6 md:gap-4">
+              <img src={`/images/${list.icon}.svg`} alt="Icono negativo" width="24" height="24" class="w-12 h-12">
+              <h3 class="text-[14px] md:text-[16px] text-paragraph font-bold leading-[150%]">{list.title}</h3>
+            </div>
+            <div class="flex flex-col justify-center items-start gap-4 md:gap-6">
+              {
+                list.items.map((item)=>( 
+                  <div class="flex justify-start items-center gap-2">
+                    <img src={`/images/${list.icon2}.svg`} alt={`Icono ${list.icon2}`} width="16" height="16" class="w-6 h-6">
+                    <p set:html={item} class="text-paragraph text-[12px] md:text-[14px] font-normal leading-[150%]"></p>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <div class="container-image-fade overflow-hidden rounded-2xl md:rounded-3xl aspect-1200/475 w-full">
+      <img src="/images/transformation.webp" alt="Transformation Image" class="w-full h-auto  image-fade" style="animation-delay: 0.2s;" width="1200" height="475" decoding="async" loading="lazy"/>
+    </div>
+    
+    <div class="w-full flex flex-col md:flex-row justify-center items-center gap-8 md:gap-6 lg:gap-16">
+      <div class="w-full md:w-[56%] flex flex-col justify-center items-start gap-6 md:gap-8">
+        <h3 set:html={content.business.title} class="text-[32px] md:text-[48px] font-bold leading-[130%] md:leading-[120%] text-paragraph animation-zoom-in-3"></h3>
+        <p set:html={content.business.description} class="text-[12px] md:text-[16px] text-paragraph leading-[150%] font-bold animation-zoom-in-3"></p>
+        <p set:html={content.business.description2} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal animation-zoom-in-3"></p>
+      </div>
+      <div class="w-full md:w-[44%] px-4 md:px-12 py-8 md:py-14 flex flex-col justify-center items-start gap-8 md:gap-6 rounded-2xl md:rounded-3xl border border-[#263A4B] bg-primary-2 container-image-fade">
+        <h4 set:html={content.business.advantages.title} class="text-[14px] md:text-[16px] font-bold leading-[150%] text-paragraph"></h4>
+        <div class="flex flex-col justify-center items-start gap-4 md:gap-6">
+          {
+            content.business.advantages.items.map((item)=>( 
+              <div class="flex justify-start items-center gap-2 md:gap-4">
+                <img src="/images/check.svg" alt="Check Icon" width="16" height="16" decoding="async" loading="lazy" class="w-6 h-6"/>
+                <p set:html={item} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal"></p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class="w-full md:w-[90%] flex flex-col justify-center items-center gap-8 rounded-3xl border-[1.5px] border-[#263A4B] py-8 md:py-16 px-4 md:px-24 container-image-fade">
+      <p class="text-paragraph text-[14px] md:text-[20px] font-bold md:font-semibold leading-[150%] text-center">{content.opinion.content}</p>
+      <h3 class="text-[14px] md:text-[20px] font-bold md:font-semibold leading-[150%] text-secondary">{content.opinion.title}</h3>
+    </div>
+  </div>
+</section>

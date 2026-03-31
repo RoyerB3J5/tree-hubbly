@@ -1,0 +1,36 @@
+---
+type Translations = typeof import("../i18n/en").default;
+type ReasonContent = Translations["systemPage"]["reason"];
+interface Props {
+  content: ReasonContent;
+}
+const { content } = Astro.props as Props;
+---
+<section class="w-full flex justify-center items-center bg-primary">
+  <div class="container-full flex flex-col md:flex-row justify-center items-center gap-10 md:gap-4 xl:gap-16 py-10 md:py-20 lg:py-30">
+    <div class="w-full md:w-1/2 flex flex-col justify-center items-start gap-8">
+      <h2 set:html={content.title} class="text-[32px] md:text-[48px] text-paragraph font-bold leading-[130%] md:leading-[120%] animation-zoom-in-2"></h2>
+      <p set:html={content.description} class="text-paragraph text-[12px] md:text-[14px] leading-[150%] font-normal w-full md:w-[85%] animation-zoom-in-2"></p>
+      <ul class="flex flex-col justify-center items-start gap-4 md:gap-6 w-full">
+        {
+          content.items.map((item) => ( 
+            <li class="w-full">
+              <div class="w-full flex justify-start items-start gap-4 p-4 md:p-6 border border-[#263A4B] rounded-2xl md:rounded-3xl animation-zoom-in-2">
+                <img src={`/images/${item.icon}.svg`} alt={item.title} width="48" height="48" class="w-6 h-6" decoding="async" loading="lazy"/>
+                <div class="flex flex-col justify-center items-start gap-2">
+                  <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-paragraph">{item.title}</h3>
+                  <p class="text-paragraph text-[12px] md:text-[14px] leading-[150%] font-normal">{item.description}</p>
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="w-full md:w-1/2 self-stretch flex flex-col justify-center items-center gap-8 md:gap-6 rounded-2xl md:rounded-3xl border border-[#263A4B] px-4 md:px-12.5 back-content py-15 md:py-0 animation-zoom-in-2">
+      <img src="/images/innovation.svg" alt="Innovation" width="64" height="64" class="w-16 h-16" decoding="async" loading="lazy"/>
+      <h4 class="text-[24px] font-bold leading-[140%] text-paragraph text-center">{content.infaestructure.title}</h4>
+      <p class="text-paragraph text-[12px] md:text-[18px] leading-[150%] font-normal text-center" set:html={content.infaestructure.description}></p>
+    </div>
+  </div>
+</section>

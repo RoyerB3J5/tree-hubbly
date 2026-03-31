@@ -1,0 +1,41 @@
+---
+import type { SolutionPage } from "../types/system.type";
+
+type ventoMarketingSection = SolutionPage["ventoMarketing"];
+interface Props {
+  content: ventoMarketingSection;
+}
+const { content } = Astro.props as Props;
+---
+<section class="container-full py-10 md:py-20 lg:py-30 flex flex-col justify-center items-center gap-8 md:gap-11 lg:gap-14">
+  <div class="flex flex-col justify-center items-start md:items-center gap-8">
+    <h2 set:html={content?.title} class="text-[32px] md:text-[48px] font-bold leading-[120%] text-primary text-start md:text-center animation-zoom-in-2"></h2>
+    <p set:html={content?.description} class="text-[12px] md:text-[14px] font-normal leading-[150%] text-primary text-start md:text-center animation-zoom-in-2"></p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-20 gap-6">
+    {
+      content?.items.map((item, index)=>(
+        <div class={`${item.back} py-6 px-4 md:p-8 rounded-2xl md:rounded-3xl flex justify-between items-center animation-zoom-in-2 ${
+          index === 0 ? 'md:col-span-9' :
+          index === 1 ? 'md:col-span-11' :
+          index === 2 ? 'md:col-span-11' :
+          index === 3 ? 'md:col-span-9' :
+          index === 4 ? 'md:col-span-20' : ''
+        }`}>
+          <div class={`flex flex-col justify-center items-start gap-6 ${item.image ? 'w-full lg:w-[50%]' : 'w-full'}`}>
+            <div class={`${item.backIcon} w-10 md:w-14 h-10 md:h-14 rounded-lg flex justify-center items-center`}>
+              <img src={`/images/${item?.icon}.svg`} alt={item.title} width="24" height="24" class="w-6 h-6" decoding="async" loading="lazy">
+            </div>
+            <h3 class={`${item.textColor} text-[14px] md:text-[16px] font-bold leading-[150%]`}>{item.title}</h3>
+            <p class={`${item.textColor} text-[12px] md:text-[14px] font-normal leading-[150%]`}>{item.description}</p>
+          </div>
+          {
+            item.image && (
+              <img src={`/images/${item.image.src}.webp`} alt={item.title} width={item.image.width} height={item.image.height} class="w-auto h-[80%] xl:h-full hidden lg:block" decoding="async" loading="lazy">
+            )
+          }
+        </div>
+      ))
+    }
+  </div>
+</section>

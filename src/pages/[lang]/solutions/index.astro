@@ -1,0 +1,29 @@
+---
+import en from '../../../i18n/en';
+import es from '../../../i18n/es';
+import Layout from '../../../layouts/Layout.astro';
+import CallAction from '../../../sections/main/CallAction.astro';
+import Hero from '../../../sections/main/Hero.astro';
+import Questions from '../../../sections/main/Questions.astro';
+import Results from '../../../sections/main/Results.astro';
+import Scale from '../../../sections/main/Scale.astro';
+import SolutionList from '../../../sections/SolutionList.astro';
+import type { Language } from '../../../types/language.type';
+export function getStaticPaths() {
+  return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+}
+
+export const defaultRedirect = '/en';
+
+const lang = Astro.params.lang as Language;
+const translations = { es, en };
+const t = translations[lang];
+---
+<Layout lang={lang} t={t}>
+  <Hero content={t.solutionPage.hero} />
+  <SolutionList content={t.solutionPage.information} />
+  <Scale content={t.solutionPage.scale} />
+  <Results content={t.solutionPage.results} />
+  <CallAction content={t.solutionPage.call} />
+  <Questions content={t.main.questions} />
+</Layout>

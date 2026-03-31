@@ -1,0 +1,10 @@
+---
+import QuestionsAccordion from './QuestionsAccordion';
+type Translations = typeof import("../../i18n/en").default;
+type QuestionsContent = Translations["main"]["questions"];
+interface Props {
+  content: QuestionsContent;
+}
+const { content } = Astro.props as Props;
+---
+<QuestionsAccordion content={content} client:load />

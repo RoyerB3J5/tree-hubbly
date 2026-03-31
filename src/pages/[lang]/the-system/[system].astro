@@ -1,0 +1,42 @@
+---
+import en from "../../../i18n/en";
+import es from "../../../i18n/es";
+import Layout from "../../../layouts/Layout.astro";
+import Charasteristic from "../../../sections/Charasteristic.astro";
+import Information from "../../../sections/Information.astro";
+import CallAction from "../../../sections/main/CallAction.astro";
+import Hero from "../../../sections/main/Hero.astro";
+import Problems from "../../../sections/Problems.astro";
+import type { Language } from "../../../types/language.type";
+import type { SystemPage } from "../../../types/system.type";
+
+export function getStaticPaths() {
+  const systems = ["structured-lead-engine", "conversion-automation", "performance-intelligence-scale"];
+  const languages = ["es", "en"];
+
+  return languages.flatMap((lang) =>
+    systems.map((system) => ({
+      params: { lang, system },
+    }))
+  );
+}
+
+export const defaultRedirect = "/en";
+
+const { lang, system } = Astro.params as { lang: Language; system: string };
+const translations = { es, en };
+const t = translations[lang];
+const systemData = (t.systems as Record<string, SystemPage>)[system] ?? ({} as SystemPage);
+---
+    
+<Layout lang={lang} t={t}>
+  <Hero content={systemData.hero} />
+  {
+    systemData.problem && <Problems content={systemData.problem} />
+  }
+  {
+    systemData.information && <Information content={systemData.information} />
+  }
+  <Charasteristic content={systemData.characteristics} />
+  <CallAction content={systemData.call} />
+</Layout>

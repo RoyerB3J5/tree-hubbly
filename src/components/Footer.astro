@@ -1,0 +1,117 @@
+---
+import { Icon } from 'astro-icon/components';
+
+type Translations = typeof import('../i18n/en').default;
+type FooterContent = Translations['footer'];
+interface Props {
+  content?: FooterContent;
+}
+const { content } = Astro.props as Props;
+
+// Obtener la ruta actual y normalizar el path sin prefijo de idioma
+const currentPath = Astro.url.pathname;
+// Normalizar: remover idioma y trailing slash
+const normalized =
+  currentPath.replace(/^\/(en|es)/, '').replace(/\/$/, '') || '/';
+// Detectar el idioma actual ('en' o 'es')
+const match = currentPath.match(/^\/(en|es)/);
+const lang = match ? match[1] : 'en';
+
+const icons = [
+  {
+    icon: 'facebook',
+    href: '#',
+  },
+  {
+    icon: 'instagram',
+    href: '#',
+  }
+];
+---
+
+<footer class="flex flex-col justify-center items-center w-full">
+  <div class=" flex justify-center items-center  bg-primary w-full">
+    <div class="w-full max-w-screen xl:max-w-7xl px-5 xl:px-0 flex flex-col md:flex-row justify-center sm:justify-between items-center sm:items-start py-20 md:py-30 gap-8 md:gap-0">
+      <div class="flex flex-col justify-center items-center sm:items-start gap-6 md:gap-8 max-w-[80%] md:max-w-62.5 lg:max-w-none">
+        <img src="/images/logo.svg" alt="Logo de TreeHubly" width="234" height="43" class="w-60 sm:w-40 lg:w-58.5 h-auto" />
+        <p set:html={content?.description} class="text-[12px] lg:text-[14px] font-normal leading-[150%] text-paragraph max-w-none md:max-w-87.5 lg:max-w-none text-center sm:text-start"></p>
+        <div class="flex justify-center items-center gap-5">
+          {
+            icons.map(item => ( 
+              <a href={item.href} class="bg-transparent p-3 rounded-full hover:bg-secondary group flex justify-center items-center transition-colors duration-300 cursor-pointer border border-paragraph">
+                <img src={`/images/${item.icon}.svg`} alt="Icono de redes" class='w-3 h-3' width="12" height="12" decoding="async" loading="lazy">
+              </a>
+            ))
+          }
+        </div>
+      </div>
+      <div class="flex flex-col justify-center items-center sm:items-start gap-6 md:gap-8 ">
+          <h3 class="text-paragraph text-[14px] lg:text-[16px] font-bold leading-[150%] ">{content?.schedules.title}</h3>
+          <div class="flex flex-col justify-center items-start gap-4">
+            {
+              content?.schedules.items.map((item) =>( 
+                <div class="flex flex-row justify-center items-center sm:items-start gap-4">
+                  <img src={`/images/${item.icon}.svg`} alt={item.title} width="16" height="16" class="w-6 h-6" />
+                  <a href={item.href} set:html={item.title} class="text-paragraph text-[12px] lg:text-[14px] font-normal md:font-semibold leading-[150%] text-center sm:text-start hover:text-secondary transition-all duration-300 ease-in-out"></a>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <div class="flex flex-col justify-center items-center sm:items-start gap-4 md:gap-8">
+          <h3 class="text-paragraph text-[14px] lg:text-[16px] font-bold leading-[150%] ">{content?.nav.title}</h3>
+          <nav >
+            <ul class="flex flex-col justify-center items-center sm:items-start gap-2 md:gap-4">
+              {
+                content?.nav.items.map((item) =>( 
+                 <li>
+                  <a href={`/${lang}${item.href}`} class="text-paragraph text-[12px] lg:text-[14px] font-normal leading-[150%] hover:text-secondary hover:font-medium transition-all duration-300 ease-in-out">{item.label}</a>
+                 </li>
+                ))
+              }
+            </ul>
+          </nav>
+        </div>
+        <div class="flex flex-col justify-center items-center sm:items-start gap-4 md:gap-8">
+          <h3 class="text-paragraph text-[14px] lg:text-[16px] font-bold leading-[150%] ">{content?.services.title}</h3>
+          <nav >
+            <ul class="flex flex-col justify-center items-center sm:items-start gap-2 md:gap-4">
+              {
+                content?.services.items.map((item) =>( 
+                 <li>
+                  <a href={`/${lang}${item.href}`} class="text-paragraph text-[12px] lg:text-[14px] font-normal leading-[150%] hover:text-secondary hover:font-medium transition-all duration-300 ease-in-out">{item.label}</a>
+                 </li>
+                ))
+              }
+            </ul>
+          </nav>
+        </div>
+    </div>
+  </div>
+  <div
+    class="bg-[#E5E5E5] dark:bg-back-dark w-full py-3.5 md:py-4.5 flex justify-center items-center px-5 xl:px-0"
+  >
+    <div
+      class="w-full max-w-screen md:max-w-7xl flex flex-col md:flex-row justify-center items-center gap-2 md:gap-4"
+    >
+      <a href="https://inkshapegroup.com/en/">
+        <img
+          src="/images/inkshape.svg"
+          alt=" Logo de Inkshape Group"
+          width="208"
+          height="40"
+          class="w-27.5 md:w-34 h-auto block "
+        />
+      </a>
+      <p
+        class="text-[10px] md:text-[12px] lg:text-[13px] leading-[170%] md:leading-[120%] text-[#404040] dark:text-paragraph-dark font-normal text-center"
+      >
+        Copyright © 2026 by <a href="https://inkshapegroup.com"
+          >Inkshape Group</a
+        > | Privacy | <a href="/">TreeHubbly</a> | Orlando | Call Now: <a
+          href="tel:+13212179445">321-217-9445</a
+        >
+      </p>
+    </div>
+  </div>
+</footer>

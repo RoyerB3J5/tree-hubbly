@@ -1,0 +1,72 @@
+---
+import Button from "../components/Button.astro";
+
+type Translations = typeof import("../i18n/en").default;
+type InformationContent = Translations["solutionPage"]["information"];
+interface Props {
+  content: InformationContent;
+}
+const { content } = Astro.props as Props;
+const currentPath = Astro.url.pathname;
+
+// Detectar el idioma actual ('en' o 'es')
+const match = currentPath.match(/^\/(en|es)/);
+const lang = match ? match[1] : "en";
+---
+<section class="w-full flex justify-center items-center bg-white">
+  <div class="container-full flex flex-col justify-center items-center gap-8 md:gap-11 lg:gap-14 py-10 md:py-20 lg:py-30">
+    <div class="flex flex-col justify-center items-center gap-8">
+      <h2 set:html={content.title} class="text-[32px] md:text-[48px] font-bold leading-[120%] text-primary text-start md:text-center animation-up-fast-2"></h2>
+      <p set:html={content.description} class="text-[12px] md:text-[14px] font-normal leading-[150%] text-primary text-start md:text-center animation-up-fast-2 "></p>
+    </div>
+    <div class={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-4 md:gap-6 `}>
+      {
+        content.items.map((item)=>( 
+          <div class={`flex flex-col   gap-4 md:gap-6  md:px-8  rounded-2xl md:rounded-3xl border border-[#DEDEDE] animation-up-fast-2 ${!item.button ? "gap-4 p-4 bg-[#F3F3F4] md:py-10 items-start justify-start" : "gap-6 bg-secondary py-6 px-4 md:py-11.25 items-start md:items-center justify-center"} self-stretch `}>
+            <div class="flex flex-row md:flex-col justify-start md:justify-center items-center md:items-start gap-4 md:gap-6">
+              {
+                item.icon && (
+                  <div class="flex justify-center items-center rounded-lg w-10 h-10 md:w-auto md:h-auto md:p-4.25 bg-[#DDF1B0]">
+                    <img src={`/images/${item.icon}.svg`} alt={item.title} width="24" height="24" class="w-5 md:w-6 h-5 md:h-6"/>
+                  </div>
+                )
+              }
+              <h3 class={` font-bold leading-[150%] text-primary  ${item.button ? "text-[24px]" : "text-[16px] flex-1 flex items-center"}`}>{item.title}</h3>
+            </div>
+            
+            <p class={`text-primary text-[14px] font-normal leading-[150%] ${item.button ? "text-start md:text-center" : "text-start hidden md:block"}`} set:html={item.description}></p>
+            {
+              item.list && (
+                <div class="flex flex-col justify-center items-start gap-4">
+                  {
+                    item.list.map((i)=>( 
+                      <div class="flex justify-start items-center gap-2 md:gap-4">
+                        <img src="/images/check.svg" alt="Check" width="16" height="16" class="w-6 h-6" decoding="async" loading="lazy"/>
+                        <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-primary">{i}</p>
+                      </div>
+                    ))
+                  }
+                </div>
+              )
+            }
+            {
+              item.link && (
+                <a href={`/${lang}/solutions/${item.link.href}`} class=" flex justify-center items-center gap-2 cursor-pointer group">
+                  <p class="text-[14px] font-bold leading-[150%] text-secondary group-hover:text-primary transition-colors duration-300 ease-in-out">
+                    {item.link.label}
+                  </p>
+                  <img src="/images/arrow-g.svg" alt="Arrow" width="24" height="24" class="w-6 h-6" decoding="async" loading="lazy"/>
+                </a>
+              )
+            }
+            {
+              item.button && (
+                <Button text={item.button.label} href={item.button.href} textClass={item.button.styleLabel} extraBtnClass={item.button.styleButton}/>
+              )
+            }
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

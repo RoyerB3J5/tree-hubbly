@@ -1,0 +1,103 @@
+---
+import Button from "../components/Button.astro";
+import type { InformationSection } from "../types/system.type";
+
+type ListsSection = InformationSection["lists"];
+interface Props {
+  content: ListsSection;
+}
+const { content } = Astro.props as Props;
+const colsMap : Record<number, string> = {
+  4: "md:grid-cols-2 lg:grid-cols-4",
+  5 : "md:grid-cols-3",
+  6: "md:grid-cols-3",
+}
+const cols = colsMap[content.items.length] || "md:grid-cols-1";
+const hasIcons = content.items.some(item => item.icon);
+---
+<div class="flex flex-col justify-center items-center gap-8 md:gap-11 lg:gap-14">
+  <div class="flex flex-col justify-center items-start md:items-center gap-8">
+    <h2 set:html={content.title} class="text-primary text-[32px] md:text-[48px] font-bold leading-[120%] text-start md:text-center animation-up-fast-2"></h2>
+    <p set:html={content.description} class="text-primary text-[12px] md:text-[14px] font-normal leading-[150%] text-start md:text-center animation-up-fast-2"></p>
+  </div>
+  {content.items.length === 5 ? (
+    <div class="flex flex-col gap-4 md:gap-6 w-full ">
+      {/* Primera fila - 2 items */}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        {
+          content.items.slice(0, 2).map((item)=>( 
+            <div class={`flex flex-row md:flex-col justify-start  gap-4 md:gap-6 md:px-8  rounded-3xl border border-[#DEDEDE] ${!item.button ? "bg-white p-4 md:py-10 items-start" : "bg-secondary py-11.25 items-center"} self-stretch animation-up-fast-2`}>
+              {
+                item.icon && (
+                  <div class="flex justify-center items-center rounded-lg w-10 h-10 md:w-auto md:h-auto md:p-4.25 bg-[#DDF1B0] shrink-0">
+                    <img src={`/images/${item.icon}.svg`} alt={item.title} width="24" height="24" class="w-6 h-6"/>
+                  </div>
+                )
+              }
+              <div class="flex flex-col justify-center items-start gap-2 md:gap-6">
+                <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-primary">{item.title}</h3>
+                <p class={`text-primary text-[12px] md:text-[14px] font-normal leading-[150%] ${item.button ? "text-center" : "text-start"}`} set:html={item.description}></p>
+              </div>
+              {
+                item.button && (
+                  <Button text={item.button.label} href={item.button.href} textClass={item.button.styleLabel} extraBtnClass={item.button.styleButton}/>
+                )
+              }
+            </div>
+          ))
+        }
+      </div>
+      {/* Segunda fila - 3 items */}
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        {
+          content.items.slice(2).map((item)=>( 
+            <div class={`flex flex-row md:flex-col justify-start  gap-4 md:gap-6 md:px-8  rounded-3xl border border-[#DEDEDE] ${!item.button ? "bg-white p-4 md:py-10 items-start" : "bg-secondary py-11.25 items-center"} self-stretch animation-up-fast-2`}>
+              {
+                item.icon && (
+                  <div class="flex justify-center items-center rounded-lg w-10 h-10 md:w-auto md:h-auto md:p-4.25 bg-[#DDF1B0] shrink-0">
+                    <img src={`/images/${item.icon}.svg`} alt={item.title} width="24" height="24" class="w-6 h-6"/>
+                  </div>
+                )
+              }
+              <div class="flex flex-col justify-center items-start gap-2 md:gap-6">
+                <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-primary">{item.title}</h3>
+                <p class={`text-primary text-[12px] md:text-[14px] font-normal leading-[150%] ${item.button ? "text-center" : "text-start"}`} set:html={item.description}></p>
+              </div>
+              {
+                item.button && (
+                  <Button text={item.button.label} href={item.button.href} textClass={item.button.styleLabel} extraBtnClass={item.button.styleButton}/>
+                )
+              }
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  ) : (
+    <div class={`grid ${cols} grid-cols-1 justify-center items-center gap-4 md:gap-6`}>
+      {
+        content.items.map((item)=>( 
+          <div class={`flex  justify-start   md:px-8  rounded-3xl border border-[#DEDEDE] ${!item.button ? "flex-row md:flex-col bg-white p-4 md:py-10 items-start gap-4 md:gap-6" : "gap-6 flex-col bg-secondary px-4 py-6 md:py-11.25 items-center"} self-stretch animation-up-fast-2`}>
+            {
+              item.icon && (
+                <div class="flex justify-center items-center rounded-lg w-10 h-10 md:w-auto md:h-auto md:p-4.25 bg-[#DDF1B0] shrink-0">
+                  <img src={`/images/${item.icon}.svg`} alt={item.title} width="24" height="24" class="w-6 h-6"/>
+                </div>
+              )
+            }
+            <div class={`flex flex-col justify-center  ${item.button ? 'items-center w-full gap-6' : 'items-start gap-2 md:gap-6'} `}>
+              <h3 class={` font-bold leading-[150%] text-primary ${item.button ? "text-[18px] md:text-[16px] text-center" : "text-[14px] md:text-[16px]"}`}>{item.title}</h3>
+              <p class={`text-primary text-[12px] md:text-[14px] font-normal leading-[150%] ${item.button ? "text-center" : "text-start"}`} set:html={item.description}></p>
+            </div>
+            
+            {
+              item.button && (
+                <Button text={item.button.label} href={item.button.href} textClass={item.button.styleLabel} extraBtnClass={item.button.styleButton}/>
+              )
+            }
+          </div>
+        ))
+      }
+    </div>
+  )}
+</div>

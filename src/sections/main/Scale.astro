@@ -1,0 +1,16 @@
+---
+type Translations = typeof import("../../i18n/en").default;
+type ScaleContent = Translations["main"]["scale"];
+interface Props {
+  content: ScaleContent;
+}
+const { content } = Astro.props as Props;
+---
+<section class="w-full flex justify-center items-center relative h-auto md:h-[40dvh] 3xl:h-[80dvh]">
+  <img src="/images/bg-scale.webp" alt="Where Tree Companies Scale" width="2100" height="1172" class="w-full h-full object-cover object-center -z-20 absolute">
+  <div class="absolute w-full h-full inset-0 -z-10 back-hero-2"></div>
+  <div class="w-full max-w-screen xl:max-w-7xl px-5 xl:px-0 flex flex-col md:flex-row justify-center md:justify-start items-center md:items-end gap-2.5 md:gap-7.25 py-27 md:py-20 h-full ">
+    <img src="/images/logo-1.svg" alt="Tree Company Logo" width="65" height="96" class="w-13.5 md:w-16.25 h-auto animation-up-fast-2">
+    <h3 set:html={content.label} class="text-[24px] md:text-[40px] font-bold leading-[120%] text-paragraph text-center md:text-start animation-up-fast-2"></h3>
+  </div>
+</section>

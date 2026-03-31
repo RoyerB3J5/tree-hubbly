@@ -1,0 +1,572 @@
+---
+type Translations = typeof import("../../i18n/en").default;
+type BannersContent = Translations["main"]["banners"];
+interface Props {
+  content: BannersContent;
+}
+const { content } = Astro.props as Props;
+---
+
+<section class="w-full relative overflow-hidden h-auto animation-up-fast">
+  <!-- Carousel Container -->
+  <div 
+    id="bannerCarousel"
+    class="relative w-full overflow-hidden h-auto"
+    data-items={content.length}
+  >
+    <!-- Slides Wrapper -->
+    <div 
+      id="slidesWrapper"
+      class="flex transition-transform duration-500 h-auto"
+      style="transform: translateX(-100%);"
+    >
+      {/* Slide clonado al inicio */}
+      {content.length > 0 && (
+        <div 
+          class="carousel-slide w-full shrink-0 relative md:h-auto flex flex-col self-stretch md:self-auto"
+          data-index="clone-start"
+        >
+          <div class="relative md:absolute w-full h-auto md:h-full z-auto md:-z-10 aspect-375/284 md:aspect-auto inset-0 md:inset-0">
+            <img 
+              src={`/images/${content[content.length - 1].image}.webp`} 
+              alt={content[content.length - 1].title} 
+              width="1440" 
+              height="684" 
+              class="w-full h-full object-right lg:object-center object-cover -z-20 inset-0"
+            >
+            <div class="absolute w-full h-full inset-0 md:inset-0 z-0 md:z-10 back-banner hidden md:block"></div>
+            <div class="absolute w-full h-full inset-0 md:inset-0 z-0 md:z-10 back-image-banner md:hidden block"></div>
+          </div>
+          
+          <div class="relative w-full max-w-screen xl:max-w-7xl px-5 xl:px-0 flex flex-col jutify-start md:justify-center items-start py-10 md:pt-30 md:pb-19 gap-8 mx-auto bg-primary md:bg-transparent grow md:grow-0 self-stretch md:self-auto">
+            <div class="flex flex-col justify-center items-start gap-4">
+              <p class="text-secondary text-[14px] font-bold leading-[150%]">{content[content.length - 1].description}</p>
+              <h2 class="text-paragraph text-[32px] md:text-[48px] font-semibold leading-[120%]" set:html={content[content.length - 1].title}></h2>
+            </div>
+            <div class="flex flex-col justify-center items-start gap-4">
+              <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph" set:html={content[content.length - 1].content}></p>
+              <div class="flex flex-col justify-center items-start gap-4">
+                {
+                  content[content.length - 1].items.map((item)=>( 
+                    <div class="flex justify-start items-center gap-4">
+                      <img src="/images/check.svg" alt="Check" width="24" height="24" class="w-6 h-6">
+                      <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph">{item}</p>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+            <div class="md:flex flex-col justify-center items-start gap-4 hidden ">
+              <p class="text-[14px] font-medium leading-[150%] text-paragraph">{content[content.length - 1].tags.title}</p>
+              <div class="flex justify-start items-center gap-4 ">
+                {
+                  content[content.length - 1].tags.items.map((tag)=>( 
+                    <div class="flex justify-center items-center gap-1.25 border-l border-paragraph/15 pl-4 first:border-l-0 first:pl-0">
+                      <img src={`/images/${tag.icon}.svg`} alt={tag.label} width="24" height="24" class="w-6 h-6">
+                      <p class="text-[14px] font-medium leading-[150%] text-paragraph">{tag.label}</p>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {content.map((slide, index) => (
+        <div 
+          class="carousel-slide w-full shrink-0 relative md:h-auto flex flex-col self-stretch md:self-auto"
+          data-index={index}
+        >
+          <div class="relative md:absolute w-full h-auto md:h-full z-auto md:-z-10 aspect-375/284 md:aspect-auto inset-0 md:inset-0">
+            <img 
+              src={`/images/${content[index].image}.webp`} 
+              alt={content[index].title} 
+              width="1440" 
+              height="684" 
+              class="w-full h-full object-right lg:object-center object-cover -z-20 inset-0"
+            >
+            <div class="absolute w-full h-full inset-0 md:inset-0 z-0 md:z-10 back-banner hidden md:block"></div>
+            <div class="absolute w-full h-full inset-0 md:inset-0 z-0 md:z-10 back-image-banner md:hidden block"></div>
+          </div>
+          
+          <div class="relative w-full max-w-screen xl:max-w-7xl px-5 xl:px-0 flex flex-col justify-start md:justify-center items-start py-10 md:pt-30 md:pb-19 gap-8 mx-auto bg-primary md:bg-transparent grow md:grow-0 self-stretch md:self-auto">
+            <div class="flex flex-col justify-center items-start gap-4">
+              <p class="text-secondary text-[14px] font-bold leading-[150%]">{content[index].description}</p>
+              <h2 class="text-paragraph text-[32px] md:text-[48px] font-semibold leading-[120%]" set:html={content[index].title}></h2>
+            </div>
+            <div class="flex flex-col justify-center items-start gap-4">
+              <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph" set:html={content[index].content}></p>
+              <div class="flex flex-col justify-center items-start gap-4">
+                {
+                  content[index].items.map((item)=>( 
+                    <div class="flex justify-start items-center gap-4">
+                      <img src="/images/check.svg" alt="Check" width="24" height="24" class="w-6 h-6">
+                      <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph">{item}</p>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+            <div class="md:flex flex-col justify-center items-start gap-4 hidden ">
+              <p class="text-[14px] font-medium leading-[150%] text-paragraph">{content[index].tags.title}</p>
+              <div class="flex justify-start items-center gap-4 ">
+                {
+                  content[index].tags.items.map((tag)=>( 
+                    <div class="flex justify-center items-center gap-1.25 border-l border-paragraph/15 pl-4 first:border-l-0 first:pl-0">
+                      <img src={`/images/${tag.icon}.svg`} alt={tag.label} width="24" height="24" class="w-6 h-6">
+                      <p class="text-[14px] font-medium leading-[150%] text-paragraph">{tag.label}</p>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+      {/* Slide clonado al final */}
+      {content.length > 0 && (
+        <div 
+          class="carousel-slide w-full shrink-0 relative md:h-auto flex flex-col self-stretch md:self-auto "
+          data-index="clone-end"
+        >
+          <div class="relative md:absolute w-full h-auto md:h-full z-auto md:-z-10 aspect-375/284 md:aspect-auto inset-0 md:inset-0">
+            <img 
+              src={`/images/${content[0].image}.webp`} 
+              alt={content[0].title} 
+              width="1440" 
+              height="684" 
+              class="w-full h-full object-right lg:object-center object-cover -z-20 inset-0"
+            >
+            <div class="absolute w-full h-full inset-0 md:inset-0 z-0 md:z-10 back-banner hidden md:block"></div>
+            <div class="absolute w-full h-full inset-0 md:inset-0 z-0 md:z-10 back-image-banner md:hidden block"></div>
+          </div>
+          
+          <div class="relative w-full max-w-screen xl:max-w-7xl px-5 xl:px-0 flex flex-col justify-start md:justify-center items-start py-10 md:pt-30 md:pb-19 gap-8 mx-auto bg-primary md:bg-transparent grow md:grow-0 self-stretch md:self-auto">
+            <div class="flex flex-col justify-center items-start gap-4">
+              <p class="text-secondary text-[14px] font-bold leading-[150%]">{content[0].description}</p>
+              <h2 class="text-paragraph text-[32px] md:text-[48px] font-semibold leading-[120%]" set:html={content[0].title}></h2>
+            </div>
+            <div class="flex flex-col justify-center items-start gap-4">
+              <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph" set:html={content[0].content}></p>
+              <div class="flex flex-col justify-center items-start gap-4">
+                {
+                  content[0].items.map((item)=>( 
+                    <div class="flex justify-start items-center gap-4">
+                      <img src="/images/check.svg" alt="Check" width="24" height="24" class="w-6 h-6">
+                      <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph">{item}</p>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+            <div class="md:flex flex-col justify-center items-start gap-4 hidden ">
+              <p class="text-[14px] font-medium leading-[150%] text-paragraph">{content[0].tags.title}</p>
+              <div class="flex justify-start items-center gap-4 ">
+                {
+                  content[0].tags.items.map((tag)=>( 
+                    <div class="flex justify-center items-center gap-1.25 border-l border-paragraph/15 pl-4 first:border-l-0 first:pl-0">
+                      <img src={`/images/${tag.icon}.svg`} alt={tag.label} width="24" height="24" class="w-6 h-6">
+                      <p class="text-[14px] font-medium leading-[150%] text-paragraph">{tag.label}</p>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <!-- Indicators -->
+  <div class="absolute top-[42%] md:top-auto bottom-auto md:bottom-10 left-1/2 -translate-x-1/2 flex justify-center items-center gap-4 z-10 h-1">
+    {Array.from({ length: content.length }).map((_, index) => (
+      <button
+        class="carousel-indicator w-10 h-1 rounded-sm transition-all duration-300 cursor-pointer hover:opacity-80"
+        data-index={index}
+        style={index === 0 ? "background-color: var(--color-secondary);" : "background-color: var(--color-paragraph)"}
+        aria-label={`Go to slide ${index + 1}`}
+      ></button>
+    ))}
+  </div>
+</section>
+
+<style>
+  .carousel-slide {
+    touch-action: pan-y;
+  }
+</style>
+
+<script>
+  interface CarouselState {
+    currentIndex: number;
+    totalSlides: number;
+    wrapperIndex: number;
+    autoplayInterval: number | null;
+    isDragging: boolean;
+    startX: number;
+    currentX: number;
+    initialized: boolean;
+    dragThreshold: number;
+  }
+
+  function initCarousel() {
+    const carousel = document.getElementById("bannerCarousel");
+    if (!carousel) {
+      console.warn("Carousel container not found");
+      return;
+    }
+
+    const totalSlides = parseInt(carousel.getAttribute("data-items") || "3");
+    const slidesWrapper = document.getElementById("slidesWrapper") as HTMLElement;
+    if (!slidesWrapper) {
+      console.warn("Slides wrapper not found");
+      return;
+    }
+
+    const slides = slidesWrapper.querySelectorAll(".carousel-slide");
+    const indicators = document.querySelectorAll(".carousel-indicator");
+
+    if (slides.length === 0) {
+      console.warn("No slides found");
+      return;
+    }
+
+    const state: CarouselState = {
+      currentIndex: 0, // Índice del slide real (0 a totalSlides-1)
+      totalSlides,
+      wrapperIndex: 1, // Índice en el wrapper (comienza en 1 por el clon)
+      autoplayInterval: null,
+      isDragging: false,
+      startX: 0,
+      currentX: 0,
+      initialized: false,
+      dragThreshold: 50,
+    };
+
+    // Update slide - maneja la lógica de clones invisibles
+    function updateSlide(nextCurrentIndex: number) {
+      // Normalizar el índice a 0-totalSlides
+      state.currentIndex = ((nextCurrentIndex % state.totalSlides) + state.totalSlides) % state.totalSlides;
+      state.wrapperIndex = state.currentIndex + 1; // +1 por el clon al inicio
+      
+      // Aplicar transición
+      slidesWrapper.style.transition = "transform 500ms ease-in-out";
+      slidesWrapper.style.transform = `translateX(${-state.wrapperIndex * 100}%)`;
+
+      // Actualizar indicadores
+      indicators.forEach((indicator, i) => {
+        const el = indicator as HTMLElement;
+        el.style.opacity = "1";
+        el.style.backgroundColor = i === state.currentIndex ? "var(--color-secondary)" : "var(--color-paragraph)";
+      });
+
+      resetAutoplay();
+    }
+
+    // Función para resetear invisible (saltando entre clones)
+    function handleCloneJump() {
+      // Si saltamos al clon final, volver al real
+      if (state.wrapperIndex === totalSlides + 1) {
+        setTimeout(() => {
+          slidesWrapper.style.transition = "none";
+          state.wrapperIndex = 1;
+          slidesWrapper.style.transform = `translateX(${-state.wrapperIndex * 100}%)`;
+        }, 500);
+      }
+      // Si saltamos al clon inicial, volver al real
+      else if (state.wrapperIndex === 0) {
+        setTimeout(() => {
+          slidesWrapper.style.transition = "none";
+          state.wrapperIndex = totalSlides;
+          slidesWrapper.style.transform = `translateX(${-state.wrapperIndex * 100}%)`;
+        }, 500);
+      }
+    }
+
+    // Función mejorada que maneja cambios directos sin pasar por updateSlide
+    function moveToSlide(nextCurrentIndex: number) {
+      nextCurrentIndex = ((nextCurrentIndex % state.totalSlides) + state.totalSlides) % state.totalSlides;
+      state.currentIndex = nextCurrentIndex;
+      state.wrapperIndex = state.currentIndex + 1;
+      
+      slidesWrapper.style.transition = "transform 500ms ease-in-out";
+      slidesWrapper.style.transform = `translateX(${-state.wrapperIndex * 100}%)`;
+
+      indicators.forEach((indicator, i) => {
+        const el = indicator as HTMLElement;
+        el.style.opacity = "1";
+        el.style.backgroundColor = i === state.currentIndex ? "var(--color-secondary)" : "var(--color-paragraph)";
+      });
+
+      resetAutoplay();
+    }
+
+    // Autoplay logic
+    function startAutoplay() {
+      if (state.autoplayInterval) {
+        clearInterval(state.autoplayInterval);
+      }
+      state.autoplayInterval = window.setInterval(() => {
+        const nextIndex = state.currentIndex + 1;
+        if (nextIndex >= state.totalSlides) {
+          // Ir al clon final
+          state.wrapperIndex = totalSlides + 1;
+          slidesWrapper.style.transition = "transform 500ms ease-in-out";
+          slidesWrapper.style.transform = `translateX(${-state.wrapperIndex * 100}%)`;
+          
+          // Usar transitionend para resetear sin saltos
+          const handleTransitionEnd = () => {
+            slidesWrapper.removeEventListener("transitionend", handleTransitionEnd);
+            // Usar requestAnimationFrame para sincronizar con el ciclo de renderización
+            requestAnimationFrame(() => {
+              slidesWrapper.style.transition = "none";
+              state.currentIndex = 0;
+              state.wrapperIndex = 1;
+              slidesWrapper.style.transform = `translateX(${-state.wrapperIndex * 100}%)`;
+              
+              // Actualizar indicadores
+              indicators.forEach((indicator, i) => {
+                const el = indicator as HTMLElement;
+                el.style.opacity = "1";
+                el.style.backgroundColor = i === 0 ? "var(--color-secondary)" : "var(--color-paragraph)";
+              });
+            });
+          };
+          
+          slidesWrapper.addEventListener("transitionend", handleTransitionEnd, { once: true });
+        } else {
+          updateSlide(nextIndex);
+        }
+      }, 5000);
+    }
+
+    function resetAutoplay() {
+      if (state.autoplayInterval) {
+        clearInterval(state.autoplayInterval);
+      }
+      startAutoplay();
+    }
+
+    function stopAutoplay() {
+      if (state.autoplayInterval) {
+        clearInterval(state.autoplayInterval);
+        state.autoplayInterval = null;
+      }
+    }
+
+    // Indicator click handlers
+    indicators.forEach((indicator, index) => {
+      (indicator as HTMLElement).addEventListener("click", () => {
+        if (state.isDragging) return;
+        moveToSlide(index);
+      });
+    });
+
+    // Mouse down - start drag
+    slidesWrapper.addEventListener("mousedown", (e: MouseEvent) => {
+      state.isDragging = true;
+      state.startX = e.clientX;
+      state.currentX = e.clientX;
+      slidesWrapper.style.transition = "none";
+      stopAutoplay();
+    });
+
+    // Mouse move - drag animation
+    document.addEventListener("mousemove", (e: MouseEvent) => {
+      if (!state.isDragging) return;
+      state.currentX = e.clientX;
+      
+      const diff = state.startX - state.currentX;
+      const dragPercent = (diff / slidesWrapper.offsetWidth) * 100;
+      const currentTranslate = -state.wrapperIndex * 100;
+      slidesWrapper.style.transform = `translateX(${currentTranslate - dragPercent}%)`;
+    });
+
+    // Mouse up - end drag
+    document.addEventListener("mouseup", () => {
+      if (!state.isDragging) return;
+      state.isDragging = false;
+      
+      const diff = state.startX - state.currentX;
+      slidesWrapper.style.transition = "transform 500ms ease-in-out";
+
+      if (Math.abs(diff) > state.dragThreshold) {
+        if (diff > state.dragThreshold) {
+          // Drag izquierda - siguiente slide
+          const nextIndex = state.currentIndex + 1;
+          if (nextIndex >= state.totalSlides) {
+            state.wrapperIndex = totalSlides + 1;
+            slidesWrapper.style.transform = `translateX(${-state.wrapperIndex * 100}%)`;
+            
+            const handleTransitionEnd = () => {
+              slidesWrapper.removeEventListener("transitionend", handleTransitionEnd);
+              requestAnimationFrame(() => {
+                slidesWrapper.style.transition = "none";
+                state.currentIndex = 0;
+                state.wrapperIndex = 1;
+                slidesWrapper.style.transform = `translateX(${-state.wrapperIndex * 100}%)`;
+                indicators.forEach((indicator, i) => {
+                  const el = indicator as HTMLElement;
+                  el.style.opacity = "1";
+                  el.style.backgroundColor = i === 0 ? "var(--color-secondary)" : "var(--color-paragraph)";
+                });
+              });
+            };
+            
+            slidesWrapper.addEventListener("transitionend", handleTransitionEnd, { once: true });
+          } else {
+            updateSlide(nextIndex);
+          }
+        } else if (diff < -state.dragThreshold) {
+          // Drag derecha - slide anterior
+          const prevIndex = state.currentIndex - 1;
+          if (prevIndex < 0) {
+            state.wrapperIndex = 0;
+            slidesWrapper.style.transform = `translateX(${-state.wrapperIndex * 100}%)`;
+            
+            const handleTransitionEnd = () => {
+              slidesWrapper.removeEventListener("transitionend", handleTransitionEnd);
+              requestAnimationFrame(() => {
+                slidesWrapper.style.transition = "none";
+                state.currentIndex = totalSlides - 1;
+                state.wrapperIndex = totalSlides;
+                slidesWrapper.style.transform = `translateX(${-state.wrapperIndex * 100}%)`;
+                indicators.forEach((indicator, i) => {
+                  const el = indicator as HTMLElement;
+                  el.style.opacity = "1";
+                  el.style.backgroundColor = i === totalSlides - 1 ? "var(--color-secondary)" : "var(--color-paragraph)";
+                });
+              });
+            };
+            
+            slidesWrapper.addEventListener("transitionend", handleTransitionEnd, { once: true });
+          } else {
+            updateSlide(prevIndex);
+          }
+        }
+      } else {
+        updateSlide(state.currentIndex);
+      }
+    });
+
+    // Mouse leave - cancel drag
+    document.addEventListener("mouseleave", () => {
+      if (state.isDragging) {
+        state.isDragging = false;
+        slidesWrapper.style.transition = "transform 500ms ease-in-out";
+        updateSlide(state.currentIndex);
+      }
+    });
+
+    // Touch start
+    slidesWrapper.addEventListener("touchstart", (e: TouchEvent) => {
+      state.isDragging = true;
+      state.startX = e.touches[0].clientX;
+      state.currentX = e.touches[0].clientX;
+      slidesWrapper.style.transition = "none";
+      stopAutoplay();
+    });
+
+    // Touch move
+    slidesWrapper.addEventListener("touchmove", (e: TouchEvent) => {
+      if (!state.isDragging) return;
+      state.currentX = e.touches[0].clientX;
+      
+      const diff = state.startX - state.currentX;
+      const dragPercent = (diff / slidesWrapper.offsetWidth) * 100;
+      const currentTranslate = -state.wrapperIndex * 100;
+      slidesWrapper.style.transform = `translateX(${currentTranslate - dragPercent}%)`;
+    });
+
+    // Touch end
+    slidesWrapper.addEventListener("touchend", () => {
+      if (!state.isDragging) return;
+      state.isDragging = false;
+      
+      slidesWrapper.style.transition = "transform 500ms ease-in-out";
+
+      const diff = state.startX - state.currentX;
+
+      if (Math.abs(diff) > state.dragThreshold) {
+        if (diff > state.dragThreshold) {
+          const nextIndex = state.currentIndex + 1;
+          if (nextIndex >= state.totalSlides) {
+            state.wrapperIndex = totalSlides + 1;
+            slidesWrapper.style.transform = `translateX(${-state.wrapperIndex * 100}%)`;
+            
+            const handleTransitionEnd = () => {
+              slidesWrapper.removeEventListener("transitionend", handleTransitionEnd);
+              requestAnimationFrame(() => {
+                slidesWrapper.style.transition = "none";
+                state.currentIndex = 0;
+                state.wrapperIndex = 1;
+                slidesWrapper.style.transform = `translateX(${-state.wrapperIndex * 100}%)`;
+                indicators.forEach((indicator, i) => {
+                  const el = indicator as HTMLElement;
+                  el.style.opacity = "1";
+                  el.style.backgroundColor = i === 0 ? "var(--color-secondary)" : "var(--color-paragraph)";
+                });
+              });
+            };
+            
+            slidesWrapper.addEventListener("transitionend", handleTransitionEnd, { once: true });
+          } else {
+            updateSlide(nextIndex);
+          }
+        } else if (diff < -state.dragThreshold) {
+          const prevIndex = state.currentIndex - 1;
+          if (prevIndex < 0) {
+            state.wrapperIndex = 0;
+            slidesWrapper.style.transform = `translateX(${-state.wrapperIndex * 100}%)`;
+            
+            const handleTransitionEnd = () => {
+              slidesWrapper.removeEventListener("transitionend", handleTransitionEnd);
+              requestAnimationFrame(() => {
+                slidesWrapper.style.transition = "none";
+                state.currentIndex = totalSlides - 1;
+                state.wrapperIndex = totalSlides;
+                slidesWrapper.style.transform = `translateX(${-state.wrapperIndex * 100}%)`;
+                indicators.forEach((indicator, i) => {
+                  const el = indicator as HTMLElement;
+                  el.style.opacity = "1";
+                  el.style.backgroundColor = i === totalSlides - 1 ? "var(--color-secondary)" : "var(--color-paragraph)";
+                });
+              });
+            };
+            
+            slidesWrapper.addEventListener("transitionend", handleTransitionEnd, { once: true });
+          } else {
+            updateSlide(prevIndex);
+          }
+        }
+      } else {
+        updateSlide(state.currentIndex);
+      }
+    });
+
+    // Initialize - comienza en slide 0 real (posición 1 en wrapper)
+    slidesWrapper.style.transition = "none";
+    state.currentIndex = 0;
+    state.wrapperIndex = 1;
+    slidesWrapper.style.transform = `translateX(${-state.wrapperIndex * 100}%)`;
+    
+    // Set initial indicator colors
+    indicators.forEach((indicator, i) => {
+      const el = indicator as HTMLElement;
+      el.style.backgroundColor = i === 0 ? "var(--color-secondary)" : "var(--color-paragraph)";
+      el.style.opacity = "1";
+    });
+    
+    state.initialized = true;
+    startAutoplay();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCarousel);
+  } else {
+    initCarousel();
+  }
+
+  document.addEventListener("astro:page-load", initCarousel);
+</script>

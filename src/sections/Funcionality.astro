@@ -1,0 +1,36 @@
+---
+type Translations = typeof import("../i18n/en").default;
+type FuncionalityContent = Translations["systemPage"]["functionality"];
+interface Props {
+  content: FuncionalityContent;
+}
+const { content } = Astro.props as Props;
+---
+<section class="w-full flex justify-center items-center bg-primary back-content">
+  <div class="container-full py-10 md:py-20 lg:py-30 flex flex-col justify-center items-center gap-8 md:gap-11 xl:gap-14">
+    <div class="flex flex-col justify-center items-start md:items-center gap-8">
+      <h2 set:html={content.title} class="text-[32px] md:text-[48px] text-paragraph font-bold leading-[130%] md:leading-[120%] text-start md:text-center animation-fade-left-3"></h2>
+      <p set:html={content.description} class="text-paragraph text-[12px] md:text-[14px] leading-[150%] font-normal text-start md:text-center animation-fade-left-3"></p>
+    </div>
+    <div class="w-full flex flex-col md:flex-row justify-center items-center gap-8 md:gap-6 relative animation-fade-left-3">
+      <div class="absolute w-[75%] border-t border-dashed border-white opacity-40 bottom-1.75 hidden md:block"></div>
+      {
+        content.items.map((item, index)=>( 
+          <div class="w-full md:w-1/4 flex flex-row md:flex-col justify-between items-center gap-5.5 md:gap-8 lg:gap-10 z-10 self-stretch">
+            <div class="flex flex-row md:flex-col justify-center items-center gap-5.5 md:gap-8 lg:gap-10">
+              <div class="flex justify-center items-center border-4 border-secondary rounded-full w-12 lg:w-16 h-12 lg:h-16 shrink-0">
+                <p class="text-[24px] font-bold leading-[140%] text-paragraph">{index+1}</p>
+              </div>
+              <div class="flex flex-col justify-center items-start md:items-center gap-2">
+                <h3 class="text-paragraph text-[14px] md:text-[16px] font-bold leading-[150%]">{item.title}</h3>
+                <p class="text-paragraph text-[12px] md:text-[14px] leading-[150%] font-normal text-start md:text-center">{item.description}</p>
+              </div>
+            </div>
+            
+            <img src="/images/point.svg" alt="Point Treehubbly" width="16" height="16" decoding="async" loading="lazy" class="w-4 h-4 hidden md:block"/>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

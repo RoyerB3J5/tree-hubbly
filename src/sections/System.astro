@@ -1,0 +1,40 @@
+---
+type Translations = typeof import("../i18n/en").default;
+type SystemContent = Translations["caseStudies"]["system"];
+interface Props {
+  content: SystemContent;
+}
+const { content } = Astro.props;
+---
+<section class="w-full flex justify-center items-center bg-paragraph">
+  <div class="container-full flex flex-col justify-center items-center gap-8 md:gap-11 lg:gap-14 py-10 md:py-20 lg:py-30">
+    <div class="flex flex-col justify-center items-center gap-8">
+      <h2 set:html={content.title} class="text-[32px] md:text-[48px] text-primary font-bold leading-[130%] md:leading-[120%] animation-up-fast-2"></h2>
+      <p set:html={content.description} class="text-[12px] md:text-[14px] text-primary leading-[150%] font-normal text-start md:text-center animation-up-fast-2"></p>
+    </div>
+    <div class="w-full grid grid-cols-1 lg:grid-cols-3 justify-center items-center gap-4 md:gap-6">
+      {
+        content.items.map((item)=>( 
+          <div class="w-full flex flex-col justify-start items-start gap-4 md:gap-6 py-6 xl:py-10 px-4 xl:px-8 rounded-2xl md:rounded-3xl border border-[#DEDEDE] bg-white self-stretch animation-up-fast-2 ">
+            <div class="bg-[#DDF1B0] flex justify-center items-center w-10 h-10 md:w-auto md:h-auto md:p-4 rounded-lg">
+              <img src={`/images/${item.icon}.svg`} alt={item.title} width="24" height="24"/>
+            </div>
+            <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-primary">{item.title}</h3>
+            <p class="text-[12px] md:text-[14px] text-primary leading-[150%] font-normal">{item.description}</p>
+            <div class="flex flex-col justify-center items-start gap-4 md:gap-6">
+              {
+                item.items.map((i)=>(
+                  <div class="flex justify-start items-center gap-2 md:gap-4">
+                    <img src="/images/check.svg" alt="Check Icon" width="16" height="16" decoding="async" loading="lazy" class="w-6 h-6"/>
+                    <p class="text-[12px] md:text-[14px] text-primary leading-[150%] font-normal">{i}</p>
+                  </div>
+                ))
+              }
+            </div>
+            <p class="text-[14px] font-normal leading-[150%] text-primary hidden md:block">{item.content}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

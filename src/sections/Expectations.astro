@@ -1,0 +1,73 @@
+---
+import type { SolutionPage } from "../types/system.type";
+
+type ExpectationSection = SolutionPage["expectations"];
+interface Props {
+  content: ExpectationSection;
+}
+const { content } = Astro.props as Props;
+---
+<section class="w-full flex justify-center items-center bg-primary">
+  <div class="container-full py-10 md:py-20 lg:py-30 flex flex-col justify-center items-center gap-8 md:pag-11 lg:gap-14">
+    <div class="w-full flex flex-col md:flex-row justify-center md:justify-between items-start md:items-center gap-8 md:gap-0">
+      <h2 set:html={content?.title} class="text-[32px] lg:text-[48px] text-paragraph font-bold leading-[130%] md:leading-[120%] animation-zoom-in-2"></h2>
+      <p set:html={content?.description} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal w-full md:w-[35%] animation-zoom-in-2"></p>
+    </div>
+    {
+      content?.items.length && content?.items.length > 4 ? (
+        <div class="w-full grid grid-cols-1 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-6">
+            {
+              content?.items.slice(0, 2).map((item)=>( 
+                <div class="flex flex-col justify-start md:justify-center items-center rounded-2xl md:rounded-3xl overflow-hidden border border-[#263A4B] self-stretch animation-zoom-in-2">
+                  <div class="aspect-343/193 md:aspect-151/85 w-full h-auto relative">
+                    <img src={`/images/${item.image}.webp`} alt={item.title} width="588" height="331" class="w-full h-full absolute object-center object-cover inset-0">
+                    <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
+                  </div>
+                  <div class="flex flex-col justify-center items-start py-6 px-4 md:px-8 md:py-10 back-content gap-4 md:gap-6 grow">
+                    <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-secondary">{item.title}</h3>
+                    <p set:html={item.description} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal"></p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 justify-center items-center gap-6">
+            {
+              content?.items.slice(2).map((item)=>( 
+                <div class="flex flex-col justify-center items-center rounded-3xl overflow-hidden border border-[#263A4B] self-stretch animation-zoom-in-2">
+                  <div class="aspect-343/193 md:aspect-video w-full h-auto relative">
+                    <img src={`/images/${item.image}.webp`} alt={item.title} width="384" height="216" class="w-full h-full absolute object-center object-cover inset-0">
+                    <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
+                  </div>
+                  <div class="flex flex-col justify-center items-start px-4 py-6 md:px-8 md:py-10 back-content gap-4 md:gap-6 grow">
+                    <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-secondary">{item.title}</h3>
+                    <p set:html={item.description} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal"></p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      ):(
+        <div class="grid grid-cols-1 md:grid-cols-3 justify-center items-center gap-4 md:gap-6">
+          {
+            content?.items.map((item)=>( 
+              <div class="flex flex-col justify-center items-center rounded-2xl md:rounded-3xl overflow-hidden border border-[#263A4B] self-stretch animation-zoom-in-2">
+                <div class="aspect-343/193 md:aspect-video w-full h-auto relative">
+                  <img src={`/images/${item.image}.webp`} alt={item.title} width="384" height="216" class="w-full h-full absolute object-center object-cover inset-0">
+                  <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
+                </div>
+                <div class="flex flex-col justify-center items-start px-4 py-6 md:px-8 md:py-10 back-content gap-4 md:gap-6 grow">
+                  <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-secondary">{item.title}</h3>
+                  <p set:html={item.description} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal"></p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      )
+    }
+    
+  </div>
+</section>

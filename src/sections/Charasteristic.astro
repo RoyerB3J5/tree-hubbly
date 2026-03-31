@@ -1,0 +1,50 @@
+---
+import type { SystemPage } from "../types/system.type";
+
+type CharasteristicSection = SystemPage["characteristics"];
+interface Props {
+  content: CharasteristicSection;
+}
+const { content } = Astro.props as Props;
+const colsMap : Record<number, string> = {
+  3: "md:grid-cols-3",
+  4: "md:grid-cols-4",
+}
+const cols = colsMap[content.items.length] || "md:grid-cols-1";
+---
+<section data-curtain class="w-full flex justify-center items-center bg-primary">
+  <div class="container-full flex flex-col justify-center items-center gap-8 md:gap-14 py-10 md:py-20 lg:py-30">
+    <div class="flex flex-col justify-center items-center gap-8">
+      <h2 set:html={content.title} class="text-[32px] md:text-[48px] text-paragraph font-bold leading-[120%] text-start md:text-center animation-up-fast-2"></h2>
+      <p set:html={content.description} class="text-paragraph text-[12px] md:text-[14px] leading-[150%] font-normal text-start md:text-center animation-up-fast-2"></p>
+    </div>
+    <div class={`${content.arrow == true ? 'flex flex-col md:flex-row gap-6 md:gap-4 lg:gap-6' : `grid grid-cols-1 ${cols} gap-6`}   justify-center items-center `}>
+      {
+        content.items.map((item, index)=>(
+          <> 
+            <div class={`flex-1 self-stretch flex flex-col justify-start ${content.arrow == true ? 'items-start md:items-center gap-6 px-4 lg:px-8' : 'items-start gap-4 px-4 md:px-8'}  md:gap-6 rounded-2xl md:rounded-3xl border border-[#263A4B]  py-6 md:py-10 bg-[#04121E] back-content animation-up-fast-2`}>
+              <div class={`w-10 md:w-14 h-10 md:h-14 rounded-lg bg-secondary/10 flex justify-center items-center shrink-0`}>
+                <img src={`/images/${item.icon}.svg`} alt={item.title} class={`${content.arrow == true ? 'w-8 h-8' : 'w-5 h-5'}  md:w-6   md:h-6`} width="24" height="24">
+              </div>
+              <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-paragraph text-center">{item.title}</h3>
+              <p class={`text-paragraph text-[12px] md:text-[14px] leading-[150%] font-normal h-full ${content.arrow == true ? 'text-start md:text-center' : 'text-start'} `}>{item.description}</p>
+              {
+                item.tag && 
+                <div class="flex justify-start items-center gap-2">
+                  <p class="text-secondary text-[12px] md:text-[14px] leading-[150%] font-bold">{item.tag.label}</p>
+                  <img src={`/images/${item.tag.icon}.svg`} alt={item.tag.label} class="w-4 h-4" width="24" height="24">
+                </div>
+              }
+            </div>
+            {
+              content.arrow == true && index !== content.items.length - 1 && (
+                <img src="/images/arrow-g.svg" alt="Arrow Right" class="animation-up-fast-2 w-10 lg:w-22.5 h-10 lg:h-22.5 hidden md:block" width="24" height="24">
+              )
+            }
+          </> 
+        ))
+      }
+    </div>
+  </div>
+  
+</section>

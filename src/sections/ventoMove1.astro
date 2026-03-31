@@ -1,0 +1,70 @@
+---
+import type { SolutionPage } from "../types/system.type";
+
+type ventoMove1Section = SolutionPage["ventoMove1"];
+interface Props {
+  content: ventoMove1Section;
+}
+const { content } = Astro.props as Props;
+---
+<section class="container-full flex flex-col md:flex-row justify-center items-center gap-8  xl:gap-23 py-10 md:py-28.5 lg:py-38.5">
+  <div class="w-full md:w-[55%] grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 lg:gap-6">
+    <!-- Columna 1 -->
+    <div class="flex flex-col gap-6 translate-y-0 md:translate-y-8.5 ">
+      <div class="container-image-fade bg-[#0798F0] aspect-auto md:aspect-282/353 px-14.5 md:px-8 xl:px-14.5 py-6 md:py-0 gap-4 md:gap-6 rounded-2xl md:rounded-3xl flex flex-col justify-center items-start">
+        <img src="/images/shield.svg" alt="Shield" width="24" height="24" class="w-12 h-12">
+        <p class="text-[20px] lg:text-[32px] font-bold leading-[130%] text-primary">{content?.vento1}</p>
+      </div>
+      <div class="container-image-fade aspect-343/304 md:aspect-square relative rounded-2xl md:rounded-3xl overflow-hidden">
+        <img src="/images/architecture-2.webp" alt="Architecture" width="500" height="500" class="w-full h-full absolute inset-0 object-cover object-center ">
+      </div>
+    </div>
+    
+    <!-- Columna 2 -->
+    <div class=" flex-col gap-6 -translate-y-8.5 hidden md:flex">
+      <div class="container-image-fade aspect-square relative rounded-3xl overflow-hidden">
+        <img src="/images/architecture-1.webp" alt="Architecture" width="500" height="500" class="w-full h-full absolute inset-0 object-cover object-center ">
+        <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
+      </div>
+      <div class="container-image-fade px-3 lg:px-6 bg-primary rounded-3xl flex flex-col justify-center items-start gap-2.5 back-content aspect-282/353">
+        <div class="flex justify-start items-center gap-2">
+          {Array(5).fill(0).map((_)=>(
+            <img src="/images/start-2.svg" alt="Estella de 5 puntas" width="20" height="20">
+          ))}
+        </div>
+        <p class="text-[20px] md:text-[14px] lg:text-[20px] font-bold lg:font-extrabold leading-[150%] text-paragraph">{content?.vento4}</p>
+      </div>
+    </div>
+  </div>
+  <div class="w-full md:w-[45%] flex flex-col justify-center items-start gap-8">
+    <h2 set:html={content?.title} class="text-[32px] md:text-[48px] font-bold leading-[130%] md:leading-[120%] text-primary animation-zoom-in-3"></h2>
+    <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-primary w-full md:w-[85%] animation-zoom-in-3">{content?.description}</p>
+    <div class="flex flex-col justify-center items-start gap-8">
+      {
+        content?.items.map((item)=>( 
+          <div class="flex justify-start items-start gap-4 animation-zoom-in-3">
+            <img src={`/images/${item.icon}.svg`} alt={item.title} width="24" height="24">
+            <div class="flex flex-col justify-center items-start gap-2">
+              <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-primary">{item.title}</h3>
+              <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-primary">{item.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class=" flex-col gap-4 translate-y-0 md:-translate-y-8.5 md:hidden flex">
+      <div class="container-image-fade aspect-343/282 md:aspect-square relative rounded-3xl overflow-hidden">
+        <img src="/images/architecture-1.webp" alt="Architecture" width="500" height="500" class="w-full h-full absolute inset-0 object-cover object-center ">
+        <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
+      </div>
+      <div class="container-image-fade px-6 py-10 md:py-0 md:px-6 bg-primary rounded-3xl flex flex-col justify-center items-start gap-2.5 back-content aspect-auto md:aspect-282/353">
+        <div class="flex justify-start items-center gap-2">
+          {Array(5).fill(0).map((_)=>(
+            <img src="/images/start-2.svg" alt="Estella de 5 puntas" width="20" height="20" class="w-6  h-6">
+          ))}
+        </div>
+        <p class="text-[20px] font-bold leading-[140%] text-paragraph w-[70%]">{content?.vento4}</p>
+      </div>
+    </div>
+</section>

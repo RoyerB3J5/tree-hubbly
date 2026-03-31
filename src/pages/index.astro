@@ -1,0 +1,11 @@
+<script is:inline>
+  if (typeof window !== 'undefined') {
+    const p = window.location.pathname;
+    // Solo redirigir si la ruta es exactamente "/" o cadena vacía
+    if (p === '/' || p === '') {
+      // Redirige a "/en/", manteniendo query y hash si existen
+      const destino = '/en/' + window.location.search + window.location.hash;
+      window.location.replace(destino);
+    }
+  }
+</script>
