@@ -1,0 +1,26 @@
+---
+const icons = [
+  {
+    name: "mail-2",
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=treehubly@gmail.com",
+  },
+  {
+    name: "instagram",
+    href: "#",
+  },
+  {
+    name: "facebook",
+    href: "#",
+  },
+];
+---
+
+<div class="flex justify-center items-center gap-4 w-full">
+  {
+    icons.map((i) => (
+      <a href={i.href} class="p-2 rounded-full flex items-center justify-center bg-primary shrink-0">
+        <img src={`/images/${i.name}.svg`} alt={i.name} class="w-4 h-4" />
+      </a>
+    ))
+  }
+</div>

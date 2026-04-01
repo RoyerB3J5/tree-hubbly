@@ -29,11 +29,11 @@ const lang = match ? match[1] : "en";
     <a
       href={`/${lang}`}
       aria-label="Ir a la página principal"
-      title="Tree Hubbly - Inicio"
+      title="Tree Hubly - Inicio"
     >
       <img
         src="/images/logo.svg"
-        alt="Logo de Tree Hubbly"
+        alt="Logo de Tree Hubly"
         width="164"
         height="33"
         class="cursor-pointer w-41 h-auto block"
@@ -219,38 +219,31 @@ const lang = match ? match[1] : "en";
   });
 </script>
 
+<!-- Overlay móvil -->
+<div
+  class="fixed inset-0 lg:hidden bg-black/40 z-50 opacity-0 pointer-events-none transition-opacity duration-300 ease-out"
+  id="mobile-overlay"
+></div>
+
 <!-- Menú móvil independiente (lg para abajo) -->
 <div
-  class="fixed top-0 right-0 bottom-0 lg:hidden flex items-center bg-primary text-white flex-col justify-center h-[85%] w-full z-60 py-6 gap-12 transform -translate-y-full transition-transform duration-300 ease-out"
+  class="fixed top-0 right-0 bottom-0 lg:hidden flex items-center bg-primary text-white flex-col justify-center h-full w-[90%] z-60 py-6 gap-12 transform translate-x-full transition-transform duration-300 ease-out px-4"
   id="mobile-menu"
 >
   <img
-    src="/images/equis.svg"
+    src="/images/back-arrow.svg"
     alt="Cerrar menú"
     width="24"
     height="24"
-    class="block absolute top-6 right-6 cursor-pointer z-20"
+    class="block absolute bottom-12 right-6 cursor-pointer z-20 h-12 w-12"
     id="close-btn"
     aria-label="Cerrar menú de navegación"
     title="Cerrar menú"
     role="button"
     tabindex="0"
   />
-  <a
-    href={`/${lang}`}
-    aria-label="Ir a la página principal"
-    title="Steve's Premium Pressure Wash - Inicio"
-  >
-    <img
-      src="/images/logo.svg"
-      alt="Logo de Steve's Premium Pressure Wash"
-      width="355"
-      height="64"
-      class="cursor-pointer w-70 h-auto block"
-    />
-  </a>
   <nav class="w-full">
-    <ul class="relative flex items-center flex-col justify-center w-full">
+    <ul class="relative flex items-start flex-col justify-center w-full gap-10">
       {
         content?.nav.map((item, index) => {
           const itemPathWithoutHash = item.href.split("#")[0];
@@ -260,7 +253,7 @@ const lang = match ? match[1] : "en";
           const isLocations = index === 0;
           return (
             <li
-              class={` flex flex-col items-center justify-center group gap-3.5 px-0 w-full py-5 text-center text-white  ${isLocations ? "relative" : ""} ${isActive ? "bg-secondary text-white uppercase" : ""}`}
+              class={` flex flex-col items-start justify-center group gap-3.5 px-0 w-full text-center text-white  ${isLocations ? "relative" : ""} ${isActive ? "bg-secondary text-white uppercase" : ""}`}
               id={`mobile-items-${index}`}
             >
               <a
@@ -286,13 +279,13 @@ const lang = match ? match[1] : "en";
     </ul>
   </nav>
 
-  <div class="flex flex-col justify-center items-center gap-5">
+  <div class="flex flex-col justify-center items-center gap-5 w-full">
     <Button
       text={content?.buttons[0].label}
-      textClass="text-white"
+      textClass="text-primary"
       href={content?.buttons[0].href}
       target="_blank"
-      extraBtnClass={`bg-accent `}
+      extraBtnClass={`bg-secondary w-full h-11.25 rounded-2xl`}
     />
   </div>
 
@@ -323,16 +316,22 @@ const lang = match ? match[1] : "en";
 
       const isMobile = () => window.innerWidth < 1024;
 
+      const overlay = document.getElementById("mobile-overlay");
+
       function openMenu() {
         if (isMobile()) {
-          menu.classList.replace("-translate-y-full", "translate-y-0");
+          menu.classList.replace("translate-x-full", "translate-x-0");
+          overlay.classList.replace("opacity-0", "opacity-100");
+          overlay.classList.replace("pointer-events-none", "pointer-events-auto");
           body.classList.add("overflow-hidden");
         }
       }
 
       function closeMenu() {
         if (isMobile()) {
-          menu.classList.replace("translate-y-0", "-translate-y-full");
+          menu.classList.replace("translate-x-0", "translate-x-full");
+          overlay.classList.replace("opacity-100", "opacity-0");
+          overlay.classList.replace("pointer-events-auto", "pointer-events-none");
           body.classList.remove("overflow-hidden");
         }
       }
@@ -363,6 +362,7 @@ const lang = match ? match[1] : "en";
 
       openBtn.addEventListener("click", openMenu);
       closeBtn.addEventListener("click", closeMenu);
+      overlay.addEventListener("click", closeMenu);
 
       // Agregar event listener al div padre para que al pulsar el div (no solo el <a>) se active el toggle
       if (locationsDiv) {
@@ -385,23 +385,25 @@ const lang = match ? match[1] : "en";
 
       // Asegurar estado inicial según tamaño
       if (isMobile()) {
-        menu.classList.add("-translate-y-full");
-        menu.classList.remove("translate-y-0");
+        menu.classList.add("translate-x-full");
+        menu.classList.remove("translate-x-0");
         body.classList.remove("overflow-hidden");
         if (subMenuLocations) {
           subMenuLocations.classList.add("hidden");
           subMenuLocations.classList.remove("flex");
         }
       } else {
-        menu.classList.add("translate-y-0");
-        menu.classList.remove("-translate-y-full");
+        menu.classList.add("translate-x-0");
+        menu.classList.remove("translate-x-full");
         body.classList.remove("overflow-hidden");
       }
 
       window.addEventListener("resize", () => {
         if (!isMobile()) {
-          menu.classList.add("translate-y-0");
-          menu.classList.remove("-translate-y-full");
+          menu.classList.add("translate-x-0");
+          menu.classList.remove("translate-x-full");
+          overlay.classList.add("opacity-0");
+          overlay.classList.add("pointer-events-none");
           body.classList.remove("overflow-hidden");
           // Ocultar submenu en desktop
           if (subMenuLocations) {
@@ -410,8 +412,10 @@ const lang = match ? match[1] : "en";
           }
         } else {
           // Asegura que el menú esté oculto al volver a móvil
-          menu.classList.add("-translate-y-full");
-          menu.classList.remove("translate-y-0");
+          menu.classList.add("translate-x-full");
+          menu.classList.remove("translate-x-0");
+          overlay.classList.add("opacity-0");
+          overlay.classList.add("pointer-events-none");
           body.classList.remove("overflow-hidden");
           if (subMenuLocations) {
             subMenuLocations.classList.add("hidden");

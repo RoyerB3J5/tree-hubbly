@@ -12,8 +12,8 @@ const { content } = Astro.props as Props;
             {
               content?.slice(0, 2).map((item)=>( 
                 <div class="flex flex-col justify-center items-start rounded-2xl md:rounded-3xl overflow-hidden  self-stretch border border-[#DEDEDE] animation-up-fast-2">
-                  <div class="aspect-343/193 md:aspect-151/85 w-full h-auto relative">
-                    <img src={`/images/${item.image}.webp`} alt={item.title} width="588" height="331" class="w-full h-full absolute object-center object-cover inset-0">
+                  <div class="aspect-343/193 md:aspect-151/85 w-full h-auto relative group">
+                    <img src={`/images/${item.image}.webp`} alt={item.title} width="588" height="331" class="w-full h-full absolute object-center object-cover inset-0 group-hover:scale-125 transition-transform duration-300 ease-in-out">
                     <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
                   </div>
                   <div class="flex flex-col justify-start items-start px-4 lg:px-8 py-6 lg:py-10 gap-4 md:gap-6 w-full lg:w-[80%] grow">
@@ -31,8 +31,8 @@ const { content } = Astro.props as Props;
             {
               content?.slice(2).map((item)=>( 
                 <div class="flex flex-col justify-center items-center rounded-2xl md:rounded-3xl overflow-hidden border border-[#DEDEDE] self-stretch animation-up-fast-2">
-                  <div class="aspect-343/193 md:aspect-video w-full h-auto relative">
-                    <img src={`/images/${item.image}.webp`} alt={item.title} width="384" height="216" class={`w-full h-full absolute  object-cover inset-0 ${item.image === "resource-4" ? "object-[50%_80%]" : "object-center"}`}>
+                  <div class="aspect-343/193 md:aspect-video w-full h-auto relative group">
+                    <img src={`/images/${item.image}.webp`} alt={item.title} width="384" height="216" class={`w-full h-full absolute  object-cover inset-0 group-hover:scale-125 transition-all duration-300 ease-in-out ${item.image === "resource-4" ? "object-[50%_80%]" : "object-center"}`}>
                     <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
                   </div>
                   <div class="flex flex-col justify-center items-start px-4 lg:px-8 py-6 lg:py-10 gap-4 md:gap-6 grow">

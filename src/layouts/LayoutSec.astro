@@ -1,34 +1,14 @@
 ---
 // Imports optimizados - solo lo esencial al inicio
 import "../styles/global.css";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-
-type Translations = typeof import("../i18n/en").default;
-
-export interface Props {
-  lang: string;
-  t?: Translations;
-}
-
-const { lang, t } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={lang} class="overflow-x-hidden scroll-smooth">
+<html lang="en" class="overflow-x-hidden">
   <head>
+    <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Crítico: CSS inline para evitar FOUC -->
-    <style is:inline>
-      body {
-        visibility: hidden;
-      }
-      body.visible {
-        visibility: visible;
-      }
-    </style>
 
     <!-- SEO Local para Orlando -->
     <meta name="geo.region" content="US-FL" />
@@ -83,7 +63,7 @@ const { lang, t } = Astro.props;
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://treehubly.com/" />
     <meta property="og:image" content="/images/fondo.png" />
-    <meta property="og:locale" content={lang === "es" ? "es_US" : "en_US"} />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -110,80 +90,10 @@ const { lang, t } = Astro.props;
     </script>
   </head>
   <body
-    class="font-family antialiased overflow-x-hidden bg-white flex flex-col justify-center items-center w-full"
+    class="font-family antialiased overflow-x-hidden bg-back flex flex-col justify-center items-center w-screen"
   >
-    <Header content={t?.header} />
-    <main class="flex flex-col w-full items-center">
+    <main class="flex flex-col w-full items-center h-full">
       <slot />
     </main>
-    <Footer content={t?.footer} />
-
-    <script>
-      function showContent() {
-        document.body.classList.add("visible");
-      }
-
-      // Inicialización optimizada
-      function initializeApp() {
-        // Mostrar contenido inmediatamente
-        showContent();
-      }
-
-      // Inicialización según el estado del documento
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initializeApp);
-      } else {
-        initializeApp();
-      }
-
-      // Fallback garantizado para mostrar contenido
-      setTimeout(showContent, 500);
-    </script>
   </body>
 </html>
-
-<!-- Consolidated IntersectionObserver for all animations and carousels -->
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    // Observer para animaciones: services-header, animation-left, hero-content
-    const animationElements = document.querySelectorAll(
-      ".animation-up-fast, .animation-zoom-in, .animation-up-fast-2, .animation-zoom-in-2, .animation-fade-down, .animation-fade-left, .animation-zoom-out, .animation-fade-right, .animation-fade-left-2, .animation-up-fast-3 , .animation-zoom-in-3, .animation-fade-left-3, .container-image-fade, .image-fade"
-    );
-
-    const animationObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-            animationObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    animationElements.forEach((element) => {
-      animationObserver.observe(element);
-    });
-
-    // Observer para carousels: .hero-carousel[data-interval]
-    const carousels = Array.from(document.querySelectorAll(".hero-carousel[data-interval]"));
-
-    if (carousels.length > 0 && "IntersectionObserver" in window) {
-      const carouselObserver = new IntersectionObserver(
-        (entries, obs) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              // Trigger custom event or initialization if needed
-              entry.target.dispatchEvent(new CustomEvent("carouselVisible"));
-              obs.unobserve(entry.target);
-            }
-          });
-        },
-        { root: null, rootMargin: "400px" }
-      );
-
-      carousels.forEach((c) => carouselObserver.observe(c));
-    }
-  });
-</script>

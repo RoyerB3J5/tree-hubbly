@@ -31,7 +31,7 @@ const { content } = Astro.props as Props;
           </div>
           {
             item.image && (
-              <img src={`/images/${item.image.src}.webp`} alt={item.title} width={item.image.width} height={item.image.height} class="w-auto h-[80%] xl:h-full hidden lg:block" decoding="async" loading="lazy">
+              <img src={`/images/${item.image.src}.webp`} alt={item.title} width={item.image.width} height={item.image.height} class="w-auto h-[80%] xl:h-full hidden lg:block hover:scale-125 transition-all duration-300 ease-in-out" decoding="async" loading="lazy">
             )
           }
         </div>

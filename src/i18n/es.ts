@@ -3,12 +3,12 @@ export default {
     nav: [
       {
         label:
-          'The System <span class="text-[16px] ml-px text-secondary">▾</span>',
+          'The System <img src="/images/arrow-d-g.svg" alt="Arrow" class="inline-block w-6 h-6 ml-1"/>',
         href: "/the-system",
       },
       {
         label:
-          'Solutions <span class="text-[16px] ml-px text-secondary">▾</span>',
+          'Solutions <img src="/images/arrow-d-g.svg" alt="Arrow" class="inline-block w-6 h-6 ml-1"/>',
         href: "/solutions",
       },
       {
@@ -299,9 +299,9 @@ export default {
     ],
     results: {
       title:
-        'Real Results. <br/> <span class="text-secondary">Real Tree Companies.</span>',
+        '<span class="animation-fade-right inline-block">Real</span> <span class="animation-fade-right inline-block">Results.</span> <br/> <span class="animation-fade-right inline-block text-secondary">Real</span> <span class="animation-fade-right inline-block text-secondary">Tree</span> <span class="animation-fade-right inline-block text-secondary">Companies.</span>',
       description:
-        "Structured growth replaced inconsistent marketing efforts.  Now every lead <br class='hidden lg:block'/> is tracked, optimized, and converted with precision.",
+        "<span class='animation-fade-down inline-block'>Structured</span> <span class='animation-fade-down inline-block'>growth</span> <span class='animation-fade-down inline-block'>replaced</span> <span class='animation-fade-down inline-block'>inconsistent</span> <span class='animation-fade-down inline-block'>marketing</span> <span class='animation-fade-down inline-block'>efforts.</span> <span class='animation-fade-down inline-block'>Now</span> <span class='animation-fade-down inline-block'>every</span> <span class='animation-fade-down inline-block'>lead</span> <br class='hidden lg:block'/> <span class='animation-fade-down inline-block'>is</span> <span class='animation-fade-down inline-block'>tracked,</span> <span class='animation-fade-down inline-block'>optimized,</span> <span class='animation-fade-down inline-block'>and</span> <span class='animation-fade-down inline-block'>converted</span> <span class='animation-fade-down inline-block'>with</span> <span class='animation-fade-down inline-block'>precision.</span>",
       buttons: [
         {
           label: "Let's talk",
@@ -1223,22 +1223,22 @@ export default {
     },
     results: {
       title:
-        'Real Results. <br/> <span class="text-secondary">Real Tree Companies.</span>',
+        '<span class="animation-fade-right inline-block">Real</span> <span class="animation-fade-right inline-block">Results.</span> <br/> <span class="animation-fade-right inline-block text-secondary">Real</span> <span class="animation-fade-right inline-block text-secondary">Tree</span> <span class="animation-fade-right inline-block text-secondary">Companies.</span>',
       description:
-        "Structured growth replaced inconsistent marketing efforts.  Now every lead <br/> is tracked, optimized, and converted with precision.",
+        "<span class='animation-fade-down inline-block'>Structured</span> <span class='animation-fade-down inline-block'>growth</span> <span class='animation-fade-down inline-block'>replaced</span> <span class='animation-fade-down inline-block'>inconsistent</span> <span class='animation-fade-down inline-block'>marketing</span> <span class='animation-fade-down inline-block'>efforts.</span> <span class='animation-fade-down inline-block'>Now</span> <span class='animation-fade-down inline-block'>every</span> <span class='animation-fade-down inline-block'>lead</span> <br class='hidden lg:block'/> <span class='animation-fade-down inline-block'>is</span> <span class='animation-fade-down inline-block'>tracked,</span> <span class='animation-fade-down inline-block'>optimized,</span> <span class='animation-fade-down inline-block'>and</span> <span class='animation-fade-down inline-block'>converted</span> <span class='animation-fade-down inline-block'>with</span> <span class='animation-fade-down inline-block'>precision.</span>",
       buttons: [
         {
           label: "Let's talk",
           href: "#",
           styleButton:
-            "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg border-2 border-secondary w-full md:w-30 h-11.25 md:h-10",
+            "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg border-2 border-secondary w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
           styleLabel: "text-primary",
         },
         {
           label: "Call us",
           href: "#",
           styleButton:
-            "border-2 border-primary hover:scale-105 transition-transform duration-300 box-container rounded-lg w-full md:w-30 h-11.25 md:h-10",
+            "border-2 border-primary hover:scale-105 transition-transform duration-300 box-container rounded-lg w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
           styleLabel: "text-primary",
         },
       ],
@@ -2542,26 +2542,26 @@ export default {
   },
   prices: [
     {
-      title: "Plan Inkstart",
-      description: "Ideal para emprendedores que recién comienzan.",
+      title: "Inkstart Plan",
+      description: "Ideal for entrepreneurs just starting out.",
       price:
-        "$157 <span class='text-[14px] font-normal leading-[150%]'>/mes</span>",
-      description2: "Todo lo esencial para lanzar y organizar tu negocio.",
+        "$157 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/month</span>",
+      description2: "Everything you need to launch and organize your business.",
       items: [
-        "1 landing page + chat web",
-        "Formularios + captura de leads",
-        "Email marketing básico",
-        "CRM con pipeline de ventas",
+        "1 landing page + web chat",
+        "Forms + lead capture",
+        "Basic email marketing",
+        "CRM with sales pipeline",
       ],
       features: {
-        title: "Capacidad",
+        title: "Capacity",
         items: [
-          "1,000 contactos, 3 usuarios",
-          "Extras: 7 días gratis, Hosting $87/año",
+          "1,000 contacts, 3 users",
+          "Extras: 7 days free, Hosting $87/year",
         ],
       },
       button: {
-        label: "Empieza ahora",
+        label: "Start Now",
         href: "#",
         styleButton:
           "border border-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full h-11.25",
@@ -2571,54 +2571,52 @@ export default {
       popularLabel: null,
     },
     {
-      title: "Plan Inkscale",
-      description: "Para negocios que quieren escalar.",
+      title: "Inkscale Plan",
+      description: "For businesses that want to scale.",
       price:
-        "$257 <span class='text-[14px] font-normal leading-[150%]'>/mes</span>",
+        "$257 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/month</span>",
       description2:
-        "Más automatización, más canales, más control para tu crecimiento.",
+        "More automation, more channels, more control for your growth.",
       items: [
-        "Web + landing + blog SEO",
-        "Gestión de redes con IA",
-        "CRM multicanal (WA, SMS, Email)",
-        "Integración Meta & Google Ads",
+        "Web + landing + SEO blog",
+        "Social media management with AI",
+        "Multi-channel CRM (WhatsApp, SMS, Email)",
+        "Advanced automations",
+        "Meta & Google Ads integration",
       ],
       features: {
-        title: "Capacidad",
-        items: [
-          "3,000 contactos, 5 usuarios",
-          "Incluye Soporte Humano + Formación",
-        ],
+        title: "Capacity",
+        items: ["3,000 contacts, 5 users", "Includes Human Support + Training"],
       },
       button: {
-        label: "Más información",
+        label: "More Information",
         href: "#",
         styleButton:
           "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full h-11.25",
         styleLabel: "text-white",
       },
       popular: true,
-      popularLabel: "Más popular",
+      popularLabel: "Most Popular",
     },
     {
-      title: "Plan Inkmaster",
-      description: "Para empresas al máximo nivel.",
+      title: "Inkmaster Plan",
+      description: "For enterprises at the highest level.",
       price:
-        "$357 <span class='text-[14px] font-normal leading-[150%]'>/mes</span>",
-      description2: "Automatización total + IA + acompañamiento estratégico.",
+        "$357 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/month</span>",
+      description2: "Total automation + AI + strategic guidance.",
       items: [
-        "Chatbots con IA (Omnicanal)",
-        "Portal de cliente + Cursos",
-        "CRM personalizado (Branding)",
-        "Forecasting con IA",
-        "Asesoría estratégica 1:1",
+        "AI Chatbots (Omnichannel)",
+        "Client portal + Courses",
+        "Custom CRM (Branding)",
+        "AI Forecasting",
+        "1:1 Strategic Consulting",
       ],
       features: {
-        title: "Capacidad",
-        items: ["Contactos & Usuarios Ilimitados", "Acceso completo a Academy"],
+        title: "Capacity",
+        items: ["Unlimited Contacts & Users", "Complete Academy Access"],
       },
       button: {
-        label: "Escalar mi negocio",
+        label: "Scale My Business",
         href: "#",
         styleButton:
           "border border-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full h-11.25",

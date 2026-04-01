@@ -7,8 +7,8 @@ interface Props {
 const { content } = Astro.props as Props;
 ---
 <section class="w-full flex flex-col md:flex-row justify-center md:justify-between items-center bg-white container-full py-10 md:py-20 lg:py-30 gap-21.5 md:gap-8 lg:gap-21.5">
-  <div class="relative rounded-3xl overflow-hidden w-full md:w-[55%] h-auto aspect-700/869 container-image-fade">
-    <img src="/images/focus.webp" alt="Focus TreeHubbly" width="700" height="869" class="w-full h-full object-cover object-center inset-0 absolute image-fade" decoding="async" loading="lazy" style="animation-delay: 0.2s;">
+  <div class="relative rounded-3xl overflow-hidden w-full md:w-[55%] h-auto aspect-700/869 container-image-fade group">
+    <img src="/images/focus.webp" alt="Focus TreeHubly" width="700" height="869" class="w-full h-full object-cover object-center inset-0 absolute image-fade group-hover:scale-125 transition-all duration-300 ease-in-out" decoding="async" loading="lazy" style="animation-delay: 0.2s;">
     <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
   </div>
   <div class="flex flex-col justify-center items-start gap-8 w-full md:w-[45%]">

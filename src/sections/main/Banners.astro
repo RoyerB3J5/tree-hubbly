@@ -26,13 +26,13 @@ const { content } = Astro.props as Props;
           class="carousel-slide w-full shrink-0 relative md:h-auto flex flex-col self-stretch md:self-auto"
           data-index="clone-start"
         >
-          <div class="relative md:absolute w-full h-auto md:h-full z-auto md:-z-10 aspect-375/284 md:aspect-auto inset-0 md:inset-0">
+          <div class="relative md:absolute w-full h-auto md:h-full z-auto md:-z-10 aspect-375/284 md:aspect-auto inset-0 md:inset-0 ">
             <img 
               src={`/images/${content[content.length - 1].image}.webp`} 
               alt={content[content.length - 1].title} 
               width="1440" 
               height="684" 
-              class="w-full h-full object-right lg:object-center object-cover -z-20 inset-0"
+              class="w-full h-full object-right lg:object-center object-cover -z-20 inset-0 "
             >
             <div class="absolute w-full h-full inset-0 md:inset-0 z-0 md:z-10 back-banner hidden md:block"></div>
             <div class="absolute w-full h-full inset-0 md:inset-0 z-0 md:z-10 back-image-banner md:hidden block"></div>
@@ -77,13 +77,13 @@ const { content } = Astro.props as Props;
           class="carousel-slide w-full shrink-0 relative md:h-auto flex flex-col self-stretch md:self-auto"
           data-index={index}
         >
-          <div class="relative md:absolute w-full h-auto md:h-full z-auto md:-z-10 aspect-375/284 md:aspect-auto inset-0 md:inset-0">
+          <div class="relative md:absolute w-full h-auto md:h-full z-auto md:-z-10 aspect-375/284 md:aspect-auto inset-0 md:inset-0 ">
             <img 
               src={`/images/${content[index].image}.webp`} 
               alt={content[index].title} 
               width="1440" 
               height="684" 
-              class="w-full h-full object-right lg:object-center object-cover -z-20 inset-0"
+              class="w-full h-full object-right lg:object-center object-cover -z-20 inset-0 "
             >
             <div class="absolute w-full h-full inset-0 md:inset-0 z-0 md:z-10 back-banner hidden md:block"></div>
             <div class="absolute w-full h-full inset-0 md:inset-0 z-0 md:z-10 back-image-banner md:hidden block"></div>
@@ -129,7 +129,7 @@ const { content } = Astro.props as Props;
           class="carousel-slide w-full shrink-0 relative md:h-auto flex flex-col self-stretch md:self-auto "
           data-index="clone-end"
         >
-          <div class="relative md:absolute w-full h-auto md:h-full z-auto md:-z-10 aspect-375/284 md:aspect-auto inset-0 md:inset-0">
+          <div class="relative md:absolute w-full h-auto md:h-full z-auto md:-z-10 aspect-375/284 md:aspect-auto inset-0 md:inset-0 ">
             <img 
               src={`/images/${content[0].image}.webp`} 
               alt={content[0].title} 

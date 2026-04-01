@@ -12,7 +12,7 @@ const { content } = Astro.props as Props;
     <p set:html={content.item1.title} class="text-[32px] md:text-[24px] lg:text-[48px] font-bold leading-[120%] text-paragraph w-[75%]"></p>
   </div>
   <div class="row-start-2 md:row-start-3 row-end-3 md:row-end-4 col-start-1 col-end-3 rounded-2xl md:rounded-3xl h-full w-full relative px-4 py-10 md:p-8 lg:py-10 lg:px-13 flex justify-start items-end overflow-hidden aspect-343/265 md:aspect-588/282 animation-zoom-in-2">
-    <img src={`/images/${content.item2.image}.webp`} alt={content.item2.title} class="w-full h-full object-cover absolute inset-0 object-center -z-20" />
+    <img src={`/images/${content.item2.image}.webp`} alt={content.item2.title} class="w-full h-full object-cover absolute inset-0 object-center -z-20 " />
     <div class="absolute w-full h-full inset-0 -z-10 back-hero-3"></div>
     <p set:html={content.item2.title} class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph z-0"></p>
   </div>

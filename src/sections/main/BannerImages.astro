@@ -8,12 +8,12 @@ const { content } = Astro.props as Props;
 ---
 <section class="w-full flex justify-center items-stretch">
   <div class="w-[26%] relative overflow-hidden hidden md:block">
-    <img src={`/images/${content.image1}.webp`} alt="Galeria 1" width="800" height="447" class="w-full h-full object-cover object-center absolute inset-0 " decoding="async" loading="lazy"/>
+    <img src={`/images/${content.image1}.webp`} alt="Galeria 1" width="800" height="447" class="w-full h-full object-cover object-center absolute inset-0 hover:scale-125 ease-in-out duration-300 transition-all" decoding="async" loading="lazy"/>
   </div>
   <div class="w-full md:w-[26%] relative overflow-hidden aspect-375/194 md:aspect-auto">
-    <img src={`/images/${content.image2}.webp`} alt="Galeria 1" width="800" height="447" class="w-full h-full object-cover object-center absolute inset-0 " decoding="async" loading="lazy"/>
+    <img src={`/images/${content.image2}.webp`} alt="Galeria 1" width="800" height="447" class="w-full h-full object-cover object-center absolute inset-0 hover:scale-125 ease-in-out duration-300 transition-all" decoding="async" loading="lazy"/>
   </div>
   <div class="w-[48%] h-auto aspect-674/194 relative overflow-hidden hidden md:block">
-    <img src={`/images/${content.image3}.webp`} alt="Galeria 1" width="1000" height="558" class={`w-full h-full object-cover ${content.image3 == 'gal-6' ? 'object-[50%_70%]' : 'object-[50%_90%]'}  absolute inset-0 `} decoding="async" loading="lazy"/>
+    <img src={`/images/${content.image3}.webp`} alt="Galeria 1" width="1000" height="558" class={`w-full h-full object-cover hover:scale-125 duration-300 ease-in-out transition-all ${content.image3 == 'gal-6' ? 'object-[50%_70%]' : 'object-[50%_90%]'}  absolute inset-0 `} decoding="async" loading="lazy"/>
   </div>
 </section>
