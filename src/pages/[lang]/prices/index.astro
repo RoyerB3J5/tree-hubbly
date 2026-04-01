@@ -1,0 +1,65 @@
+---
+import Button from '../../../components/Button.astro';
+import en from '../../../i18n/en';
+import es from '../../../i18n/es';
+import Layout from '../../../layouts/Layout.astro';
+import type { Language } from '../../../types/language.type';
+export function getStaticPaths() {
+  return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+}
+
+export const defaultRedirect = '/en';
+
+const lang = Astro.params.lang as Language;
+const translations = { es, en };
+const t = translations[lang];
+const content = t.prices
+---
+<Layout lang={lang} t={t}>
+  <section class="w-full h-full flex justify-center items-center bg-primary">
+    <div class="container-full pt-20 lg:pt-30 grid grid-cols-1 lg:grid-cols-3 justify-center items-center gap-6">
+      {
+        content.map((items)=>( 
+          <div class={`relative w-full flex flex-col justify-center items-start gap-6 px-4 py-6 md:p-6 xl:p-8 rounded-2xl md:rounded-3xl border ${items.popular ? 'bg-[#04121E] border-secondary':'bg-[#152232] border-[#263A4B]'}`}>
+            {
+              items.popular && (
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-secondary text-primary text-[12px] font-bold leading-[150%] px-2 py-1 rounded-lg">
+                  <p>{items.popularLabel}</p>
+                </div>
+              )
+            }
+            <h3 class="text-paragraph text-[14px] md:text-[18px] font-bold leading-[150%]">{items.title}</h3>
+            <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph h-auto lg:h-10.5">{items.description}</p>
+            <p set:html={items.price} class="text-paragraph text-[32px] font-bold leading-[130%]"></p>
+            <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph">{items.description2}</p>
+            <div class={`flex flex-col justify-start items-start gap-6 h-auto ${items.popular ? 'lg:h-66' : 'lg:h-54'} w-full`}>
+              {
+                items.items.map((i)=>( 
+                  <div class="flex justify-start items-center gap-4">
+                    <img src="/images/check.svg" alt="Check" width="16" height="16" class="w-6 h-6"/>
+                    <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph"> {i}</p>
+                  </div>
+                ))
+              }
+            </div>
+            <div class="w-full h-px bg-[#263A4B]"></div>
+            <div class="flex flex-col justify-center items-start gap-2">
+              <h4 class={`text-[14px] font-bold leading-[150%] ${items.popular ? 'text-secondary' : 'text-paragraph'}`}>{items.features.title}</h4>
+                {
+                  items.features.items.map((i) => ( 
+                    <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph">{i}</p>
+                  ))
+                }
+            </div>
+            <Button
+              text={items.button.label}
+              href={items.button.href}
+              extraBtnClass={items.button.styleButton}
+              textClass={items.button.styleLabel}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</Layout>

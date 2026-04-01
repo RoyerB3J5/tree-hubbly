@@ -3,12 +3,12 @@ export default {
     nav: [
       {
         label:
-          'The System <span class="text-[16px] ml-px text-secondary">▾</span>',
+          'The System <img src="/images/arrow-d-g.svg" alt="Arrow" class="inline-block w-6 h-6 ml-1"/>',
         href: "/the-system",
       },
       {
         label:
-          'Solutions <span class="text-[16px] ml-px text-secondary">▾</span>',
+          'Solutions <img src="/images/arrow-d-g.svg" alt="Arrow" class="inline-block w-6 h-6 ml-1"/>',
         href: "/solutions",
       },
       {
@@ -2540,6 +2540,92 @@ export default {
       ],
     },
   },
+  prices: [
+    {
+      title: "Inkstart Plan",
+      description: "Ideal for entrepreneurs just starting out.",
+      price:
+        "$157 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/month</span>",
+      description2: "Everything you need to launch and organize your business.",
+      items: [
+        "1 landing page + web chat",
+        "Forms + lead capture",
+        "Basic email marketing",
+        "CRM with sales pipeline",
+      ],
+      features: {
+        title: "Capacity",
+        items: [
+          "1,000 contacts, 3 users",
+          "Extras: 7 days free, Hosting $87/year",
+        ],
+      },
+      button: {
+        label: "Start Now",
+        href: "#",
+        styleButton:
+          "border border-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full h-11.25",
+        styleLabel: "text-white",
+      },
+      popular: false,
+      popularLabel: null,
+    },
+    {
+      title: "Inkscale Plan",
+      description: "For businesses that want to scale.",
+      price:
+        "$257 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/month</span>",
+      description2:
+        "More automation, more channels, more control for your growth.",
+      items: [
+        "Web + landing + SEO blog",
+        "Social media management with AI",
+        "Multi-channel CRM (WhatsApp, SMS, Email)",
+        "Advanced automations",
+        "Meta & Google Ads integration",
+      ],
+      features: {
+        title: "Capacity",
+        items: ["3,000 contacts, 5 users", "Includes Human Support + Training"],
+      },
+      button: {
+        label: "More Information",
+        href: "#",
+        styleButton:
+          "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full h-11.25",
+        styleLabel: "text-white",
+      },
+      popular: true,
+      popularLabel: "Most Popular",
+    },
+    {
+      title: "Inkmaster Plan",
+      description: "For enterprises at the highest level.",
+      price:
+        "$357 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/month</span>",
+      description2: "Total automation + AI + strategic guidance.",
+      items: [
+        "AI Chatbots (Omnichannel)",
+        "Client portal + Courses",
+        "Custom CRM (Branding)",
+        "AI Forecasting",
+        "1:1 Strategic Consulting",
+      ],
+      features: {
+        title: "Capacity",
+        items: ["Unlimited Contacts & Users", "Complete Academy Access"],
+      },
+      button: {
+        label: "Scale My Business",
+        href: "#",
+        styleButton:
+          "border border-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full h-11.25",
+        styleLabel: "text-white",
+      },
+      popular: false,
+      popularLabel: null,
+    },
+  ],
   footer: {
     description:
       "The ultimate growth system for tree service <br class='hidden lg:block'/> professionals. We don't just provide marketing: <br class='hidden lg:block'/> we provide the infrastructure for your success",

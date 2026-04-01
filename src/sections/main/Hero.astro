@@ -41,9 +41,9 @@ const imagePosittion = {
         <div class="w-auto flex justify-center items-center gap-4 md:gap-7 lg:gap-10 animation-up-fast">
           {
             content.tags.map((tag)=>( 
-              <div class="flex justify-center item-center gap-4 border-l-0 md:border-l border-paragraph/50 pl-0 md:pl-7 lg:pl-10 first:border-l-0 first:pl-0 ">
+              <div class="flex justify-center items-center gap-4 border-l-0 md:border-l border-paragraph/50 pl-0 md:pl-7 lg:pl-10 first:border-l-0 first:pl-0 ">
                 <img src={`/images/${tag.icon}.svg`} alt={tag.title} class="hidden md:block w-8 h-8" width="32" height="32" decoding="async" loading="eager"/>
-                <p class="text-[14px] lg:text-[16px] font-bold leading-[150%] text-paragraph">{tag.title}</p>
+                <p class="text-[14px] lg:text-[16px] font-bold text-paragraph ">{tag.title}</p>
               </div>
             ))
           }

@@ -2540,6 +2540,94 @@ export default {
       ],
     },
   },
+  prices: [
+    {
+      title: "Plan Inkstart",
+      description: "Ideal para emprendedores que recién comienzan.",
+      price:
+        "$157 <span class='text-[14px] font-normal leading-[150%]'>/mes</span>",
+      description2: "Todo lo esencial para lanzar y organizar tu negocio.",
+      items: [
+        "1 landing page + chat web",
+        "Formularios + captura de leads",
+        "Email marketing básico",
+        "CRM con pipeline de ventas",
+      ],
+      features: {
+        title: "Capacidad",
+        items: [
+          "1,000 contactos, 3 usuarios",
+          "Extras: 7 días gratis, Hosting $87/año",
+        ],
+      },
+      button: {
+        label: "Empieza ahora",
+        href: "#",
+        styleButton:
+          "border border-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full h-11.25",
+        styleLabel: "text-white",
+      },
+      popular: false,
+      popularLabel: null,
+    },
+    {
+      title: "Plan Inkscale",
+      description: "Para negocios que quieren escalar.",
+      price:
+        "$257 <span class='text-[14px] font-normal leading-[150%]'>/mes</span>",
+      description2:
+        "Más automatización, más canales, más control para tu crecimiento.",
+      items: [
+        "Web + landing + blog SEO",
+        "Gestión de redes con IA",
+        "CRM multicanal (WA, SMS, Email)",
+        "Integración Meta & Google Ads",
+      ],
+      features: {
+        title: "Capacidad",
+        items: [
+          "3,000 contactos, 5 usuarios",
+          "Incluye Soporte Humano + Formación",
+        ],
+      },
+      button: {
+        label: "Más información",
+        href: "#",
+        styleButton:
+          "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full h-11.25",
+        styleLabel: "text-white",
+      },
+      popular: true,
+      popularLabel: "Más popular",
+    },
+    {
+      title: "Plan Inkmaster",
+      description: "Para empresas al máximo nivel.",
+      price:
+        "$357 <span class='text-[14px] font-normal leading-[150%]'>/mes</span>",
+      description2: "Automatización total + IA + acompañamiento estratégico.",
+      items: [
+        "Chatbots con IA (Omnicanal)",
+        "Portal de cliente + Cursos",
+        "CRM personalizado (Branding)",
+        "Forecasting con IA",
+        "Asesoría estratégica 1:1",
+      ],
+      features: {
+        title: "Capacidad",
+        items: ["Contactos & Usuarios Ilimitados", "Acceso completo a Academy"],
+      },
+      button: {
+        label: "Escalar mi negocio",
+        href: "#",
+        styleButton:
+          "border border-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full h-11.25",
+        styleLabel: "text-white",
+      },
+      popular: false,
+      popularLabel: null,
+    },
+  ],
   footer: {
     description:
       "The ultimate growth system for tree service <br class='hidden lg:block'/> professionals. We don't just provide marketing: <br class='hidden lg:block'/> we provide the infrastructure for your success",
