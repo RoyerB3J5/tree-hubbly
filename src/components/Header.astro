@@ -46,7 +46,8 @@ const lang = match ? match[1] : "en";
               const itemPathWithoutHash = item.href.split("#")[0];
               const isActive =
                 normalized === itemPathWithoutHash ||
-                (index === 0 && normalized.startsWith("/services"));
+                (index === 0 && normalized.startsWith("/the-system")) ||
+                (index === 1 && normalized.startsWith("/solutions"));
               const hasDropdown = index === 0 || index === 1;
               return (
                 <li
@@ -104,7 +105,7 @@ const lang = match ? match[1] : "en";
                                 </a>
                               ))}
                             </div>
-                            <div class="w-0.5 self-stretch bg-[#D9D9D9]"></div>
+                            <div class="w-0.5 h-[80%] bg-[#D9D9D9]"></div>
                             <div class="flex flex-col jusitfy-center items-center gap-10 w-[30%]">
                               {
                                 content?.solutions.content.map((item)=> ( 
@@ -249,27 +250,45 @@ const lang = match ? match[1] : "en";
           const itemPathWithoutHash = item.href.split("#")[0];
           const isActive =
             normalized === itemPathWithoutHash ||
-            (index === 0 && normalized.startsWith("/locations"));
-          const isLocations = index === 0;
+            (index === 0 && normalized.startsWith("/the-system")) ||
+            (index === 1 && normalized.startsWith("/solutions"));
+          const hasDropdown = index === 0 || index === 1;
           return (
             <li
-              class={` flex flex-col items-start justify-center group gap-3.5 px-0 w-full text-center text-white  ${isLocations ? "relative" : ""} ${isActive ? "bg-secondary text-white uppercase" : ""}`}
+              class={` flex flex-col items-start justify-center group gap-3.5 px-0 w-full text-center   ${hasDropdown ? "relative" : ""} ${isActive ? " text-secondary " : "text-white"}`}
               id={`mobile-items-${index}`}
             >
               <a
                 href={`/${lang}${item.href}`}
-                class="relative transition-colors duration-300 flex justify-center items-center "
+                class="relative transition-colors duration-300 flex justify-center items-center mobile-nav-item"
+                data-index={index}
+                data-has-dropdown={hasDropdown}
               >
-                <p class="text-[16px] font-medium leading-[120%] " set:html={item.label} />
+                <p class={`text-[16px] font-medium leading-[120%] ${isActive ? "uppercase" : ""}`} set:html={item.label} />
               </a>
-              {isLocations && (
+              {hasDropdown && (
                 <div
-                  class="flex-col justify-center items-center w-full bg-accent divide-y divide-secondary hidden absolute z-20 top-0 translate-y-12.5"
-                  id="sub-menu-locations"
+                  class="flex-col justify-center items-center w-full bg-primary divide-y divide-secondary hidden absolute z-20 top-0 translate-y-12.5"
+                  id={`sub-menu-mobile-${index}`}
                 >
-                  {content.system.map((sub) => (
-                    <div></div>
-                  ))}
+                  {index === 0 && (
+                    <>
+                      {content?.systemPhone.map((systemItem) => (
+                        <a href={`/${lang}${systemItem.href}`} class="w-full px-4 py-5 hover:bg-primary/80 transition-colors duration-200">
+                          <h3 class="text-[14px] text-white font-bold leading-[150%]">{systemItem.title}</h3>
+                        </a>
+                      ))}
+                    </>
+                  )}
+                  {index === 1 && (
+                    <>
+                      {content?.solutionsPhone.map((solutionItem) => (
+                        <a href={`/${lang}${solutionItem.href}`} class="w-full px-4 py-3 hover:bg-primary/80 transition-colors duration-200">
+                          <h3 class="text-[14px] text-white font-bold leading-[150%]">{solutionItem.title}</h3>
+                        </a>
+                      ))}
+                    </>
+                  )}
                 </div>
               )}
             </li>
@@ -309,14 +328,10 @@ const lang = match ? match[1] : "en";
       const menu = document.getElementById("mobile-menu");
       const openBtn = document.getElementById("hamburger-btn");
       const closeBtn = document.getElementById("close-btn");
-      const locationsDiv = document.getElementById("items-0"); // Desktop locations (locations is index 0)
-      const mobileLocationsDiv = document.getElementById("mobile-items-0"); // Mobile locations (locations is index 0)
-      const subMenuLocations = document.getElementById("sub-menu-locations");
       const body = document.body;
+      const overlay = document.getElementById("mobile-overlay");
 
       const isMobile = () => window.innerWidth < 1024;
-
-      const overlay = document.getElementById("mobile-overlay");
 
       function openMenu() {
         if (isMobile()) {
@@ -336,62 +351,46 @@ const lang = match ? match[1] : "en";
         }
       }
 
-      function toggleSubMenu(event) {
-        // Solo en móvil prestamos atención al toggle
-        if (!isMobile()) return;
-
-        // Seguridad: si no existe el subMenuLocations, no hacemos nada
-        if (!subMenuLocations) return;
-
-        const isSubMenuOpen = !subMenuLocations.classList.contains("hidden");
-
-        // Si el submenu está cerrado, prevenimos la navegación y lo abrimos
-        if (!isSubMenuOpen) {
-          event.preventDefault();
-          subMenuLocations.classList.remove("hidden");
-          subMenuLocations.classList.add("flex");
-        }
-        // Si el submenu está abierto y se presiona de nuevo, cerramos el submenu
-        // y evitamos la navegación para que el click solo actúe como toggle
-        else {
-          event.preventDefault();
-          subMenuLocations.classList.add("hidden");
-          subMenuLocations.classList.remove("flex");
-        }
-      }
-
       openBtn.addEventListener("click", openMenu);
       closeBtn.addEventListener("click", closeMenu);
       overlay.addEventListener("click", closeMenu);
 
-      // Agregar event listener al div padre para que al pulsar el div (no solo el <a>) se active el toggle
-      if (locationsDiv) {
-        locationsDiv.addEventListener("click", (e) => {
-          // Solo actuamos en móvil
+      // Manejar toggle de submenus en items de navegación móvil
+      const mobileNavItems = document.querySelectorAll(".mobile-nav-item");
+      mobileNavItems.forEach((item) => {
+        item.addEventListener("click", (e) => {
           if (!isMobile()) return;
-          // Ignorar clicks que vayan dirigidos al propio sub-menu (navegación de items)
-          if (e.target.closest("#sub-menu-locations")) return;
-          toggleSubMenu(e);
-        });
-      }
 
-      if (mobileLocationsDiv) {
-        mobileLocationsDiv.addEventListener("click", (e) => {
-          if (!isMobile()) return;
-          if (e.target.closest("#sub-menu-locations")) return;
-          toggleSubMenu(e);
+          const index = parseInt(item.getAttribute("data-index"));
+          const hasDropdown = item.getAttribute("data-has-dropdown") === "true";
+
+          if (!hasDropdown) return;
+
+          const subMenu = document.getElementById(`sub-menu-mobile-${index}`);
+          if (!subMenu) return;
+
+          const isSubMenuOpen = !subMenu.classList.contains("hidden");
+
+          // Prevenir navegación y toggle del submenú
+          e.preventDefault();
+
+          if (!isSubMenuOpen) {
+            // Si está cerrado, abrirlo
+            subMenu.classList.remove("hidden");
+            subMenu.classList.add("flex");
+          } else {
+            // Si está abierto, cerrarlo
+            subMenu.classList.add("hidden");
+            subMenu.classList.remove("flex");
+          }
         });
-      }
+      });
 
       // Asegurar estado inicial según tamaño
       if (isMobile()) {
         menu.classList.add("translate-x-full");
         menu.classList.remove("translate-x-0");
         body.classList.remove("overflow-hidden");
-        if (subMenuLocations) {
-          subMenuLocations.classList.add("hidden");
-          subMenuLocations.classList.remove("flex");
-        }
       } else {
         menu.classList.add("translate-x-0");
         menu.classList.remove("translate-x-full");
@@ -405,11 +404,6 @@ const lang = match ? match[1] : "en";
           overlay.classList.add("opacity-0");
           overlay.classList.add("pointer-events-none");
           body.classList.remove("overflow-hidden");
-          // Ocultar submenu en desktop
-          if (subMenuLocations) {
-            subMenuLocations.classList.add("hidden");
-            subMenuLocations.classList.remove("flex");
-          }
         } else {
           // Asegura que el menú esté oculto al volver a móvil
           menu.classList.add("translate-x-full");
@@ -417,10 +411,6 @@ const lang = match ? match[1] : "en";
           overlay.classList.add("opacity-0");
           overlay.classList.add("pointer-events-none");
           body.classList.remove("overflow-hidden");
-          if (subMenuLocations) {
-            subMenuLocations.classList.add("hidden");
-            subMenuLocations.classList.remove("flex");
-          }
         }
       });
       const header = document.getElementById("site-header");

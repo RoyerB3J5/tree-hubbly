@@ -16,9 +16,9 @@ const { content } = Astro.props as Props;
         <p set:html={content.description} class="text-paragraph text-[48px] font-bold leading-[120%]"></p>
       </div>
     </div>
-    <div class="w-full max-w-screen xl:max-w-7xl px-5 xl:px-0  flex flex-col lg:flex-row justify-center lg:justify-end items-center relative z-5 gap-8 lg:gap-0">
+    <div class="w-full max-w-screen xl:max-w-7xl px-5 xl:px-0  flex flex-col lg:flex-row justify-center lg:justify-end xl:justify-center  items-center relative z-5 gap-8 lg:gap-0">
       <p set:html={content.description} class="text-primary text-[32px] font-bold leading-[120%] block lg:hidden text-center"></p>
-      <div class="flex flex-col justify-center items-end gap-8 py-0 lg:py-10.5 relative">
+      <div class="flex flex-col justify-center items-end gap-8 py-0 lg:py-10.5 relative xl:translate-x-[30%]">
         <div class="absolute w-0.5 h-[85%] md:h-full bg-[#D7DADC] md:top-0 left-5 md:left-6.75"></div>
         {
           content.items.map((item,index)=>( 

@@ -85,6 +85,50 @@ export default {
         },
       ],
     },
+    systemPhone: [
+      {
+        title: "Structured Lead Engine",
+        href: "/the-system/structured-lead-engine",
+      },
+      {
+        title: "Conversion & Automation Infrastructure",
+        href: "/the-system/conversion-automation",
+      },
+      {
+        title: "Performance Intelligence & Scale",
+        href: "/the-system/performance-intelligence-scale",
+      },
+      {
+        title: "All Systems",
+        href: "/the-system",
+      },
+    ],
+    solutionsPhone: [
+      {
+        title: "Tree Service Marketing",
+        href: "/solutions/marketing",
+      },
+      {
+        title: "SEO for Tree Services",
+        href: "/solutions/seo",
+      },
+      {
+        title: "Google Ads",
+        href: "/solutions/google-ads",
+      },
+      {
+        href: "/solutions/website-funnels",
+        title: "Website & Funnels",
+      },
+      {
+        href: "/solutions/crm-automation",
+        title: "CRM & Automation",
+      },
+      {
+        href: "/solutions",
+        title: "All Solutions",
+      },
+    ],
     buttons: [
       {
         label: "Let's talk",

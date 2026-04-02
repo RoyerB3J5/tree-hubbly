@@ -3,46 +3,46 @@ export default {
     nav: [
       {
         label:
-          'The System <img src="/images/arrow-d-g.svg" alt="Arrow" class="inline-block w-6 h-6 ml-1"/>',
+          'El Sistema <img src="/images/arrow-d-g.svg" alt="Flecha" class="inline-block w-6 h-6 ml-1"/>',
         href: "/the-system",
       },
       {
         label:
-          'Solutions <img src="/images/arrow-d-g.svg" alt="Arrow" class="inline-block w-6 h-6 ml-1"/>',
+          'Soluciones <img src="/images/arrow-d-g.svg" alt="Flecha" class="inline-block w-6 h-6 ml-1"/>',
         href: "/solutions",
       },
       {
-        label: "Case Studies",
+        label: "Casos de Éxito",
         href: "/case-studies",
       },
       {
-        label: "Resources",
+        label: "Recursos",
         href: "/resources",
       },
       {
-        label: "About",
+        label: "Acerca de",
         href: "/about",
       },
     ],
     system: [
       {
-        title: "Structured Lead Engine",
+        title: "Motor de Prospectos Estructurado",
         description:
-          "A predictable lead engine attracting high-intent homeowners in your area.",
+          "Un motor de prospectos predecible que atrae propietarios de alto interés en tu área.",
         image: "structured",
         href: "/the-system/structured-lead-engine",
       },
       {
-        title: "Conversion & Automation Infrastructure",
+        title: "Infraestructura de Conversión y Automatización",
         description:
-          "Turn inquiries into structured opportunities with automated follow-up visibility.",
+          "Convierte consultas en oportunidades estructuradas con seguimiento automatizado visible.",
         image: "automation",
         href: "/the-system/conversion-automation",
       },
       {
-        title: "Performance Intelligence & Scale",
+        title: "Inteligencia de Rendimiento y Escalabilidad",
         description:
-          "Track leads, jobs, and marketing spend with real performance dashboards.",
+          "Rastrea prospectos, trabajos e inversión en marketing con paneles de desempeño real.",
         image: "intelligence",
         href: "/the-system/performance-intelligence-scale",
       },
@@ -50,22 +50,23 @@ export default {
     solutions: {
       items: [
         {
-          title: "Tree Service Marketing",
+          title: "Marketing Servicios de Árboles",
           description:
-            "Marketing strategies designed to generate consistent tree service leads.",
+            "Estrategias de marketing diseñadas para generar prospectos consistentes de servicios de árboles.",
           image: "marketing",
           href: "/solutions/marketing",
         },
         {
-          title: "SEO for Tree Services",
-          description: "Rank higher on Google for tree services in your area.",
+          title: "SEO Servicios de Árboles",
+          description:
+            "Aparece en los primeros lugares de Google para servicios de árboles en tu área.",
           image: "seo",
           href: "/solutions/seo",
         },
         {
           title: "Google Ads",
           description:
-            "Google Ads campaigns that attract high-intent tree service customers.",
+            "Campañas de Google Ads que atraen clientes de servicios de árboles de alto interés.",
           image: "google",
           href: "/solutions/google-ads",
         },
@@ -73,21 +74,65 @@ export default {
       content: [
         {
           href: "/solutions/website-funnels",
-          title: "Website & Funnels",
+          title: "Sitio Web y Embudos",
           description:
-            "Websites and funnels built to convert visitors into tree leads.",
+            "Sitios web y embudos diseñados para convertir visitantes en prospectos de servicios de árboles.",
         },
         {
           href: "/solutions/crm-automation",
-          title: "CRM & Automation",
+          title: "CRM y Automatización",
           description:
-            "Automated systems to capture, manage, and follow up with leads.",
+            "Sistemas automatizados para capturar, gestionar y dar seguimiento a prospectos.",
         },
       ],
     },
+    systemPhone: [
+      {
+        title: "Motor de Prospectos Estructurado",
+        href: "/the-system/structured-lead-engine",
+      },
+      {
+        title: "Infraestructura de Conversión y Automatización",
+        href: "/the-system/conversion-automation",
+      },
+      {
+        title: "Inteligencia de Rendimiento y Escalabilidad",
+        href: "/the-system/performance-intelligence-scale",
+      },
+      {
+        title: "Todos los Sistemas",
+        href: "/the-system",
+      },
+    ],
+    solutionsPhone: [
+      {
+        title: "Marketing Servicios de Árboles",
+        href: "/solutions/marketing",
+      },
+      {
+        title: "SEO Servicios de Árboles",
+        href: "/solutions/seo",
+      },
+      {
+        title: "Google Ads",
+        href: "/solutions/google-ads",
+      },
+      {
+        href: "/solutions/website-funnels",
+        title: "Sitio Web y Embudos",
+      },
+      {
+        href: "/solutions/crm-automation",
+        title: "CRM y Automatización",
+      },
+      {
+        href: "/solutions",
+        title: "Todas las Soluciones",
+      },
+    ],
     buttons: [
       {
-        label: "Let's talk",
+        label: "Hablemos",
         href: "#",
       },
     ],
@@ -96,33 +141,33 @@ export default {
     hero: {
       imageHero: "main-hero",
       title:
-        "The Growth System <br/> for Tree Services <span class='text-secondary'>.</span>",
+        "El Sistema de Crecimiento <br/> para Servicios de Árboles <span class='text-secondary'>.</span>",
       description:
-        "We help tree companies generate better leads, book more jobs, and <br class='hidden md:block'/> scale with a structured growth ecosystem.",
+        "Ayudamos a empresas de árboles a generar mejores prospectos, cerrar más trabajos y <br class='hidden md:block'/> escalar con un ecosistema de crecimiento estructurado.",
       tags: [
         {
           icon: "lead",
-          title: "Better Leads",
+          title: "Mejores Prospectos",
         },
         {
           icon: "tools",
-          title: " More Jobs.",
+          title: "Más Trabajos.",
         },
         {
           icon: "higher",
-          title: " Higher Revenue.",
+          title: "Más Ingresos.",
         },
       ],
       buttons: [
         {
-          label: "Let's talk",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Llámanos",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -132,75 +177,75 @@ export default {
     },
     companies: {
       title:
-        'Most Tree Companies <span class="text-secondary">Don’t <br class="hidden md:block"/> Have a Growth System.</span>',
+        'La Mayoría de Empresas de Árboles <span class="text-secondary">No Tienen <br class="hidden md:block"/> un Sistema de Crecimiento.</span>',
       tags: [
         {
           image: "tree",
-          label: "Arborists",
+          label: "Arboristas",
         },
         {
           image: "removal",
-          label: "Removal",
+          label: "Tala",
         },
         {
           image: "stump",
-          label: "Stump Grinding",
+          label: "Remoción de Tocones",
         },
       ],
       content:
-        "Tree companies don’t struggle because of lack of demand.They struggle because they lack structure.",
+        "Las empresas de árboles no luchan por falta de demanda. Luchan porque no tienen estructura.",
       items: [
-        "Inconsistent lead flow.",
-        "Low-quality inquiries.",
-        "Missed follow-ups.",
-        "No visibility into ROI.",
-        "No scalable infrastructure.",
+        "Flujo de prospectos irregular.",
+        "Consultas de baja calidad.",
+        "Seguimientos perdidos.",
+        "Sin visibilidad del ROI.",
+        "Sin infraestructura escalable.",
       ],
       review:
-        '“Marketing tactics without a system <br class="md:hidden block"/> create temporary <br class="hidden lg:block"/> spikes, <span class="text-secondary">not <br class="md:hidden block"/> sustainable growth.”</span>',
+        '"Las tácticas de marketing sin un sistema <br class="md:hidden block"/> generan picos temporales, <span class="text-secondary">no <br class="md:hidden block"/> crecimiento sostenible."</span>',
     },
     scale: {
-      label: "Where Tree <br/> Companies Scale.",
+      label: "Donde las Empresas <br/> de Árboles Escalan.",
     },
     vento: {
       item1: {
         title:
-          'A Complete <span class="text-secondary">Growth Ecosystem</span>, Not  Disconnected Services.',
+          'Un <span class="text-secondary">Ecosistema de Crecimiento</span> Completo, No Servicios Aislados.',
         icon: "three",
       },
       item2: {
         image: "vento-2",
         title:
-          'The <span class="text-secondary font-semibold">TreeHubly Growth System™</span> connects acquisition, conversion, automation, and performance into one unified structure.',
+          'El <span class="text-secondary font-semibold">TreeHubly Growth System™</span> conecta adquisición, conversión, automatización y rendimiento en una sola estructura unificada.',
       },
       item3: {
-        title: "1. Traffic",
+        title: "1. Tráfico",
         icon: "world",
       },
       item4: {
-        title: "2. Lead Capture",
+        title: "2. Captación",
         icon: "person",
       },
       item5: {
-        title: "3. Automation",
+        title: "3. Automatización",
         icon: "brain",
         image: "vento-5",
       },
       item6: {
-        title: "4. Booking",
+        title: "4. Reservas",
         icon: "calendar",
       },
       item7: {
-        title: "5. Revenue Tracking",
+        title: "5. Ingresos",
         icon: "stadistic",
       },
       item8: {
-        title: "6. Optimization",
+        title: "6. Optimización",
         icon: "streamline",
         image: "arbol",
       },
       item9: {
-        title: "7. Scale",
+        title: "7. Escala",
         icon: "rocket",
         image: "vento-9",
       },
@@ -208,90 +253,91 @@ export default {
     banners: [
       {
         image: "banner-1",
-        description: "If It’s Not Measurable, It’s Not Scalable.",
-        title: "Performance <br/> Intelligence & Scale.",
+        description: "Si No Es Medible, No Es Escalable.",
+        title: "Inteligencia de <br/> Rendimiento y Escala.",
         content:
-          "Scaling requires data clarity. <br/> We implement dashboards that track:",
+          "Escalar requiere claridad de datos. <br/> Implementamos paneles que rastrean:",
         items: [
-          "Cost per booked job",
-          "Revenue attribution",
-          "Campaign ROI",
-          "Multi-location performance",
+          "Costo por trabajo cerrado",
+          "Atribución de ingresos",
+          "ROI de campañas",
+          "Rendimiento multi-ubicación",
         ],
         tags: {
-          title: "Outcome:",
+          title: "Resultado:",
           items: [
             {
               icon: "barras",
-              label: "Clear decision-making.",
+              label: "Decisiones claras.",
             },
             {
               icon: "stats",
-              label: " Controlled expansion.",
+              label: "Expansión controlada.",
             },
             {
               icon: "scalable",
-              label: "Scalable structure.",
+              label: "Estructura escalable.",
             },
           ],
         },
       },
       {
         image: "banner-2",
-        description: "Every Lead Tracked. Every Opportunity Followed Up.",
-        title: "Conversion & Automation <br/> Infrastructure.",
+        description: "Cada Prospecto Rastreado. Cada Oportunidad Seguida.",
+        title: "Infraestructura de <br/> Conversión y Automatización.",
         content:
-          "Traffic without follow-up is wasted revenue. <br/>We implement structured automation systems that:",
+          "El tráfico sin seguimiento es dinero perdido. <br/>Implementamos sistemas de automatización que:",
         items: [
-          "Respond instantly to inquiries",
-          "Track pipeline stages",
-          "Send follow-up sequences",
-          "Increase booked job rates",
+          "Responden al instante a consultas",
+          "Rastrean etapas del pipeline",
+          "Envían secuencias de seguimiento",
+          "Aumentan las reservas de trabajos",
         ],
         tags: {
-          title: "Outcome:",
+          title: "Resultado:",
           items: [
             {
               icon: "close",
-              label: "Higher close rates.",
+              label: "Mayor tasa de cierre.",
             },
             {
               icon: "effort",
-              label: "Less manual effort.",
+              label: "Menos esfuerzo manual.",
             },
             {
               icon: "pipeline",
-              label: "Full pipeline visibility.",
+              label: "Visibilidad del pipeline.",
             },
           ],
         },
       },
       {
         image: "banner-3",
-        description: "Predictable Lead Flow Designed for Tree Services.",
-        title: "Structured Lead <br/> Engine.",
+        description:
+          "Flujo de Prospectos Predecible para Servicios de Árboles.",
+        title: "Motor de <br/> Prospectos Estructurado.",
         content:
-          "We build a controlled acquisition system that attracts <br/> high-intent prospects in your service areas.",
+          "Construimos un sistema de adquisición controlado que atrae <br/> prospectos de alto interés en tus zonas de servicio.",
         items: [
-          "Local SEO for tree companies",
-          "Google Ads optimized for service intent",
-          "Conversion-focused landing pages",
-          "Geo-targeted scaling",
+          "SEO local para empresas de árboles",
+          "Google Ads optimizado para intención de servicio",
+          "Páginas de aterrizaje enfocadas en conversión",
+          "Escalado geo-dirigido",
         ],
         tags: {
-          title: "Outcome:",
+          title: "Resultado:",
           items: [
             {
               icon: "cost",
-              label: "Predictable cost per lead.",
+              label: "Costo por prospecto predecible.",
             },
             {
               icon: "lead-2",
-              label: "Controlled lead quality.",
+              label: "Calidad de prospecto controlada.",
             },
             {
               icon: "visible",
-              label: "Market visibility.",
+              label: "Visibilidad en el mercado.",
             },
           ],
         },
@@ -299,19 +345,19 @@ export default {
     ],
     results: {
       title:
-        '<span class="animation-fade-right inline-block">Real</span> <span class="animation-fade-right inline-block">Results.</span> <br/> <span class="animation-fade-right inline-block text-secondary">Real</span> <span class="animation-fade-right inline-block text-secondary">Tree</span> <span class="animation-fade-right inline-block text-secondary">Companies.</span>',
+        '<span class="animation-fade-right inline-block">Resultados</span> <span class="animation-fade-right inline-block">Reales.</span> <br/> <span class="animation-fade-right inline-block text-secondary">Empresas</span> <span class="animation-fade-right inline-block text-secondary">Reales</span> <span class="animation-fade-right inline-block text-secondary">de Árboles.</span>',
       description:
-        "<span class='animation-fade-down inline-block'>Structured</span> <span class='animation-fade-down inline-block'>growth</span> <span class='animation-fade-down inline-block'>replaced</span> <span class='animation-fade-down inline-block'>inconsistent</span> <span class='animation-fade-down inline-block'>marketing</span> <span class='animation-fade-down inline-block'>efforts.</span> <span class='animation-fade-down inline-block'>Now</span> <span class='animation-fade-down inline-block'>every</span> <span class='animation-fade-down inline-block'>lead</span> <br class='hidden lg:block'/> <span class='animation-fade-down inline-block'>is</span> <span class='animation-fade-down inline-block'>tracked,</span> <span class='animation-fade-down inline-block'>optimized,</span> <span class='animation-fade-down inline-block'>and</span> <span class='animation-fade-down inline-block'>converted</span> <span class='animation-fade-down inline-block'>with</span> <span class='animation-fade-down inline-block'>precision.</span>",
+        "<span class='animation-fade-down inline-block'>El</span> <span class='animation-fade-down inline-block'>crecimiento</span> <span class='animation-fade-down inline-block'>estructurado</span> <span class='animation-fade-down inline-block'>reemplazó</span> <span class='animation-fade-down inline-block'>el</span> <span class='animation-fade-down inline-block'>marketing</span> <span class='animation-fade-down inline-block'>irregular.</span> <span class='animation-fade-down inline-block'>Ahora</span> <span class='animation-fade-down inline-block'>cada</span> <span class='animation-fade-down inline-block'>prospecto</span> <br class='hidden lg:block'/> <span class='animation-fade-down inline-block'>se</span> <span class='animation-fade-down inline-block'>rastrea,</span> <span class='animation-fade-down inline-block'>optimiza</span> <span class='animation-fade-down inline-block'>y</span> <span class='animation-fade-down inline-block'>convierte</span> <span class='animation-fade-down inline-block'>con</span> <span class='animation-fade-down inline-block'>precisión.</span>",
       buttons: [
         {
-          label: "Let's talk",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg border-2 border-secondary w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Llámanos",
           href: "#",
           styleButton:
             "border-2 border-primary hover:scale-105 transition-transform duration-300 box-container rounded-lg w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
@@ -321,101 +367,101 @@ export default {
       items: [
         {
           image: "result-1",
-          tag: "case study",
+          tag: "caso de éxito",
           title: "H&A Tree Brothers Orlando, FL",
           numbers: [
             {
               value: "+38%",
-              description: "increase in qualified leads",
+              description: "aumento en prospectos calificados",
             },
             {
               value: "+27%",
-              description: "increase in booked jobs",
+              description: "aumento en trabajos reservados",
             },
           ],
           description: [
             {
               icon: "down",
-              label: "Reduced cost per booked job",
+              label: "Reducción del costo por trabajo",
             },
             {
               icon: "stats",
-              label: "Full pipeline and revenue tracking",
+              label: "Seguimiento completo del pipeline",
             },
           ],
         },
         {
           image: "result-1",
-          tag: "case study",
+          tag: "caso de éxito",
           title: "H&A Tree Brothers Orlando, FL",
           numbers: [
             {
               value: "+38%",
-              description: "increase in qualified leads",
+              description: "aumento en prospectos calificados",
             },
             {
               value: "+27%",
-              description: "increase in booked jobs",
+              description: "aumento en trabajos reservados",
             },
           ],
           description: [
             {
               icon: "down",
-              label: "Reduced cost per booked job",
+              label: "Reducción del costo por trabajo",
             },
             {
               icon: "stats",
-              label: "Full pipeline and revenue tracking",
+              label: "Seguimiento completo del pipeline",
             },
           ],
         },
         {
           image: "result-1",
-          tag: "case study",
+          tag: "caso de éxito",
           title: "H&A Tree Brothers Orlando, FL",
           numbers: [
             {
               value: "+38%",
-              description: "increase in qualified leads",
+              description: "aumento en prospectos calificados",
             },
             {
               value: "+27%",
-              description: "increase in booked jobs",
+              description: "aumento en trabajos reservados",
             },
           ],
           description: [
             {
               icon: "down",
-              label: "Reduced cost per booked job",
+              label: "Reducción del costo por trabajo",
             },
             {
               icon: "stats",
-              label: "Full pipeline and revenue tracking",
+              label: "Seguimiento completo del pipeline",
             },
           ],
         },
         {
           image: "result-1",
-          tag: "case study",
+          tag: "caso de éxito",
           title: "H&A Tree Brothers Orlando, FL",
           numbers: [
             {
               value: "+38%",
-              description: "increase in qualified leads",
+              description: "aumento en prospectos calificados",
             },
             {
               value: "+27%",
-              description: "increase in booked jobs",
+              description: "aumento en trabajos reservados",
             },
           ],
           description: [
             {
               icon: "down",
-              label: "Reduced cost per booked job",
+              label: "Reducción del costo por trabajo",
             },
             {
               icon: "stats",
-              label: "Full pipeline and revenue tracking",
+              label: "Seguimiento completo del pipeline",
             },
           ],
         },
@@ -423,49 +469,49 @@ export default {
     },
     path: {
       description:
-        "A Structured <br class='hidden md:block'/> <span class='text-secondary font-semibold'>Path to Scale</span>.",
+        "Un <br class='hidden md:block'/> <span class='text-secondary font-semibold'>Camino Estructurado</span> para Escalar.",
       items: [
         {
           icon: "search",
-          title: " Strategic Audit",
+          title: "Auditoría Estratégica",
           description:
-            "We analyze your current marketing, lead flow, and sales <br class='hidden md:block'/> process.",
+            "Analizamos tu marketing actual, flujo de prospectos y <br class='hidden md:block'/> proceso de ventas.",
         },
         {
           icon: "growth",
-          title: "Custom Growth Blueprint",
+          title: "Plan de Crecimiento",
           description:
-            "We design a system tailored to your market, services, and <br class='hidden md:block'/> expansion goals.",
+            "Diseñamos un sistema adaptado a tu mercado, servicios y <br class='hidden md:block'/> metas de expansión.",
         },
         {
           icon: "system",
-          title: "System Deployment",
+          title: "Implementación del Sistema",
           description:
-            "Lead engine, automation, tracking, and dashboards are <br class='hidden md:block'/>implemented.",
+            "Motor de prospectos, automatización, rastreo y paneles <br class='hidden md:block'/> implementados.",
         },
         {
           icon: "load",
-          title: "Optimization & Expansion",
+          title: "Optimización y Expansión",
           description:
-            "We continuously refine performance and prepare your <br class='hidden md:block'/> company for scalable growth.",
+            "Refinamos continuamente el rendimiento y preparamos tu <br class='hidden md:block'/> empresa para escalar.",
         },
       ],
     },
     traditional: {
       title:
-        "Why This Is <span class='text-secondary'>Not Traditional <br/> Marketing.</span>",
+        "Por Qué Esto No Es <span class='text-secondary'>Marketing <br/> Tradicional.</span>",
       description:
-        "Outdated tactics vs. a performance-driven growth system designed <br class='hidden md:block'/> specifically for the tree service industry.",
+        "Tácticas obsoletas vs. un sistema de crecimiento basado en rendimiento, <br class='hidden md:block'/> diseñado para la industria de servicios de árboles.",
       lists: [
         {
           border: "border-[#263A4B]",
           icon: "counter",
-          title: "Traditional Marketing",
+          title: "Marketing Tradicional",
           items: [
-            "Campaign-based",
-            "Short-term tactics",
-            "Vanity metrics",
-            "Manual follow-up",
+            "Basado en campañas",
+            "Tácticas a corto plazo",
+            "Métricas de vanidad",
+            "Seguimiento manual",
           ],
           icon2: "equis-2",
         },
@@ -474,10 +520,10 @@ export default {
           icon: "plant",
           title: "TreeHubly Growth System™",
           items: [
-            "System-based",
-            "Long-term infrastructure",
-            "Revenue metrics",
-            "Automated pipeline",
+            "Basado en sistemas",
+            "Infraestructura a largo plazo",
+            "Métricas de ingresos",
+            "Pipeline automatizado",
           ],
           icon2: "check-2",
         },
@@ -490,20 +536,20 @@ export default {
     },
     call: {
       title:
-        "Ready to Build a <span class='text-paragraph'>System <br class='hidden md:block'/> That Scales?</span>",
+        "¿Listo para Construir un <span class='text-paragraph'>Sistema <br class='hidden md:block'/> que Escale?</span>",
       description:
-        "If you're serious about growing your tree company, we're ready to <br class='hidden md:block'/> build the structure behind it.",
+        "Si estás decidido a hacer crecer tu empresa de árboles, estamos listos para <br class='hidden md:block'/> construir la estructura detrás de ello.",
       items: [],
       buttons: [
         {
-          label: "Lets talk",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "border-2 border-primary bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-paragraph",
         },
         {
-          label: "Call us",
+          label: "Llámanos",
           href: "#",
           styleButton:
             "border-2 border-primary hover:scale-105 transition-transform duration-300  rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -512,30 +558,32 @@ export default {
       ],
     },
     questions: {
-      title: "Frequently <span class='text-secondary'>asked questions.</span>",
+      title: "Preguntas <span class='text-secondary'>frecuentes.</span>",
       description:
-        "Everything you need about scaling your tree service business with our data-<br class='hidden md:block'/>driven marketing frameworks",
+        "Todo lo que necesitas saber sobre cómo escalar tu empresa de árboles con nuestros <br class='hidden md:block'/>marcos de marketing basados en datos.",
       items: [
         {
           question:
-            "What is the best marketing strategy for tree service companies?",
+            "¿Cuál es la mejor estrategia de marketing para empresas de árboles?",
           answer:
-            "The most effective strategy combines structured lead generation, automation, and measurable performance tracking within a unified growth system.",
+            "La estrategia más efectiva combina generación estructurada de prospectos, automatización y seguimiento de rendimiento dentro de un sistema de crecimiento unificado.",
         },
         {
-          question: "How can I generate more tree service leads?",
+          question:
+            "¿Cómo puedo generar más prospectos de servicios de árboles?",
           answer:
-            "By implementing a predictable acquisition engine built around local SEO, high-intent advertising, and optimized landing pages.",
+            "Implementando un motor de adquisición predecible basado en SEO local, publicidad de alto interés y páginas de aterrizaje optimizadas.",
         },
         {
-          question: "Is SEO or Google Ads better for tree services?",
+          question: "¿Es mejor el SEO o Google Ads para servicios de árboles?",
           answer:
-            "Both work best when integrated into a structured system that tracks revenue impact and conversion efficiency.",
+            "Ambos funcionan mejor integrados en un sistema estructurado que rastrea el impacto en ingresos y la eficiencia de conversión.",
         },
         {
-          question: "How can I generate more tree service leads?",
+          question:
+            "¿Cómo puedo generar más prospectos de servicios de árboles?",
           answer:
-            "Scaling requires infrastructure, automated follow-ups, revenue tracking, and a system designed for expansion into new service areas.",
+            "Escalar requiere infraestructura, seguimientos automatizados, rastreo de ingresos y un sistema diseñado para expandirse a nuevas zonas de servicio.",
         },
       ],
     },
@@ -544,33 +592,33 @@ export default {
     hero: {
       imageHero: "system-hero",
       title:
-        "The TreeHubly <br class='md:hidden block'/> Growth <br class='hidden md:block'/> System <span class='text-secondary'>.</span>",
+        "El TreeHubly <br class='md:hidden block'/> Growth <br class='hidden md:block'/> System <span class='text-secondary'>.</span>",
       description:
-        "A structured ecosystem designed to generate better leads, increase booked jobs, and <br class='hidden md:block'/> scale tree service companies with measurable performance.",
+        "Un ecosistema estructurado para generar mejores prospectos, aumentar trabajos reservados y <br class='hidden md:block'/> escalar empresas de árboles con rendimiento medible.",
       tags: [
         {
           icon: "attract",
-          title: "Attract",
+          title: "Atraer",
         },
         {
           icon: "convert",
-          title: "Convert",
+          title: "Convertir",
         },
         {
           icon: "path",
-          title: "Scale",
+          title: "Escalar",
         },
       ],
       buttons: [
         {
-          label: "Let's talk",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Llámanos",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -580,51 +628,52 @@ export default {
     },
     reason: {
       title:
-        "Why Tree Companies <br/> <span class='text-secondary'>Need a System.</span>",
+        "Por Qué las Empresas de Árboles <br/> <span class='text-secondary'>Necesitan un Sistema.</span>",
       description:
-        "Most tree service companies rely on disconnected marketing tactics.Referrals, seasonal demand, and inconsistent advertising often create unpredictable results.",
+        "La mayoría de empresas de servicios de árboles dependen de tácticas de marketing aisladas. Las referencias, la demanda estacional y la publicidad irregular generan resultados impredecibles.",
       items: [
         {
           icon: "warning",
-          title: "Inconsistent lead flow and revenue gaps",
-          description: "Feast or famine cycles that make hiring impossible.",
+          title: "Flujo irregular de prospectos y brechas de ingresos",
+          description:
+            "Ciclos de abundancia o escasez que imposibilitan contratar.",
         },
         {
           icon: "missed",
-          title: "Missed follow-ups and lost opportunities",
-          description: "Leads cooling off because you're busy in the field.",
+          title: "Seguimientos perdidos y oportunidades desaprovechadas",
+          description:
+            "Prospectos que se enfrían porque estás ocupado en campo.",
         },
         {
           icon: "unclear",
-          title: "Unclear performance and wasted ad spend",
-          description:
-            "Not knowing which marketing dollar is actually working.",
+          title: "Rendimiento poco claro y gasto publicitario perdido",
+          description: "Sin saber qué dinero de marketing realmente funciona.",
         },
       ],
       infaestructure: {
-        title: "The Infrastructure Shift",
+        title: "El Cambio de Infraestructura",
         description:
-          "The TreeHubly Growth System™ <span class='text-secondary font-bold'> replaces chaos</span> with a structured growth infrastructure built for scale.",
+          "El TreeHubly Growth System™ <span class='text-secondary font-bold'> reemplaza el caos</span> con una infraestructura de crecimiento estructurada para escalar.",
       },
     },
     pilars: {
       title:
-        "<span class='text-secondary'>The Three Pillars</span> of <br/> Performance.",
+        "<span class='text-secondary'>Los Tres Pilares</span> del <br/> Rendimiento.",
       description:
-        "The TreeHubly lead engine is built on three components working together to <br class='hidden md:block'/> generate consistent inquiries.",
+        "El motor de prospectos de TreeHubly se apoya en tres componentes que trabajan juntos para <br class='hidden md:block'/> generar consultas consistentes.",
       items: [
         {
           image: "pillar-1",
-          title: "Structured Lead Engine",
+          title: "Motor de Prospectos Estructurado",
           description:
-            "Dominate your local market. We deploy high-intent SEO strategies and precision-targeted ads to attract customers exactly when they need tree work.",
+            "Domina tu mercado local. Desplegamos estrategias de SEO de alto interés y anuncios de precisión para atraer clientes cuando más necesitan servicios de árboles.",
           list: [
-            "Local SEO Optimization",
-            "Paid Search Performance",
-            "Demand Generation",
+            "Optimización SEO Local",
+            "Rendimiento en Búsqueda Pagada",
+            "Generación de Demanda",
           ],
           button: {
-            label: "Learn More",
+            label: "Ver más",
             href: "#",
             classButton:
               "border border-primary hover:scale-105 transition-transform duration-300 rounded-lg ease-in-out w-full h-11.25",
@@ -633,16 +682,16 @@ export default {
         },
         {
           image: "pillar-2",
-          title: "Conversion & Automation",
+          title: "Conversión y Automatización",
           description:
-            "Never lose a lead again. Our infrastructure includes instant SMS text-back and automated nurture sequences that qualify leads while you work.",
+            "No pierdas un prospecto más. Nuestra infraestructura incluye respuesta SMS instantánea y secuencias automatizadas que califican prospectos mientras trabajas.",
           list: [
-            "Instant Lead Response",
-            "Automated SMS Follow-up",
-            "Lead Capture Optimization",
+            "Respuesta Instantánea",
+            "Seguimiento SMS Automatizado",
+            "Optimización de Captación",
           ],
           button: {
-            label: "Learn More",
+            label: "Ver más",
             href: "#",
             classButton:
               "border border-primary hover:scale-105 transition-transform duration-300 rounded-lg ease-in-out w-full h-11.25",
@@ -651,16 +700,16 @@ export default {
         },
         {
           image: "pillar-3",
-          title: "Performance Intelligence",
+          title: "Inteligencia de Rendimiento",
           description:
-            "Scale with absolute visibility. Custom dashboards track your ROI, lead-to-job conversion rates, and total revenue performance.",
+            "Escala con visibilidad total. Paneles personalizados rastrean tu ROI, tasas de conversión prospecto-trabajo e ingresos totales.",
           list: [
-            "Real-time ROI Dashboard",
-            "Cost Per Lead Tracking",
-            "Scalability Mapping",
+            "Panel ROI en Tiempo Real",
+            "Rastreo de Costo por Prospecto",
+            "Mapeo de Escalabilidad",
           ],
           button: {
-            label: "Learn More",
+            label: "Ver más",
             href: "#",
             classButton:
               "border border-primary hover:scale-105 transition-transform duration-300 rounded-lg ease-in-out w-full h-11.25",
@@ -670,41 +719,41 @@ export default {
       ],
     },
     functionality: {
-      title: "How the <span class='text-secondary'>System Works. </span>",
+      title: "Cómo <span class='text-secondary'>Funciona el Sistema.</span>",
       description:
-        "The three components of the TreeHubly Growth System operate together in a continuous cycle. This <br class='hidden md:block'/> integrated system allows tree service companies to grow with clarity and control.",
+        "Los tres componentes del TreeHubly Growth System operan juntos en un ciclo continuo. Este <br class='hidden md:block'/> sistema integrado permite a las empresas crecer con claridad y control.",
       items: [
         {
-          title: "Generate Demand",
+          title: "Generar Demanda",
           description:
-            "Identify high-value areas and flood them with targeted visibility.",
+            "Identificar zonas de alto valor e inundarlas con visibilidad dirigida.",
         },
         {
-          title: "Capture & Organize",
+          title: "Capturar y Organizar",
           description:
-            "Route every lead into our conversion system for instant engagement.",
+            "Derivar cada prospecto a nuestro sistema de conversión para contacto inmediato.",
         },
         {
-          title: "Track Performance",
+          title: "Medir Rendimiento",
           description:
-            "Measure the outcome of every interaction and job booked.",
+            "Medir el resultado de cada interacción y trabajo reservado.",
         },
         {
-          title: "Optimize & Scale",
+          title: "Optimizar y Escalar",
           description:
-            "Double down on what works and expand your service territory.",
+            "Potenciar lo que funciona y expandir tu territorio de servicio.",
         },
       ],
     },
     call: {
       title:
-        "Ready to Build <span class='text-paragraph'>Your <br/> Growth System?</span>",
+        "¿Listo para Construir <span class='text-paragraph'>Tu <br/> Sistema de Crecimiento?</span>",
       description:
-        "TreeHubly helps tree service companies implement structured marketing, <br class='hidden md:block'/> automation, and performance tracking to support scalable growth.",
+        "TreeHubly ayuda a empresas de árboles a implementar marketing estructurado, <br class='hidden md:block'/> automatización y rastreo de rendimiento para un crecimiento escalable.",
       items: [],
       buttons: [
         {
-          label: "Book Your Strategy Call",
+          label: "Agenda tu Llamada Estratégica",
           href: "#",
           styleButton:
             "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-65 h-11.25 md:h-10",
@@ -718,33 +767,33 @@ export default {
       hero: {
         imageHero: "system-hero",
         title:
-          "Structured Lead <br/> Engines <span class='text-secondary'>.</span>",
+          "Motor de Prospectos <br/> Estructurado <span class='text-secondary'>.</span>",
         description:
-          "A predictable lead engine designed to attract high-intent homeowners <br class='hidden md:block'/> searching for tree services in your service area.",
+          "Un motor de prospectos predecible diseñado para atraer propietarios de alto interés <br class='hidden md:block'/> que buscan servicios de árboles en tu zona.",
         tags: [
           {
             icon: "attract",
-            title: "Attract",
+            title: "Atraer",
           },
           {
             icon: "convert",
-            title: "Convert",
+            title: "Convertir",
           },
           {
             icon: "path",
-            title: "Scale",
+            title: "Escalar",
           },
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Llámanos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -753,67 +802,68 @@ export default {
         ],
       },
       problem: {
-        title: "The <span class='text-secondary'>Problem.</span>",
+        title: "El <span class='text-secondary'>Problema.</span>",
         description:
-          "Most tree service businesses rely on inconsistent marketing sources. Without a structured acquisition system, lead flow becomes unpredictable and growth becomes difficult to sustain.",
+          "La mayoría de empresas de árboles dependen de fuentes de marketing inconsistentes. Sin un sistema de adquisición estructurado, el flujo de prospectos se vuelve impredecible y el crecimiento difícil de sostener.",
         items: [
           {
             icon: "warning",
-            title: "Referrals",
+            title: "Referencias",
             description:
-              "Word of mouth is great but unreliable for aggressive scaling.",
+              "El boca a boca es valioso, pero poco fiable para escalar agresivamente.",
           },
           {
             icon: "wind",
-            title: "Seasonal Spikes",
+            title: "Picos Estacionales",
             description:
-              "Fluctuating demand based on weather and time of year creates revenue instability.",
+              "La demanda fluctuante según clima y época crea inestabilidad en los ingresos.",
           },
           {
             icon: "advertising",
-            title: "Random Advertising",
+            title: "Publicidad Aleatoria",
             description:
-              "Wasted spend on platforms that don't convert homeowners into calls.",
+              "Gasto en plataformas que no convierten propietarios en llamadas.",
           },
         ],
         imageContent: {
           image: "structured-2",
           description:
-            "”Without a structured acquisition system, lead flow becomes unpredictable and growth becomes difficult to sustain.”",
+            "Sin un sistema de adquisición estructurado, el flujo de prospectos se vuelve impredecible y el crecimiento difícil de sostener.",
         },
       },
       characteristics: {
-        title: "The <span class='text-secondary'>Lead Engine</span> Framework.",
+        title:
+          "El Marco del <span class='text-secondary'>Motor de Prospectos</span>.",
         description:
-          "The TreeHubly lead engine is built on three components working together to <br class='hidden md:block'/> generate consistent inquiries.",
+          "El motor de prospectos de TreeHubly se apoya en tres componentes que trabajan juntos para <br class='hidden md:block'/> generar consultas consistentes.",
         items: [
           {
             icon: "local",
-            title: "Local SEO Visibility",
+            title: "Visibilidad SEO Local",
             description:
-              "Ranking your company when homeowners search for services such as: tree removal near me, emergency tree service, stump grinding services.",
+              "Posicionamos tu empresa cuando propietarios buscan servicios como: tala de árboles cerca de mí, servicio de emergencia de árboles, remoción de tocones.",
             tag: {
-              label: "Sustainable organic growth",
+              label: "Crecimiento orgánico sostenible",
               icon: "higher-2",
             },
           },
           {
             icon: "ads",
-            title: "High-Intent Google Ads",
+            title: "Google Ads de Alto Interés",
             description:
-              "Google Ads campaigns target homeowners actively searching for tree services, capturing demand at the exact moment it exists.",
+              "Campañas de Google Ads que llegan a propietarios buscando servicios de árboles activamente, captando demanda justo cuando existe.",
             tag: {
-              label: "Immediate lead flow",
+              label: "Flujo inmediato de prospectos",
               icon: "thunder",
             },
           },
           {
             icon: "file",
-            title: "Conversion Focused Landing Pages",
+            title: "Páginas de Aterrizaje para Conversión",
             description:
-              "Traffic is directed to optimized service pages designed to convert visitors into inquiries and phone calls.",
+              "El tráfico se dirige a páginas optimizadas diseñadas para convertir visitantes en consultas y llamadas.",
             tag: {
-              label: "Maximize your ROI",
+              label: "Maximiza tu ROI",
               icon: "check",
             },
           },
@@ -821,18 +871,18 @@ export default {
       },
       call: {
         title:
-          "Ready to build your <br/> <span class='text-paragraph'>predictable lead engine?</span>",
+          "¿Listo para construir tu <br/> <span class='text-paragraph'>motor de prospectos predecible?</span>",
         description:
-          "Experience faster response times, higher close rates, organized <br class='hidden md:block'/> pipeline visibility, and improved lead management.",
+          "Experimenta tiempos de respuesta más rápidos, mayor tasa de cierre, visibilidad <br class='hidden md:block'/> organizada del pipeline y mejor gestión de prospectos.",
         items: [
-          "Predictable Lead Flow",
-          "Qualified Inquiries",
-          "Lower Cost Per Lead",
-          "Increased Visibility In Your Market",
+          "Flujo Predecible de Prospectos",
+          "Consultas Calificadas",
+          "Menor Costo por Prospecto",
+          "Mayor Visibilidad en tu Mercado",
         ],
         buttons: [
           {
-            label: "Book Your Strategy Call",
+            label: "Agenda tu Llamada Estratégica",
             href: "#",
             styleButton:
               "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-65 h-11.25 md:h-10",
@@ -845,33 +895,33 @@ export default {
       hero: {
         imageHero: "system-hero",
         title:
-          "Conversion & Automation <br class='hidden md:block'/> Infrastructure <span class='text-secondary'>.</span>",
+          "Infraestructura de Conversión <br class='hidden md:block'/> y Automatización <span class='text-secondary'>.</span>",
         description:
-          "Turn every inquiry into a structured opportunity through automated follow-up <br class='hidden md:block'/> and pipeline visibility.",
+          "Convierte cada consulta en una oportunidad estructurada mediante seguimiento automatizado <br class='hidden md:block'/> y visibilidad del pipeline.",
         tags: [
           {
             icon: "attract",
-            title: "Attract",
+            title: "Atraer",
           },
           {
             icon: "convert",
-            title: "Convert",
+            title: "Convertir",
           },
           {
             icon: "path",
-            title: "Scale",
+            title: "Escalar",
           },
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Llámanos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -881,29 +931,30 @@ export default {
       },
       problem: {
         title:
-          "The  <span class='text-secondary'>Revenue Leak</span> Most <br class='hidden md:block'/> Companies Ignore.",
+          "La <span class='text-secondary'>Fuga de Ingresos</span> que Muchas <br class='hidden md:block'/> Empresas Ignoran.",
         description:
-          "Many tree companies lose potential jobs because follow-ups are inconsistent. Don't let your growth slip through the cracks of a manual process.",
+          "Muchas empresas de árboles pierden trabajos porque los seguimientos son inconsistentes. No dejes que tu crecimiento se escape por un proceso manual.",
         items: [
           {
             icon: "misscall-2",
-            title: "Missed Calls",
-            description: "Competitors answer when you don't.",
+            title: "Llamadas Perdidas",
+            description: "Los competidores responden cuando tú no lo haces.",
           },
           {
             icon: "clock-2",
-            title: "Delayed Responses",
-            description: "Slow engagement kills trust.",
+            title: "Respuestas Tardías",
+            description: "El contacto lento destruye la confianza.",
           },
           {
             icon: "docs",
-            title: "Forgotten Estimates",
-            description: "Unfollowed quotes are lost revenue.",
+            title: "Cotizaciones Olvidadas",
+            description:
+              "Las presupuestos sin seguimiento son ingresos perdidos.",
           },
           {
             icon: "eye-off",
-            title: "Disorganized Tracking",
-            description: "Leads vanish without a CRM.",
+            title: "Seguimiento Desorganizado",
+            description: "Los prospectos desaparecen sin un CRM.",
           },
         ],
         imageContent: {
@@ -912,50 +963,50 @@ export default {
       },
       characteristics: {
         title:
-          "Automation <span class='text-secondary'>Systems <br class='hidden md:block'/> Implemented.</span>",
+          "Sistemas de Automatización <span class='text-secondary'>Implementados <br class='hidden md:block'/> .</span>",
         description:
-          "The TreeHubly automation infrastructure ensures every lead is tracked and <br class='hidden md:block'/> followed up.",
+          "La infraestructura de automatización de TreeHubly garantiza que cada prospecto sea rastreado y <br class='hidden md:block'/> reciba seguimiento.",
         items: [
           {
             icon: "sms",
-            title: "Instant SMS Response",
+            title: "Respuesta SMS Instantánea",
             description:
-              "Every inquiry receives an immediate response to increase engagement and response rates.",
+              "Cada consulta recibe una respuesta inmediata para aumentar el compromiso y la tasa de respuesta.",
           },
           {
             icon: "pipe",
-            title: "CRM Pipeline Tracking",
+            title: "Pipeline CRM",
             description:
-              "All leads enter a structured pipeline where each opportunity is tracked from inquiry to completed job.",
+              "Todos los prospectos entran a un pipeline estructurado donde cada oportunidad se rastrea desde la consulta hasta el trabajo completado.",
           },
           {
             icon: "misscall",
-            title: "Missed Call Text-Back",
+            title: "Texto Automático por Llamada Perdida",
             description:
-              "Every inquiry receives an immediate response to increase engagement and response rates.",
+              "Cada consulta recibe una respuesta inmediata para aumentar el compromiso y la tasa de respuesta.",
           },
           {
             icon: "load-2",
-            title: "Auto Estimate Follow-Up",
+            title: "Seguimiento Automático de Cotizaciones",
             description:
-              "Follow-up messages remind potential customers and increase close rates.",
+              "Mensajes de seguimiento que recuerdan a los clientes potenciales y aumentan las tasas de cierre.",
           },
         ],
       },
       call: {
         title:
-          "Ready for a real <span class='text-paragraph'> <br class='hidden md:block'/> business impact?</span>",
+          "¿Listo para un impacto <span class='text-paragraph'> <br class='hidden md:block'/> real en tu negocio?</span>",
         description:
-          "Experience faster response times, higher close rates, organized <br class='hidden md:block'/> pipeline visibility, and improved lead management.",
+          "Experimenta respuestas más rápidas, mayor tasa de cierre, visibilidad <br class='hidden md:block'/> organizada del pipeline y mejor gestión de prospectos.",
         items: [
-          "Faster Response Times",
-          "Higher Close Rates",
-          "Organized Pipeline Visibility",
-          "Improved Lead Management",
+          "Respuestas Más Rápidas",
+          "Mayor Tasa de Cierre",
+          "Visibilidad del Pipeline",
+          "Mejor Gestión de Prospectos",
         ],
         buttons: [
           {
-            label: "Book Your Strategy Call",
+            label: "Agenda tu Llamada Estratégica",
             href: "#",
             styleButton:
               "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-65 h-11.25 md:h-10",
@@ -968,33 +1019,33 @@ export default {
       hero: {
         imageHero: "system-hero",
         title:
-          "Performance Intelligence <br/> for Scalable Growth <span class='text-secondary'>.</span>",
+          "Inteligencia de Rendimiento <br/> para Crecimiento Escalable <span class='text-secondary'>.</span>",
         description:
-          "Track every lead, every job, and every marketing dollar with real performance <br class='hidden md:block'/> dashboards.",
+          "Rastrea cada prospecto, cada trabajo y cada dólar de marketing con paneles de <br class='hidden md:block'/> rendimiento real.",
         tags: [
           {
             icon: "attract",
-            title: "Attract",
+            title: "Atraer",
           },
           {
             icon: "convert",
-            title: "Convert",
+            title: "Convertir",
           },
           {
             icon: "path",
-            title: "Scale",
+            title: "Escalar",
           },
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Llámanos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1005,89 +1056,89 @@ export default {
       information: {
         lists: {
           title:
-            "Why <span class='text-secondary'>Performance <br class='hidden md:block'/> Data</span> Matters.",
+            "Por Qué los <span class='text-secondary'>Datos de <br class='hidden md:block'/> Rendimiento</span> Importan.",
           description:
-            "Many companies operate without clear visibility into marketing performance. Without proper <br class='hidden md:block'/> tracking, it becomes difficult to understand. Data visibility is essential for scalable growth.",
+            "Muchas empresas operan sin visibilidad clara del rendimiento de su marketing. Sin rastreo adecuado, <br class='hidden md:block'/> es difícil entender el negocio. La visibilidad de datos es esencial para el crecimiento escalable.",
           items: [
             {
               icon: "cost-2",
-              title: "Cost Per Lead",
+              title: "Costo por Prospecto",
               description:
-                "Know exactly what you pay for every inquiry across all channels.",
+                "Saber exactamente cuánto pagas por cada consulta en todos los canales.",
             },
             {
               icon: "copy",
-              title: "Cost Per Booked Job",
+              title: "Costo por Trabajo Cerrado",
               description:
-                "Track the total investment required to secure a real project.",
+                "Rastrear la inversión total para asegurar un proyecto real.",
             },
             {
               icon: "cta",
-              title: "Campaign Effectiveness",
+              title: "Efectividad de Campaña",
               description:
-                "Identify which marketing channels drive real business results.",
+                "Identificar qué canales de marketing generan resultados de negocio reales.",
             },
             {
               icon: "wallet",
-              title: "Revenue Attribution",
+              title: "Atribución de Ingresos",
               description:
-                "Connect every marketing dollar spent to revenue earned.",
+                "Conectar cada dólar invertido en marketing con los ingresos generados.",
             },
           ],
         },
         dashboard: {
           image: "dashboard",
           title:
-            "Performance <br/> <span class='text-secondary'>Dashboard.</span>",
+            "Panel de <br/> <span class='text-secondary'>Rendimiento.</span>",
           description:
-            "TreeHubly dashboards track key performance indicators including. This allows companies to understand exactly where growth comes from.",
+            "Los paneles de TreeHubly rastrean indicadores clave de rendimiento incluyendo. Esto permite a las empresas entender exactamente de dónde viene el crecimiento.",
           items: [
-            "Lead Source",
-            "Pipeline Stage",
-            "Campaign ROI",
-            "Revenue Generated",
+            "Fuente de Prospectos",
+            "Etapa del Pipeline",
+            "ROI de Campaña",
+            "Ingresos Generados",
           ],
         },
       },
       characteristics: {
         title:
-          "Built for  <span class='text-secondary'>Systems <br class='hidden md:block'/> Expansion.</span>",
+          "Diseñado para <span class='text-secondary'>Expansión <br class='hidden md:block'/> del Sistema.</span>",
         description:
-          "Scale across multiple service areas and crews with absolute clarity. Our multi-location <br class='hidden md:block'/> intelligence provides the control you need to manage complex operations.",
+          "Escala en múltiples zonas de servicio y equipos con total claridad. Nuestra inteligencia multi-ubicación <br class='hidden md:block'/> te da el control necesario para gestionar operaciones complejas.",
         items: [
           {
             icon: "multi",
-            title: "Multi-Service Area",
+            title: "Múltiples Zonas de Servicio",
             description:
-              "Track and compare performance across different geographic territories seamlessly.",
+              "Rastrea y compara el rendimiento entre distintos territorios geográficos sin complicaciones.",
           },
           {
             icon: "group",
-            title: "Crew Optimization",
+            title: "Optimización de Equipos",
             description:
-              "Analyze crew productivity and job quality to ensure consistent service standards.",
+              "Analiza la productividad y calidad del trabajo para garantizar estándares de servicio consistentes.",
           },
           {
             icon: "control",
-            title: "Centralized Control",
+            title: "Control Centralizado",
             description:
-              "Manage all operations from a single dashboard with deep-dive drill-down capabilities.",
+              "Gestiona todas las operaciones desde un solo panel con capacidad de análisis profundo.",
           },
         ],
       },
       call: {
         title:
-          "Ready to <span class='text-paragraph'> <br/> Scale Smarter?</span>",
+          "¿Listo para <span class='text-paragraph'> <br/> Escalar con Inteligencia?</span>",
         description:
-          "Stop wasting marketing dollars. Get the performance intelligence <br/> your business needs to grow profitably and predictably.",
+          "Deja de desperdiciar dinero en marketing. Obtén la inteligencia de rendimiento <br/> que tu negocio necesita para crecer de forma rentable y predecible.",
         items: [
-          "Data-Driven Decisions",
-          "Optimized Marketing Investment",
-          "Scalable Operational Growth",
+          "Decisiones Basadas en Datos",
+          "Inversión en Marketing Optimizada",
+          "Crecimiento Operativo Escalable",
         ],
         buttons: [
           {
-            label: "Book Your Strategy Call",
+            label: "Agenda tu Llamada Estratégica",
             href: "#",
             styleButton:
               "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-65 h-11.25 md:h-10",
@@ -1101,9 +1152,9 @@ export default {
     hero: {
       imageHero: "solution-hero",
       title:
-        "Growth Solutions Built for <br class='hidden md:block'/> Tree Service Companies <span class='text-secondary'>.</span>",
+        "Soluciones de Crecimiento para <br class='hidden md:block'/> Empresas de Servicios de Árboles <span class='text-secondary'>.</span>",
       description:
-        "TreeHubly delivers structured growth solutions for tree service companies, designed to generate <br class='hidden md:block'/> better leads, increase booked jobs, and drive measurable revenue growth.",
+        "TreeHubly ofrece soluciones de crecimiento estructuradas para empresas de árboles, diseñadas para generar <br class='hidden md:block'/> mejores prospectos, aumentar trabajos reservados e impulsar ingresos medibles.",
       tags: [
         {
           icon: "marketing",
@@ -1111,23 +1162,23 @@ export default {
         },
         {
           icon: "automation",
-          title: "Automation",
+          title: "Automatización",
         },
         {
           icon: "intelligence",
-          title: "Intelligence",
+          title: "Inteligencia",
         },
       ],
       buttons: [
         {
-          label: "Let's talk",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Llámanos",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1137,79 +1188,79 @@ export default {
     },
     information: {
       title:
-        "A Complete <span class='text-secondary'>Growth Ecosystem</span>, <br class='hidden lg:block'/> Not Disconnected Services.",
+        "Un <span class='text-secondary'>Ecosistema de Crecimiento</span> Completo, <br class='hidden lg:block'/> No Servicios Aislados.",
       description:
-        'Most agencies sell you "SEO" or "Ads" as a silo. We build a unified engine that takes <br class="hidden md:block"/> every prospect from first impression to five-star review.',
+        'La mayoría de agencias te venden "SEO" o "Anuncios" por separado. Nosotros construimos un motor unificado que lleva <br class="hidden md:block"/> a cada prospecto desde la primera impresión hasta la reseña de cinco estrellas.',
       items: [
         {
           icon: "advertising-2",
-          title: "Tree Service Marketing",
+          title: "Marketing para Servicios de Árboles",
           description:
-            "A complete marketing system designed to generate predictable, high-intent leads for tree companies.",
-          list: ["Structured Lead Engine™", "Automation Integration"],
+            "Un sistema de marketing completo diseñado para generar prospectos predecibles de alto interés.",
+          list: ["Structured Lead Engine™", "Integración de Automatización"],
           link: {
-            label: "Explore",
+            label: "Explorar",
             href: "marketing",
           },
           button: null,
         },
         {
           icon: "earth",
-          title: "Tree Service SEO",
+          title: "SEO para Servicios de Árboles",
           description:
-            "Local SEO strategies built to dominate search results and drive sustainable organic leads.",
-          list: ["Local Search Dominance", "Map Pack Optimization"],
+            "Estrategias de SEO local para dominar resultados de búsqueda y generar prospectos orgánicos sostenibles.",
+          list: ["Dominio de Búsqueda Local", "Optimización en Google Maps"],
           link: {
-            label: "Explore",
+            label: "Explorar",
             href: "seo",
           },
           button: null,
         },
         {
           icon: "cta",
-          title: "Google Ads for Tree Services",
+          title: "Google Ads para Servicios de Árboles",
           description:
-            "High-intent advertising campaigns structured to produce measurable ROI.",
-          list: ["High-Intent Targeting", "Conversion Tracking"],
+            "Campañas de publicidad de alto interés estructuradas para producir ROI medible.",
+          list: ["Segmentación de Alto Interés", "Rastreo de Conversiones"],
           link: {
-            label: "Explore",
+            label: "Explorar",
             href: "google-ads",
           },
           button: null,
         },
         {
           icon: "screen",
-          title: "Tree Service Website Design",
+          title: "Diseño Web para Servicios de Árboles",
           description:
-            "Conversion-focused websites designed to turn traffic into booked jobs.",
-          list: ["Conversion-First Design", "Mobile Optimization"],
+            "Sitios web enfocados en conversión diseñados para transformar tráfico en trabajos reservados.",
+          list: ["Diseño Orientado a Conversión", "Optimización Móvil"],
           link: {
-            label: "Explore",
+            label: "Explorar",
             href: "website-funnels",
           },
           button: null,
         },
         {
           icon: "magic",
-          title: "CRM & Automation for Tree Companies",
+          title: "CRM y Automatización para Empresas de Árboles",
           description:
-            "Structured follow-up systems that increase close rates and revenue visibility.",
-          list: ["Instant Lead Alerts", "Pipeline Management"],
+            "Sistemas de seguimiento estructurado que aumentan tasas de cierre y visibilidad de ingresos.",
+          list: ["Alertas Instantáneas de Prospectos", "Gestión del Pipeline"],
           link: {
-            label: "Explore",
+            label: "Explorar",
             href: "crm-automation",
           },
           button: null,
         },
         {
           icon: null,
-          title: "Ready to Grow?",
+          title: "¿Listo para Crecer?",
           description:
-            "Get a custom growth blueprint for your <br class='hidden xl:block'/> service area.",
+            "Obtén un plan de crecimiento personalizado para <br class='hidden xl:block'/> tu zona de servicio.",
           list: null,
           link: null,
           button: {
-            label: "Lets Talk",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1219,23 +1270,23 @@ export default {
       ],
     },
     scale: {
-      label: "Where Tree <br/> Companies Scale.",
+      label: "Donde las Empresas <br/> de Árboles Escalan.",
     },
     results: {
       title:
-        '<span class="animation-fade-right inline-block">Real</span> <span class="animation-fade-right inline-block">Results.</span> <br/> <span class="animation-fade-right inline-block text-secondary">Real</span> <span class="animation-fade-right inline-block text-secondary">Tree</span> <span class="animation-fade-right inline-block text-secondary">Companies.</span>',
+        '<span class="animation-fade-right inline-block">Resultados</span> <span class="animation-fade-right inline-block">Reales.</span> <br/> <span class="animation-fade-right inline-block text-secondary">Empresas</span> <span class="animation-fade-right inline-block text-secondary">Reales</span> <span class="animation-fade-right inline-block text-secondary">de Árboles.</span>',
       description:
-        "<span class='animation-fade-down inline-block'>Structured</span> <span class='animation-fade-down inline-block'>growth</span> <span class='animation-fade-down inline-block'>replaced</span> <span class='animation-fade-down inline-block'>inconsistent</span> <span class='animation-fade-down inline-block'>marketing</span> <span class='animation-fade-down inline-block'>efforts.</span> <span class='animation-fade-down inline-block'>Now</span> <span class='animation-fade-down inline-block'>every</span> <span class='animation-fade-down inline-block'>lead</span> <br class='hidden lg:block'/> <span class='animation-fade-down inline-block'>is</span> <span class='animation-fade-down inline-block'>tracked,</span> <span class='animation-fade-down inline-block'>optimized,</span> <span class='animation-fade-down inline-block'>and</span> <span class='animation-fade-down inline-block'>converted</span> <span class='animation-fade-down inline-block'>with</span> <span class='animation-fade-down inline-block'>precision.</span>",
+        "<span class='animation-fade-down inline-block'>El</span> <span class='animation-fade-down inline-block'>crecimiento</span> <span class='animation-fade-down inline-block'>estructurado</span> <span class='animation-fade-down inline-block'>reemplazó</span> <span class='animation-fade-down inline-block'>el</span> <span class='animation-fade-down inline-block'>marketing</span> <span class='animation-fade-down inline-block'>irregular.</span> <span class='animation-fade-down inline-block'>Ahora</span> <span class='animation-fade-down inline-block'>cada</span> <span class='animation-fade-down inline-block'>prospecto</span> <br class='hidden lg:block'/> <span class='animation-fade-down inline-block'>se</span> <span class='animation-fade-down inline-block'>rastrea,</span> <span class='animation-fade-down inline-block'>optimiza</span> <span class='animation-fade-down inline-block'>y</span> <span class='animation-fade-down inline-block'>convierte</span> <span class='animation-fade-down inline-block'>con</span> <span class='animation-fade-down inline-block'>precisión.</span>",
       buttons: [
         {
-          label: "Let's talk",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg border-2 border-secondary w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Llámanos",
           href: "#",
           styleButton:
             "border-2 border-primary hover:scale-105 transition-transform duration-300 box-container rounded-lg w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
@@ -1245,101 +1296,101 @@ export default {
       items: [
         {
           image: "result-1",
-          tag: "case study",
+          tag: "caso de éxito",
           title: "H&A Tree Brothers Orlando, FL",
           numbers: [
             {
               value: "+38%",
-              description: "increase in qualified leads",
+              description: "aumento en prospectos calificados",
             },
             {
               value: "+27%",
-              description: "increase in booked jobs",
+              description: "aumento en trabajos reservados",
             },
           ],
           description: [
             {
               icon: "down",
-              label: "Reduced cost per booked job",
+              label: "Reducción del costo por trabajo",
             },
             {
               icon: "stats",
-              label: "Full pipeline and revenue tracking",
+              label: "Seguimiento completo del pipeline",
             },
           ],
         },
         {
           image: "result-1",
-          tag: "case study",
+          tag: "caso de éxito",
           title: "H&A Tree Brothers Orlando, FL",
           numbers: [
             {
               value: "+38%",
-              description: "increase in qualified leads",
+              description: "aumento en prospectos calificados",
             },
             {
               value: "+27%",
-              description: "increase in booked jobs",
+              description: "aumento en trabajos reservados",
             },
           ],
           description: [
             {
               icon: "down",
-              label: "Reduced cost per booked job",
+              label: "Reducción del costo por trabajo",
             },
             {
               icon: "stats",
-              label: "Full pipeline and revenue tracking",
+              label: "Seguimiento completo del pipeline",
             },
           ],
         },
         {
           image: "result-1",
-          tag: "case study",
+          tag: "caso de éxito",
           title: "H&A Tree Brothers Orlando, FL",
           numbers: [
             {
               value: "+38%",
-              description: "increase in qualified leads",
+              description: "aumento en prospectos calificados",
             },
             {
               value: "+27%",
-              description: "increase in booked jobs",
+              description: "aumento en trabajos reservados",
             },
           ],
           description: [
             {
               icon: "down",
-              label: "Reduced cost per booked job",
+              label: "Reducción del costo por trabajo",
             },
             {
               icon: "stats",
-              label: "Full pipeline and revenue tracking",
+              label: "Seguimiento completo del pipeline",
             },
           ],
         },
         {
           image: "result-1",
-          tag: "case study",
+          tag: "caso de éxito",
           title: "H&A Tree Brothers Orlando, FL",
           numbers: [
             {
               value: "+38%",
-              description: "increase in qualified leads",
+              description: "aumento en prospectos calificados",
             },
             {
               value: "+27%",
-              description: "increase in booked jobs",
+              description: "aumento en trabajos reservados",
             },
           ],
           description: [
             {
               icon: "down",
-              label: "Reduced cost per booked job",
+              label: "Reducción del costo por trabajo",
             },
             {
               icon: "stats",
-              label: "Full pipeline and revenue tracking",
+              label: "Seguimiento completo del pipeline",
             },
           ],
         },
@@ -1347,13 +1398,13 @@ export default {
     },
     call: {
       title:
-        "Ready to Build a <span class='text-paragraph'>System <br class='hidden md:block'/> That Scale?</span>",
+        "¿Listo para Construir un <span class='text-paragraph'>Sistema <br class='hidden md:block'/> que Escale?</span>",
       description:
-        "If you're serious about growing your tree company, we're ready to <br class='hidden md:block'/> build the structure behind it.",
+        "Si estás decidido a hacer crecer tu empresa de árboles, estamos listos para <br class='hidden md:block'/> construir la estructura detrás de ello.",
       items: [],
       buttons: [
         {
-          label: "Book Your Strategy Call",
+          label: "Agenda tu Llamada Estratégica",
           href: "#",
           styleButton:
             "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-65 h-11.25 md:h-10",
@@ -1367,9 +1418,9 @@ export default {
       hero: {
         imageHero: "solution-hero",
         title:
-          "Tree Service Marketing Built <br class='hidden md:block'/> for Predictable Growth <span class='text-secondary'>.</span>",
+          "Marketing para Servicios de Árboles <br class='hidden md:block'/> Diseñado para Crecer Predeciblemente <span class='text-secondary'>.</span>",
         description:
-          "When homeowners search for tree services, they’re ready to hire. If you’re not at the top of Google, <br class='hidden md:block'/> competitors win those leads. Our SEO is built for sustainable lead generation.",
+          "Cuando los propietarios buscan servicios de árboles, están listos para contratar. Si no estás en lo alto de Google, <br class='hidden md:block'/> los competidores ganan esos prospectos. Nuestro SEO está hecho para generación sostenible.",
         tags: [
           {
             icon: "marketing",
@@ -1377,23 +1428,23 @@ export default {
           },
           {
             icon: "automation",
-            title: "Automation",
+            title: "Automatización",
           },
           {
             icon: "intelligence",
-            title: "Intelligence",
+            title: "Inteligencia",
           },
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Llámanos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1403,24 +1454,24 @@ export default {
       },
       ventoMarketing: {
         title:
-          "Our Structured <span class='text-secondary'>Marketing <br class='hidden md:block'/> Framework.</span>",
+          "Nuestro <span class='text-secondary'>Marco de Marketing <br class='hidden md:block'/> Estructurado.</span>",
         description:
-          "Everything works together inside one unified Growth System.",
+          "Todo funciona junto dentro de un Growth System unificado.",
         items: [
           {
             icon: "local",
-            title: "High-intent Google Ads",
+            title: "Google Ads de Alto Interés",
             description:
-              "Ensuring you appear when local homeowners are searching for emergency tree removal.",
+              "Apareces cuando propietarios locales buscan tala de árboles de emergencia.",
             back: "bg-primary back-content",
             backIcon: "bg-secondary/10",
             textColor: "text-paragraph",
           },
           {
             icon: "chart",
-            title: "High-intent Google Ads",
+            title: "Google Ads de Alto Interés",
             description:
-              "Target high-profit neighborhoods, not broad keywords.",
+              "Segmenta vecindarios de alto valor, no palabras clave genéricas.",
             back: "bg-secondary gap-6",
             backIcon: "bg-primary/10",
             textColor: "text-primary",
@@ -1432,9 +1483,9 @@ export default {
           },
           {
             icon: "panel",
-            title: "Conversion-focused landing pages",
+            title: "Páginas de aterrizaje para conversión",
             description:
-              "Mobile-first designs built to turn clicks into quote requests with zero friction.",
+              "Diseños móviles que convierten clics en solicitudes de cotización sin fricción.",
             image: {
               src: "marketing-2",
               width: "86",
@@ -1444,21 +1495,20 @@ export default {
             backIcon: "bg-[#DDF1B0]",
             textColor: "text-primary",
           },
-
           {
             icon: "connection",
-            title: "CRM & Automation",
+            title: "CRM y Automatización",
             description:
-              "Automated text and email follow-ups so you never lose a job to a faster competitor.",
+              "Seguimientos automáticos por texto y correo para no perder trabajos ante competidores más rápidos.",
             back: "bg-primary back-content",
             backIcon: "bg-secondary/10",
             textColor: "text-paragraph",
           },
           {
             icon: "cuadros",
-            title: "Revenue Tracking Dashboards",
+            title: "Paneles de Seguimiento de Ingresos",
             description:
-              "Real-time visibility into your marketing ROI. See which campaigns are actually putting money in the bank.",
+              "Visibilidad en tiempo real de tu ROI. Ve qué campañas realmente ponen dinero en el banco.",
             back: "bg-primary back-content",
             backIcon: "bg-secondary/10",
             textColor: "text-paragraph",
@@ -1471,83 +1521,83 @@ export default {
         ],
       },
       expectations: {
-        title: "What You <span class='text-secondary'>Can Expect.</span> ",
+        title: "Qué Puedes <span class='text-secondary'>Esperar.</span>",
         description:
-          "Performance marketing designed specifically for high-volume tree care companies.",
+          "Marketing de rendimiento diseñado para empresas de cuidado de árboles de alto volumen.",
         items: [
           {
             image: "expectation-1",
-            title: "Consistent Lead Flow",
+            title: "Flujo Constante de Prospectos",
             description:
-              "Eliminate the 'feast and famine' cycle with a steady stream of incoming calls that keep your crews busy year-round.",
+              "Elimina el ciclo de abundancia y escasez con un flujo constante de llamadas que mantiene a tus equipos ocupados todo el año.",
           },
           {
             image: "expectation-2",
-            title: "Higher Booked Job Rate",
+            title: "Mayor Tasa de Trabajos Reservados",
             description:
-              "Turn more estimates into high-value contracts with automated nurturing and professional follow-up sequences.",
+              "Convierte más presupuestos en contratos de alto valor con seguimiento automatizado y secuencias profesionales.",
           },
           {
             image: "expectation-3",
-            title: "Lower Cost Per Job",
+            title: "Menor Costo por Trabajo",
             description:
-              "Maximize efficiency and keep more of your revenue by cutting waste in your ad spend.",
+              "Maximiza la eficiencia y conserva más de tus ingresos reduciendo el desperdicio en publicidad.",
           },
           {
             image: "expectation-4",
-            title: "Full ROI Visibility",
+            title: "Visibilidad Total del ROI",
             description:
-              "Track every dollar spent back to a specific job and exact revenue amount with our dashboard.",
+              "Rastrea cada dólar invertido hasta un trabajo específico y el ingreso exacto con nuestro panel.",
           },
           {
             image: "expectation-5",
-            title: "Scalable Infrastructure",
+            title: "Infraestructura Escalable",
             description:
-              "Build a foundation that grows as your crew and equipment capacity increases.",
+              "Construye una base que crece junto con tu capacidad de equipo y equipamiento.",
           },
         ],
       },
       lists: {
         title:
-          "Why Tree Companies Need <br class='hidden md:block'/> <span class='text-secondary'>More Than Marketing.</span> ",
+          "Por Qué las Empresas de Árboles Necesitan <br class='hidden md:block'/> <span class='text-secondary'>Más que Marketing.</span>",
         description:
-          "Traffic alone doesn't create growth. Most agencies focus on vanity metrics <br class='hidden md:block'/> while your actual revenue stays flat. Tree companies need infrastructure, <br class='hidden md:block'/> not random tactics.",
+          "El tráfico solo no genera crecimiento. La mayoría de agencias se enfocan en métricas de vanidad <br class='hidden md:block'/> mientras tus ingresos reales se estancan. Las empresas de árboles necesitan infraestructura, <br class='hidden md:block'/> no tácticas aisladas.",
         items: [
           {
             icon: "snow",
-            title: "Leads Go Cold",
+            title: "Prospectos que se Enfrían",
             description:
-              "Expensive leads disappear without a structured nurturing system. Speed to lead is everything.",
+              "Los prospectos costosos desaparecen sin un sistema de seguimiento estructurado. La velocidad de respuesta lo es todo.",
           },
           {
             icon: "bell",
-            title: "Follow-Ups Missed",
+            title: "Seguimientos Perdidos",
             description:
-              "Manual processes rely on memory. One missed call can mean a lost $5k removal job.",
+              "Los procesos manuales dependen de la memoria. Una llamada perdida puede significar un trabajo de $5k perdido.",
           },
           {
             icon: "square",
-            title: "ROI Is Unclear",
+            title: "ROI sin Claridad",
             description:
-              "Stop guessing which ads are working. We track every dollar back to a signed contract.",
+              "Deja de adivinar qué anuncios funcionan. Rastreamos cada dólar hasta el contrato firmado.",
           },
           {
             icon: "arrow-black",
-            title: "Revenue Plateaus",
+            title: "Ingresos Estancados",
             description:
-              "Break through the glass ceiling with a repeatable, scalable lead acquisition system.",
+              "Rompe el techo de cristal con un sistema de adquisición de prospectos repetible y escalable.",
           },
         ],
       },
       call: {
         title:
-          "Ready to Scale your <span class='text-paragraph'>Tree <br class='hidden md:block'/> Service?</span>",
+          "¿Listo para Escalar tu <span class='text-paragraph'>Servicio de <br class='hidden md:block'/> Árboles?</span>",
         description:
-          "Join the top-performing tree care companies nationwide and <br class='hidden md:block'/> secure your territory today.",
+          "Únete a las empresas de cuidado de árboles con mejor rendimiento a nivel nacional y <br class='hidden md:block'/> asegura tu territorio hoy.",
         items: [],
         buttons: [
           {
-            label: "Book Your Strategy Call",
+            label: "Agenda tu Llamada Estratégica",
             href: "#",
             styleButton:
               "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-65 h-11.25 md:h-10",
@@ -1560,9 +1610,9 @@ export default {
       hero: {
         imageHero: "solution-hero",
         title:
-          "SEO for Tree <br/> Service Companies <span class='text-secondary'>.</span>",
+          "SEO para Empresas de <br/> Servicios de Árboles <span class='text-secondary'>.</span>",
         description:
-          "If you’re not at the top of Google, you’re losing high-intent leads. <br class='hidden md:block'/> Our SEO drives long-term growth.",
+          "Si no estás en lo alto de Google, estás perdiendo prospectos de alto interés. <br class='hidden md:block'/> Nuestro SEO impulsa el crecimiento a largo plazo.",
         tags: [
           {
             icon: "marketing",
@@ -1570,23 +1620,23 @@ export default {
           },
           {
             icon: "automation",
-            title: "Automation",
+            title: "Automatización",
           },
           {
             icon: "intelligence",
-            title: "Intelligence",
+            title: "Inteligencia",
           },
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Llámanos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1596,98 +1646,98 @@ export default {
       },
       lists: {
         title:
-          "Local SEO Built for <span class='text-secondary'>Tree Services.</span> ",
+          "SEO Local para <span class='text-secondary'>Servicios de Árboles.</span>",
         description:
-          'Most agencies sell you "SEO" or "Ads" as a silo. We build a unified engine that takes <br class="hidden md:block"/> every prospect from first impression to five-star review.',
+          'La mayoría de agencias te venden "SEO" o "Anuncios" por separado. Nosotros construimos un motor unificado que lleva <br class="hidden md:block"/> a cada prospecto desde la primera impresión hasta la reseña de cinco estrellas.',
         items: [
           {
             icon: "maps",
             title: "Google Business Profile",
             description:
-              "Dominating local map packs through precise optimization and ranking signal management.",
+              "Dominando resultados locales en mapas con optimización precisa de señales de posicionamiento.",
           },
           {
             icon: "location",
-            title: "Location Pages",
+            title: "Páginas por Ubicación",
             description:
-              "Automating social proof and reputation management to build massive trust.",
+              "Automatizando prueba social y gestión de reputación para generar confianza masiva.",
           },
           {
             icon: "code",
-            title: "Technical Website Structure",
+            title: "Estructura Técnica del Sitio",
             description:
-              "Automating social proof and reputation management to build massive trust.",
+              "Automatizando prueba social y gestión de reputación para generar confianza masiva.",
           },
           {
             icon: "link",
-            title: "Authority Signals",
+            title: "Señales de Autoridad",
             description:
-              "Automating social proof and reputation management to build massive trust.",
+              "Automatizando prueba social y gestión de reputación para generar confianza masiva.",
           },
           {
             icon: "star",
-            title: "Review Strategy",
+            title: "Estrategia de Reseñas",
             description:
-              "Automating social proof and reputation management to build massive trust.",
+              "Automatizando prueba social y gestión de reputación para generar confianza masiva.",
           },
         ],
       },
       matters: {
         title:
-          "Why SEO Matters in the <span class='text-secondary'>Tree Industry.</span>",
-        description: "Tree services are high-intent searches. ",
+          "Por Qué el SEO Importa en la <span class='text-secondary'>Industria de Árboles.</span>",
+        description: "Los servicios de árboles son búsquedas de alto interés.",
         items: [
           {
             icon: "search",
-            label: '"Tree removal near me"',
+            label: '"Tala de árboles cerca de mí"',
           },
           {
             icon: "alert-2",
-            label: '"Emergency tree service"',
+            label: '"Servicio de emergencia de árboles"',
           },
           {
             icon: "hammer",
-            label: '"Stump grinding service"',
+            label: '"Remoción de tocones"',
           },
         ],
         description2:
-          "Unlike general landscaping, tree work often happens because of immediate needs or safety concerns. SEO ensures your business appears exactly when that demand is strongest.",
+          "A diferencia del paisajismo general, el trabajo con árboles ocurre por necesidades inmediatas o de seguridad. El SEO asegura que tu empresa aparezca justo cuando esa demanda es más fuerte.",
       },
       characteristics: {
         title:
-          "Integrated With <span class='text-secondary'>Automation & <br class='hidden lg:block'/> Tracking.</span> ",
+          "Integrado con <span class='text-secondary'>Automatización y <br class='hidden lg:block'/> Rastreo.</span>",
         description:
-          "SEO without conversion infrastructure wastes opportunity. We connect your <br class='hidden md:block'/> traffic directly to your bottom line.",
+          "El SEO sin infraestructura de conversión desperdicia oportunidades. Conectamos tu <br class='hidden md:block'/> tráfico directamente a tus resultados.",
         items: [
           {
             icon: "three-2",
-            title: "Optimized Landing Pages",
+            title: "Páginas de Aterrizaje Optimizadas",
             description:
-              "High-converting pages designed to turn tree service searches into scheduled estimates.",
+              "Páginas de alta conversión diseñadas para transformar búsquedas en presupuestos agendados.",
           },
           {
             icon: "path-2",
-            title: "Automated Follow-ups",
+            title: "Seguimientos Automatizados",
             description:
-              "Instant SMS and email sequences that engage leads before your competitors even call back.",
+              "Secuencias instantáneas de SMS y correo que contactan prospectos antes que tus competidores.",
           },
           {
             icon: "cuadros",
-            title: "Revenue Tracking",
+            title: "Rastreo de Ingresos",
             description:
-              "Transparent dashboards showing exactly which keywords are generating real revenue for your business.",
+              "Paneles transparentes que muestran exactamente qué palabras clave generan ingresos reales.",
           },
         ],
       },
       call: {
         title:
-          "Ready to own your  <span class='text-paragraph'>local <br class='hidden md:block'/>  search results?</span>",
+          "¿Listo para dominar tu <span class='text-paragraph'>búsqueda <br class='hidden md:block'/>  local?</span>",
         description:
-          "Book a strategy call today and we'll show you the exact roadmap to <br class='hidden md:block'/> becoming the #1 tree service in your area.",
+          "Agenda una llamada estratégica hoy y te mostraremos el plan exacto para <br class='hidden md:block'/> convertirte en el #1 de servicios de árboles en tu área.",
         items: [],
         buttons: [
           {
-            label: "Book Your Strategy Call",
+            label: "Agenda tu Llamada Estratégica",
             href: "#",
             styleButton:
               "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-65 h-11.25 md:h-10",
@@ -1700,9 +1750,9 @@ export default {
       hero: {
         imageHero: "solution-hero",
         title:
-          "Google Ads for Tree <br/> Service Companies <span class='text-secondary'>.</span>",
+          "Google Ads para Empresas de <br/> Servicios de Árboles <span class='text-secondary'>.</span>",
         description:
-          "Google Ads generates fast leads, but poor structure raises costs. We build high-intent ad <br class='hidden md:block'/> systems with landing pages, automation, and revenue tracking.",
+          "Google Ads genera prospectos rápido, pero una mala estructura eleva los costos. Construimos sistemas <br class='hidden md:block'/> de anuncios de alto interés con páginas de aterrizaje, automatización y rastreo de ingresos.",
         tags: [
           {
             icon: "marketing",
@@ -1710,23 +1760,23 @@ export default {
           },
           {
             icon: "automation",
-            title: "Automation",
+            title: "Automatización",
           },
           {
             icon: "intelligence",
-            title: "Intelligence",
+            title: "Inteligencia",
           },
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Llámanos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1736,92 +1786,92 @@ export default {
       },
       lists: {
         title:
-          "High-Intent <span class='text-secondary'>Campaing <br class='hidden md:block'/> Strategy.</span> ",
+          "Estrategia de Campaña <span class='text-secondary'>de Alto <br class='hidden md:block'/> Interés.</span>",
         description:
-          "Campaigns are built around buyer intent — not generic traffic. We focus on the <br class='hidden md:block'/> most profitable service lines to ensure your budget works harder.",
+          "Las campañas se construyen en torno a la intención de compra, no tráfico genérico. Nos enfocamos en <br class='hidden md:block'/> las líneas de servicio más rentables para que tu presupuesto rinda más.",
         items: [
           {
             icon: "alert",
-            title: "Emergency Services",
+            title: "Servicios de Emergencia",
             description:
-              "Capture urgent leads when property owners need help fast. 24/7 visibility for high-priority calls.",
+              "Captura prospectos urgentes cuando propietarios necesitan ayuda rápida. Visibilidad 24/7 para llamadas prioritarias.",
           },
           {
             icon: "cloud",
-            title: "Storm Damage",
+            title: "Daños por Tormenta",
             description:
-              "Be the first choice during local weather events. Rapid response campaigns triggered by storm data.",
+              "Sé la primera opción durante eventos climáticos locales. Campañas de respuesta rápida activadas por datos de tormentas.",
           },
           {
             icon: "shopping",
-            title: "Tree Removal",
+            title: "Tala de Árboles",
             description:
-              "Target high-value removal projects in your service area. Focus on commercial and residential removals.",
+              "Segmenta proyectos de tala de alto valor en tu zona. Enfócate en remociones comerciales y residenciales.",
           },
           {
             icon: "higher-black",
-            title: "High-Margin Work",
+            title: "Trabajos de Alto Margen",
             description:
-              "Focus on the specialized jobs like pruning and preservation that drive the most profit for your fleet.",
+              "Enfócate en trabajos especializados como poda y conservación que generan más ganancia para tu flota.",
           },
         ],
       },
       expectations: {
         title:
-          "Conversion- <br class='md:hidden block'/> Focused <br class='hidden md:block'/>  <span class='text-secondary'>Funnels.</span> ",
+          "Embudos <br class='md:hidden block'/> Enfocados en <br class='hidden md:block'/>  <span class='text-secondary'>Conversión.</span>",
         description:
-          "Ad traffic never goes to generic homepages. We build high-performing funnels designed to convert clicks into booked jobs.",
+          "El tráfico de anuncios nunca va a páginas de inicio genéricas. Construimos embudos de alto rendimiento para convertir clics en trabajos reservados.",
         items: [
           {
             image: "expectation-6",
-            title: "Service-Specific Pages",
+            title: "Páginas por Servicio",
             description:
-              "Custom landing pages for removal, pruning, and emergency work that match user search terms exactly.",
+              "Páginas de aterrizaje personalizadas para tala, poda y emergencias que coinciden exactamente con el término buscado.",
           },
           {
             image: "expectation-7",
-            title: "Location-Based Funnels",
+            title: "Embudos por Ubicación",
             description:
-              "Localized content that builds trust in your specific service area, featuring local reviews and project photos.",
+              "Contenido localizado que genera confianza en tu zona específica, con reseñas y fotos de proyectos locales.",
           },
           {
             image: "expectation-8",
-            title: "Call-Driven Layouts",
+            title: "Diseños para Llamadas",
             description:
-              "Optimized for mobile users who need to click-to-call immediately, especially for high-intent emergency traffic.",
+              "Optimizados para usuarios móviles que necesitan llamar de inmediato, especialmente para tráfico de emergencia.",
           },
         ],
       },
       stadistic: {
         title:
-          "Measurable ROI: <span class='text-secondary'>If it’s not measurable, it’s not scalable.</span>",
+          "ROI Medible: <span class='text-secondary'>Si no es medible, no es escalable.</span>",
         description:
-          "We don't just track clicks. We track revenue. Our integration connects your CRM to your ad campaigns so you know exactly which dollar drove which job.",
+          "No solo rastreamos clics. Rastreamos ingresos. Nuestra integración conecta tu CRM con tus campañas para que sepas exactamente qué dólar generó qué trabajo.",
         lists: [
           {
-            title: "CPL",
-            description: "COST PER LEAD",
+            title: "CPP",
+            description: "COSTO POR PROSPECTO",
           },
           {
-            title: "CPBJ",
-            description: "COST PER JOB",
+            title: "CPTJ",
+            description: "COSTO POR TRABAJO",
           },
           {
             title: "ROAS",
-            description: "REV ATTRIBUTION",
+            description: "ATRIBUCIÓN DE INGRESOS",
           },
         ],
         image: "stadistic-1",
       },
       call: {
         title:
-          "Ready to own your  <span class='text-paragraph'>local <br class='hidden md:block'/>  search results?</span>",
+          "¿Listo para dominar tu <span class='text-paragraph'>búsqueda <br class='hidden md:block'/>  local?</span>",
         description:
-          "Book a strategy call today and we'll show you the exact roadmap to <br class='hidden md:block'/> becoming the #1 tree service in your area.",
+          "Agenda una llamada estratégica hoy y te mostraremos el plan exacto para <br class='hidden md:block'/> convertirte en el #1 de servicios de árboles en tu área.",
         items: [],
         buttons: [
           {
-            label: "Book Your Strategy Call",
+            label: "Agenda tu Llamada Estratégica",
             href: "#",
             styleButton:
               "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-65 h-11.25 md:h-10",
@@ -1834,9 +1884,9 @@ export default {
       hero: {
         imageHero: "solution-hero",
         title:
-          "Tree Service Website <br class='hidden md:block'/> Design Built to Convert ",
+          "Diseño Web para Servicios de Árboles <br class='hidden md:block'/> Creado para Convertir",
         description:
-          "Your website isn’t a brochure. It’s your primary conversion engine. <br class='hidden md:block'/> We design tree service websites that turn traffic into qualified inquiries and booked jobs.",
+          "Tu sitio web no es un folleto. Es tu motor principal de conversión. <br class='hidden md:block'/> Diseñamos sitios web de servicios de árboles que convierten tráfico en consultas calificadas y trabajos reservados.",
         tags: [
           {
             icon: "marketing",
@@ -1844,23 +1894,23 @@ export default {
           },
           {
             icon: "automation",
-            title: "Automation",
+            title: "Automatización",
           },
           {
             icon: "intelligence",
-            title: "Intelligence",
+            title: "Inteligencia",
           },
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Llámanos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1869,100 +1919,102 @@ export default {
         ],
       },
       lists: {
-        title: "Built for  <span class='text-secondary'>Service Intent.</span>",
+        title:
+          "Diseñado para <span class='text-secondary'>Intención de Servicio.</span>",
         description:
-          "Campaigns are built around buyer intent — not generic traffic. We focus on the <br class='hidden md:block'/> most profitable service lines to ensure your budget works harder.",
+          "Las campañas se construyen en torno a la intención de compra, no tráfico genérico. Nos enfocamos en <br class='hidden md:block'/> las líneas de servicio más rentables para que tu presupuesto rinda más.",
         items: [
           {
             icon: "shapes",
-            title: "Service Segmentation",
+            title: "Segmentación de Servicios",
             description:
-              "Categorized landing pages for specific tree services, optimizing both UX and long-tail SEO.",
+              "Páginas de aterrizaje por servicio específico, optimizando UX y SEO de cola larga.",
           },
           {
             icon: "location",
-            title: "Location Optimization",
+            title: "Optimización por Ubicación",
             description:
-              "Geographic targeting strategy designed to dominate local map packs and city-specific searches.",
+              "Estrategia de segmentación geográfica para dominar los mapas locales y búsquedas por ciudad.",
           },
           {
             icon: "thunder-2",
-            title: "Fast-Loading",
+            title: "Carga Rápida",
             description:
-              "Optimized code and asset delivery for sub-second load times, reducing bounce rates on mobile.",
+              "Código y entrega de recursos optimizados para tiempos de carga mínimos, reduciendo el abandono móvil.",
           },
           {
             icon: "cta",
-            title: "Strategic CTAs",
+            title: "CTAs Estratégicos",
             description:
-              "High-visibility contact points placed at critical decision stages throughout the scroll.",
+              "Puntos de contacto visibles colocados en etapas críticas de decisión durante el scroll.",
           },
         ],
       },
       ventoMove1: {
         title:
-          '<span class="text-secondary">Conversion-Focused</span> Architecture.',
+          'Arquitectura <span class="text-secondary">Enfocada en Conversión</span>.',
         description:
-          "Your site visitors make up their minds in seconds. We provide the visual cues and technical ease they need to choose you over the competition.",
+          "Los visitantes de tu sitio deciden en segundos. Les damos las señales visuales y la facilidad técnica que necesitan para elegirte sobre la competencia.",
         items: [
           {
             icon: "reviews",
-            title: "Live Review Integration",
+            title: "Integración de Reseñas en Vivo",
             description:
-              "Stream your best Google and Yelp reviews directly onto your page to build instant social proof.",
+              "Muestra tus mejores reseñas de Google y Yelp directamente en tu página para generar confianza al instante.",
           },
           {
             icon: "mobile",
-            title: "Live Review Integration",
+            title: "Integración de Reseñas en Vivo",
             description:
-              "Stream your best Google and Yelp reviews directly onto your page to build instant social proof.",
+              "Muestra tus mejores reseñas de Google y Yelp directamente en tu página para generar confianza al instante.",
           },
           {
             icon: "sharp",
-            title: "Live Review Integration",
+            title: "Integración de Reseñas en Vivo",
             description:
-              "Stream your best Google and Yelp reviews directly onto your page to build instant social proof.",
+              "Muestra tus mejores reseñas de Google y Yelp directamente en tu página para generar confianza al instante.",
           },
         ],
-        vento1: "Trust is Curated",
-        vento4: "The best investment we've made for our tree service.",
+        vento1: "La Confianza se Construye",
+        vento4:
+          "La mejor inversión que hemos hecho para nuestro servicio de árboles.",
       },
       characteristics: {
         title:
-          "Integrated With <span class='text-secondary'>CRM & <br/> Automation.</span> ",
+          "Integrado con <span class='text-secondary'>CRM y <br/> Automatización.</span>",
         description:
-          "Websites shouldn't just send emails. They should start your entire <br/> sales process automatically.",
+          "Los sitios web no deben solo enviar correos. Deben iniciar todo tu <br/> proceso de ventas automáticamente.",
         items: [
           {
             icon: "paper",
-            title: "Instant Capture",
+            title: "Captación Instantánea",
             description:
-              'Form submissions are validated in real-time and trigger an immediate "Thank You" SMS to the lead.',
+              'Los formularios se validan en tiempo real y activan un SMS de "Gracias" inmediato al prospecto.',
           },
           {
             icon: "coin",
-            title: "CRM Ingestion",
+            title: "Ingreso al CRM",
             description:
-              "Data flows directly into your CRM (HubSpot, Jobber, etc.), creating a new deal and assigning it to your team.",
+              "Los datos fluyen directamente a tu CRM (HubSpot, Jobber, etc.), creando un nuevo trato y asignándolo a tu equipo.",
           },
           {
             icon: "double-a",
-            title: "Follow-up Workflows",
+            title: "Flujos de Seguimiento",
             description:
-              "Automated nurturing sequences keep your company top-of-mind until the job is booked and completed.",
+              "Secuencias de seguimiento automatizadas que mantienen a tu empresa en la mente del cliente hasta que el trabajo es reservado.",
           },
         ],
         arrow: true,
       },
       call: {
         title:
-          "Upgrade Your <br/> <span class='text-paragraph'>Conversion Engine.</span>",
+          "Mejora tu <br/> <span class='text-paragraph'>Motor de Conversión.</span>",
         description:
-          "Stop wasting ad spend on a website that doesn't convert. Join the <br class='hidden md:block'/> top-performing tree services in the country.",
+          "Deja de desperdiciar presupuesto en un sitio web que no convierte. Únete a los <br class='hidden md:block'/> servicios de árboles con mejor rendimiento del país.",
         items: [],
         buttons: [
           {
-            label: "Start Your Website Strategy",
+            label: "Inicia tu Estrategia Web",
             href: "#",
             styleButton:
               "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-65 h-11.25 md:h-10",
@@ -1975,9 +2027,9 @@ export default {
       hero: {
         imageHero: "solution-hero",
         title:
-          "CRM & Automation for <br class='hidden md:block'/> Tree Service Companies <span class='text-secondary'>.</span>",
+          "CRM y Automatización para <br class='hidden md:block'/> Empresas de Servicios de Árboles <span class='text-secondary'>.</span>",
         description:
-          "Most tree companies lose revenue from missed calls, slow responses, and untracked estimates. <br class='hidden md:block'/> Our CRM and automation capture, track, and optimize every opportunity.",
+          "La mayoría de empresas de árboles pierden ingresos por llamadas perdidas, respuestas lentas y presupuestos sin rastrear. <br class='hidden md:block'/> Nuestro CRM y automatización capturan, rastrean y optimizan cada oportunidad.",
         tags: [
           {
             icon: "marketing",
@@ -1985,23 +2037,23 @@ export default {
           },
           {
             icon: "automation",
-            title: "Automation",
+            title: "Automatización",
           },
           {
             icon: "intelligence",
-            title: "Intelligence",
+            title: "Inteligencia",
           },
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Llámanos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -2011,46 +2063,46 @@ export default {
       },
       lists: {
         title:
-          "Built for  <span class='text-secondary'>Tree Service Workflows.</span>",
+          "Diseñado para <span class='text-secondary'>Flujos de Servicios de Árboles.</span>",
         description:
-          "Stop juggling sticky notes and spreadsheets. We built specialized tools designed <br/> to handle the unique demands of tree care professionals.",
+          "Deja de malabarear notas adhesivas y hojas de cálculo. Herramientas especializadas <br/> para las demandas únicas de los profesionales de árboles.",
         items: [
           {
             icon: "message",
-            title: "Automated SMS Follow-ups",
+            title: "Seguimientos SMS Automatizados",
             description:
-              "Never let a lead go cold with instant automated messaging sent the moment they inquire.",
+              "No dejes que un prospecto se enfríe con mensajes automáticos instantáneos al momento de consultar.",
           },
           {
             icon: "misscall-3",
-            title: "Missed Call Text-back",
+            title: "Texto por Llamada Perdida",
             description:
-              "Automatically reply to missed calls so you never lose a job to a competitor while you're in the bucket.",
+              "Responde automáticamente las llamadas perdidas para no perder un trabajo ante la competencia mientras estás en campo.",
           },
           {
             icon: "mind",
-            title: "Pipeline Stage Tracking",
+            title: "Rastreo por Etapa del Pipeline",
             description:
-              "Visualize your sales process from initial lead to completed job with drag-and-drop simplicity.",
+              "Visualiza tu proceso de ventas desde el prospecto inicial hasta el trabajo completado con simplicidad drag-and-drop.",
           },
           {
             icon: "callendar-2",
-            title: "Appointment Workflows",
+            title: "Flujos de Citas",
             description:
-              "Streamline scheduling for crews and estimators. Send automatic reminders to reduce no-shows.",
+              "Simplifica la agenda para equipos y estimadores. Envía recordatorios automáticos para reducir ausencias.",
           },
           {
             icon: "document",
-            title: "Estimate Follow-up",
+            title: "Seguimiento de Cotizaciones",
             description:
-              "Automatically nudge customers to approve pending estimates until the contract is signed.",
+              "Recuerda automáticamente a los clientes aprobar presupuestos pendientes hasta que el contrato esté firmado.",
           },
           {
-            title: "Need something specific?",
+            title: "¿Necesitas algo específico?",
             description:
-              "Our team can customize <br class='hidden md:block'/> workflows to match your exact <br class='hidden md:block'/> operations.",
+              "Nuestro equipo puede personalizar <br class='hidden md:block'/> flujos de trabajo para adaptarse <br class='hidden md:block'/> exactamente a tu operación.",
             button: {
-              label: "Lets Talk",
+              label: "Hablemos",
               href: "#",
               styleButton:
                 "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-40 md:w-30 h-11.25 md:h-10",
@@ -2060,25 +2112,26 @@ export default {
         ],
       },
       stadistic: {
-        title: "Full <span class='text-secondary'>Revenue Visibility.</span>",
+        title:
+          "Visibilidad <span class='text-secondary'>Total de Ingresos.</span>",
         description:
-          "Stop guessing where your money is coming from. Our dashboard gives you a crystal-clear view of your business health in real-time.",
+          "Deja de adivinar de dónde viene tu dinero. Nuestro panel te da una vista clara de la salud de tu negocio en tiempo real.",
         items: [
-          "Track ROI on every marketing dollar",
-          "Monitor crew performance and job efficiency",
-          "Identify bottle-necks in your sales process",
+          "Rastrea el ROI de cada dólar de marketing",
+          "Monitorea el rendimiento del equipo y la eficiencia por trabajo",
+          "Identifica cuellos de botella en tu proceso de ventas",
         ],
         image: "stadistic-2",
         different: true,
       },
       call: {
-        title: "Designed for <span class='text-paragraph'>Scalability.</span>",
+        title: "Diseñado para <span class='text-paragraph'>Escalar.</span>",
         description:
-          "Whether you operate one crew or multiple locations, automation <br class='hidden md:block'/> ensures consistency across your business. Scale your operations <br class='hidden md:block'/>  without adding more office staff.",
+          "Ya sea que operes un equipo o múltiples ubicaciones, la automatización <br class='hidden md:block'/> garantiza consistencia en todo tu negocio. Escala tus operaciones <br class='hidden md:block'/>  sin añadir más personal de oficina.",
         items: [],
         buttons: [
           {
-            label: "Start Your Growth Plan",
+            label: "Inicia tu Plan de Crecimiento",
             href: "#",
             styleButton:
               "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-65 h-11.25 md:h-10",
@@ -2092,33 +2145,33 @@ export default {
     hero: {
       imageHero: "case-hero",
       title:
-        "From Inconsistent Leads to a <br class='hidden lg:block'/> Structured Growth System <span class='text-secondary'>.</span>",
+        "De Prospectos Irregulares a un <br class='hidden lg:block'/> Sistema de Crecimiento Estructurado <span class='text-secondary'>.</span>",
       description:
-        "How H&A Brother Tree Services Improved Lead Generation and Operational <br class='hidden md:block'/> Efficiency with the TreeHubly Growth System™",
+        "Cómo H&A Brother Tree Services Mejoró la Generación de Prospectos y la <br class='hidden md:block'/> Eficiencia Operativa con el TreeHubly Growth System™",
       tags: [
         {
           icon: "lead",
-          title: "Better Leads",
+          title: "Mejores Prospectos",
         },
         {
           icon: "tools",
-          title: " More Jobs.",
+          title: "Más Trabajos.",
         },
         {
           icon: "higher",
-          title: " Higher Revenue.",
+          title: "Más Ingresos.",
         },
       ],
       buttons: [
         {
-          label: "Let's talk",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Llámanos",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -2128,168 +2181,168 @@ export default {
     },
     business: {
       iverview: {
-        title: "Company Overview",
+        title: "Resumen de la Empresa",
         items: [
           {
-            tag: "Company",
+            tag: "Empresa",
             title: "H&A Brother Tree Services",
           },
           {
-            tag: "Industry",
-            title: "Tree Services",
+            tag: "Industria",
+            title: "Servicios de Árboles",
           },
           {
-            tag: "Location",
-            title: "Florida, USA",
+            tag: "Ubicación",
+            title: "Florida, EE.UU.",
           },
         ],
         services: {
-          title: "Core Services",
+          title: "Servicios Principales",
           lists: [
-            "Tree Removal",
-            "Trimming",
-            "Stump Grinding",
-            "Emergency Services",
+            "Tala de Árboles",
+            "Poda",
+            "Remoción de Tocones",
+            "Servicios de Emergencia",
           ],
         },
       },
-      title: 'The Business <span class="text-secondary">Story.</span>',
+      title: 'La Historia del <span class="text-secondary">Negocio.</span>',
       description:
-        "H&A Brother Tree Services is a growing tree service company serving residential and commercial clients in the Orlando area. As demand for tree services increased, the company needed a more structured way to generate leads, manage inquiries, and track marketing performance.",
+        "H&A Brother Tree Services es una empresa de servicios de árboles en crecimiento que atiende clientes residenciales y comerciales en el área de Orlando. A medida que la demanda creció, la empresa necesitaba una forma más estructurada de generar prospectos, gestionar consultas y rastrear el rendimiento del marketing.",
       items: [
         {
           icon: "counter-g",
-          title: "The <span class='text-secondary'>Situation.</span>",
+          title: "La <span class='text-secondary'>Situación.</span>",
           description:
-            "Like many growing service companies, H&A Brother Tree Services relied heavily on referrals and occasional advertising to generate new business. While these sources produced customers, the process lacked structure and predictability. Some weeks brought strong demand, while others were slower, making it difficult to maintain consistent growth. <br/> <br/> <br class='hidden md:block'/>Additionally, the company did not have a centralized system to manage inquiries or track marketing performance. Leads often depended on manual follow-up and phone calls, which created operational challenges as the business continued to grow.",
+            "Como muchas empresas de servicios en crecimiento, H&A Brother Tree Services dependía en gran medida de referencias y publicidad ocasional para generar nuevos clientes. Si bien estas fuentes producían clientes, el proceso carecía de estructura y predictibilidad. Algunas semanas traían una demanda fuerte, mientras que otras eran más lentas, lo que dificultaba mantener un crecimiento constante. <br/> <br/> <br class='hidden md:block'/>Además, la empresa no tenía un sistema centralizado para gestionar consultas ni rastrear el rendimiento del marketing. Los prospectos dependían frecuentemente de seguimiento manual y llamadas telefónicas, lo que creaba desafíos operativos a medida que el negocio continuaba creciendo.",
         },
         {
           icon: "alert-2",
-          title: "The <span class='text-secondary'>Challenge.</span> ",
+          title: "El <span class='text-secondary'>Desafío.</span>",
           description:
-            "Before implementing the TreeHubly Growth System™, several key obstacles limited the company’s ability to scale.",
+            "Antes de implementar el TreeHubly Growth System™, varios obstáculos clave limitaban la capacidad de escalar de la empresa.",
         },
       ],
       disadvantages: [
         {
           icons: "arrow-dr",
-          title: "Inconsistent Lead Flow",
-          description: "Unpredictable demand made planning difficult.",
+          title: "Flujo de Prospectos Irregular",
+          description: "La demanda impredecible dificultaba la planificación.",
         },
         {
           icons: "eye-off",
-          title: "Limited Visibility",
-          description: "Weak presence in local search results.",
+          title: "Visibilidad Limitada",
+          description: "Presencia débil en resultados de búsqueda local.",
         },
         {
           icons: "time-r",
-          title: "Delayed Response",
-          description: "Inquiries were often missed or delayed.",
+          title: "Respuesta Tardía",
+          description: "Las consultas frecuentemente se perdían o retrasaban.",
         },
         {
           icons: "unclear",
-          title: "No Tracking",
-          description: "Zero visibility into marketing ROI.",
+          title: "Sin Rastreo",
+          description: "Cero visibilidad del ROI de marketing.",
         },
       ],
     },
     system: {
-      title: "The <span class='text-secondary'>TreeHubly Growth System.</span>",
+      title: "El <span class='text-secondary'>TreeHubly Growth System.</span>",
       description:
-        "We implemented our proprietary three-pillar framework to transition H&A from <br class='hidden md:block'/> reactive marketing to a proactive growth engine.",
+        "Implementamos nuestro marco propietario de tres pilares para llevar a H&A del marketing <br class='hidden md:block'/> reactivo a un motor de crecimiento proactivo.",
       items: [
         {
           icon: "ibm",
-          title: "Structured Lead Engine",
+          title: "Motor de Prospectos Estructurado",
           description:
-            "The first step was building a reliable acquisition engine to attract homeowners searching for tree services in the Orlando market. This included:",
+            "El primer paso fue construir un motor de adquisición confiable para atraer propietarios que buscan servicios de árboles en el mercado de Orlando. Esto incluyó:",
           items: [
-            "Improving local search visibility.",
-            "Implementing targeted digital advertising campaigns.",
-            "Developing conversion-focused landing pages.",
+            "Mejorar la visibilidad en búsquedas locales.",
+            "Implementar campañas de publicidad digital dirigida.",
+            "Desarrollar páginas de aterrizaje enfocadas en conversión.",
           ],
           content:
-            "These efforts allowed the company to capture demand from homeowners actively searching for services such as tree removal and emergency tree assistance.",
+            "Estos esfuerzos permitieron capturar demanda de propietarios que buscaban activamente servicios como tala de árboles y asistencia de emergencia.",
         },
         {
           icon: "structure",
-          title: "Conversion Infrastructure",
+          title: "Infraestructura de Conversión",
           description:
-            "To ensure no opportunities were lost, TreeHubly implemented automation systems designed to capture and manage every inquiry. This included:",
+            "Para asegurar que ninguna oportunidad se perdiera, TreeHubly implementó sistemas de automatización diseñados para capturar y gestionar cada consulta. Esto incluyó:",
           items: [
-            "Automated responses to inquiries.",
-            "Missed-call text-back functionality.",
-            "Structured CRM pipeline tracking.",
-            "Automated follow-up messaging sequences.",
+            "Respuestas automáticas a consultas.",
+            "Funcionalidad de texto automático por llamada perdida.",
+            "Rastreo estructurado del pipeline CRM.",
+            "Secuencias automáticas de mensajes de seguimiento.",
           ],
           content:
-            "These systems significantly improved response speed and ensured potential customers remained engaged throughout the quoting process.",
+            "Estos sistemas mejoraron significativamente la velocidad de respuesta y aseguraron que los clientes potenciales permanecieran comprometidos durante el proceso de cotización.",
         },
         {
           icon: "performance",
-          title: "Performance Intelligence",
+          title: "Inteligencia de Rendimiento",
           description:
-            "Finally, TreeHubly implemented dashboards to track marketing performance and lead activity. These dashboards provided visibility into:",
+            "Finalmente, TreeHubly implementó paneles para rastrear el rendimiento del marketing y la actividad de prospectos. Estos paneles proporcionaron visibilidad de:",
           items: [
-            "Lead sources.",
-            "Campaign performance.",
-            "Pipeline activity.",
-            "Marketing efficiency.",
+            "Fuentes de prospectos.",
+            "Rendimiento de campañas.",
+            "Actividad del pipeline.",
+            "Eficiencia del marketing.",
           ],
           content:
-            "This allowed the team to understand where inquiries were coming from and how marketing efforts contributed to business growth.",
+            "Esto permitió al equipo entender de dónde venían las consultas y cómo los esfuerzos de marketing contribuían al crecimiento del negocio.",
         },
       ],
     },
     transformation: {
-      title: "The <span class='text-secondary'>Transformation.</span>",
+      title: "La <span class='text-secondary'>Transformación.</span>",
       description:
-        "After implementing the TreeHubly Growth System, H&A Brother Tree Services shifted from reactive <br class='hidden md:block'/> marketing to a structured system that supports consistent growth and improved operational organization.",
+        "Tras implementar el TreeHubly Growth System, H&A Brother Tree Services pasó del marketing reactivo <br class='hidden md:block'/> a un sistema estructurado que apoya el crecimiento constante y una organización operativa mejorada.",
       lists: [
         {
           border: "border-[#263A4B]",
           icon: "counter",
-          title: "Before TreeHubly",
+          title: "Antes de TreeHubly",
           items: [
-            "Lead generation relied mostly on referrals",
-            "Inconsistent marketing efforts",
-            "Follow-up processes were manual",
-            "Limited visibility into marketing performance",
+            "La generación de prospectos dependía principalmente de referencias",
+            "Esfuerzos de marketing inconsistentes",
+            "Los procesos de seguimiento eran manuales",
+            "Visibilidad limitada del rendimiento de marketing",
           ],
           icon2: "equis-2",
         },
         {
           border: "border-secondary",
           icon: "plant",
-          title: "After TreeHubly",
+          title: "Después de TreeHubly",
           items: [
-            "Structured lead generation strategyd",
-            "Automated inquiry response and follow-up",
-            "Organized CRM pipeline for lead management",
-            "Improved visibility into marketing performance",
+            "Estrategia estructurada de generación de prospectos",
+            "Respuesta automática y seguimiento de consultas",
+            "Pipeline CRM organizado para gestión de prospectos",
+            "Mayor visibilidad del rendimiento de marketing",
           ],
           icon2: "check-2",
         },
       ],
       business: {
-        title: "Business <span class='text-secondary'>Impact.</span>",
+        title: "Impacto en el <span class='text-secondary'>Negocio.</span>",
         description:
-          "The implementation of a structured growth system helped the company operate with greater clarity and efficiency. ",
+          "La implementación de un sistema de crecimiento estructurado ayudó a la empresa a operar con mayor claridad y eficiencia.",
         description2:
-          "These improvements created a foundation for long-term, scalable growth, moving away from reactive management to proactive scaling.",
+          "Estas mejoras crearon una base para el crecimiento escalable a largo plazo, pasando de la gestión reactiva al escalado proactivo.",
         advantages: {
-          title: "Key Improvements Included:",
+          title: "Mejoras Clave:",
           items: [
-            "Stronger consistency in incoming inquiries",
-            "Faster response times to potential customers",
-            "Improved organization of the sales pipeline",
-            "Better understanding of marketing performance",
+            "Mayor consistencia en las consultas entrantes",
+            "Tiempos de respuesta más rápidos a clientes potenciales",
+            "Mejor organización del pipeline de ventas",
+            "Mayor comprensión del rendimiento de marketing",
           ],
         },
       },
       opinion: {
         content:
-          '"Working with TreeHubly helped us bring structure to how we generate and manage leads. The system allowed us to respond faster to inquiries and stay organized as our business continues to grow."',
+          '"Trabajar con TreeHubly nos ayudó a estructurar cómo generamos y gestionamos prospectos. El sistema nos permitió responder más rápido a las consultas y mantenernos organizados mientras nuestro negocio sigue creciendo."',
         title: "H&A Brother Tree Services",
       },
     },
@@ -2300,21 +2353,21 @@ export default {
     },
     advantage: {
       title:
-        'The Infrastructure <br/> <span class="text-secondary">Advantage.</span>',
+        'La Ventaja de la <br/> <span class="text-secondary">Infraestructura.</span>',
       descriptions: [
-        "The experience of H&A Brother Tree Services demonstrates the impact of implementing a <span class='font-bold'>structured growth infrastructure</span> rather than relying on disconnected marketing tactics.",
-        "By connecting lead generation, automation, and performance visibility, the <span class='text-secondary font-bold'>TreeHubly Growth System</span> helps tree service companies operate with greater efficiency and scalability.",
+        "La experiencia de H&A Brother Tree Services demuestra el impacto de implementar una <span class='font-bold'>infraestructura de crecimiento estructurada</span> en lugar de depender de tácticas de marketing aisladas.",
+        "Al conectar la generación de prospectos, la automatización y la visibilidad del rendimiento, el <span class='text-secondary font-bold'>TreeHubly Growth System</span> ayuda a las empresas de árboles a operar con mayor eficiencia y escalabilidad.",
       ],
     },
     call: {
       title:
-        "Ready to Build a Growth System <br class='hidden md:block'/> for <span class='text-paragraph'>Your Tree Service Company?</span>",
+        "¿Listo para Construir un Sistema de Crecimiento <br class='hidden md:block'/> para <span class='text-paragraph'>tu Empresa de Árboles?</span>",
       description:
-        "TreeHubly helps tree service businesses generate better leads, improve follow-up processes, <br class='hidden md:block'/> and scale their operations through structured marketing and automation systems.",
+        "TreeHubly ayuda a empresas de servicios de árboles a generar mejores prospectos, mejorar los procesos de <br class='hidden md:block'/> seguimiento y escalar operaciones con sistemas estructurados de marketing y automatización.",
       items: [],
       buttons: [
         {
-          label: "Book Your Strategy Call",
+          label: "Agenda tu Llamada Estratégica",
           href: "#",
           styleButton:
             "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-65 h-11.25 md:h-10",
@@ -2327,33 +2380,33 @@ export default {
     hero: {
       imageHero: "resource-hero",
       title:
-        "Insights for Tree <br class='hidden md:block'/> Company Owners <span class='text-secondary'>.</span>",
+        "Recursos para Dueños de <br class='hidden md:block'/> Empresas de Árboles <span class='text-secondary'>.</span>",
       description:
-        "Strategic insights designed to help tree service companies generate better<br class='hidden md:block'/> leads, increase booked jobs, and scale efficiently.",
+        "Información estratégica diseñada para ayudar a empresas de servicios de árboles a generar mejores <br class='hidden md:block'/> prospectos, aumentar trabajos reservados y escalar eficientemente.",
       tags: [
         {
           icon: "lead",
-          title: "Better Leads",
+          title: "Mejores Prospectos",
         },
         {
           icon: "tools",
-          title: " More Jobs.",
+          title: "Más Trabajos.",
         },
         {
           icon: "higher",
-          title: " Higher Revenue.",
+          title: "Más Ingresos.",
         },
       ],
       buttons: [
         {
-          label: "Let's talk",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Llámanos",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -2364,56 +2417,57 @@ export default {
     resources: [
       {
         image: "resource-1",
-        tag: "LEAD GENERATION",
-        title: "How to Generate Tree Service Leads Consistently",
+        tag: "GENERACIÓN DE PROSPECTOS",
+        title:
+          "Cómo Generar Prospectos de Servicios de Árboles Consistentemente",
         description:
-          "Discover the multi-channel approach to keep your crews busy throughout every season of the year.",
+          "Descubre el enfoque multicanal para mantener a tus equipos ocupados durante todas las temporadas del año.",
       },
       {
         image: "resource-2",
-        tag: "SEO & VISIBILITY",
-        title: "How to Rank a Tree Service Business on Google",
+        tag: "SEO Y VISIBILIDAD",
+        title: "Cómo Posicionar una Empresa de Árboles en Google",
         description:
-          "Master local SEO and Google Business Profile to dominate the top spot in your local market.",
+          "Domina el SEO local y Google Business Profile para ocupar el primer lugar en tu mercado local.",
       },
       {
         image: "resource-3",
-        tag: "ADS & PAID MEDIA",
-        title: "How to Lower Cost Per Lead for Tree Services",
+        tag: "ANUNCIOS Y MEDIOS PAGADOS",
+        title: "Cómo Reducir el Costo por Prospecto en Servicios de Árboles",
         description:
-          "Optimization tips for Google Ads and Facebook Ads to get more calls for every dollar spent.",
+          "Consejos de optimización para Google Ads y Facebook Ads para obtener más llamadas por cada dólar invertido.",
       },
       {
         image: "resource-4",
-        tag: "AUTOMATION & CRM",
-        title: "How to Improve Follow-Up and Increase Booked Jobs",
+        tag: "AUTOMATIZACIÓN Y CRM",
+        title: "Cómo Mejorar el Seguimiento y Aumentar los Trabajos Reservados",
         description:
-          "Don't let leads go cold. Learn how to automate your estimates and follow-up sequence.",
+          "No dejes que los prospectos se enfríen. Aprende a automatizar tus presupuestos y secuencias de seguimiento.",
       },
       {
         image: "resource-5",
-        tag: "SCALING & EXPANSION",
-        title: "How to Expand Your Tree Service to Multiple Cities",
+        tag: "ESCALA Y EXPANSIÓN",
+        title: "Cómo Expandir tu Servicio de Árboles a Múltiples Ciudades",
         description:
-          "The blueprint for managing crews and marketing across multiple service areas effectively.",
+          "El plan para gestionar equipos y marketing en múltiples zonas de servicio de forma efectiva.",
       },
     ],
     call: {
       title:
-        "Ready to Build a <span class='text-paragraph'>System <br class='hidden md:block'/> That Scales?</span>",
+        "¿Listo para Construir un <span class='text-paragraph'>Sistema <br class='hidden md:block'/> que Escale?</span>",
       description:
-        "If you're serious about growing your tree company, we're ready to <br class='hidden md:block'/> build the structure behind it.",
+        "Si estás decidido a hacer crecer tu empresa de árboles, estamos listos para <br class='hidden md:block'/> construir la estructura detrás de ello.",
       items: [],
       buttons: [
         {
-          label: "Lets talk",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "border-2 border-primary bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-paragraph",
         },
         {
-          label: "Call us",
+          label: "Llámanos",
           href: "#",
           styleButton:
             "border-2 border-primary hover:scale-105 transition-transform duration-300  rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -2426,33 +2480,33 @@ export default {
     hero: {
       imageHero: "resource-hero",
       title:
-        "Built to Scale Tree <br class='hidden md:block'/> Service Companies <span class='text-secondary'>.</span>",
+        "Creados para Escalar Empresas <br class='hidden md:block'/> de Servicios de Árboles <span class='text-secondary'>.</span>",
       description:
-        "TreeHubly was created with one mission: To bring structure, predictability, and measurable growth to the tree service <br class='hidden md:block'/> industry. We believe tree companies don’t need more tactics, they need infrastructure.",
+        "TreeHubly fue creado con una misión: traer estructura, predictibilidad y crecimiento medible a la industria de servicios de árboles. <br class='hidden md:block'/> Creemos que las empresas de árboles no necesitan más tácticas, necesitan infraestructura.",
       tags: [
         {
           icon: "lead",
-          title: "Better Leads",
+          title: "Mejores Prospectos",
         },
         {
           icon: "tools",
-          title: " More Jobs.",
+          title: "Más Trabajos.",
         },
         {
           icon: "higher",
-          title: " Higher Revenue.",
+          title: "Más Ingresos.",
         },
       ],
       buttons: [
         {
-          label: "Let's talk",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Llámanos",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -2462,76 +2516,76 @@ export default {
     },
     focus: {
       title:
-        "Why We Focus Only on <span class='text-secondary'>Tree Services.</span>",
+        "Por Qué Nos Enfocamos Solo en <span class='text-secondary'>Servicios de Árboles.</span>",
       description:
-        "Specialization creates expertise. By working exclusively with tree service companies, we've built systems designed specifically for this industry.",
+        "La especialización crea experiencia. Al trabajar exclusivamente con empresas de árboles, hemos construido sistemas diseñados específicamente para esta industria.",
       items: [
         {
           icon: "calendar-g",
-          title: "Seasonality",
+          title: "Estacionalidad",
           description:
-            "Managing off-peak months to maintain cash flow year-round.",
+            "Gestión de meses bajos para mantener el flujo de caja durante todo el año.",
         },
         {
           icon: "thunder",
-          title: "Emergency Cycles",
+          title: "Ciclos de Emergencia",
           description:
-            "Rapid response systems for storm-related demand surges.",
+            "Sistemas de respuesta rápida para picos de demanda por tormentas.",
         },
         {
           icon: "local",
-          title: "Area Targeting",
+          title: "Segmentación por Zona",
           description:
-            "Hyper-local marketing that dominates high-value neighborhoods.",
+            "Marketing hiper-local que domina los vecindarios de mayor valor.",
         },
         {
           icon: "search",
-          title: "Intent Search",
+          title: "Búsqueda de Intención",
           description:
-            "Capturing ready-to-buy customers at the exact moment of need.",
+            "Captura clientes listos para contratar en el momento exacto de necesidad.",
         },
         {
           icon: "teams",
-          title: "Scaling Teams",
+          title: "Crecimiento de Equipos",
           description:
-            "Solving the challenges of expanding crews and heavy equipment.",
+            "Soluciones para los desafíos de expandir equipos y equipamiento pesado.",
         },
       ],
     },
     philosophy: {
       title:
-        "Our Philosophy: <span class='text-secondary'>Systems First.</span>",
+        "Nuestra Filosofía: <span class='text-secondary'>Sistemas Primero.</span>",
       items: [
         {
           icon: "multi",
-          title: "Growth without structure creates chaos.",
+          title: "El crecimiento sin estructura genera caos.",
           description:
-            "Scaling a team without the right systems is a recipe for operational failure.",
+            "Escalar un equipo sin los sistemas correctos es una receta para el fracaso operativo.",
         },
         {
           icon: "analytics",
-          title: "Structure without data creates stagnation.",
+          title: "La estructura sin datos genera estancamiento.",
           description:
-            "Precision measurement is the only way to ensure every dollar works for you.",
+            "La medición precisa es la única forma de asegurar que cada dólar trabaje para ti.",
         },
       ],
       review:
-        '<span class="text-secondary">“The TreeHubly Growth System™</span> connects acquisition, automation, and performance into one scalable ecosystem."',
+        '<span class="text-secondary">"El TreeHubly Growth System™</span> conecta adquisición, automatización y rendimiento en un ecosistema escalable único."',
     },
     opinion: {
-      tag: "OUR VISION",
+      tag: "NUESTRA VISIÓN",
       title:
-        "“To become the national growth infrastructure <br class='hidden xl:block'/> <span class='text-secondary'>partner for tree service companies across the United States.”</span>",
+        "Convertirnos en la infraestructura nacional de crecimiento <br class='hidden xl:block'/> <span class='text-secondary'>para empresas de servicios de árboles en todo Estados Unidos.</span>",
     },
     call: {
       title:
-        "Let’s build your  <span class='text-paragraph'> <br class='block md:hidden'/>growth <br /> infrastructure.</span>",
+        "Construyamos tu  <span class='text-paragraph'> <br class='block md:hidden'/>infraestructura <br /> de crecimiento.</span>",
       description:
-        "Stop guessing and start growing. Join the industry leaders using TreeHubly.",
+        "Deja de adivinar y empieza a crecer. Únete a los líderes de la industria que usan TreeHubly.",
       items: [],
       buttons: [
         {
-          label: "Book Your Strategy Call",
+          label: "Agenda tu Llamada Estratégica",
           href: "#",
           styleButton:
             "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-65 h-11.25 md:h-10",
@@ -2542,26 +2596,26 @@ export default {
   },
   prices: [
     {
-      title: "Inkstart Plan",
-      description: "Ideal for entrepreneurs just starting out.",
+      title: "Plan Inkstart",
+      description: "Ideal para emprendedores que están comenzando.",
       price:
-        "$157 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/month</span>",
-      description2: "Everything you need to launch and organize your business.",
+        "$157 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/mes</span>",
+      description2: "Todo lo que necesitas para lanzar y organizar tu negocio.",
       items: [
-        "1 landing page + web chat",
-        "Forms + lead capture",
-        "Basic email marketing",
-        "CRM with sales pipeline",
+        "1 landing page + chat web",
+        "Formularios + captación de prospectos",
+        "Email marketing básico",
+        "CRM con pipeline de ventas",
       ],
       features: {
-        title: "Capacity",
+        title: "Capacidad",
         items: [
-          "1,000 contacts, 3 users",
-          "Extras: 7 days free, Hosting $87/year",
+          "1,000 contactos, 3 usuarios",
+          "Extras: 7 días gratis, Hosting $87/año",
         ],
       },
       button: {
-        label: "Start Now",
+        label: "Comenzar Ahora",
         href: "#",
         styleButton:
           "border border-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full h-11.25",
@@ -2571,52 +2625,58 @@ export default {
       popularLabel: null,
     },
     {
-      title: "Inkscale Plan",
-      description: "For businesses that want to scale.",
+      title: "Plan Inkscale",
+      description: "Para negocios que quieren escalar.",
       price:
-        "$257 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/month</span>",
+        "$257 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/mes</span>",
       description2:
-        "More automation, more channels, more control for your growth.",
+        "Más automatización, más canales, más control para tu crecimiento.",
       items: [
-        "Web + landing + SEO blog",
-        "Social media management with AI",
-        "Multi-channel CRM (WhatsApp, SMS, Email)",
-        "Advanced automations",
-        "Meta & Google Ads integration",
+        "Web + landing + blog SEO",
+        "Gestión de redes sociales con IA",
+        "CRM multicanal (WhatsApp, SMS, Email)",
+        "Automatizaciones avanzadas",
+        "Integración Meta y Google Ads",
       ],
       features: {
-        title: "Capacity",
-        items: ["3,000 contacts, 5 users", "Includes Human Support + Training"],
+        title: "Capacidad",
+        items: [
+          "3,000 contactos, 5 usuarios",
+          "Incluye Soporte Humano + Capacitación",
+        ],
       },
       button: {
-        label: "More Information",
+        label: "Más Información",
         href: "#",
         styleButton:
           "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full h-11.25",
         styleLabel: "text-white",
       },
       popular: true,
-      popularLabel: "Most Popular",
+      popularLabel: "Más Popular",
     },
     {
-      title: "Inkmaster Plan",
-      description: "For enterprises at the highest level.",
+      title: "Plan Inkmaster",
+      description: "Para empresas al más alto nivel.",
       price:
-        "$357 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/month</span>",
-      description2: "Total automation + AI + strategic guidance.",
+        "$357 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/mes</span>",
+      description2: "Automatización total + IA + asesoría estratégica.",
       items: [
-        "AI Chatbots (Omnichannel)",
-        "Client portal + Courses",
-        "Custom CRM (Branding)",
-        "AI Forecasting",
-        "1:1 Strategic Consulting",
+        "Chatbots con IA (Omnicanal)",
+        "Portal de clientes + Cursos",
+        "CRM personalizado (Branding)",
+        "Pronósticos con IA",
+        "Consultoría Estratégica 1:1",
       ],
       features: {
-        title: "Capacity",
-        items: ["Unlimited Contacts & Users", "Complete Academy Access"],
+        title: "Capacidad",
+        items: [
+          "Contactos y Usuarios Ilimitados",
+          "Acceso Completo a la Academia",
+        ],
       },
       button: {
-        label: "Scale My Business",
+        label: "Escalar mi Negocio",
         href: "#",
         styleButton:
           "border border-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full h-11.25",
@@ -2628,9 +2688,9 @@ export default {
   ],
   footer: {
     description:
-      "The ultimate growth system for tree service <br class='hidden lg:block'/> professionals. We don't just provide marketing: <br class='hidden lg:block'/> we provide the infrastructure for your success",
+      "El sistema de crecimiento definitivo para profesionales <br class='hidden lg:block'/> de servicios de árboles. No solo ofrecemos marketing: <br class='hidden lg:block'/> ofrecemos la infraestructura para tu éxito",
     schedules: {
-      title: "Get in Touch",
+      title: "Contáctanos",
       items: [
         {
           href: "#",
@@ -2644,45 +2704,45 @@ export default {
         },
         {
           href: "#",
-          title: "Mon - Fri: 7AM - 7PM",
+          title: "Lun - Vie: 7AM - 7PM",
           icon: "clock",
         },
       ],
     },
     nav: {
-      title: "Main Menu",
+      title: "Menú Principal",
       items: [
         {
-          label: "The System",
+          label: "El Sistema",
           href: "/the-system",
         },
         {
-          label: "Solutions",
+          label: "Soluciones",
           href: "/solutions",
         },
         {
-          label: "Case Studies",
+          label: "Casos de Éxito",
           href: "/case-studies",
         },
         {
-          label: "Resources",
+          label: "Recursos",
           href: "/resources",
         },
         {
-          label: "About",
+          label: "Acerca de",
           href: "/about",
         },
       ],
     },
     services: {
-      title: "Solutions",
+      title: "Soluciones",
       items: [
         {
-          label: "Tree Service Marketing",
+          label: "Marketing para Servicios de Árboles",
           href: "/services/marketing",
         },
         {
-          label: "SEO for Tree Services",
+          label: "SEO para Servicios de Árboles",
           href: "/services/seo",
         },
         {
@@ -2690,11 +2750,11 @@ export default {
           href: "/services/google-ads",
         },
         {
-          label: "Website & Funnels",
+          label: "Sitio Web y Embudos",
           href: "/services/website-funnels",
         },
         {
-          label: "CRM & Automation",
+          label: "CRM y Automatización",
           href: "/services/crm-automation",
         },
       ],

@@ -20,7 +20,7 @@ const { content } = Astro.props as Props;
             {
               content?.items.slice(0, 2).map((item)=>( 
                 <div class="flex flex-col justify-start md:justify-center items-center rounded-2xl md:rounded-3xl overflow-hidden border border-[#263A4B] self-stretch animation-zoom-in-2">
-                  <div class="aspect-343/193 md:aspect-151/85 w-full h-auto relative group">
+                  <div class="aspect-343/193 md:aspect-151/85 w-full h-auto relative group overflow-hidden">
                     <img src={`/images/${item.image}.webp`} alt={item.title} width="588" height="331" class="w-full h-full absolute object-center object-cover inset-0 group-hover:scale-125 transition-transform duration-300">
                     <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
                   </div>
@@ -36,7 +36,7 @@ const { content } = Astro.props as Props;
             {
               content?.items.slice(2).map((item)=>( 
                 <div class="flex flex-col justify-center items-center rounded-3xl overflow-hidden border border-[#263A4B] self-stretch animation-zoom-in-2">
-                  <div class="aspect-343/193 md:aspect-video w-full h-auto relative group">
+                  <div class="aspect-343/193 md:aspect-video w-full h-auto relative group overflow-hidden">
                     <img src={`/images/${item.image}.webp`} alt={item.title} width="384" height="216" class="w-full h-full absolute object-center object-cover inset-0 group-hover:scale-125 transition-transform duration-300 ease-in-out">
                     <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
                   </div>
@@ -54,7 +54,7 @@ const { content } = Astro.props as Props;
           {
             content?.items.map((item)=>( 
               <div class="flex flex-col justify-center items-center rounded-2xl md:rounded-3xl overflow-hidden border border-[#263A4B] self-stretch animation-zoom-in-2">
-                <div class="aspect-343/193 md:aspect-video w-full h-auto relative">
+                <div class="aspect-343/193 md:aspect-video w-full h-auto relative overflow-hidden group">
                   <img src={`/images/${item.image}.webp`} alt={item.title} width="384" height="216" class="w-full h-full absolute object-center object-cover inset-0 group-hover:scale-125 transition-transform duration-300 ease-in-out">
                   <div class="absolute w-full h-full inset-0 z-10 gradient-image"></div>
                 </div>
