@@ -2286,35 +2286,37 @@ export default {
       ],
     },
     transformation: {
-      title: "The <span class='text-secondary'>Transformation.</span>",
-      description:
-        "After implementing the TreeHubly Growth System, H&A Brother Tree Services shifted from reactive <br class='hidden md:block'/> marketing to a structured system that supports consistent growth and improved operational organization.",
-      lists: [
-        {
-          border: "border-[#263A4B]",
-          icon: "counter",
-          title: "Before TreeHubly",
-          items: [
-            "Lead generation relied mostly on referrals",
-            "Inconsistent marketing efforts",
-            "Follow-up processes were manual",
-            "Limited visibility into marketing performance",
-          ],
-          icon2: "equis-2",
-        },
-        {
-          border: "border-secondary",
-          icon: "plant",
-          title: "After TreeHubly",
-          items: [
-            "Structured lead generation strategyd",
-            "Automated inquiry response and follow-up",
-            "Organized CRM pipeline for lead management",
-            "Improved visibility into marketing performance",
-          ],
-          icon2: "check-2",
-        },
-      ],
+      info: {
+        title: "The <span class='text-secondary'>Transformation.</span>",
+        description:
+          "After implementing the TreeHubly Growth System, H&A Brother Tree Services shifted from reactive <br class='hidden md:block'/> marketing to a structured system that supports consistent growth and improved operational organization.",
+        lists: [
+          {
+            border: "border-[#263A4B]",
+            icon: "counter",
+            title: "Before TreeHubly",
+            items: [
+              "Lead generation relied mostly on referrals",
+              "Inconsistent marketing efforts",
+              "Follow-up processes were manual",
+              "Limited visibility into marketing performance",
+            ],
+            icon2: "equis-2",
+          },
+          {
+            border: "border-secondary",
+            icon: "plant",
+            title: "After TreeHubly",
+            items: [
+              "Structured lead generation strategyd",
+              "Automated inquiry response and follow-up",
+              "Organized CRM pipeline for lead management",
+              "Improved visibility into marketing performance",
+            ],
+            icon2: "check-2",
+          },
+        ],
+      },
       business: {
         title: "Business <span class='text-secondary'>Impact.</span>",
         description:

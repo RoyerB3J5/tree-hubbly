@@ -9,6 +9,7 @@ import CallAction from '../../../sections/main/CallAction.astro';
 import Hero from '../../../sections/main/Hero.astro';
 import System from '../../../sections/System.astro';
 import Transformation from '../../../sections/Transformation.astro';
+import Transformation2 from '../../../sections/Transformation2';
 import type { Language } from '../../../types/language.type';
 export function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
@@ -24,6 +25,7 @@ const t = translations[lang];
   <Hero content={t.caseStudies.hero} />
   <Business content={t.caseStudies.business} />
   <System content={t.caseStudies.system} />
+  <Transformation2 content={t.caseStudies.transformation.info} client:load/>
   <Transformation content={t.caseStudies.transformation} />
   <BannerImages content={t.caseStudies.bannerImage} />
   <Advantage content={t.caseStudies.advantage} />

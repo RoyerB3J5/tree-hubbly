@@ -1,0 +1,125 @@
+---
+type Translations = typeof import("../../i18n/en").default;
+type BannersContent = Translations["main"]["banners"];
+interface Props {
+  content: BannersContent;
+}
+const { content } = Astro.props as Props;
+---
+
+<section class="w-full relative h-auto flex flex-col justify-center items-center">
+  {content.map((slide, index) => (
+    <div
+      class="carousel-slide-1 sticky top-0 origin-top h-screen w-full shrink-0 flex flex-col self-stretch md:self-auto"
+      data-index={index}
+    >
+      <div class="relative md:absolute w-full h-auto md:h-full z-auto md:-z-10 aspect-375/284 md:aspect-auto inset-0 md:inset-0">
+        <img 
+          src={`/images/${content[index].image}.webp`} 
+          alt={content[index].title} 
+          width="1440" 
+          height="684" 
+          class="w-full h-full object-right lg:object-center object-cover -z-20 inset-0"
+        >
+        <div class="absolute w-full h-full inset-0 md:inset-0 z-0 md:z-10 back-banner hidden md:block"></div>
+        <div class="absolute w-full h-full inset-0 md:inset-0 z-0 md:z-10 back-image-banner md:hidden block"></div>
+      </div>
+      
+      <div class="relative w-full max-w-screen xl:max-w-7xl px-5 xl:px-0 flex flex-col justify-start md:justify-center items-start py-10 md:pt-30 md:pb-19 gap-8 mx-auto bg-primary md:bg-transparent grow md:grow-0 self-stretch md:self-auto h-full">
+        <div class="flex flex-col justify-center items-start gap-4">
+          <p class="text-secondary text-[14px] font-bold leading-[150%]">{content[index].description}</p>
+          <h2 class="text-paragraph text-[32px] md:text-[48px] font-semibold leading-[120%]" set:html={content[index].title}></h2>
+        </div>
+        <div class="flex flex-col justify-center items-start gap-4">
+          <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph" set:html={content[index].content}></p>
+          <div class="flex flex-col justify-center items-start gap-4">
+            {content[index].items.map((item) => (
+              <div class="flex justify-start items-center gap-4">
+                <img src="/images/check.svg" alt="Check" width="24" height="24" class="w-6 h-6">
+                <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="md:flex flex-col justify-center items-start gap-4 hidden">
+          <p class="text-[14px] font-medium leading-[150%] text-paragraph">{content[index].tags.title}</p>
+          <div class="flex justify-start items-center gap-4">
+            {content[index].tags.items.map((tag) => (
+              <div class="flex justify-center items-center gap-1.25 border-l border-paragraph/15 pl-4 first:border-l-0 first:pl-0">
+                <img src={`/images/${tag.icon}.svg`} alt={tag.label} width="24" height="24" class="w-6 h-6">
+                <p class="text-[14px] font-medium leading-[150%] text-paragraph">{tag.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+</section>
+
+<style>
+  .carousel-slide-1 {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+</style>
+
+<script>
+  function setupScrollAnimation() {
+    const slides = Array.from(
+      document.querySelectorAll<HTMLElement>('.carousel-slide-1')
+    );
+
+    if (!slides.length) return;
+
+    slides.forEach((slide, i) => {
+      slide.style.zIndex = String(i + 1);
+    });
+
+    let rafId: number | null = null;
+
+    const handleScroll = () => {
+      if (rafId !== null) return;
+
+      rafId = requestAnimationFrame(() => {
+        const windowHeight = window.innerHeight;
+
+        slides.forEach((slide, index) => {
+          const nextSlide = slides[index + 1];
+
+          if (!nextSlide) {
+            // Último slide: nunca se mueve
+            slide.style.transform = 'translate3d(0, 0, 0)';
+            return;
+          }
+
+          const nextRect = nextSlide.getBoundingClientRect();
+
+          // Cuánto ha entrado el siguiente slide en el viewport
+          // nextRect.top va de windowHeight (no ha entrado) a 0 (llega al top)
+          // progress: 0 = siguiente slide fuera de vista, 1 = siguiente slide en el top
+          let progress = 1 - (nextRect.top / windowHeight);
+          progress = Math.max(0, Math.min(1, progress));
+
+          // El slide actual se hunde hacia abajo en proporción al avance del siguiente
+          const translateY = progress * windowHeight;
+          slide.style.transform = `translate3d(0, ${translateY}px, 0)`;
+        });
+
+        rafId = null;
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    document.addEventListener('astro:before-swap', () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    }, { once: true });
+  }
+
+  setupScrollAnimation();
+  document.addEventListener('astro:page-load', setupScrollAnimation);
+</script>

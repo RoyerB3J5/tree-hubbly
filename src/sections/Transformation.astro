@@ -7,33 +7,7 @@ interface Props {
 const { content } = Astro.props;
 ---
 <section class="w-full flex justify-center items-center  bg-primary">
-  <div class="container-full flex flex-col justify-center items-center gap-8 md:gap-11 lg:gap-14 py-10 md:py-20 lg:py-30">
-    <div class="flex flex-col justify-center items-start md:items-center gap-8">
-      <h2 set:html={content.title} class="text-[32px] md:text-[48px] text-paragraph font-bold leading-[120%] animation-zoom-in"></h2>
-      <p set:html={content.description} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal text-start md:text-center animation-zoom-in"></p>
-    </div>
-    <div class="w-full flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6">
-      {
-        content.lists.map((list)=>( 
-          <div class={`${list.border} w-full md:w-1/2 flex flex-col justify-start lg:justify-center items-start gap-8 py-8 md:py-14 px-4 md:px-12 rounded-2xl md:rounded-3xl border box-border back-content self-stretch animation-zoom-in`}>
-            <div class="flex justify-start items-center gap-6 md:gap-4">
-              <img src={`/images/${list.icon}.svg`} alt="Icono negativo" width="24" height="24" class="w-12 h-12">
-              <h3 class="text-[14px] md:text-[16px] text-paragraph font-bold leading-[150%]">{list.title}</h3>
-            </div>
-            <div class="flex flex-col justify-center items-start gap-4 md:gap-6">
-              {
-                list.items.map((item)=>( 
-                  <div class="flex justify-start items-center gap-2">
-                    <img src={`/images/${list.icon2}.svg`} alt={`Icono ${list.icon2}`} width="16" height="16" class="w-6 h-6">
-                    <p set:html={item} class="text-paragraph text-[12px] md:text-[14px] font-normal leading-[150%]"></p>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-        ))
-      }
-    </div>
+  <div class="container-full flex flex-col justify-center items-center gap-8 md:gap-11 lg:gap-14 pb-10 md:pb-20 lg:pb-30 pt-8 md:py-11 lg:pt-14">
     <div class="container-image-fade overflow-hidden rounded-2xl md:rounded-3xl aspect-1200/475 w-full">
       <img src="/images/transformation.webp" alt="Transformation Image" class="w-full h-auto  image-fade hover:scale-125 transition-transform duration-300 ease-in-out" style="animation-delay: 0.2s;" width="1200" height="475" decoding="async" loading="lazy"/>
     </div>

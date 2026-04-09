@@ -2295,35 +2295,38 @@ export default {
       ],
     },
     transformation: {
-      title: "La <span class='text-secondary'>Transformación.</span>",
-      description:
-        "Tras implementar el TreeHubly Growth System, H&A Brother Tree Services pasó del marketing reactivo <br class='hidden md:block'/> a un sistema estructurado que apoya el crecimiento constante y una organización operativa mejorada.",
-      lists: [
-        {
-          border: "border-[#263A4B]",
-          icon: "counter",
-          title: "Antes de TreeHubly",
-          items: [
-            "La generación de prospectos dependía principalmente de referencias",
-            "Esfuerzos de marketing inconsistentes",
-            "Los procesos de seguimiento eran manuales",
-            "Visibilidad limitada del rendimiento de marketing",
-          ],
-          icon2: "equis-2",
-        },
-        {
-          border: "border-secondary",
-          icon: "plant",
-          title: "Después de TreeHubly",
-          items: [
-            "Estrategia estructurada de generación de prospectos",
-            "Respuesta automática y seguimiento de consultas",
-            "Pipeline CRM organizado para gestión de prospectos",
-            "Mayor visibilidad del rendimiento de marketing",
-          ],
-          icon2: "check-2",
-        },
-      ],
+      info: {
+        title: "La <span class='text-secondary'>Transformación.</span>",
+        description:
+          "Tras implementar el TreeHubly Growth System, H&A Brother Tree Services pasó del marketing reactivo <br class='hidden md:block'/> a un sistema estructurado que apoya el crecimiento constante y una organización operativa mejorada.",
+        lists: [
+          {
+            border: "border-[#263A4B]",
+            icon: "counter",
+            title: "Antes de TreeHubly",
+            items: [
+              "La generación de prospectos dependía principalmente de referencias",
+              "Esfuerzos de marketing inconsistentes",
+              "Los procesos de seguimiento eran manuales",
+              "Visibilidad limitada del rendimiento de marketing",
+            ],
+            icon2: "equis-2",
+          },
+          {
+            border: "border-secondary",
+            icon: "plant",
+            title: "Después de TreeHubly",
+            items: [
+              "Estrategia estructurada de generación de prospectos",
+              "Respuesta automática y seguimiento de consultas",
+              "Pipeline CRM organizado para gestión de prospectos",
+              "Mayor visibilidad del rendimiento de marketing",
+            ],
+            icon2: "check-2",
+          },
+        ],
+      },
+
       business: {
         title: "Impacto en el <span class='text-secondary'>Negocio.</span>",
         description:
