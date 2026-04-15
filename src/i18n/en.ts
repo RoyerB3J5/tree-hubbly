@@ -159,14 +159,14 @@ export default {
       ],
       buttons: [
         {
-          label: "Let's talk",
+          label: "Book a call",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Let's talk",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -348,14 +348,14 @@ export default {
         "<span class='animation-fade-down inline-block'>Structured</span> <span class='animation-fade-down inline-block'>growth</span> <span class='animation-fade-down inline-block'>replaced</span> <span class='animation-fade-down inline-block'>inconsistent</span> <span class='animation-fade-down inline-block'>marketing</span> <span class='animation-fade-down inline-block'>efforts.</span> <span class='animation-fade-down inline-block'>Now</span> <span class='animation-fade-down inline-block'>every</span> <span class='animation-fade-down inline-block'>lead</span> <br class='hidden lg:block'/> <span class='animation-fade-down inline-block'>is</span> <span class='animation-fade-down inline-block'>tracked,</span> <span class='animation-fade-down inline-block'>optimized,</span> <span class='animation-fade-down inline-block'>and</span> <span class='animation-fade-down inline-block'>converted</span> <span class='animation-fade-down inline-block'>with</span> <span class='animation-fade-down inline-block'>precision.</span>",
       buttons: [
         {
-          label: "Let's talk",
+          label: "Book a call",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg border-2 border-secondary w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Let's talk",
           href: "#",
           styleButton:
             "border-2 border-primary hover:scale-105 transition-transform duration-300 box-container rounded-lg w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
@@ -547,7 +547,7 @@ export default {
           styleLabel: "text-paragraph",
         },
         {
-          label: "Call us",
+          label: "Let's talk",
           href: "#",
           styleButton:
             "border-2 border-primary hover:scale-105 transition-transform duration-300  rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -607,14 +607,14 @@ export default {
       ],
       buttons: [
         {
-          label: "Let's talk",
+          label: "Book a call",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Let's talk",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -781,14 +781,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Book a call",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Let's talk",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -908,14 +908,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Book a call",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Let's talk",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1031,14 +1031,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Book a call",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Let's talk",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1164,14 +1164,14 @@ export default {
       ],
       buttons: [
         {
-          label: "Let's talk",
+          label: "Book a call",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Let's talk",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1272,14 +1272,14 @@ export default {
         "<span class='animation-fade-down inline-block'>Structured</span> <span class='animation-fade-down inline-block'>growth</span> <span class='animation-fade-down inline-block'>replaced</span> <span class='animation-fade-down inline-block'>inconsistent</span> <span class='animation-fade-down inline-block'>marketing</span> <span class='animation-fade-down inline-block'>efforts.</span> <span class='animation-fade-down inline-block'>Now</span> <span class='animation-fade-down inline-block'>every</span> <span class='animation-fade-down inline-block'>lead</span> <br class='hidden lg:block'/> <span class='animation-fade-down inline-block'>is</span> <span class='animation-fade-down inline-block'>tracked,</span> <span class='animation-fade-down inline-block'>optimized,</span> <span class='animation-fade-down inline-block'>and</span> <span class='animation-fade-down inline-block'>converted</span> <span class='animation-fade-down inline-block'>with</span> <span class='animation-fade-down inline-block'>precision.</span>",
       buttons: [
         {
-          label: "Let's talk",
+          label: "Book a call",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg border-2 border-secondary w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Let's talk",
           href: "#",
           styleButton:
             "border-2 border-primary hover:scale-105 transition-transform duration-300 box-container rounded-lg w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
@@ -1430,14 +1430,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Book a call",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Let's talk",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1623,14 +1623,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Book a call",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Let's talk",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1763,14 +1763,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Book a call",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Let's talk",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1897,14 +1897,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Book a call",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Let's talk",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -2038,14 +2038,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Let's talk",
+            label: "Book a call",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Call us",
+            label: "Let's talk",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -2155,14 +2155,14 @@ export default {
       ],
       buttons: [
         {
-          label: "Let's talk",
+          label: "Book a call",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Let's talk",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -2392,14 +2392,14 @@ export default {
       ],
       buttons: [
         {
-          label: "Let's talk",
+          label: "Book a call",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Let's talk",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -2459,7 +2459,7 @@ export default {
           styleLabel: "text-paragraph",
         },
         {
-          label: "Call us",
+          label: "Let's talk",
           href: "#",
           styleButton:
             "border-2 border-primary hover:scale-105 transition-transform duration-300  rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -2491,14 +2491,14 @@ export default {
       ],
       buttons: [
         {
-          label: "Let's talk",
+          label: "Book a call",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Call us",
+          label: "Let's talk",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",

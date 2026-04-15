@@ -160,14 +160,14 @@ export default {
       ],
       buttons: [
         {
-          label: "Hablemos",
+          label: "Agendar",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Llámanos",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -177,7 +177,7 @@ export default {
     },
     companies: {
       title:
-        'La Mayoría de Empresas de Árboles <span class="text-secondary">No Tienen <br class="hidden md:block"/> un Sistema de Crecimiento.</span>',
+        'La Mayoría de Empresas de Árboles <br class="hidden md:block"/> <span class="text-secondary">No Tienen  un Sistema de Crecimiento.</span>',
       tags: [
         {
           image: "tree",
@@ -202,7 +202,7 @@ export default {
         "Sin infraestructura escalable.",
       ],
       review:
-        '"Las tácticas de marketing sin un sistema <br class="md:hidden block"/> generan picos temporales, <span class="text-secondary">no <br class="md:hidden block"/> crecimiento sostenible."</span>',
+        '"Las tácticas de marketing sin un sistema  generan picos temporales, <br class="hidden md:block"/> <span class="text-secondary">no <br class="md:hidden block"/> crecimiento sostenible."</span>',
     },
     scale: {
       label: "Donde las Empresas <br/> de Árboles Escalan.",
@@ -350,14 +350,14 @@ export default {
         "<span class='animation-fade-down inline-block'>El</span> <span class='animation-fade-down inline-block'>crecimiento</span> <span class='animation-fade-down inline-block'>estructurado</span> <span class='animation-fade-down inline-block'>reemplazó</span> <span class='animation-fade-down inline-block'>el</span> <span class='animation-fade-down inline-block'>marketing</span> <span class='animation-fade-down inline-block'>irregular.</span> <span class='animation-fade-down inline-block'>Ahora</span> <span class='animation-fade-down inline-block'>cada</span> <span class='animation-fade-down inline-block'>prospecto</span> <br class='hidden lg:block'/> <span class='animation-fade-down inline-block'>se</span> <span class='animation-fade-down inline-block'>rastrea,</span> <span class='animation-fade-down inline-block'>optimiza</span> <span class='animation-fade-down inline-block'>y</span> <span class='animation-fade-down inline-block'>convierte</span> <span class='animation-fade-down inline-block'>con</span> <span class='animation-fade-down inline-block'>precisión.</span>",
       buttons: [
         {
-          label: "Hablemos",
+          label: "Agendar",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg border-2 border-secondary w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
           styleLabel: "text-primary",
         },
         {
-          label: "Llámanos",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "border-2 border-primary hover:scale-105 transition-transform duration-300 box-container rounded-lg w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
@@ -542,14 +542,14 @@ export default {
       items: [],
       buttons: [
         {
-          label: "Hablemos",
+          label: "Agendar",
           href: "#",
           styleButton:
             "border-2 border-primary bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-paragraph",
         },
         {
-          label: "Llámanos",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "border-2 border-primary hover:scale-105 transition-transform duration-300  rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -611,14 +611,14 @@ export default {
       ],
       buttons: [
         {
-          label: "Hablemos",
+          label: "Agendar",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Llámanos",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -786,14 +786,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Hablemos",
+            label: "Agendar",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Llámanos",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -914,14 +914,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Hablemos",
+            label: "Agendar",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Llámanos",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1038,14 +1038,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Hablemos",
+            label: "Agendar",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Llámanos",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1171,14 +1171,14 @@ export default {
       ],
       buttons: [
         {
-          label: "Hablemos",
+          label: "Agendar",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Llámanos",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1260,7 +1260,7 @@ export default {
           list: null,
           link: null,
           button: {
-            label: "Hablemos",
+            label: "Agendar",
             href: "#",
             styleButton:
               "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1279,14 +1279,14 @@ export default {
         "<span class='animation-fade-down inline-block'>El</span> <span class='animation-fade-down inline-block'>crecimiento</span> <span class='animation-fade-down inline-block'>estructurado</span> <span class='animation-fade-down inline-block'>reemplazó</span> <span class='animation-fade-down inline-block'>el</span> <span class='animation-fade-down inline-block'>marketing</span> <span class='animation-fade-down inline-block'>irregular.</span> <span class='animation-fade-down inline-block'>Ahora</span> <span class='animation-fade-down inline-block'>cada</span> <span class='animation-fade-down inline-block'>prospecto</span> <br class='hidden lg:block'/> <span class='animation-fade-down inline-block'>se</span> <span class='animation-fade-down inline-block'>rastrea,</span> <span class='animation-fade-down inline-block'>optimiza</span> <span class='animation-fade-down inline-block'>y</span> <span class='animation-fade-down inline-block'>convierte</span> <span class='animation-fade-down inline-block'>con</span> <span class='animation-fade-down inline-block'>precisión.</span>",
       buttons: [
         {
-          label: "Hablemos",
+          label: "Agendar",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg border-2 border-secondary w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
           styleLabel: "text-primary",
         },
         {
-          label: "Llámanos",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "border-2 border-primary hover:scale-105 transition-transform duration-300 box-container rounded-lg w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
@@ -1437,14 +1437,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Hablemos",
+            label: "Agendar",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Llámanos",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1629,14 +1629,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Hablemos",
+            label: "Agendar",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Llámanos",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1769,14 +1769,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Hablemos",
+            label: "Agendar",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Llámanos",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -1903,14 +1903,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Hablemos",
+            label: "Agendar",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Llámanos",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -2046,14 +2046,14 @@ export default {
         ],
         buttons: [
           {
-            label: "Hablemos",
+            label: "Agendar",
             href: "#",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
           },
           {
-            label: "Llámanos",
+            label: "Hablemos",
             href: "#",
             styleButton:
               "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -2102,7 +2102,7 @@ export default {
             description:
               "Nuestro equipo puede personalizar <br class='hidden md:block'/> flujos de trabajo para adaptarse <br class='hidden md:block'/> exactamente a tu operación.",
             button: {
-              label: "Hablemos",
+              label: "Agendar",
               href: "#",
               styleButton:
                 "bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-40 md:w-30 h-11.25 md:h-10",
@@ -2164,14 +2164,14 @@ export default {
       ],
       buttons: [
         {
-          label: "Hablemos",
+          label: "Agendar",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Llámanos",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -2402,14 +2402,14 @@ export default {
       ],
       buttons: [
         {
-          label: "Hablemos",
+          label: "Agendar",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Llámanos",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -2463,14 +2463,14 @@ export default {
       items: [],
       buttons: [
         {
-          label: "Hablemos",
+          label: "Agendar",
           href: "#",
           styleButton:
             "border-2 border-primary bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-paragraph",
         },
         {
-          label: "Llámanos",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "border-2 border-primary hover:scale-105 transition-transform duration-300  rounded-lg w-full md:w-30 h-11.25 md:h-10",
@@ -2502,14 +2502,14 @@ export default {
       ],
       buttons: [
         {
-          label: "Hablemos",
+          label: "Agendar",
           href: "#",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
         },
         {
-          label: "Llámanos",
+          label: "Hablemos",
           href: "#",
           styleButton:
             "border-2 border-white hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
