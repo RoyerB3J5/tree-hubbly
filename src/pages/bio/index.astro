@@ -7,7 +7,7 @@ import SaveContact from "../../components/SaveContact.astro";
 const content = [
   {
     title: "Instagram",
-    link: "#",
+    link: "https://www.instagram.com/treehubly?igsh=dHFsbzB0NjdmdXpp&utm_source=qr",
   },
   {
     title: "Facebook",
@@ -62,7 +62,7 @@ const content = [
         content.map((item) => (
           <a class="w-full" href={item.link}>
             <div
-              class={`w-full  py-2.5 h-11.75 rounded-xl text-primary flex justify-center items-center transition-all duration-300 ease-in-out  bg-primary hover:bg-secondary/90 cursor-pointer`}
+              class={`w-full  py-2.5 h-11.75 rounded-xl text-white flex justify-center items-center transition-all duration-300 ease-in-out  bg-primary hover:bg-secondary/90 cursor-pointer`}
             >
               <p class="text-[14px] font-bold leading-[140%]">{item.title}</p>
             </div>
@@ -70,7 +70,7 @@ const content = [
         ))
       }
       <button
-        class="w-full bg-primary hover:bg-secondary transition-all duration-300 ease-in-out py-2.5 h-11.75 rounded-lg text-primary flex justify-center items-center text-[14px] font-bold leading-[140%] cursor-pointer animate-shake"
+        class="w-full bg-primary hover:bg-secondary transition-all duration-300 ease-in-out py-2.5 h-11.75 rounded-xl text-white flex justify-center items-center text-[14px] font-bold leading-[140%] cursor-pointer animate-shake"
         id="open-contact-panel"
       >
         Save Contact

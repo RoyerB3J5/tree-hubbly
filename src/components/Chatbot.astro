@@ -1,0 +1,173 @@
+<!-- Chatbot lazy-load widget: carga bajo demanda para mejorar UX -->
+<div class="chatbot-wrapper" aria-hidden="false">
+  <button id="chatbot-toggle" aria-label="Abrir chat" class="chatbot-button">💬</button>
+  <div id="chatbot-loading" class="chatbot-loading" aria-hidden="true" hidden>...</div>
+</div>
+
+<noscript>
+  <a href="/connect/" class="chatbot-noscript">Contacta con nosotros</a>
+</noscript>
+
+<style>
+  .chatbot-wrapper {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9999;
+  }
+
+  .chatbot-wrapper.hidden-mobile {
+    display: none;
+  }
+
+  .chatbot-wrapper.visible-mobile {
+    display: block;
+  }
+
+  .chatbot-button {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #1B8911FF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 640px) {
+    .chatbot-wrapper {
+      display: none;
+    }
+
+    .chatbot-wrapper.visible-mobile {
+      display: block;
+    }
+  }
+
+  .chatbot-loading {
+    position: fixed;
+    right: 86px;
+    bottom: 28px;
+    background: #fff;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .chatbot-noscript {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: #1B8911FF;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+</style>
+
+<script>
+  (() => {
+    const WIDGET_ID = "69e93b6939177153a74f091e";
+    const RES_URL = "https://widgets.leadconnectorhq.com/chat-widget/loader.js";
+    const SRC = "https://widgets.leadconnectorhq.com/loader.js";
+    let loaded = false;
+    const btn = document.getElementById("chatbot-toggle");
+    const spinner = document.getElementById("chatbot-loading");
+    const wrapper = document.querySelector(".chatbot-wrapper");
+    let idleTimer: any;
+    let scrollDetected = false;
+    let lastScrollPosition = 0;
+    const isMobile = window.innerWidth <= 640;
+
+    function insertScript() {
+      if (loaded) return;
+      loaded = true;
+      if (spinner) spinner.hidden = false;
+      const s = document.createElement("script");
+      s.src = SRC;
+      s.setAttribute("data-resources-url", RES_URL);
+      s.setAttribute("data-widget-id", WIDGET_ID);
+      s.async = true;
+      s.onload = () => {
+        if (spinner) spinner.hidden = true;
+      };
+      s.onerror = () => {
+        if (spinner) spinner.hidden = true;
+        console.error("Chat widget failed to load");
+      };
+      document.body.appendChild(s);
+    }
+
+    function onFirstInteraction() {
+      clearTimeout(idleTimer);
+      insertScript();
+      removeInteractionListeners();
+    }
+
+    function removeInteractionListeners() {
+      window.removeEventListener("pointerdown", onFirstInteraction);
+      window.removeEventListener("keydown", onFirstInteraction);
+    }
+
+    function onScroll() {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+      // Solo mostrar si se hizo scroll hacia ABAJO (scrollPosition > 0)
+      if (isMobile && !scrollDetected && currentScroll > 200) {
+        scrollDetected = true;
+        if (wrapper) {
+          wrapper.classList.remove("hidden-mobile");
+          wrapper.classList.add("visible-mobile");
+        }
+        // Comienza a cargar el widget cuando aparece en móvil
+        insertScript();
+        window.removeEventListener("scroll", onScroll);
+      }
+      lastScrollPosition = currentScroll;
+    }
+
+    // Si es móvil, ocultar chatbot hasta que haga scroll
+    if (isMobile && wrapper) {
+      wrapper.classList.add("hidden-mobile");
+      window.addEventListener("scroll", onScroll, { passive: true });
+    } else {
+      // En desktop, mantener comportamiento original
+      // Load after a short idle as fallback (adjust ms as desired)
+      idleTimer = setTimeout(() => insertScript(), 3000);
+
+      // Load on first user interaction (tap/scroll/keyboard)
+      window.addEventListener("pointerdown", onFirstInteraction, {
+        once: true,
+      });
+      window.addEventListener("keydown", onFirstInteraction, { once: true });
+    }
+
+    if (btn) {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (!loaded) {
+          clearTimeout(idleTimer);
+          insertScript();
+          return;
+        }
+        // Si el widget ya está cargado, intentamos abrirlo si expone API común
+        try {
+          if (window.LC_API && typeof window.LC_API.open_chat === "function") {
+            window.LC_API.open_chat();
+          } else if (window.LC_API && typeof window.LC_API.toggle === "function") {
+            window.LC_API.toggle();
+          } else if (window.leadconnector && typeof window.leadconnector.open === "function") {
+            window.leadconnector.open();
+          }
+        } catch (err) {
+          /* no-op */
+        }
+      });
+    }
+  })();
+</script>

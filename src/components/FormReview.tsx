@@ -6,17 +6,20 @@ export default function NuvisionForm() {
 
   useEffect(() => {
     // Only run in the browser
-    if (typeof window === "undefined" || typeof document === "undefined") return;
+    if (typeof window === "undefined" || typeof document === "undefined")
+      return;
 
-    const SRC = "https://link.stevespremiumpressurewashing.com/js/form_embed.js";
+    const SRC = "https://link.inkshapecrm.com/widget/form/h0LXh1XRyh7PuCTPHlfz";
     // Avoid injecting the script multiple times
     let addedByUs = false;
-    let script = document.querySelector(`script[src="${SRC}"]`) as HTMLScriptElement | null;
+    let script = document.querySelector(
+      `script[src="${SRC}"]`,
+    ) as HTMLScriptElement | null;
     if (!script) {
       script = document.createElement("script");
       script.src = SRC;
       script.async = true;
-      script.setAttribute("data-qualityport-embed", "1");
+      script.setAttribute("data-treehubly-embed", "1");
       document.body.appendChild(script);
       addedByUs = true;
     }
@@ -32,7 +35,7 @@ export default function NuvisionForm() {
     <div
       style={{
         position: "relative",
-        width: "350px",
+        width: "370px",
         height: "510px", // Altura específica basada en data-height
         padding: 0,
         overflow: "hidden",
@@ -51,21 +54,22 @@ export default function NuvisionForm() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background: "#efaf20",
+            background: "#91d200",
+            overflow: "hidden",
           }}
         >
           Cargando…
         </div>
       )}
       <iframe
-        id="inline-aoLmYgxX8cSAq5ftGdfz"
-        src="https://link.stevespremiumpressurewashing.com/widget/form/aoLmYgxX8cSAq5ftGdfz"
+        id="inline-h0LXh1XRyh7PuCTPHlfz"
+        src="https://link.inkshapecrm.com/widget/form/h0LXh1XRyh7PuCTPHlfz"
         title="Form Reviews"
         loading="lazy"
         onLoad={() => setLoaded(true)}
         style={{
           width: "100%",
-          height: "470px",
+          height: "540px",
           border: "none",
           borderRadius: 3,
           background: "transparent",
@@ -78,9 +82,9 @@ export default function NuvisionForm() {
         data-activation-type="alwaysActivated"
         data-deactivation-type="neverDeactivate"
         data-form-name="Form Reviews"
-        data-height="470"
-        data-layout-iframe-id="inline-aoLmYgxX8cSAq5ftGdfz"
-        data-form-id="aoLmYgxX8cSAq5ftGdfz"
+        data-height="510"
+        data-layout-iframe-id="inline-h0LXh1XRyh7PuCTPHlfz"
+        data-form-id="h0LXh1XRyh7PuCTPHlfz"
       />
     </div>
   );
