@@ -1,0 +1,59 @@
+---
+import Button from "../../components/Button.astro";
+import type { SystemPage } from "../../types/system.type";
+
+type HeroSection = SystemPage["hero"];
+type Translations = typeof import("../../i18n/en").default;
+type HeroContent = Translations["main"]["hero"];
+interface Props {
+  content: HeroContent | HeroSection;
+}
+const { content } = Astro.props as Props;
+---
+
+<section class="w-full flex items-center justify-center relative overflow-hidden">
+  <video
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      class="block absolute inset-0 w-full h-full object-cover object-center -z-20"
+    >
+      <source src="/images/video.mp4" type="video/mp4" />
+    </video>
+  <div class="absolute w-full h-full inset-0 -z-10 back-hero"></div>
+  <div
+    class="w-full max-w-screen md:max-w-7xl flex flex-row justify-center items-end px-5 xl:px-0 h-screen md:h-[90vh] lg:h-screen pb-8 md:pb-10 "
+  >
+    <div
+      class="flex flex-col justify-center items-center gap-8 "
+    >
+      <div class="flex flex-col justify-center items-center gap-6">
+        <h1 set:html={content.title} class="text-[32px] md:text-[54px] lg:text-[72px] font-bold leading-[110%] text-paragraph text-center animation-up-fast"></h1>
+        <p set:html={content.description} class="text-[12px] md:text-[14px] font-normal leading-[150%] text-center text-paragraph animation-up-fast"></p>
+        <div class="w-auto flex justify-center items-center gap-4 md:gap-7 lg:gap-10 animation-up-fast">
+          {
+            content.tags.map((tag)=>( 
+              <div class="flex justify-center items-center gap-4 border-l-0 md:border-l border-paragraph/50 pl-0 md:pl-7 lg:pl-10 first:border-l-0 first:pl-0 ">
+                <img src={`/images/${tag.icon}.svg`} alt={tag.title} class="hidden md:block w-8 h-8" width="32" height="32" decoding="async" loading="eager"/>
+                <p class="text-[14px] lg:text-[16px] font-bold text-paragraph ">{tag.title}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="w-full md:w-auto flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6 animation-up-fast">
+        {
+          content.buttons.map((button) => (
+            <Button
+              text={button.label}
+              href={button.href}
+              extraBtnClass={button.styleButton}
+              textClass={button.styleLabel}
+            />))
+        }
+      </div>
+    </div>
+  </div>
+</section>

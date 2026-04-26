@@ -16,6 +16,7 @@ import Traditional from '../../sections/main/Traditional.astro';
 import Vento from '../../sections/main/Vento.astro';
 import type { Language } from '../../types/language.type';
 import Traditional2 from '../../sections/main/Traditional2';
+import HeroMain from '../../sections/main/HeroMain.astro';
 export function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
 }
@@ -27,7 +28,7 @@ const translations = { es, en };
 const t = translations[lang];
 ---
 <Layout lang={lang} t={t}>
-  <Hero content={t.main.hero} />
+  <HeroMain content={t.main.hero} />
   <Companies content={t.main.companies} />
   <Scale content={t.main.scale} />
   <Vento content={t.main.vento} />
