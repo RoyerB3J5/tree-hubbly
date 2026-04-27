@@ -13,15 +13,15 @@ const { content } = Astro.props as Props;
 
 <section class="w-full flex items-center justify-center relative overflow-hidden">
   <video
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="auto"
-      class="block absolute inset-0 w-full h-full object-cover object-center -z-20"
-    >
-      <source src="/images/video.mp4" type="video/mp4" />
-    </video>
+    autoplay={true}
+    muted={true}
+    loop={true}
+    playsinline={true}
+    preload="auto"
+    class="block absolute inset-0 w-full h-full object-cover object-center -z-20"
+  >
+    <source src="/images/video.mp4" type="video/mp4" />
+  </video>
   <div class="absolute w-full h-full inset-0 -z-10 back-hero"></div>
   <div
     class="w-full max-w-screen md:max-w-7xl flex flex-row justify-center items-end px-5 xl:px-0 h-screen md:h-[90vh] lg:h-screen pb-8 md:pb-10 "
@@ -57,3 +57,10 @@ const { content } = Astro.props as Props;
     </div>
   </div>
 </section>
+<script>
+  const video = document.querySelector("video");
+  if (video) {
+    video.muted = true;
+    video.play().catch(() => {});
+  }
+</script>
