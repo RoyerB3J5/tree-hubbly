@@ -420,17 +420,18 @@ const lang = match ? match[1] : "en";
       function updateHeaderBackground() {
         const currentScroll = window.pageYOffset;
 
-        // Calcular la opacidad: 0 al inicio, 1 cuando se alcance 50vh
-        const opacity = Math.min(currentScroll / (viewportHeight * 0.5), 1);
+        // El color de fondo comienza cuando se pasa la sección Hero (primera viewport)
+        // Transición suave desde que pasa el Hero
+        const opacity = Math.min(Math.max(currentScroll - viewportHeight, 0) / (viewportHeight * 0.3), 1);
 
-        // Actualizar el fondo del header con la opacidad calculada
-        header.style.backgroundColor = `rgba(var(--color-primary-rgb), ${opacity})`;
+        // Actualizar el fondo del header con el color #051725 y la opacidad calculada
+        header.style.backgroundColor = `rgba(5, 23, 37, ${opacity})`;
       }
 
       window.addEventListener("scroll", () => {
         const currentScroll = window.pageYOffset;
 
-        //updateHeaderBackground();
+        updateHeaderBackground();
 
         // Mostrar/ocultar header según dirección del scroll, pero SOLO después de los primeros 100vh
         if (currentScroll > viewportHeight) {

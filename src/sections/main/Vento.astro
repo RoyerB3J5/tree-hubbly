@@ -33,7 +33,7 @@ const { content } = Astro.props as Props;
       <p set:html={content.item3.title} class="text-[14px] md:text-[16px] font-bold leading-[150%] text-paragraph z-0"></p>
     </div>
   </div>
-  <div class="col-start-2 md:col-start-4 col-end-3 md:col-end-5 row-start-3 md:row-start-1 row-end-4 md:row-end-2 rounded-2xl md:rounded-3xl bg-secondary h-auto w-full relative  aspect-163/149 md:aspect-square overflow-hidden flex flex-col justify-between md:justify-end items-start p-4 md:p-6 lg:py-10 lg:px-8 gap-10 animation-zoom-in-2">
+  <div class="col-start-2 md:col-start-4 col-end-3 md:col-end-5 row-start-3 md:row-start-1 row-end-4 md:row-end-2 rounded-2xl md:rounded-3xl bg-secondary h-auto w-full relative aspect-163/149 md:aspect-square overflow-hidden flex flex-col justify-between md:justify-end items-start p-4 md:p-6 lg:py-10 lg:px-8 gap-10 animation-zoom-in-2">
     <img src={`/images/${content.item4.icon}.svg`} alt={content.item4.title} class="w-14 md:w-8 h-14 md:h-8" width="8" height="8" decoding="async" loading="lazy"/>
     <p set:html={content.item4.title} class="text-[14px] md:text-[16px] font-bold leading-[150%] text-[#565656] z-0"></p>
   </div>
@@ -45,14 +45,18 @@ const { content } = Astro.props as Props;
       <p set:html={content.item5.title} class="text-[14px] md:text-[16px] font-bold leading-[150%] text-paragraph z-0"></p>
     </div>
   </div>
-  <div class="cols-start-1 md:col-start-4 col-end-2 md:col-end-5 row-start-5 md:row-start-2 row-end-6 md:row-end-3 rounded-2xl md:rounded-3xl bg-[#F3F3F4] h-auto w-full aspect-163/149 md:aspect-square border border-[#D3D3D3] overflow-hidden flex flex-col justify-between md:justify-end items-start p-4 md:p-6 lg:py-10 lg:px-8 gap-6 lg:gap-10 animation-zoom-in-2">
+
+  <!-- FIX 1: "cols-start-1" corregido a "col-start-1" -->
+  <!-- FIX 2: aspect-ratio como style inline para que Safari iOS lo respete -->
+  <div class="col-start-1 md:col-start-4 col-end-2 md:col-end-5 row-start-5 md:row-start-2 row-end-6 md:row-end-3 rounded-2xl md:rounded-3xl bg-[#F3F3F4] h-auto w-full border border-[#D3D3D3] overflow-hidden flex flex-col justify-between md:justify-end items-start p-4 md:p-6 lg:py-10 lg:px-8 gap-6 lg:gap-10 animation-zoom-in-2" style="aspect-ratio: 163 / 149;">
     <img src={`/images/${content.item6.icon}.svg`} alt={content.item6.title} class="w-14 md:w-8 h-14 md:h-8" width="8" height="8" decoding="async" loading="lazy"/>
     <p set:html={content.item6.title} class="text-[14px] md:text-[16px] font-bold leading-[150%] text-[#565656] z-0"></p>
   </div>
-  <div class="col-start-2 md:col-start-4 col-end-3 md:col-end-5 row-start-5 md:row-start-3 row-end-6 md:row-end-4 rounded-2xl md:rounded-3xl bg-[#0798F0] h-auto w-full aspect-163/149 md:aspect-square overflow-hidden flex flex-col justify-between md:justify-end items-start p-4 md:p-6 lg:py-10 lg:px-8 gap-6 lg:gap-10 animation-zoom-in-2">
+  <div class="col-start-2 md:col-start-4 col-end-3 md:col-end-5 row-start-5 md:row-start-3 row-end-6 md:row-end-4 rounded-2xl md:rounded-3xl bg-[#0798F0] h-auto w-full overflow-hidden flex flex-col justify-between md:justify-end items-start p-4 md:p-6 lg:py-10 lg:px-8 gap-6 lg:gap-10 animation-zoom-in-2" >
     <img src={`/images/${content.item7.icon}.svg`} alt={content.item7.title} class="w-14 md:w-8 h-14 md:h-8" width="8" height="8" decoding="async" loading="lazy"/>
     <p set:html={content.item7.title} class="text-[14px] md:text-[16px] font-bold leading-[150%] text-[#023554] z-0"></p>
   </div>
+
   <div class="col-start-1 md:col-start-3 col-end-3 md:col-end-5 row-start-7 md:row-start-4 row-end-8 md:row-end-5 rounded-2xl md:rounded-3xl h-full w-full overflow-hidden aspect-343/149 md:aspect-588/282 relative animation-zoom-in-2" >
     <img src={`/images/vento-9.webp`} alt={content.item9.title} class="w-full h-full object-cover object-center absolute inset-0 -z-20" decoding="async" loading="lazy"/>
     <div class="absolute w-full h-full inset-0 -z-10 back-hero-3"></div>

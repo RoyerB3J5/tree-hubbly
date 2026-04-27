@@ -85,37 +85,40 @@ const { content } = Astro.props as Props;
       rafId = requestAnimationFrame(() => {
         const windowHeight = window.innerHeight;
 
-        slides.forEach((slide, index) => {
-          const nextSlide = slides[index + 1];
+        // Leer todos los rects de una sola vez (una pasada de lectura, una de escritura)
+        const rects = slides.map(slide => slide.getBoundingClientRect());
 
-          if (!nextSlide) {
-            // Último slide: nunca se mueve
+        slides.forEach((slide, i) => {
+          const nextRect = rects[i + 1];
+
+          if (!nextRect) {
             slide.style.transform = 'translate3d(0, 0, 0)';
             return;
           }
 
-          const nextRect = nextSlide.getBoundingClientRect();
+          // nextRect.top: windowHeight = aún no entró, 0 = llegó al top
+          const progress = Math.max(0, Math.min(1,
+            1 - (nextRect.top / windowHeight)
+          ));
 
-          // Cuánto ha entrado el siguiente slide en el viewport
-          // nextRect.top va de windowHeight (no ha entrado) a 0 (llega al top)
-          // progress: 0 = siguiente slide fuera de vista, 1 = siguiente slide en el top
-          let progress = 1 - (nextRect.top / windowHeight);
-          progress = Math.max(0, Math.min(1, progress));
-
-          // El slide actual se hunde hacia abajo en proporción al avance del siguiente
-          const translateY = progress * windowHeight;
-          slide.style.transform = `translate3d(0, ${translateY}px, 0)`;
+          slide.style.transform = `translate3d(0, ${progress * windowHeight}px, 0)`;
         });
 
         rafId = null;
       });
     };
 
+    const recalc = () => {
+      handleScroll();
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', recalc, { passive: true });
     handleScroll();
 
     document.addEventListener('astro:before-swap', () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', recalc);
       if (rafId !== null) cancelAnimationFrame(rafId);
     }, { once: true });
   }
