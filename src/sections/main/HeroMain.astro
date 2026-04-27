@@ -17,6 +17,7 @@ const { content } = Astro.props as Props;
     muted={true}
     loop={true}
     playsinline={true}
+    x-webkit-playsinline={true}
     preload="auto"
     class="block absolute inset-0 w-full h-full object-cover object-center -z-20"
   >
@@ -58,9 +59,11 @@ const { content } = Astro.props as Props;
   </div>
 </section>
 <script>
-  const video = document.querySelector("video");
+  const video = document.querySelector("video") as HTMLVideoElement;
   if (video) {
     video.muted = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
     video.play().catch(() => {});
   }
 </script>
