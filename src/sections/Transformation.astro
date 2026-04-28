@@ -13,10 +13,10 @@ const { content } = Astro.props;
     </div>
     
     <div class="w-full flex flex-col md:flex-row justify-center items-center gap-8 md:gap-6 lg:gap-16">
-      <div class="w-full md:w-[56%] flex flex-col justify-center items-start gap-6 md:gap-8">
-        <h3 set:html={content.business.title} class="text-[32px] md:text-[48px] font-bold leading-[130%] md:leading-[120%] text-paragraph animation-zoom-in-3"></h3>
-        <p set:html={content.business.description} class="text-[12px] md:text-[16px] text-paragraph leading-[150%] font-bold animation-zoom-in-3"></p>
-        <p set:html={content.business.description2} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal animation-zoom-in-3"></p>
+      <div class="w-full md:w-[56%] flex flex-col justify-center items-center md:items-start gap-6 md:gap-8">
+        <h3 set:html={content.business.title} class="text-[32px] md:text-[48px] font-bold leading-[130%] md:leading-[120%] text-paragraph animation-zoom-in-3 "></h3>
+        <p set:html={content.business.description} class="text-[12px] md:text-[16px] text-paragraph leading-[150%] font-bold animation-zoom-in-3 text-center md:text-start"></p>
+        <p set:html={content.business.description2} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal animation-zoom-in-3 text-center md:text-start"></p>
       </div>
       <div class="w-full md:w-[44%] px-4 md:px-12 py-8 md:py-14 flex flex-col justify-center items-start gap-8 md:gap-6 rounded-2xl md:rounded-3xl border border-[#263A4B] bg-primary-2 container-image-fade">
         <h4 set:html={content.business.advantages.title} class="text-[14px] md:text-[16px] font-bold leading-[150%] text-paragraph"></h4>

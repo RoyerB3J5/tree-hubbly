@@ -15,14 +15,14 @@ const { content } = Astro.props as Props;
 >
   <div class="curtain-wrapper bg-secondary w-full h-full flex justify-center items-center relative will-change-transform">
     
-    <div class="w-full max-w-screen xl:max-w-7xl px-5 xl:px-0 flex flex-col justify-start items-start md:items-center gap-8 pt-10 md:pt-20 lg:pt-30 z-20 h-full pb-20 md:pb-40 lg:pb-55.75 3xl:pb-68">
+    <div class="w-full max-w-screen xl:max-w-7xl px-5 xl:px-0 flex flex-col justify-start items-center gap-8 pt-10 md:pt-20 lg:pt-30 z-20 h-full pb-20 md:pb-40 lg:pb-55.75 3xl:pb-68">
       <h2
         set:html={content.title}
-        class="text-[32px] md:text-[48px] font-bold leading-[120%] text-primary text-start md:text-center"
+        class="text-[32px] md:text-[48px] font-bold leading-[120%] text-primary text-center"
       ></h2>
       <p
         set:html={content.description}
-        class="text-[12px] md:text-[14px] leading-[150%] font-normal text-primary text-start md:text-center"
+        class="text-[12px] md:text-[14px] leading-[150%] font-normal text-primary text-center"
       ></p>
       
       {content.items &&

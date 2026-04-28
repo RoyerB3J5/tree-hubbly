@@ -10,9 +10,9 @@ const { content } = Astro.props as Props;
 ---
 <section class="w-full flex justify-center items-center bg-back">
   <div class="container-full flex flex-col justify-center items-center gap-8 md:gap-11 lg:gap-14 py-10 md:py-20 lg:py-30">
-    <div class="flex flex-col justify-center ites-start md:items-center gap-8">
-      <h2 set:html={content.title} class="text-[32px] lg:text-[48px] text-primary font-bold leading-[130%] lg:leading-[120%] text-strat md:text-center animation-up-fast-2"></h2>
-      <p set:html={content.description} class="text-primary text-[12px] lg:text-[14px] leading-[150%] font-normal text-start md:text-center animation-up-fast-2"></p>
+    <div class="flex flex-col justify-center items-center gap-8">
+      <h2 set:html={content.title} class="text-[32px] lg:text-[48px] text-primary font-bold leading-[130%] lg:leading-[120%] text-center animation-up-fast-2"></h2>
+      <p set:html={content.description} class="text-primary text-[12px] lg:text-[14px] leading-[150%] font-normal text-center animation-up-fast-2"></p>
     </div>
     <div class="w-full flex flex-col md:flex-row justify-center md:items-start items-center gap-4 lg:gap-6">
       {

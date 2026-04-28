@@ -8,9 +8,9 @@ const { content } = Astro.props as Props;
 ---
 <section class="w-full flex justify-center items-center bg-primary">
   <div class="container-full flex flex-col md:flex-row justify-center items-center gap-10 md:gap-4 xl:gap-16 py-10 md:py-20 lg:py-30">
-    <div class="w-full md:w-1/2 flex flex-col justify-center items-start gap-8">
-      <h2 set:html={content.title} class="text-[32px] md:text-[48px] text-paragraph font-bold leading-[130%] md:leading-[120%] animation-zoom-in-2"></h2>
-      <p set:html={content.description} class="text-paragraph text-[12px] md:text-[14px] leading-[150%] font-normal w-full md:w-[85%] animation-zoom-in-2"></p>
+    <div class="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start gap-8">
+      <h2 set:html={content.title} class="text-[32px] md:text-[48px] text-paragraph font-bold leading-[130%] md:leading-[120%] animation-zoom-in-2 text-center md:text-start"></h2>
+      <p set:html={content.description} class="text-paragraph text-[12px] md:text-[14px] leading-[150%] font-normal w-full md:w-[85%] animation-zoom-in-2 text-center md:text-start"></p>
       <ul class="flex flex-col justify-center items-start gap-4 md:gap-6 w-full">
         {
           content.items.map((item) => ( 

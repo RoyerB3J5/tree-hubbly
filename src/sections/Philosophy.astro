@@ -9,7 +9,7 @@ const { content } = Astro.props as Props;
 <section class="w-full flex justify-center items-center bg-primary back-content">
   <div class="container-full flex flex-col md:flex-row justify-between items-center py-10 md:py-28.5 lg:py-38.5 gap-8 md:gap-10 xl:gap-23">
     <div class="w-full md:w-[45%] flex flex-col justify-center items-start gap-8 order-2 md:order-1">
-      <h2 set:html={content.title} class="text-[32px] md:text-[48px] font-bold text-paragraph leading-[130%] md:leading-[120%] animation-zoom-in-3"></h2>
+      <h2 set:html={content.title} class="text-[32px] md:text-[48px] font-bold text-paragraph leading-[130%] md:leading-[120%] animation-zoom-in-3 text-center md:text-start"></h2>
       <div class="flex flex-col justfiy-center items-start gap-8">
         {
           content.items.map((item)=>( 

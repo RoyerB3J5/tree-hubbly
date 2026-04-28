@@ -43,16 +43,16 @@ export default function QuestionsAccordion({ content }: Props) {
 
   return (
     <section className="container-full flex flex-col justify-center items-center gap-8 md:gap-16 py-10 md:py-20 lg:py-30">
-      <div className="flex flex-col justify-center items-start md:items-center gap-8">
+      <div className="flex flex-col justify-center items-center md:items-center gap-8">
         <h2
           ref={titleRef}
           dangerouslySetInnerHTML={{ __html: content.title }}
-          className="text-[32px] md:text-[48px] font-bold leading-[130%] md:leading-[120%] text-primary text-start md:text-center animation-zoom-in-3"
+          className="text-[32px] md:text-[48px] font-bold leading-[130%] md:leading-[120%] text-primary text-center animation-zoom-in-3"
         ></h2>
         <p
           ref={descRef}
           dangerouslySetInnerHTML={{ __html: content.description }}
-          className="text-[12px] md:text-[14px] font-normal leading-[150%] text-[#2C2C2C] text-start md:text-center animation-zoom-in-3"
+          className="text-[12px] md:text-[14px] font-normal leading-[150%] text-[#2C2C2C] text-center md:text-center animation-zoom-in-3"
         ></p>
       </div>
       <div className="w-full flex flex-col justify-center items-center gap-4 md:gap-8">

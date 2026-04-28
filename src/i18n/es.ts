@@ -658,7 +658,7 @@ export default {
     },
     pilars: {
       title:
-        "<span class='text-secondary'>Los Tres Pilares</span> del <br/> Rendimiento.",
+        "<span class='text-secondary'>Los Tres Pilares <br class='md:hidden block'/> </span> del <br class='hidden md:block'/> Rendimiento.",
       description:
         "El motor de prospectos de TreeHubly se apoya en tres componentes que trabajan juntos para <br class='hidden md:block'/> generar consultas consistentes.",
       items: [
@@ -2065,7 +2065,7 @@ export default {
         title:
           "Diseñado para <span class='text-secondary'>Flujos de Servicios de Árboles.</span>",
         description:
-          "Deja de malabarear notas adhesivas y hojas de cálculo. Herramientas especializadas <br/> para las demandas únicas de los profesionales de árboles.",
+          "Deja de malabarear notas adhesivas y hojas de cálculo. Herramientas especializadas <br class='hidden md:block'/> para las demandas únicas de los profesionales de árboles.",
         items: [
           {
             icon: "message",
@@ -2582,7 +2582,7 @@ export default {
     },
     call: {
       title:
-        "Construyamos tu  <span class='text-paragraph'> <br class='block md:hidden'/>infraestructura <br /> de crecimiento.</span>",
+        "Construyamos tu  <span class='text-paragraph'> <br class='block md:hidden'/>infraestructura <br class='hidden md:block'/> de crecimiento.</span>",
       description:
         "Deja de adivinar y empieza a crecer. Únete a los líderes de la industria que usan TreeHubly.",
       items: [],

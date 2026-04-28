@@ -15,8 +15,8 @@ const cols = colsMap[content.items.length] || "md:grid-cols-1";
 <section  class="w-full flex justify-center items-center bg-primary">
   <div class="container-full flex flex-col justify-center items-center gap-8 md:gap-14 py-10 md:py-20 lg:py-30">
     <div class="flex flex-col justify-center items-center gap-8">
-      <h2 set:html={content.title} class="text-[32px] md:text-[48px] text-paragraph font-bold leading-[120%] text-start md:text-center animation-up-fast-2"></h2>
-      <p set:html={content.description} class="text-paragraph text-[12px] md:text-[14px] leading-[150%] font-normal text-start md:text-center animation-up-fast-2"></p>
+      <h2 set:html={content.title} class="text-[32px] md:text-[48px] text-paragraph font-bold leading-[120%] text-center animation-up-fast-2"></h2>
+      <p set:html={content.description} class="text-paragraph text-[12px] md:text-[14px] leading-[150%] font-normal text-center animation-up-fast-2"></p>
     </div>
     <div class={`${content.arrow == true ? 'flex flex-col md:flex-row gap-6 md:gap-4 lg:gap-6' : `grid grid-cols-1 ${cols} gap-6`}   justify-center items-center `}>
       {

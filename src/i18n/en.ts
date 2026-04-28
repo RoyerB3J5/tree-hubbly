@@ -653,7 +653,7 @@ export default {
     },
     pilars: {
       title:
-        "<span class='text-secondary'>The Three Pillars</span> of <br/> Performance.",
+        "<span class='text-secondary'>The Three Pillars</span> <br class='md:hidden block'/> of <br class='hidden md:block'/> Performance.",
       description:
         "The TreeHubly lead engine is built on three components working together to <br class='hidden md:block'/> generate consistent inquiries.",
       items: [
@@ -1812,7 +1812,7 @@ export default {
       },
       expectations: {
         title:
-          "Conversion- <br class='md:hidden block'/> Focused <br class='hidden md:block'/>  <span class='text-secondary'>Funnels.</span> ",
+          "Conversion <br class='md:hidden block'/> Focused <br class='hidden md:block'/>  <span class='text-secondary'>Funnels.</span> ",
         description:
           "Ad traffic never goes to generic homepages. We build high-performing funnels designed to convert clicks into booked jobs.",
         items: [
@@ -2057,7 +2057,7 @@ export default {
         title:
           "Built for  <span class='text-secondary'>Tree Service Workflows.</span>",
         description:
-          "Stop juggling sticky notes and spreadsheets. We built specialized tools designed <br/> to handle the unique demands of tree care professionals.",
+          "Stop juggling sticky notes and spreadsheets. We built specialized tools designed <br class='hidden md:block'/> to handle the unique demands of tree care professionals.",
         items: [
           {
             icon: "message",
@@ -2571,7 +2571,7 @@ export default {
     },
     call: {
       title:
-        "Let’s build your  <span class='text-paragraph'> <br class='block md:hidden'/>growth <br /> infrastructure.</span>",
+        "Let’s build your  <span class='text-paragraph'> <br class='block md:hidden'/>growth <br class='hidden md:block'/> infrastructure.</span>",
       description:
         "Stop guessing and start growing. Join the industry leaders using TreeHubly.",
       items: [],

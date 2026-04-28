@@ -9,10 +9,10 @@ const { content } = Astro.props as Props;
 ---
 <section class={`w-full flex ${content?.different ? 'bg-primary' : 'bg-white'} justify-center items-center `}>
   <div class={`container-full flex flex-col md:flex-row ${content?.different ? 'justify-start gap-12' : 'justify-between gap-8 md:gap-6 lg:gap-0'}  items-center py-10 md:py-20 lg:py-30`}>
-    <div class={`w-full md:w-[55%] lg:w-[45%] flex flex-col justify-center items-start gap-8 md:gap-12 ${content?.different ? 'text-white order-2' : 'text-primary order-1'}`}>
-      <div class="flex flex-col justify-center items-start gap-8">
-        <h2 set:html={content?.title} class={`text-[32px] md:text-[48px] font-bold leading-[120%] ${content?.different ? 'text-white' : 'text-primary animation-zoom-in-3'}`}></h2>
-        <p class={`animation-zoom-in-3 text-[12px] md:text-[14px] font-normal leading-[150%] ${content?.different ? 'text-white' : 'text-primary'} w-full md:w-[80%]`}>{content?.description}</p>
+    <div class={`w-full md:w-[55%] lg:w-[45%] flex flex-col justify-center items-center md:items-start gap-8 md:gap-12 ${content?.different ? 'text-white order-2' : 'text-primary order-1'}`}>
+      <div class="flex flex-col justify-center items-center md:items-start gap-8">
+        <h2 set:html={content?.title} class={`text-[32px] md:text-[48px] font-bold leading-[120%] ${content?.different ? 'text-white' : 'text-primary animation-zoom-in-3'} text-center md:text-start`}></h2>
+        <p class={`animation-zoom-in-3 text-[12px] md:text-[14px] font-normal leading-[150%] ${content?.different ? 'text-white' : 'text-primary'} w-full md:w-[80%] text-center md:text-start`}>{content?.description}</p>
       </div>
       {
         content?.items && ( 

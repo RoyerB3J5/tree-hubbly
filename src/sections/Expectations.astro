@@ -9,9 +9,9 @@ const { content } = Astro.props as Props;
 ---
 <section class="w-full flex justify-center items-center bg-primary">
   <div class="container-full py-10 md:py-20 lg:py-30 flex flex-col justify-center items-center gap-8 md:pag-11 lg:gap-14">
-    <div class="w-full flex flex-col md:flex-row justify-center md:justify-between items-start md:items-center gap-8 md:gap-0">
-      <h2 set:html={content?.title} class="text-[32px] lg:text-[48px] text-paragraph font-bold leading-[130%] md:leading-[120%] animation-zoom-in-2"></h2>
-      <p set:html={content?.description} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal w-full md:w-[35%] animation-zoom-in-2"></p>
+    <div class="w-full flex flex-col md:flex-row justify-center md:justify-between items-center gap-8 md:gap-0">
+      <h2 set:html={content?.title} class="text-[32px] lg:text-[48px] text-paragraph font-bold leading-[130%] md:leading-[120%] animation-zoom-in-2 text-center "></h2>
+      <p set:html={content?.description} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal w-full md:w-[35%] animation-zoom-in-2 text-center md:text-start"></p>
     </div>
     {
       content?.items.length && content?.items.length > 4 ? (

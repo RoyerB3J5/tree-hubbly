@@ -101,13 +101,13 @@ export default function TraditionalSection({ content }: Props) {
       <style dangerouslySetInnerHTML={{ __html: GLOW_STYLES }} />
       <section className="w-full flex justify-center items-center bg-primary">
         <div className="w-full max-w-screen xl:max-w-7xl px-5 xl:px-0 flex flex-col justify-center items-center gap-8 md:gap-11 lg:gap-14 pt-10 md:pt-20 lg:pt-30">
-          <div className="flex flex-col justify-center items-start md:items-center gap-8">
+          <div className="flex flex-col justify-center items-center gap-8">
             <h2
-              className="text-[32px] md:text-[48px] text-paragraph font-bold leading-[120%] text-start md:text-center animation-zoom-in"
+              className="text-[32px] md:text-[48px] text-paragraph font-bold leading-[120%] text-center animation-zoom-in"
               dangerouslySetInnerHTML={{ __html: content.title }}
             />
             <p
-              className="text-paragraph text-[12px] md:text-[14px] font-normal leading-[150%] text-start md:text-center animation-zoom-in"
+              className="text-paragraph text-[12px] md:text-[14px] font-normal leading-[150%] text-center animation-zoom-in"
               dangerouslySetInnerHTML={{ __html: content.description }}
             />
           </div>

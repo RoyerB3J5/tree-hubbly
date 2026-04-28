@@ -55,21 +55,21 @@ const { content } = Astro.props;
       </div>
     </div>
     <div class="flex flex-col justify-between items-start  w-full md:w-[65%] self-stretch gap-8 lg:gap-0">
-      <div class="flex flex-col justify-center items-start gap-8">
+      <div class="flex flex-col justify-center items-center md:items-start gap-8">
         <h2 set:html={content.title} class="text-[32px] md:text-[48px] text-paragraph font-bold leading-[120%] animation-zoom-in-3"></h2>
-        <p set:html={content.description} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal animation-zoom-in-3 "></p>
+        <p set:html={content.description} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal animation-zoom-in-3 text-center md:text-start"></p>
       </div>
       <div class="flex flex-col justify-center items-center gap-8">
         {
           content.items.map((item)=>( 
-            <div class="flex flex-col justify-center items-start gap-4 md:gap-8 animation-zoom-in-3">
-              <div class="flex justify-start items-center gap-4 md:gap-6">
+            <div class="flex flex-col justify-center items-center md:items-start gap-4 md:gap-8 animation-zoom-in-3">
+              <div class="flex justify-center md:justify-start items-center gap-4 md:gap-6">
                 <div class="w-10 md:w-14 h-10 md:h-14 bg-secondary/10 flex justify-center items-center rounded-lg ">
                   <img src={`/images/${item.icon}.svg`} alt={item.title} width="24" height="24" class="w-6 h-6"/>
                 </div>
                 <h3 set:html={item.title} class="text-[14px] md:text-[18px] font-bold leading-[150%] text-paragraph"></h3>
               </div>
-              <p set:html={item.description} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal"></p>
+              <p set:html={item.description} class="text-[12px] md:text-[14px] text-paragraph leading-[150%] font-normal text-center md:text-start"></p>
             </div>
           ))
         }
