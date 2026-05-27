@@ -22,7 +22,7 @@ const { content } = Astro.props as Props;
       ></h2>
       <p
         set:html={content.description}
-        class="text-[12px] md:text-[14px] leading-[150%] font-normal text-primary text-center"
+        class="text-p-mobile md:text-p-desktop leading-[150%] font-normal text-primary text-center"
       ></p>
       
       {content.items &&
@@ -38,7 +38,7 @@ const { content } = Astro.props as Props;
                 loading="lazy"
                 class="w-6 h-6"
               />
-              <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-primary">
+              <p class="text-p-mobile md:text-p-desktop font-normal leading-[150%] text-primary">
                 {item}
               </p>
             </div>

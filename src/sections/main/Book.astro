@@ -1,0 +1,22 @@
+---
+import Form from "../../components/Form.astro";
+
+type Translations = typeof import("../../i18n/en").default;
+type BookContent = Translations["main"]["book"];
+interface Props {
+  content: BookContent;
+}
+const { content } = Astro.props as Props;
+---
+<div class="container-full flex flex-col md:flex-row justify-center items-start gap-[32px] lg:gap-[80px]" >
+  <div class="w-full md:w-[45%] flex flex-col justify-center items-start gap-[32px]">
+    <div class="flex flex-col justify-center items-start gap-4">
+      <h2 set:html={content.title} class="text-[32px] md:text-[36px] lg:text-[48px] font-bold leading-[110%] text-primary text-center animation-up-fast"></h2>
+      <p set:html={content.description} class="text-p-mobile md:text-p-desktop text-[#2C2C2C] text-center leading-[150%] text-start w-[80%]"></p>
+    </div>
+    <div class="hidden md:block w-full relative h-auto rounded-3xl overflow-hidden container-image-fade group cursor-pointer" style="aspect-ratio: 535 / 511;">
+      <img src="/images/book.webp" alt="Book" width="535" height="511" class="w-full h-full absolute object-cover object-center inset-0 group-hover:scale-105 transition-all duration-300 ease-in-out" loading="lazy" decoding="async"/>
+    </div>
+  </div>
+  <Form title={content.subtitle} />
+</div>

@@ -10,7 +10,7 @@ const { content } = Astro.props as Props;
   <div class="w-full max-w-screen xl:max-w-7xl px-5 xl:px-0 flex flex-col justufy-center items-center gap-8 md:gap-11 lg:gap-14 py-10 md:py-20 lg:py-30">
     <div class="flex flex-col justify-center items-start md:items-center gap-8">
       <h2 set:html={content.title} class="text-[32px] md:text-[48px] text-paragraph font-bold leading-[120%] text-start md:text-center animation-zoom-in"></h2>
-      <p set:html={content.description} class="text-paragraph text-[12px] md:text-[14px] font-normal leading-[150%] text-start md:text-center animation-zoom-in"></p>
+      <p set:html={content.description} class="text-paragraph text-p-mobile md:text-p-desktop font-normal leading-[150%] text-start md:text-center animation-zoom-in"></p>
     </div>
     <div class="w-full flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6">
       {
@@ -26,7 +26,7 @@ const { content } = Astro.props as Props;
                 list.items.map((item)=>( 
                   <div class="flex justify-start items-center gap-2">
                     <img src={`/images/${list.icon2}.svg`} alt={`Icono ${list.icon2}`} width="16" height="16" class="w-6 h-6">
-                    <p set:html={item} class="text-paragraph text-[12px] md:text-[14px] font-normal leading-[150%]"></p>
+                    <p set:html={item} class="text-paragraph text-p-mobile md:text-p-desktop font-normal leading-[150%]"></p>
                   </div>
                 ))
               }

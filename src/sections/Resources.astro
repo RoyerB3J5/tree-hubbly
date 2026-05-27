@@ -18,10 +18,10 @@ const { content } = Astro.props as Props;
                   </div>
                   <div class="flex flex-col justify-start items-start px-4 lg:px-8 py-6 lg:py-10 gap-4 md:gap-6 w-full lg:w-[80%] grow">
                     <div class="px-1 bg-secondary flex justify-center items-center">
-                      <p class="text-[12px] md:text-[14px] font-bold leading-[150%] text-primary">{item.tag}</p>
+                      <p class="text-p-mobile md:text-p-desktop font-bold leading-[150%] text-primary">{item.tag}</p>
                     </div>
                     <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-primary">{item.title}</h3>
-                    <p set:html={item.description} class="text-[12px] md:text-[14px] text-primary leading-[150%] font-normal"></p>
+                    <p set:html={item.description} class="text-p-mobile md:text-p-desktop text-primary leading-[150%] font-normal"></p>
                   </div>
                 </div>
               ))
@@ -37,10 +37,10 @@ const { content } = Astro.props as Props;
                   </div>
                   <div class="flex flex-col justify-center items-start px-4 lg:px-8 py-6 lg:py-10 gap-4 md:gap-6 grow">
                     <div class="px-1 bg-secondary flex justify-center items-center">
-                      <p class="text-[12px] md:text-[14px] font-bold leading-[150%] text-primary">{item.tag}</p>
+                      <p class="text-p-mobile md:text-p-desktop font-bold leading-[150%] text-primary">{item.tag}</p>
                     </div>
                     <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-primary">{item.title}</h3>
-                    <p set:html={item.description} class="text-[12px] md:text-[14px] text-primary leading-[150%] font-normal"></p>
+                    <p set:html={item.description} class="text-p-mobile md:text-p-desktop text-primary leading-[150%] font-normal"></p>
                   </div>
                 </div>
               ))

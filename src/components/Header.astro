@@ -430,15 +430,23 @@ const lang = match ? match[1] : "en";
       const viewportHeight = window.innerHeight;
       let lastScroll = window.pageYOffset;
 
+      // Detectar si estamos en la página principal
+      const currentPath = window.location.pathname;
+      const isHomePage = currentPath === "/" || currentPath === "/en" || currentPath === "/es" || currentPath === "/en/" || currentPath === "/es/";
+
       function updateHeaderBackground() {
         const currentScroll = window.pageYOffset;
 
-        // El color de fondo comienza cuando se pasa la sección Hero (primera viewport)
-        // Transición suave desde que pasa el Hero
-        const opacity = Math.min(Math.max(currentScroll - viewportHeight, 0) / (viewportHeight * 0.3), 1);
-
-        // Actualizar el fondo del header con el color #051725 y la opacidad calculada
-        header.style.backgroundColor = `rgba(5, 23, 37, ${opacity})`;
+        if (isHomePage) {
+          // En la página principal: opacidad progresiva después del hero
+          // El color de fondo comienza cuando se pasa la sección Hero (primera viewport)
+          // Transición suave desde que pasa el Hero
+          const opacity = Math.min(Math.max(currentScroll - viewportHeight, 0) / (viewportHeight * 0.3), 1);
+          header.style.backgroundColor = `rgba(5, 23, 37, ${opacity})`;
+        } else {
+          // En otras páginas: background fijo con color primary
+          header.style.backgroundColor = "rgba(5, 23, 37, 1)";
+        }
       }
 
       window.addEventListener("scroll", () => {
@@ -462,6 +470,9 @@ const lang = match ? match[1] : "en";
 
         lastScroll = currentScroll;
       });
+
+      // Aplicar el background al cargar la página
+      updateHeaderBackground();
 
       // Observer para detectar cambios en el tema (clase 'dark')
       const observer = new MutationObserver(() => {

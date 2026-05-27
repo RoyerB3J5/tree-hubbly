@@ -10,7 +10,7 @@ const { content } = Astro.props;
   <div class="container-full flex flex-col justify-center items-center gap-8 md:gap-11 lg:gap-14 py-10 md:py-20 lg:py-30">
     <div class="flex flex-col justify-center items-center gap-8">
       <h2 set:html={content.title} class="text-[32px] md:text-[48px] text-primary font-bold leading-[130%] md:leading-[120%] animation-up-fast-2 text-center md:text-start"></h2>
-      <p set:html={content.description} class="text-[12px] md:text-[14px] text-primary leading-[150%] font-normal text-center animation-up-fast-2"></p>
+      <p set:html={content.description} class="text-p-mobile md:text-p-desktop text-primary leading-[150%] font-normal text-center animation-up-fast-2"></p>
     </div>
     <div class="w-full grid grid-cols-1 lg:grid-cols-3 justify-center items-center gap-4 md:gap-6">
       {
@@ -20,13 +20,13 @@ const { content } = Astro.props;
               <img src={`/images/${item.icon}.svg`} alt={item.title} width="24" height="24"/>
             </div>
             <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-primary">{item.title}</h3>
-            <p class="text-[12px] md:text-[14px] text-primary leading-[150%] font-normal">{item.description}</p>
+            <p class="text-p-mobile md:text-p-desktop text-primary leading-[150%] font-normal">{item.description}</p>
             <div class="flex flex-col justify-center items-start gap-4 md:gap-6">
               {
                 item.items.map((i)=>(
                   <div class="flex justify-start items-center gap-2 md:gap-4">
                     <img src="/images/check.svg" alt="Check Icon" width="16" height="16" decoding="async" loading="lazy" class="w-6 h-6"/>
-                    <p class="text-[12px] md:text-[14px] text-primary leading-[150%] font-normal">{i}</p>
+                    <p class="text-p-mobile md:text-p-desktop text-primary leading-[150%] font-normal">{i}</p>
                   </div>
                 ))
               }

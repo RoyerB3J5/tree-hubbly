@@ -15,6 +15,7 @@ import Matters from "../../../sections/Matters.astro";
 import Stadistic from "../../../sections/Stadistic.astro";
 import VentoMarketing from "../../../sections/VentoMarketing.astro";
 import VentoMove1 from "../../../sections/ventoMove1.astro";
+import Book from "../../../sections/main/Book.astro";
 
 export function getStaticPaths() {
   const solutions = ["marketing", "seo","google-ads","website-funnels","crm-automation"];
@@ -33,6 +34,12 @@ const { lang, solution } = Astro.params as { lang: Language; solution: string };
 const translations = { es, en };
 const t = translations[lang];
 const solutionData = (t.solutions as Record<string, SolutionPage>)[solution] ?? ({} as SolutionPage);
+
+const currentPath = Astro.url.pathname;
+// Normalizar: remover idioma y trailing slash
+const normalized = currentPath.replace(/^\/(en|es)/, "").replace(/\/$/, "") || "/";
+// Detectar el idioma actual ('en' o 'es')
+
 ---
 
 <Layout lang={lang} t={t}>
@@ -48,25 +55,35 @@ const solutionData = (t.solutions as Record<string, SolutionPage>)[solution] ?? 
     )
   }
   {
-    solutionData.ventoMove1 && (
-      <VentoMove1 content={solutionData.ventoMove1}/>
-    )
-  }
-  {
-    solutionData.expectations && (
-      <Expectations content={solutionData.expectations}/>
-    )
-  }
-  {
     solutionData.matters && (
       <Matters content={solutionData.matters}/>
     )
   }
   {
+    solutionData.ventoMove1 && (
+      <VentoMove1 content={solutionData.ventoMove1}/>
+    )
+  }
+  
+  {
+    solutionData.expectations && solution == "google-ads" && (
+      <Expectations content={solutionData.expectations}/>
+    )
+  }
+  <section class={ `w-full ${solution == 'crm-automation' ? 'bg-paragraph' : 'bg-[#F3F3F4]'} py-10 md:py-20 lg:py-30 flex justify-center items-center`} id="book">
+    <Book content={t.main.book} />
+  </section>
+  {
     solutionData.characteristics && (
       <Charasteristic content={solutionData.characteristics}/>
     )
   }
+  {
+    solutionData.expectations && solution == "marketing" && (
+      <Expectations content={solutionData.expectations}/>
+    )
+  }
+  
   {
     solutionData.stadistic && (
       <Stadistic content={solutionData.stadistic}/>

@@ -13,7 +13,7 @@ const { content } = Astro.props as Props;
   </div>
   <div class="flex flex-col justify-center items-center md:items-start gap-8 w-full md:w-[45%]">
     <h2 set:html={content.title} class="text-[32px] md:text-[48px] text-primary font-bold leading-[130%] md:leading-[120%] animation-zoom-in-3 text-center md:text-start"></h2>
-    <p set:html={content.description} class="text-[12px] md:text-[14px] font-normal leading-[150%] text-primary animation-zoom-in-3 text-center md:text-start"></p>
+    <p set:html={content.description} class="text-p-mobile md:text-p-desktop font-normal leading-[150%] text-primary animation-zoom-in-3 text-center md:text-start"></p>
     <div class="flex flex-col justify-center items-start gap-8">
       {
         content.items.map((item)=>(
@@ -21,7 +21,7 @@ const { content } = Astro.props as Props;
             <img src={`/images/${item.icon}.svg`} alt={item.title} width="48" height="48" class="w-6 h-6" decoding="async" loading="lazy">
             <div class="flex flex-col justify-center items-start gap-2">
               <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-primary">{item.title}</h3>
-              <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-primary">{item.description}</p>
+              <p class="text-p-mobile md:text-p-desktop font-normal leading-[150%] text-primary">{item.description}</p>
             </div>
           </div>
         ))

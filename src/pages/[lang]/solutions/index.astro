@@ -2,6 +2,7 @@
 import en from '../../../i18n/en';
 import es from '../../../i18n/es';
 import Layout from '../../../layouts/Layout.astro';
+import Book from '../../../sections/main/Book.astro';
 import CallAction from '../../../sections/main/CallAction.astro';
 import Hero from '../../../sections/main/Hero.astro';
 import Questions from '../../../sections/main/Questions.astro';
@@ -22,6 +23,9 @@ const t = translations[lang];
 <Layout lang={lang} t={t}>
   <Hero content={t.solutionPage.hero} />
   <SolutionList content={t.solutionPage.information} />
+  <section class="w-full bg-white py-10 md:py-20 lg:py-30 flex justify-center items-center" id="book">
+    <Book content={t.main.book} />
+  </section>
   <Scale content={t.solutionPage.scale} />
   <Results content={t.solutionPage.results} />
   <CallAction content={t.solutionPage.call} />

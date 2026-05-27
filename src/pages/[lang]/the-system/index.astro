@@ -3,6 +3,7 @@ import en from '../../../i18n/en';
 import es from '../../../i18n/es';
 import Layout from '../../../layouts/Layout.astro';
 import Funcionality from '../../../sections/Funcionality.astro';
+import Book from '../../../sections/main/Book.astro';
 import CallAction from '../../../sections/main/CallAction.astro';
 import Hero from '../../../sections/main/Hero.astro';
 import Questions from '../../../sections/main/Questions.astro';
@@ -23,6 +24,9 @@ const t = translations[lang];
   <Hero content={t.systemPage.hero} />
   <Reason content={t.systemPage.reason} />
   <Pillars content={t.systemPage.pilars} />
+  <section class="w-full bg-[#F3F3F4] pb-10 md:pb-20 lg:pb-30 flex justify-center items-center" id="book">
+    <Book content={t.main.book} />
+  </section>
   <Funcionality content={t.systemPage.functionality} />
   <Questions content={t.main.questions} />
   <CallAction content={t.systemPage.call} />

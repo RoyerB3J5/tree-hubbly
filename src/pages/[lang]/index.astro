@@ -17,6 +17,7 @@ import Vento from '../../sections/main/Vento.astro';
 import type { Language } from '../../types/language.type';
 import Traditional2 from '../../sections/main/Traditional2';
 import HeroMain from '../../sections/main/HeroMain.astro';
+import Book from '../../sections/main/Book.astro';
 export function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
 }
@@ -30,6 +31,9 @@ const t = translations[lang];
 <Layout lang={lang} t={t}>
   <HeroMain content={t.main.hero} />
   <Companies content={t.main.companies} />
+  <section class="w-full bg-[#F3F3F4] py-10 md:py-20 lg:py-30 flex justify-center items-center" id="book">
+    <Book content={t.main.book} />
+  </section>
   <Scale content={t.main.scale} />
   <Vento content={t.main.vento} />
   <Banners2 content={t.main.banners} />

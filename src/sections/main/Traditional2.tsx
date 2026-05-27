@@ -107,7 +107,7 @@ export default function TraditionalSection({ content }: Props) {
               dangerouslySetInnerHTML={{ __html: content.title }}
             />
             <p
-              className="text-paragraph text-[12px] md:text-[14px] font-normal leading-[150%] text-center md:text-center animation-zoom-in"
+              className="text-paragraph text-p-mobile md:text-p-desktop font-normal leading-[150%] text-center md:text-center animation-zoom-in"
               dangerouslySetInnerHTML={{ __html: content.description }}
             />
           </div>
@@ -155,7 +155,7 @@ export default function TraditionalSection({ content }: Props) {
                         className="w-6 h-6"
                       />
                       <p
-                        className="text-paragraph text-[12px] md:text-[14px] font-normal leading-[150%]"
+                        className="text-paragraph text-p-mobile md:text-p-desktop font-normal leading-[150%]"
                         dangerouslySetInnerHTML={{ __html: item }}
                       />
                     </div>

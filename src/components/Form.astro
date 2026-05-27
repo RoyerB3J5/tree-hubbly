@@ -1,0 +1,39 @@
+---
+interface Props {
+  title: string;
+}
+const { title } = Astro.props as Props;
+---
+
+<div class="relative w-full md:w-[55%] lg:w-[55%] animation-fade-left bg-white rounded-3xl overflow-hidden py-6 md:py-10 px-4 md:px-8 border border-[#D3D3D3]">
+  <div id="spinner" class="absolute inset-0 z-10 flex items-center justify-center bg-white">
+    <!-- Spinner CSS puro más eficiente -->
+    <div class="w-8 h-8 border-4 border-gray-200 border-t-gray-500 rounded-full animate-spin"></div>
+  </div>
+  <div class="w-full flex flex-col justify-center items-start gap-10">
+    <h3 class="text-[24px] md:text-[32px] font-semibold leading-[150%] text-primary">{title}</h3>
+    <iframe
+      src="https://link.inkshapecrm.com/widget/form/QiDq3XVm3rXaOPeFOn8b"
+      class="w-full h-full border-none relative z-40"
+      id="inline-QiDq3XVm3rXaOPeFOn8b"
+      data-layout="{'id':'INLINE'}"
+      data-trigger-type="alwaysShow"
+      data-trigger-value=""
+      data-activation-type="alwaysActivated"
+      data-activation-value=""
+      data-deactivation-type="neverDeactivate"
+      data-deactivation-value=""
+      data-form-name="Form General Website"
+      data-height="926"
+      data-layout-iframe-id="inline-QiDq3XVm3rXaOPeFOn8b"
+      data-form-id="QiDq3XVm3rXaOPeFOn8b"
+      title="Form General Website"
+      onload="document.getElementById('spinner').style.display='none'"
+      sandbox="allow-forms allow-scripts allow-popups allow-same-origin"
+      loading="eager"
+    >
+    </iframe>
+    <script src="https://link.inkshapecrm.com/js/form_embed.js" defer></script>
+  </div>
+  
+</div>

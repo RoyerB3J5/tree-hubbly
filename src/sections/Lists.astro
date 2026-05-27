@@ -18,7 +18,7 @@ const hasIcons = content.items.some(item => item.icon);
 <div class="flex flex-col justify-center items-center gap-8 md:gap-11 lg:gap-14">
   <div class="flex flex-col justify-center items-center gap-8">
     <h2 set:html={content.title} class="text-primary text-[32px] md:text-[48px] font-bold leading-[120%] text-center animation-up-fast-2"></h2>
-    <p set:html={content.description} class="text-primary text-[12px] md:text-[14px] font-normal leading-[150%] text-center animation-up-fast-2"></p>
+    <p set:html={content.description} class="text-primary text-p-mobile md:text-p-desktop font-normal leading-[150%] text-center animation-up-fast-2"></p>
   </div>
   {content.items.length === 5 ? (
     <div class="flex flex-col gap-4 md:gap-6 w-full ">
@@ -36,7 +36,7 @@ const hasIcons = content.items.some(item => item.icon);
               }
               <div class="flex flex-col justify-center items-start gap-2 md:gap-6">
                 <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-primary">{item.title}</h3>
-                <p class={`text-primary text-[12px] md:text-[14px] font-normal leading-[150%] ${item.button ? "text-center" : "text-start"}`} set:html={item.description}></p>
+                <p class={`text-primary text-p-mobile md:text-p-desktop font-normal leading-[150%] ${item.button ? "text-center" : "text-start"}`} set:html={item.description}></p>
               </div>
               {
                 item.button && (
@@ -61,7 +61,7 @@ const hasIcons = content.items.some(item => item.icon);
               }
               <div class="flex flex-col justify-center items-start gap-2 md:gap-6">
                 <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-primary">{item.title}</h3>
-                <p class={`text-primary text-[12px] md:text-[14px] font-normal leading-[150%] ${item.button ? "text-center" : "text-start"}`} set:html={item.description}></p>
+                <p class={`text-primary text-p-mobile md:text-p-desktop font-normal leading-[150%] ${item.button ? "text-center" : "text-start"}`} set:html={item.description}></p>
               </div>
               {
                 item.button && (
@@ -87,7 +87,7 @@ const hasIcons = content.items.some(item => item.icon);
             }
             <div class={`flex flex-col justify-center  ${item.button ? 'items-center w-full gap-6' : 'items-start gap-2 md:gap-6'} `}>
               <h3 class={` font-bold leading-[150%] text-primary ${item.button ? "text-[18px] md:text-[16px] text-center" : "text-[14px] md:text-[16px]"}`}>{item.title}</h3>
-              <p class={`text-primary text-[12px] md:text-[14px] font-normal leading-[150%] ${item.button ? "text-center" : "text-start"}`} set:html={item.description}></p>
+              <p class={`text-primary text-p-mobile md:text-p-desktop font-normal leading-[150%] ${item.button ? "text-center" : "text-start"}`} set:html={item.description}></p>
             </div>
             
             {

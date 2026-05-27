@@ -33,8 +33,8 @@ const { content } = Astro.props as Props;
                   <h3 class="text-[16px] font-bold leading-[150%] text-primary block md:hidden">{item.title}</h3>
                 </div>
                 <div class="w-full flex flex-col justify-center items-start gap-2">
-                  <h3 class="text-[16px] font-bold leading-[150%] text-primary hidden md:block">{item.title}</h3>
-                  <p class="text-[12px] md:text-[14px] leading-[150%] text-primary " set:html={item.description}></p>
+                  <h3 class="text-[14px] md:text-[16px] font-bold leading-[150%] text-primary hidden md:block">{item.title}</h3>
+                  <p class="text-p-mobile md:text-p-desktop leading-[150%] text-primary " set:html={item.description}></p>
                 </div>
               </div>
             </div>

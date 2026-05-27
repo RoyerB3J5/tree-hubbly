@@ -161,7 +161,7 @@ export default {
       buttons: [
         {
           label: "Agendar",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
@@ -203,6 +203,12 @@ export default {
       ],
       review:
         '"Las tácticas de marketing sin un sistema  generan picos temporales, <br class="hidden md:block"/> <span class="text-secondary">no <br class="md:hidden block"/> crecimiento sostenible."</span>',
+    },
+    book: {
+      title: "Vamos a comenzar <span class='text-secondary'>ahora</span>",
+      description:
+        "Completa el formulario a continuación y nuestro equipo se comunicará contigo pronto. Estamos aquí para ayudarte a escalar con precisión.",
+      subtitle: "Reserva una Sesión de Estrategia Gratuita",
     },
     scale: {
       label: "Donde las Empresas <br/> de Árboles Escalan.",
@@ -351,7 +357,7 @@ export default {
       buttons: [
         {
           label: "Agendar",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg border-2 border-secondary w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
           styleLabel: "text-primary",
@@ -543,7 +549,7 @@ export default {
       buttons: [
         {
           label: "Agendar",
-          href: "#",
+          href: "#book",
           styleButton:
             "border-2 border-primary bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-paragraph",
@@ -594,7 +600,7 @@ export default {
       title:
         "El TreeHubly <br class='md:hidden block'/> Growth <br class='hidden md:block'/> System <span class='text-secondary'>.</span>",
       description:
-        "Un ecosistema estructurado para generar mejores prospectos, aumentar trabajos reservados y <br class='hidden md:block'/> escalar empresas de árboles con rendimiento medible.",
+        "Un ecosistema estructurado para generar mejores prospectos, <br class='hidden md:block'/> aumentar trabajos reservados y  escalar empresas de árboles con <br class='hidden md:block'/> rendimiento medible.",
       tags: [
         {
           icon: "attract",
@@ -612,7 +618,7 @@ export default {
       buttons: [
         {
           label: "Agendar",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
@@ -1154,7 +1160,7 @@ export default {
       title:
         "Soluciones de Crecimiento para <br class='hidden md:block'/> Empresas de Servicios de Árboles <span class='text-secondary'>.</span>",
       description:
-        "TreeHubly ofrece soluciones de crecimiento estructuradas para empresas de árboles, diseñadas para generar <br class='hidden md:block'/> mejores prospectos, aumentar trabajos reservados e impulsar ingresos medibles.",
+        "TreeHubly ofrece soluciones de crecimiento estructuradas para empresas de árboles,<br class='hidden md:block'/> diseñadas para generar  mejores prospectos, aumentar trabajos reservados e <br class='hidden md:block'/> impulsar ingresos medibles.",
       tags: [
         {
           icon: "marketing",
@@ -1172,7 +1178,7 @@ export default {
       buttons: [
         {
           label: "Agendar",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
@@ -1280,7 +1286,7 @@ export default {
       buttons: [
         {
           label: "Agendar",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg border-2 border-secondary w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
           styleLabel: "text-primary",
@@ -1752,7 +1758,7 @@ export default {
         title:
           "Google Ads para Empresas de <br/> Servicios de Árboles <span class='text-secondary'>.</span>",
         description:
-          "Google Ads genera prospectos rápido, pero una mala estructura eleva los costos. Construimos sistemas <br class='hidden md:block'/> de anuncios de alto interés con páginas de aterrizaje, automatización y rastreo de ingresos.",
+          "Google Ads genera prospectos rápido, pero una mala estructura eleva los costos. Construimos <br class='hidden md:block'/> sistemas  de anuncios de alto interés con páginas de aterrizaje, automatización y <br class='hidden md:block'/> rastreo de ingresos.",
         tags: [
           {
             icon: "marketing",
@@ -1886,7 +1892,7 @@ export default {
         title:
           "Diseño Web para Servicios de Árboles <br class='hidden md:block'/> Creado para Convertir",
         description:
-          "Tu sitio web no es un folleto. Es tu motor principal de conversión. <br class='hidden md:block'/> Diseñamos sitios web de servicios de árboles que convierten tráfico en consultas calificadas y trabajos reservados.",
+          "Tu sitio web no es un folleto. Es tu motor principal de conversión. <br class='hidden md:block'/> Diseñamos sitios web de servicios de árboles que convierten tráfico en consultas calificadas y <br class='hidden md:block'/> trabajos reservados.",
         tags: [
           {
             icon: "marketing",
@@ -2029,7 +2035,7 @@ export default {
         title:
           "CRM y Automatización para <br class='hidden md:block'/> Empresas de Servicios de Árboles <span class='text-secondary'>.</span>",
         description:
-          "La mayoría de empresas de árboles pierden ingresos por llamadas perdidas, respuestas lentas y presupuestos sin rastrear. <br class='hidden md:block'/> Nuestro CRM y automatización capturan, rastrean y optimizan cada oportunidad.",
+          "La mayoría de empresas de árboles pierden ingresos por llamadas perdidas, respuestas lentas y <br class='hidden md:block'/> presupuestos sin rastrear.  Nuestro CRM y automatización capturan, rastrean y <br class='hidden md:block'/> optimizan cada oportunidad.",
         tags: [
           {
             icon: "marketing",
@@ -2147,7 +2153,7 @@ export default {
       title:
         "De Prospectos Irregulares a un <br class='hidden lg:block'/> Sistema de Crecimiento Estructurado <span class='text-secondary'>.</span>",
       description:
-        "Cómo H&A Brother Tree Services Mejoró la Generación de Prospectos y la <br class='hidden md:block'/> Eficiencia Operativa con el TreeHubly Growth System™",
+        "Cómo H&A Brother Tree Services Mejoró la Generación <br class='hidden md:block'/> de Prospectos y la  Eficiencia Operativa con el TreeHubly Growth <br class='hidden md:block'/> System™",
       tags: [
         {
           icon: "lead",
@@ -2165,7 +2171,7 @@ export default {
       buttons: [
         {
           label: "Agendar",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
@@ -2403,7 +2409,7 @@ export default {
       buttons: [
         {
           label: "Agendar",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
@@ -2464,7 +2470,7 @@ export default {
       buttons: [
         {
           label: "Agendar",
-          href: "#",
+          href: "#book",
           styleButton:
             "border-2 border-primary bg-primary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-paragraph",
@@ -2503,7 +2509,7 @@ export default {
       buttons: [
         {
           label: "Agendar",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
@@ -2602,7 +2608,7 @@ export default {
       title: "Plan Inkstart",
       description: "Ideal para emprendedores que están comenzando.",
       price:
-        "$157 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/mes</span>",
+        "$157 <span class='text-p-mobile md:text-p-desktop font-normal leading-[150%]'>/mes</span>",
       description2: "Todo lo que necesitas para lanzar y organizar tu negocio.",
       items: [
         "1 landing page + chat web",
@@ -2631,7 +2637,7 @@ export default {
       title: "Plan Inkscale",
       description: "Para negocios que quieren escalar.",
       price:
-        "$257 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/mes</span>",
+        "$257 <span class='text-p-mobile md:text-p-desktop font-normal leading-[150%]'>/mes</span>",
       description2:
         "Más automatización, más canales, más control para tu crecimiento.",
       items: [
@@ -2662,7 +2668,7 @@ export default {
       title: "Plan Inkmaster",
       description: "Para empresas al más alto nivel.",
       price:
-        "$357 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/mes</span>",
+        "$357 <span class='text-p-mobile md:text-p-desktop font-normal leading-[150%]'>/mes</span>",
       description2: "Automatización total + IA + asesoría estratégica.",
       items: [
         "Chatbots con IA (Omnicanal)",

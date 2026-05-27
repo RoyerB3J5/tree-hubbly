@@ -5,6 +5,7 @@ import Layout from '../../../layouts/Layout.astro';
 import Advantage from '../../../sections/Advantage.astro';
 import Business from '../../../sections/Business.astro';
 import BannerImages from '../../../sections/main/BannerImages.astro';
+import Book from '../../../sections/main/Book.astro';
 import CallAction from '../../../sections/main/CallAction.astro';
 import Hero from '../../../sections/main/Hero.astro';
 import System from '../../../sections/System.astro';
@@ -25,6 +26,9 @@ const t = translations[lang];
   <Hero content={t.caseStudies.hero} />
   <Business content={t.caseStudies.business} />
   <System content={t.caseStudies.system} />
+  <section class="w-full bg-paragraph pb-10 md:pb-20 lg:pb-30 flex justify-center items-center" id="book">
+    <Book content={t.main.book} />
+  </section>
   <Transformation2 content={t.caseStudies.transformation.info} client:load/>
   <Transformation content={t.caseStudies.transformation} />
   <BannerImages content={t.caseStudies.bannerImage} />

@@ -12,7 +12,7 @@ const { content } = Astro.props as Props;
     <div class={`w-full md:w-[55%] lg:w-[45%] flex flex-col justify-center items-center md:items-start gap-8 md:gap-12 ${content?.different ? 'text-white order-2' : 'text-primary order-1'}`}>
       <div class="flex flex-col justify-center items-center md:items-start gap-8">
         <h2 set:html={content?.title} class={`text-[32px] md:text-[48px] font-bold leading-[120%] ${content?.different ? 'text-white' : 'text-primary animation-zoom-in-3'} text-center md:text-start`}></h2>
-        <p class={`animation-zoom-in-3 text-[12px] md:text-[14px] font-normal leading-[150%] ${content?.different ? 'text-white' : 'text-primary'} w-full md:w-[80%] text-center md:text-start`}>{content?.description}</p>
+        <p class={`animation-zoom-in-3 text-p-mobile md:text-p-desktop font-normal leading-[150%] ${content?.different ? 'text-white' : 'text-primary'} w-full md:w-[80%] text-center md:text-start`}>{content?.description}</p>
       </div>
       {
         content?.items && ( 
@@ -35,7 +35,7 @@ const { content } = Astro.props as Props;
               content?.lists?.map((item)=>( 
                 <div class="flex flex-col justify-center items-center lg:items-start gap-1 animation-zoom-in-3">
                   <h3 class="text-[20px] md:text-[32px] font-bold leading-[140%] md:leading-[130%] text-primary">{item.title}</h3>
-                  <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-primary text-center lg:text-start">{item.description}</p>
+                  <p class="text-p-mobile md:text-p-desktop font-normal leading-[150%] text-primary text-center lg:text-start">{item.description}</p>
                 </div>
               ))
             }

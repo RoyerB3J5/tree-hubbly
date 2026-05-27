@@ -2,6 +2,7 @@
 import en from '../../../i18n/en';
 import es from '../../../i18n/es';
 import Layout from '../../../layouts/Layout.astro';
+import Book from '../../../sections/main/Book.astro';
 import CallAction from '../../../sections/main/CallAction.astro';
 import Hero from '../../../sections/main/Hero.astro';
 import Resources from '../../../sections/Resources.astro';
@@ -19,5 +20,8 @@ const t = translations[lang];
 <Layout lang={lang} t={t}>
   <Hero content={t.resource.hero} />
   <Resources content={t.resource.resources} />
+  <section class="w-full bg-paragraph pb-10 md:pb-20 lg:pb-30 flex justify-center items-center" id="book">
+    <Book content={t.main.book} />
+  </section>
   <CallAction content={t.resource.call} />
 </Layout>

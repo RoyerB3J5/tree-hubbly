@@ -7,6 +7,7 @@ import Information from "../../../sections/Information.astro";
 import CallAction from "../../../sections/main/CallAction.astro";
 import Hero from "../../../sections/main/Hero.astro";
 import Problems from "../../../sections/Problems.astro";
+import Book from "../../../sections/main/Book.astro";
 import type { Language } from "../../../types/language.type";
 import type { SystemPage } from "../../../types/system.type";
 
@@ -37,6 +38,9 @@ const systemData = (t.systems as Record<string, SystemPage>)[system] ?? ({} as S
   {
     systemData.information && <Information content={systemData.information} />
   }
+  <section class="w-full bg-[#F3F3F4] pb-10 md:pb-20 lg:pb-30 flex justify-center items-center"  id="book">
+    <Book content={t.main.book} />
+  </section>
   <Charasteristic content={systemData.characteristics} />
   <CallAction content={systemData.call} />
 </Layout>

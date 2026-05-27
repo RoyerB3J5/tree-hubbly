@@ -4,6 +4,8 @@
 @theme {
   --font-family: "Poppins", sans-serif;
   --font-title: "Poppins", sans-serif;
+  --font-size-p-desktop: 16px;
+  --font-size-p-mobile: 14px;
   --color-primary: #051725;
   --color-primary-2: #04121e;
   --color-primary-rgb: 0, 37, 108;

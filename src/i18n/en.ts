@@ -160,7 +160,7 @@ export default {
       buttons: [
         {
           label: "Book a call",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
@@ -202,6 +202,12 @@ export default {
       ],
       review:
         '“Marketing tactics without a system <br class="md:hidden block"/> create temporary <br class="hidden lg:block"/> spikes, <span class="text-secondary">not <br class="md:hidden block"/> sustainable growth.”</span>',
+    },
+    book: {
+      title: "Let's get <span class='text-secondary'>started</span>",
+      description:
+        "Fill out the form below and our team will get back to you shortly. We're here to help you scale with precision.",
+      subtitle: "Book A Free Strategy Session",
     },
     scale: {
       label: "Where Tree <br/> Companies Scale.",
@@ -349,7 +355,7 @@ export default {
       buttons: [
         {
           label: "Book a call",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg border-2 border-secondary w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
           styleLabel: "text-primary",
@@ -590,7 +596,7 @@ export default {
       title:
         "The TreeHubly <br class='md:hidden block'/> Growth <br class='hidden md:block'/> System <span class='text-secondary'>.</span>",
       description:
-        "A structured ecosystem designed to generate better leads, increase booked jobs, and <br class='hidden md:block'/> scale tree service companies with measurable performance.",
+        "A structured ecosystem designed to generate better leads, <br class='hidden md:block'/> increase booked jobs, and scale tree service companies with  <br class='hidden md:block'/>  measurable performance.",
       tags: [
         {
           icon: "attract",
@@ -608,7 +614,7 @@ export default {
       buttons: [
         {
           label: "Book a call",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
@@ -782,7 +788,7 @@ export default {
         buttons: [
           {
             label: "Book a call",
-            href: "#",
+            href: "#book",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
@@ -909,7 +915,7 @@ export default {
         buttons: [
           {
             label: "Book a call",
-            href: "#",
+            href: "#book",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
@@ -1032,7 +1038,7 @@ export default {
         buttons: [
           {
             label: "Book a call",
-            href: "#",
+            href: "#book",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
@@ -1147,7 +1153,7 @@ export default {
       title:
         "Growth Solutions Built for <br class='hidden md:block'/> Tree Service Companies <span class='text-secondary'>.</span>",
       description:
-        "TreeHubly delivers structured growth solutions for tree service companies, designed to generate <br class='hidden md:block'/> better leads, increase booked jobs, and drive measurable revenue growth.",
+        "TreeHubly delivers structured growth solutions for tree service companies,<br class='hidden md:block'/> designed to generate better leads, increase booked jobs, and drive <br class='hidden md:block'/> measurable revenue growth.",
       tags: [
         {
           icon: "marketing",
@@ -1165,7 +1171,7 @@ export default {
       buttons: [
         {
           label: "Book a call",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
@@ -1273,7 +1279,7 @@ export default {
       buttons: [
         {
           label: "Book a call",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg border-2 border-secondary w-full md:w-30 h-11.25 md:h-10 animation-fade-left",
           styleLabel: "text-primary",
@@ -1431,7 +1437,7 @@ export default {
         buttons: [
           {
             label: "Book a call",
-            href: "#",
+            href: "#book",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
@@ -1624,7 +1630,7 @@ export default {
         buttons: [
           {
             label: "Book a call",
-            href: "#",
+            href: "#book",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
@@ -1746,7 +1752,7 @@ export default {
         title:
           "Google Ads for Tree <br/> Service Companies <span class='text-secondary'>.</span>",
         description:
-          "Google Ads generates fast leads, but poor structure raises costs. We build high-intent ad <br class='hidden md:block'/> systems with landing pages, automation, and revenue tracking.",
+          "Google Ads generates fast leads, but poor structure raises costs. We <br class='hidden md:block'/> build high-intent ad  systems with landing pages, automation, and <br class='hidden md:block'/> revenue tracking.",
         tags: [
           {
             icon: "marketing",
@@ -1764,7 +1770,7 @@ export default {
         buttons: [
           {
             label: "Book a call",
-            href: "#",
+            href: "#book",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
@@ -1880,7 +1886,7 @@ export default {
         title:
           "Tree Service Website <br class='hidden md:block'/> Design Built to Convert ",
         description:
-          "Your website isn’t a brochure. It’s your primary conversion engine. <br class='hidden md:block'/> We design tree service websites that turn traffic into qualified inquiries and booked jobs.",
+          "Your website isn’t a brochure. It’s your primary conversion engine. We design tree service websites that turn traffic into qualified inquiries and <br class='hidden md:block'/> booked jobs.",
         tags: [
           {
             icon: "marketing",
@@ -1898,7 +1904,7 @@ export default {
         buttons: [
           {
             label: "Book a call",
-            href: "#",
+            href: "#book",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
@@ -2021,7 +2027,7 @@ export default {
         title:
           "CRM & Automation for <br class='hidden md:block'/> Tree Service Companies <span class='text-secondary'>.</span>",
         description:
-          "Most tree companies lose revenue from missed calls, slow responses, and untracked estimates. <br class='hidden md:block'/> Our CRM and automation capture, track, and optimize every opportunity.",
+          "Most tree companies lose revenue from missed calls, slow responses, and <br class='hidden md:block'/> untracked estimates.  Our CRM and automation capture, track, and <br class='hidden md:block'/> optimize every opportunity.",
         tags: [
           {
             icon: "marketing",
@@ -2039,7 +2045,7 @@ export default {
         buttons: [
           {
             label: "Book a call",
-            href: "#",
+            href: "#book",
             styleButton:
               "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
             styleLabel: "text-primary",
@@ -2138,7 +2144,7 @@ export default {
       title:
         "From Inconsistent Leads to a <br class='hidden lg:block'/> Structured Growth System <span class='text-secondary'>.</span>",
       description:
-        "How H&A Brother Tree Services Improved Lead Generation and Operational <br class='hidden md:block'/> Efficiency with the TreeHubly Growth System™",
+        "How H&A Brother Tree Services Improved Lead Generation <br class='hidden md:block'/> and Operational  Efficiency with the TreeHubly Growth<br class='hidden md:block'/>  System™",
       tags: [
         {
           icon: "lead",
@@ -2156,7 +2162,7 @@ export default {
       buttons: [
         {
           label: "Book a call",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
@@ -2393,7 +2399,7 @@ export default {
       buttons: [
         {
           label: "Book a call",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
@@ -2492,7 +2498,7 @@ export default {
       buttons: [
         {
           label: "Book a call",
-          href: "#",
+          href: "#book",
           styleButton:
             "bg-secondary hover:scale-105 transition-transform duration-300 rounded-lg w-full md:w-30 h-11.25 md:h-10",
           styleLabel: "text-primary",
@@ -2591,7 +2597,7 @@ export default {
       title: "Inkstart Plan",
       description: "Ideal for entrepreneurs just starting out.",
       price:
-        "$157 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/month</span>",
+        "$157 <span class='text-p-mobile md:text-p-desktop font-normal leading-[150%]'>/month</span>",
       description2: "Everything you need to launch and organize your business.",
       items: [
         "1 landing page + web chat",
@@ -2620,7 +2626,7 @@ export default {
       title: "Inkscale Plan",
       description: "For businesses that want to scale.",
       price:
-        "$257 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/month</span>",
+        "$257 <span class='text-p-mobile md:text-p-desktop font-normal leading-[150%]'>/month</span>",
       description2:
         "More automation, more channels, more control for your growth.",
       items: [
@@ -2648,7 +2654,7 @@ export default {
       title: "Inkmaster Plan",
       description: "For enterprises at the highest level.",
       price:
-        "$357 <span class='text-[12px] md:text-[14px] font-normal leading-[150%]'>/month</span>",
+        "$357 <span class='text-p-mobile md:text-p-desktop font-normal leading-[150%]'>/month</span>",
       description2: "Total automation + AI + strategic guidance.",
       items: [
         "AI Chatbots (Omnichannel)",

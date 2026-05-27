@@ -52,7 +52,7 @@ export default function QuestionsAccordion({ content }: Props) {
         <p
           ref={descRef}
           dangerouslySetInnerHTML={{ __html: content.description }}
-          className="text-[12px] md:text-[14px] font-normal leading-[150%] text-[#2C2C2C] text-center md:text-center animation-zoom-in-3"
+          className="text-p-mobile md:text-p-desktop font-normal leading-[150%] text-[#2C2C2C] text-center md:text-center animation-zoom-in-3"
         ></p>
       </div>
       <div className="w-full flex flex-col justify-center items-center gap-4 md:gap-8">
@@ -68,7 +68,7 @@ export default function QuestionsAccordion({ content }: Props) {
               }`}
             >
               <div className="w-full flex justify-between items-center gap-18.25">
-                <h3 className="text-[16px] text-primary font-extrabold leading-[150%]">
+                <h3 className="text-[14px] md:text-[16px] text-primary font-bold md:font-semibold leading-[150%]">
                   {item.question}
                 </h3>
                 <button

@@ -17,7 +17,7 @@ const lang = match ? match[1] : "en";
   <div class="container-full flex flex-col justify-center items-center gap-8 md:gap-11 lg:gap-14 py-10 md:py-20 lg:py-30">
     <div class="flex flex-col justify-center items-center gap-8">
       <h2 set:html={content.title} class="text-[32px] md:text-[48px] font-bold leading-[120%] text-primary text-center animation-up-fast-2"></h2>
-      <p set:html={content.description} class="text-[12px] md:text-[14px] font-normal leading-[150%] text-primary text-center animation-up-fast-2 "></p>
+      <p set:html={content.description} class="text-p-mobile md:text-p-desktop font-normal leading-[150%] text-primary text-center animation-up-fast-2 "></p>
     </div>
     <div class={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-4 md:gap-6 `}>
       {
@@ -42,7 +42,7 @@ const lang = match ? match[1] : "en";
                     item.list.map((i)=>( 
                       <div class="flex justify-start items-center gap-2 md:gap-4">
                         <img src="/images/check.svg" alt="Check" width="16" height="16" class="w-6 h-6" decoding="async" loading="lazy"/>
-                        <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-primary">{i}</p>
+                        <p class="text-p-mobile md:text-p-desktop font-normal leading-[150%] text-primary">{i}</p>
                       </div>
                     ))
                   }

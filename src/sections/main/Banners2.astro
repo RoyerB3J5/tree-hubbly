@@ -31,12 +31,12 @@ const { content } = Astro.props as Props;
           <h2 class="text-paragraph text-[32px] md:text-[48px] font-semibold leading-[120%]" set:html={content[index].title}></h2>
         </div>
         <div class="flex flex-col justify-center items-start gap-4">
-          <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph" set:html={content[index].content}></p>
+          <p class="text-p-mobile md:text-p-desktop font-normal leading-[150%] text-paragraph" set:html={content[index].content}></p>
           <div class="flex flex-col justify-center items-start gap-4">
             {content[index].items.map((item) => (
               <div class="flex justify-start items-center gap-4">
                 <img src="/images/check.svg" alt="Check" width="24" height="24" class="w-6 h-6">
-                <p class="text-[12px] md:text-[14px] font-normal leading-[150%] text-paragraph">{item}</p>
+                <p class="text-p-mobile md:text-p-desktop font-normal leading-[150%] text-paragraph">{item}</p>
               </div>
             ))}
           </div>
