@@ -18,15 +18,15 @@ export interface Props {
   structuredData?: object | object[];
 }
 
-const SITE_URL = "https://www.prestigegrowthpartners.com";
-const SITE_NAME = "Tree Hubbly";
+const SITE_URL = "https://treehubly.com";
+const SITE_NAME = "Treehubly";
 
 const {
   lang = "en",
-  title = "Prestige Growth Partners | Business Funding & Capital Solutions",
-  description = "Access $150K to $1M+ in business funding. Prestige Growth Partners optimizes your business profile and connects you with top lenders for sustainable growth.",
-  keywords = "business funding, business credit, capital acquisition, commercial loans, line of credit, lender ready system, business consulting, prestige growth partners",
-  image = "/images/portada.jpg",
+  title = "Treehubly - The Growth System for Tree Services",
+  description = "Treehubly helps tree companies generate better leads, book more jobs, and scale with a structured growth ecosystem.",
+  keywords = "Tree Services, Lead Generation, Growth System, Marketing Automation, Tree Company Growth, Tree Service Marketing, Tree Service Leads, Tree Service Automation, Tree Service Performance, TreeHubly Growth System",
+  image = "/images/fondo.png",
   canonicalPath = "",
   noindex = false,
   type = "website",
@@ -50,10 +50,10 @@ const absoluteImage = image.startsWith("http")
   ? image
   : `${SITE_URL}${image.startsWith("/") ? "" : "/"}${image}`;
 
-// Base FinancialService / Organization Schema
+// Base Organization Schema
 const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": "FinancialService",
+  "@type": "Organization",
   "@id": `${SITE_URL}/#organization`,
   name: SITE_NAME,
   legalName: SITE_NAME,
@@ -75,7 +75,6 @@ const organizationSchema = {
     longitude: -81.3792,
   },
   sameAs: [instagramLink, facebookLink].filter(Boolean),
-  priceRange: "$$$",
 };
 
 const websiteSchema = {
@@ -151,7 +150,7 @@ const allSchemas = [organizationSchema, websiteSchema, ...customSchemas];
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@PrestigeGP" />
+<meta name="twitter:site" content="@Treehubly" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={absoluteImage} />
