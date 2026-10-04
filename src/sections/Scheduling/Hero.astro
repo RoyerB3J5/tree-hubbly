@@ -1,0 +1,109 @@
+---
+const contentUS = {
+  description: "The proven marketing system <br/>tree service owners use to",
+  title: "Generate more leads and booked jobs.",
+  description2: "(in just 60 days)",
+  buttonLabel: "Schedule My Meeting",
+  excelent: "5 · Excellent",
+  see: "See testimonials",
+};
+
+const contentEs = {
+  description:
+    "El sistema probado para obtener entre sistema <br/> probado para obtener",
+  title: "$150K y $1M en financiación empresarial",
+  description2: "(en tan solo 60 días)",
+  buttonLabel: "Agenda tu reunión",
+  excelent: "5.0 · Excelente",
+  see: "Ver testimonios",
+};
+
+const content = contentUS;
+---
+
+<section
+  class="w-full h-auto lg:h-[70vh] xl:h-auto flex flex-col justify-end items-center gradient-scheduling"
+>
+  <div
+    class="flex flex-col justify-center items-center px-4 md:px-0 pt-38 md:pt-35 w-full md:w-auto"
+  >
+    <div
+      class="flex flex-col justify-center items-center gap-[15px] md:gap-[25px] animation-up-fast w-full md:w-auto"
+    >
+      <div class="text-white flex flex-col justify-center items-center">
+        <p
+          class="text-[16px] md:text-[20px] lg:text-[26px] font-normal leading-[167%] md:leading-[160%] text-center"
+          set:html={content.description}
+        />
+        <h1
+          class="text-[38px] md:text-[36px] lg:text-[44px] font-normal leading-[100%] tracking-[-1.1px] text-secondary font-georgia mt-2 md:mt-2"
+          set:html={content.title}
+        />
+        <p
+          class="text-[14px] md:text-[16px] lg:text-[20px] font-normal leading-[100%] text-center font-georgia italic tracking-[0.2px] mt-2 md:mt-4"
+        >
+          {content.description2}
+        </p>
+      </div>
+      <div class="w-[140px] h-[1px] bg-white/12"></div>
+      <div
+        class="relative w-full h-auto md:w-[530px] lg:w-[631px] max-w-full overflow-hidden rounded-3xl border-2 border-white/20 aspect-47/27 md:aspect-video"
+      >
+      {/*<VTurbPlayer
+          playerId="6a8e1aa1655329ca2a97851c"
+          class="h-full w-full"
+        /> */}
+        
+      </div>
+    </div>
+    <div
+      class="flex flex-col gap-[37px] md:gap-[49px] items-center justify-center py-4.5 w-full"
+    >
+      <!-- Main Button -->
+      <a
+        class="bg-secondary flex items-center justify-center md:px-[48px] py-[18px] rounded-[14px] shrink-0 w-full md:w-auto shadow-[0_0_30px_0_#91D200] hover:-translate-y-1 transition-transform duration-300 ease-in-out"
+        href="/scheduling/questions"
+      >
+        <span
+          class="font-medium text-[16px] text-[#0a0a0a] tracking-[1.44px] uppercase"
+        >
+          {content.buttonLabel}
+        </span>
+      </a>
+
+      <!-- Trustpilot Rating Bar -->
+      <div
+        class="bg-black/50 flex gap-4 justify-center items-center px-5 py-2.5 rounded-full w-full md:w-auto"
+      >
+        <!-- Stars -->
+        <div class="flex gap-[3px]">
+          {
+            Array(5)
+              .fill(0)
+              .map(() => (
+                <div class="bg-secondary flex items-center justify-center rounded-[2px] size-[18px]">
+                  <img
+                    alt="Star"
+                    class="size-[11px]"
+                    src="/images/scheduling/star.svg"
+                  />
+                </div>
+              ))
+          }
+        </div>
+        <!-- Rating -->
+        <span
+          class="font-family-times font-bold text-[12.5px] text-[#f0ead6] whitespace-nowrap"
+          >{content.excelent}</span
+        >
+        <!-- Link -->
+        <a
+          href="/en/#reviews"
+          class="font-family-times text-[12.5px] text-secondary leading-[100%] font-normal underline whitespace-nowrap"
+        >
+          {content.see}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

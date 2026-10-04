@@ -1,0 +1,321 @@
+---
+interface StatRow {
+  label: string;
+  value: string;
+  highlight?: boolean;
+}
+
+interface StatusItem {
+  label: string;
+  status: string;
+  statusColor: string;
+}
+
+type StatCard =
+  | {
+      variant: "progress";
+      label: string;
+      value: string;
+      valueSuffix?: string;
+      progress: string;
+      rows: StatRow[];
+    }
+  | {
+      variant: "status";
+      label: string;
+      items: StatusItem[];
+      footerLabel: string;
+      footerValue: string;
+    }
+  | {
+      variant: "chart";
+      label: string;
+      value: string;
+      chartSrc: string;
+      chartAlt: string;
+      rows: StatRow[];
+    };
+
+interface StadisticContent {
+  eyebrow: string;
+  title: string;
+  hint: string;
+  cards: StatCard[];
+}
+
+const contentUs: StadisticContent = {
+  eyebrow: "Verified Results",
+  title:
+    'Data Driven <br /> <span class="text-secondary">Growth.</span>',
+  hint: "Hover over the cursor to pause.",
+  cards: [
+    {
+      variant: "progress",
+      label: "Lead Generation",
+      value: "94%",
+      progress: "90%",
+      rows: [
+        { label: "Website Conversion", value: "742" },
+        { label: "Business Growth", value: "4.2 Years" },
+        { label: "Lead Opportunities", value: "$2.5M" },
+      ],
+    },
+    {
+      variant: "status",
+      label: "Marketing Process",
+      items: [
+        {
+          label: "Google Ads",
+          status: "Generating Leads",
+          statusColor: "text-secondary",
+        },
+        {
+          label: "SEO",
+          status: "In Progress",
+          statusColor: "text-secondary",
+        },
+        {
+          label: "Website Optimization",
+          status: "Qualified",
+          statusColor: "text-secondary",
+        },
+      ],
+      footerLabel: "Total Lead Potential",
+      footerValue: "$3.4M",
+    },
+    {
+      variant: "progress",
+      label: "Marketing Process",
+      value: "742",
+      valueSuffix: "+ 57 pts",
+      progress: "80%",
+      rows: [
+        { label: "Cost Per Lead", value: "21%" },
+        {
+          label: "Conversion Probability",
+          value: "96%",
+          highlight: true,
+        },
+        { label: "Marketing Rating", value: "A+" },
+      ],
+    },
+    {
+      variant: "chart",
+      label: "Growth Summary",
+      value: "$2.5M",
+      chartSrc: "/images/scheduling/up.svg",
+      chartAlt: "Icono",
+      rows: [
+        { label: "Google Ads", value: "$850K", highlight: true },
+        { label: "SEO", value: "$600K" },
+        { label: "Website & Conversio", value: "$1.05M" },
+      ],
+    },
+  ],
+};
+
+const contentEs: StadisticContent = {
+  eyebrow: "Ingresos verificados",
+  title:
+    'Crecimiento <br /> <span class="text-secondary font-georgia">Basado en datos.</span>',
+  hint: "Pasa el cursor para pausar.",
+  cards: [
+    {
+      variant: "progress",
+      label: "Preparación para Financiamiento",
+      value: "94%",
+      progress: "90%",
+      rows: [
+        { label: "Crédito empresarial", value: "742" },
+        { label: "Antigüedad del negocio", value: "4.2 años" },
+        { label: "Acceso a financiación", value: "$2.5M" },
+      ],
+    },
+    {
+      variant: "status",
+      label: "Proceso de Financiamiento",
+      items: [
+        {
+          label: "Préstamo empresarial",
+          status: "Aprobado",
+          statusColor: "text-[#29683C]",
+        },
+        {
+          label: "Línea de crédito",
+          status: "En proceso",
+          statusColor: "text-[#D3AE6A]",
+        },
+        {
+          label: "Préstamo SBA",
+          status: "Calificado",
+          statusColor: "text-[#29683C]",
+        },
+      ],
+      footerLabel: "Capital Disponible Total",
+      footerValue: "$3.4M",
+    },
+    {
+      variant: "progress",
+      label: "Crédito Empresarial",
+      value: "742",
+      valueSuffix: "+ 57 pts",
+      progress: "80%",
+      rows: [
+        { label: "Utilización del crédito", value: "21%" },
+        {
+          label: "Probabilidad de aprobación",
+          value: "96%",
+          highlight: true,
+        },
+        { label: "Calificación bancaria", value: "A+" },
+      ],
+    },
+    {
+      variant: "chart",
+      label: "Resumen de capital",
+      value: "$2.5M",
+      chartSrc: "/images/scheduling/up.svg",
+      chartAlt: "Icono",
+      rows: [
+        { label: "Préstamo empresarial", value: "$850K", highlight: true },
+        { label: "Línea de crédito", value: "$600K" },
+        { label: "Financiación de equipos", value: "$1.05M" },
+      ],
+    },
+  ],
+};
+
+const content = contentUs;
+---
+
+<section
+  class="w-full flex justify-center items-center overflow-hidden relative bg-primary"
+>
+  <div
+    class="flex flex-col justify-center items-center gap-10 md:gap-15 py-20 md:py-24.5 container-full"
+  >
+    <div class="flex flex-col justify-center items-center gap-3 md:gap-5.25">
+      <p
+        class="text-[9px] font-light tracking-[2.34px] uppercase text-white text-center uppercase"
+      >
+        {content.eyebrow}
+      </p>
+      <h2
+        class="text-[25px] md:text-[48px] leading-[100%] text-white text-center font-bold"
+        set:html={content.title}
+      />
+      <p
+        class="text-[8px] md:text-[10px] font-light text-white text-center uppercase tracking-[1px] hidden md:block"
+      >
+        {content.hint}
+      </p>
+    </div>
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center items-stretch w-full md:w-[80%] lg:w-[874px]"
+    >
+      {
+        content.cards.map((card) => (
+          <div class="card-back flex flex-col justify-center items-start px-8 py-6 border border-white/10 rounded-3xl h-full hover:-translate-y-1 transition-all duration-300 ease-in-out ">
+            <p class="text-[14px] text-white leading-[100%] font-normal">
+              {card.label}
+            </p>
+
+            {card.variant === "progress" && (
+              <>
+                <p class="text-[48px] font-semibold leading-[100%] pt-3 pb-8 text-white">
+                  {card.value}{" "}
+                  {card.valueSuffix && (
+                    <span class="text-secondary  text-[18px] font-normal">
+                      {card.valueSuffix}
+                    </span>
+                  )}
+                </p>
+                <div class="w-full h-2.5 bg-white/10 rounded-full overflow-hidden">
+                  <div
+                    class="h-full bg-secondary rounded-full transition-all duration-300"
+                    style={`width: ${card.progress};`}
+                  />
+                </div>
+                <div class="flex flex-col justify-start items-center w-full gap-4.5 pt-8">
+                  {card.rows.map((row) => (
+                    <div class="w-full flex justify-between">
+                      <p class="text-[13px] text-white leading-[100%] font-normal">
+                        {row.label}
+                      </p>
+                      <p
+                        class={`text-[16px] leading-[100%] font-normal ${row.highlight ? "text-secondary" : "text-white"}`}
+                      >
+                        {row.value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {card.variant === "status" && (
+              <>
+                <div class="w-full flex flex-col justify-center items-center gap-3 pt-6">
+                  {card.items.map((item) => (
+                    <div class="bg-white/10 w-full p-4 rounded-xl flex justify-between items-center">
+                      <p class="text-[12px] text-white leading-[100%] font-normal">
+                        {item.label}
+                      </p>
+                      <p
+                        class={`text-[12px] leading-[100%] font-normal ${item.statusColor}`}
+                      >
+                        {item.status}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <div class="flex flex-col justify-center items-center w-full gap-4.5 pt-8">
+                  <div class="w-full flex justify-between">
+                    <p class="text-[12px] text-white leading-[100%] font-normal">
+                      {card.footerLabel}
+                    </p>
+                    <p class="text-[12px] text-white leading-[100%] font-normal">
+                      {card.footerValue}
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {card.variant === "chart" && (
+              <>
+                
+                <img
+                  src={card.chartSrc}
+                  alt={card.chartAlt}
+                  class="w-full h-auto pt-2"
+                  decoding="async"
+                  loading="lazy"
+                  width="330"
+                  height="54"
+                />
+                <div class="flex flex-col justify-center items-center w-full gap-4.5 pt-2">
+                  {card.rows.map((row) => (
+                    <div class="w-full flex justify-between">
+                      <p class="text-[12px] text-white leading-[100%] font-normal">
+                        {row.label}
+                      </p>
+                      <p
+                        class={`text-[12px] leading-[100%] font-normal ${row.highlight ? "text-secondary" : "text-white"}`}
+                      >
+                        {row.value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <p class="text-[48px] font-semibold leading-[100%]  text-white mt-2">
+                  {card.value}
+                </p>
+              </>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

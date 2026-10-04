@@ -1,0 +1,211 @@
+---
+const contentUs = {
+  title:
+    'We connect tree service businesses <br/><span class="text-secondary">with the customers they need to  <br class="md:hidden"/> grow.</span>',
+  pausa: "Hover over the cursor to pause.",
+};
+
+const contentEs = {
+  title:
+    'Conectamos empresas con <br/><span class="text-secondary font-georgia">el capital que necesitan  <br class="md:hidden"/> para crecer.</span>',
+  pausa: "Pasa el cursor para pausar.",
+};
+
+const content = contentUs;
+---
+
+<section class="flex justify-center items-center w-full py-15">
+  <div
+    class="w-full flex flex-col justify-center items-center gap-[26px] md:gap-[49px]"
+  >
+    <div
+      class="flex flex-col justify-center items-center gap-3 md:gap-2.5 text-center px-4 lg:px-0"
+    >
+      <h2
+        class="text-[25px] md:text-[48px] font-semibold leading-[110%] text-white"
+        set:html={content.title}
+      />
+      <p
+        class="font-light text-[8px] md:text-[10px] letter-spacing-[1px] uppercase text-white hidden md:block"
+      >
+        {content.pausa}
+      </p>
+    </div>
+
+    <div class="flex flex-col justify-center items-center gap-2 w-full">
+      <style>
+        .carousel-track {
+          gap: 8px;
+          align-items: center;
+        }
+        .carousel {
+          overflow: hidden;
+          container-type: inline-size;
+        }
+      </style>
+
+      <!-- Carrusel 1 (Forward) -->
+      <div class="carousel overflow-hidden w-full">
+        <div class="carousel-track flex w-full">
+          <!-- Group A -->
+          <div class="carousel-slide flex shrink-0 items-center gap-2">
+            {
+              Array.from({ length: 4 }, (_, i) => (
+                <div class="overflow-hidden shrink-0 w-[calc((100cqw-8px)/2)] md:w-[calc((100cqw-16px)/3)] lg:w-[calc((100cqw-24px)/4)] aspect-[42/53] md:aspect-[354/352] h-auto relative group cursor-pointer">
+                  <div class="w-full h-full absolute z-10  transition-all duration-300 ease-in-out" />
+                  <img
+                    src={`/images/scheduling/project-${i + 1}.webp`}
+                    alt={`Video ${i + 1}`}
+                    class="w-full h-full absolute inset-0 object-cover transition-transform duration-300 ease-in-out"
+                    width="354"
+                    height="352"
+                  />
+                </div>
+              ))
+            }
+          </div>
+          <!-- Group B -->
+          <div class="carousel-slide flex shrink-0 items-center gap-2">
+            {
+              Array.from({ length: 4 }, (_, i) => (
+                <div class="overflow-hidden shrink-0 w-[calc((100cqw-8px)/2)] md:w-[calc((100cqw-16px)/3)] lg:w-[calc((100cqw-24px)/4)] aspect-[42/53] md:aspect-[354/352] h-auto relative group cursor-pointer">
+                  <div class="w-full h-full absolute z-10  transition-all duration-300 ease-in-out" />
+                  <img
+                    src={`/images/scheduling/project-${i + 1}.webp`}
+                    alt={`Video ${i + 1}`}
+                    class="w-full h-full absolute inset-0 object-cover transition-transform duration-300 ease-in-out"
+                    width="354"
+                    height="352"
+                  />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Carrusel 2 (Backward) -->
+      <div class="carousel overflow-hidden w-full" data-direction="backward">
+        <div class="carousel-track flex w-full">
+          <!-- Group B -->
+          <div class="carousel-slide flex shrink-0 items-center gap-2">
+            {
+              Array.from({ length: 4 }, (_, i) => (
+                <div class="overflow-hidden shrink-0 w-[calc((100cqw-8px)/2)] md:w-[calc((100cqw-16px)/3)] lg:w-[calc((100cqw-24px)/4)] aspect-[42/53] md:aspect-[354/352] h-auto relative group cursor-pointer">
+                  <div class="w-full h-full absolute z-10  transition-all duration-300 ease-in-out" />
+                  <img
+                    src={`/images/scheduling/project-${i + 5}.webp`}
+                    alt={`Video ${i + 5}`}
+                    class="w-full h-full absolute inset-0 object-cover transition-transform duration-300 ease-in-out"
+                    width="354"
+                    height="352"
+                  />
+                </div>
+              ))
+            }
+          </div>
+          <!-- Group A -->
+          <div class="carousel-slide flex shrink-0 items-center gap-2">
+            {
+              Array.from({ length: 4 }, (_, i) => (
+                <div class="overflow-hidden shrink-0 w-[calc((100cqw-8px)/2)] md:w-[calc((100cqw-16px)/3)] lg:w-[calc((100cqw-24px)/4)] aspect-[42/53] md:aspect-[354/352] h-auto relative group cursor-pointer">
+                  <div class="w-full h-full absolute z-10  transition-all duration-300 ease-in-out" />
+                  <img
+                    src={`/images/scheduling/project-${i + 5}.webp`}
+                    alt={`Video ${i + 5}`}
+                    class="w-full h-full absolute inset-0 object-cover transition-transform duration-300 ease-in-out"
+                    width="354"
+                    height="352"
+                  />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const carousels = document.querySelectorAll(".carousel");
+
+      carousels.forEach((carouselElement) => {
+        const carouselContainer = carouselElement as HTMLElement;
+        const track = carouselContainer.querySelector(
+          ".carousel-track",
+        ) as HTMLElement;
+        if (!track) return;
+
+        const slides = Array.from(
+          track.querySelectorAll<HTMLElement>(".carousel-slide"),
+        );
+
+        if (slides.length < 2) return;
+
+        let anim: Animation | null = null;
+        const speedPxPerSec = 25;
+        const direction =
+          carouselContainer.getAttribute("data-direction") || "forward";
+
+        function startAnim() {
+          if (anim) anim.cancel();
+
+          const first = slides[0];
+          const slideRect = first.getBoundingClientRect();
+          const slideWidth = Math.round(slideRect.width);
+
+          if (!slideWidth) return;
+
+          const trackStyle = getComputedStyle(track);
+          const gap = parseFloat(trackStyle.gap || "0") || 0;
+          const distance = slideWidth + gap;
+
+          const duration = Math.max(3000, (distance / speedPxPerSec) * 1000);
+
+          if (direction === "backward") {
+            anim = track.animate(
+              [
+                { transform: `translateX(-${distance}px)` },
+                { transform: "translateX(0px)" },
+              ],
+              { duration, iterations: Infinity, easing: "linear" },
+            );
+          } else {
+            anim = track.animate(
+              [
+                { transform: "translateX(0px)" },
+                { transform: `translateX(-${distance}px)` },
+              ],
+              { duration, iterations: Infinity, easing: "linear" },
+            );
+          }
+
+          if (carouselContainer.dataset.carouselHoverBound !== "1") {
+            carouselContainer.addEventListener("mouseenter", () =>
+              anim?.pause(),
+            );
+            carouselContainer.addEventListener("mouseleave", () =>
+              anim?.play(),
+            );
+            carouselContainer.dataset.carouselHoverBound = "1";
+          }
+        }
+
+        startAnim();
+
+        window.addEventListener("resize", () => {
+          if (anim) anim.cancel();
+
+          const newSlides = Array.from(
+            track.querySelectorAll<HTMLElement>(".carousel-slide"),
+          );
+
+          if (newSlides.length >= 2) {
+            startAnim();
+          }
+        });
+      });
+    });
+  </script>
+</section>

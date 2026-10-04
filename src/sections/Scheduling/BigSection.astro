@@ -1,0 +1,20 @@
+---
+import Hero from "./Hero.astro";
+import Videos from "./Videos.astro";
+const contentUs = {
+  stories : {
+    tag:"Building tree service businesses through proven marketing and growth systems.",
+    storie:"<span class='text-secondary'>5,000+</span> Success Stories"
+  }
+}
+---
+
+<section class='w-full flex flex-col justify-center items-center back-scheduling'>
+  <Hero/>
+  <section class='w-full flex flex-col justify-center items-center gap-7.5 py-10 border-y border-white/10'>
+    <p class="text-[10px] leading-[100%] uppercase text-white font-normal tracking-[2px]">{contentUs.stories.tag}</p>
+    <img src="/images/scheduling/logo.webp" alt="Logo Tree Hubbly Scheduling" width="974" height="275" decoding="async" loading="lazy" class='w-[276px] h-auto'/>
+    <p set:html={contentUs.stories.storie} class="text-[32px] font-normal leading-[100%] text-white"></p>
+  </section>
+  <Videos/>
+</section>

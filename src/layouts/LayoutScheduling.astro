@@ -1,0 +1,114 @@
+---
+import "../styles/global.css";
+import SEOHead from "../components/SEOHead.astro";
+
+export interface Props {
+  lang?: string;
+  title?: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+  canonicalPath?: string;
+  logoAlt?: string;
+}
+
+const contentUS = {
+  lang: "en",
+  title: "Schedule a Consultation | Prestige Growth Partners",
+  description:
+    "Schedule your consultation with Prestige Growth Partners. Learn how to access $150K to $1M in business funding and optimize your business credit.",
+  keywords:
+    "schedule business consultation, funding consultation, business credit strategy, prestige growth partners scheduling",
+  image: "/images/portada.jpg",
+  canonicalPath: "/scheduling",
+  logoAlt: "Prestige Growth Partners Logo",
+};
+
+const contentEs = {
+  lang: "es",
+  title: "Agenda una Consulta | Prestige Growth Partners",
+  description:
+    "Agenda tu consulta con Prestige Growth Partners. Descubre cómo acceder a $150K a $1M en financiación empresarial y optimiza tu crédito comercial.",
+  keywords:
+    "agendar consulta empresarial, consulta de financiación, estrategia de crédito empresarial, prestige growth partners agenda",
+  image: "/images/portada.jpg",
+  canonicalPath: "/scheduling",
+  logoAlt: "Logotipo de Prestige Growth Partners",
+};
+
+const content = contentEs;
+
+const {
+  lang = content.lang,
+  title = content.title,
+  description = content.description,
+  keywords = content.keywords,
+  image = content.image,
+  canonicalPath = content.canonicalPath,
+  logoAlt = content.logoAlt,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} class="overflow-x-clip">
+  
+  <head>
+    <SEOHead
+      lang={lang}
+      title={title}
+      description={description}
+      keywords={keywords}
+      image={image}
+      canonicalPath={canonicalPath}
+    />
+  </head>
+
+  <body
+    class="font-family antialiased overflow-x-clip bg-white flex flex-col justify-center items-center w-full"
+  >
+    <header
+      class="w-full absolute top-0 left-0 flex justify-center items-center pt-15 md:pt-[54px] pb-6 md:pb-3 z-10"
+    >
+      <a href="/" class="cursor-pointer">
+        <img
+          src="/images/logo.svg"
+          alt={logoAlt}
+          width="190"
+          height="40"
+          class="w-[147px] md:w-[190px] h-auto"
+          decoding="async"
+          loading="eager"
+        />
+      </a>
+    </header>
+    <main class="flex flex-col w-full justify-center items-center relative z-0">
+      <slot />
+    </main>
+  </body>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const animationElements = document.querySelectorAll(
+        ".animation-up-fast, .animation-fade-down, .animation-fade-left, .animation-fade-right",
+      );
+
+      const animationObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              animationObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.3 },
+      );
+
+      animationElements.forEach((element) => {
+        animationObserver.observe(element);
+      });
+    });
+  </script>
+
+
+</html>
