@@ -1,7 +1,7 @@
 RewriteEngine On
 
-# Keep the two published pages and their static assets available.
-RewriteRule ^scheduling/(programme|questionnaire)/?$ - [L]
+# Keep the published pages, confirmation page, and static assets available.
+RewriteRule ^scheduling/(programme|questionnaire|thank-you)/?$ - [L]
 RewriteRule ^(_astro|images)(/|$) - [L]
 RewriteRule ^(robots\.txt|sitemap\.xml|favicon\.ico|favicon\.svg)$ - [L]
 RewriteRule ^\.well-known(/|$) - [L]

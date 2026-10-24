@@ -14,6 +14,7 @@ export interface Props {
   includeLocationMetadata?: boolean;
   websiteLanguage?: string;
   structuredData?: object | object[];
+  noindex?: boolean;
   logoAlt?: string;
   mainClass?: string;
 }
@@ -56,6 +57,7 @@ const {
   includeLocationMetadata,
   websiteLanguage,
   structuredData,
+  noindex,
   logoAlt = content.logoAlt,
   mainClass = "flex flex-col w-full justify-center items-center relative z-0",
 } = Astro.props;
@@ -77,12 +79,52 @@ const {
       includeLocationMetadata={includeLocationMetadata}
       websiteLanguage={websiteLanguage}
       structuredData={structuredData}
+      noindex={noindex}
     />
+    <!-- Meta Pixel Code -->
+    <script is:inline>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+      );
+      fbq('init', '998111372541287');
+      if (window.top === window.self) {
+        fbq('track', 'PageView');
+      }
+    </script>
+    
   </head>
 
   <body
     class="font-family antialiased overflow-x-clip bg-white flex flex-col justify-center items-center w-full scroll-smooth"
   >
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display:none"
+        src="https://www.facebook.com/tr?id=998111372541287&ev=PageView&noscript=1"
+      />
+    </noscript>
     <header
       class="w-full absolute top-0 left-0 flex justify-center items-center pt-4 z-10"
     >
@@ -126,6 +168,71 @@ const {
         animationObserver.observe(element);
       });
     });
+  </script>
+
+  <script is:inline>
+    (() => {
+      const sourceByPath = {
+        "/scheduling/programme": "programme",
+        "/scheduling/questionnaire": "questionnaire",
+      };
+      const currentPath = window.location.pathname.replace(/\/+$/, "");
+      const currentSource = sourceByPath[currentPath];
+      const storageKey = "treehubly:pending-lead-transition:v1";
+      const maxAgeMs = 4 * 60 * 60 * 1000;
+      const trustedOrigins = [
+        window.location.origin,
+        "https://treehubly.com",
+        "https://www.treehubly.com",
+      ];
+
+      if (currentSource) {
+        try {
+          window.sessionStorage.setItem(
+            storageKey,
+            JSON.stringify({ source: currentSource, createdAt: Date.now() }),
+          );
+        } catch {
+          // Tracking should not affect page rendering when storage is unavailable.
+        }
+      }
+
+      window.addEventListener("message", (event) => {
+        if (
+          !trustedOrigins.includes(event.origin) ||
+          event.data?.type !== "treehubly:crm-thank-you" ||
+          !currentSource
+        ) {
+          return;
+        }
+
+        let shouldTrackLead = false;
+        try {
+          const pending = JSON.parse(
+            window.sessionStorage.getItem(storageKey) ?? "null",
+          );
+          if (
+            pending?.source !== currentSource ||
+            !Number.isFinite(pending?.createdAt) ||
+            Date.now() - pending.createdAt > maxAgeMs
+          ) {
+            shouldTrackLead = false;
+          } else {
+            window.sessionStorage.removeItem(storageKey);
+            shouldTrackLead = true;
+          }
+        } catch {
+          // Continue to the confirmation page even if browser storage is unavailable.
+        }
+
+        if (shouldTrackLead && typeof window.fbq === "function") {
+          window.fbq("track", "Lead");
+        }
+        window.setTimeout(() => {
+            window.location.assign("/scheduling/thank-you/");
+        }, 250);
+      });
+    })();
   </script>
 
 

@@ -4,6 +4,8 @@ Allow: /scheduling/programme$
 Allow: /scheduling/programme/$
 Allow: /scheduling/questionnaire$
 Allow: /scheduling/questionnaire/$
+Allow: /scheduling/thank-you$
+Allow: /scheduling/thank-you/$
 Allow: /_astro/
 Allow: /images/
 Allow: /favicon.ico

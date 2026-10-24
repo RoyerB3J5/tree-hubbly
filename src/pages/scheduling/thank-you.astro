@@ -1,0 +1,108 @@
+---
+import ProgrammeFooter from "../../components/scheduling/programme/ProgrammeFooter.astro";
+import { programmeContent } from "../../content/schedulingProgramme";
+import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
+
+const thankYouUrl = "https://treehubly.com/scheduling/thank-you/";
+const thankYouDescription =
+  "Hemos recibido tu información. Revisa tu correo para conocer la confirmación y los siguientes pasos con Treehubly.";
+const thankYouSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": thankYouUrl,
+  name: "Gracias por completar el formulario | Treehubly",
+  description: thankYouDescription,
+  url: thankYouUrl,
+  inLanguage: "es",
+  isPartOf: { "@id": "https://treehubly.com/#website" },
+};
+---
+
+<LayoutScheduling
+  lang="es"
+  title="Gracias por completar el formulario | Treehubly"
+  description={thankYouDescription}
+  keywords="confirmación de formulario, gracias Treehubly"
+  image="/images/portada.jpg"
+  canonicalUrl={thankYouUrl}
+  includeLanguageAlternates={false}
+  includeLocationMetadata={false}
+  websiteLanguage="es"
+  structuredData={thankYouSchema}
+  noindex={true}
+  mainClass="w-full flex flex-col justify-center items-center relative z-0 gap-10 bg-[#04121E]"
+>
+  <section class="w-full min-h-[70vh] flex justify-center items-center px-5 pt-28 pb-16">
+    <div class="container-full flex flex-col justify-center items-center gap-6 text-center text-[#F7F7F7]">
+      <div class="w-16 h-16 rounded-full bg-secondary flex justify-center items-center" aria-hidden="true">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="m5 12 4 4L19 6"
+            stroke="#04121E"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+      <h1 class="max-w-[900px] text-[28px] md:text-[36px] lg:text-[44px] font-bold leading-[140%] font-title-libre">
+        ¡Gracias por completar el formulario!
+      </h1>
+      <p class="max-w-[720px] text-[16px] md:text-[19px] font-normal leading-[150%]">
+        Hemos recibido tu información. Nos estaremos poniendo en contacto contigo en breve.
+      </p>
+    </div>
+  </section>
+  <script is:inline>
+    (() => {
+      if (window.top !== window.self) {
+        window.parent.postMessage(
+          { type: "treehubly:crm-thank-you" },
+          "*",
+        );
+        return;
+      }
+
+      const sourceByPath = {
+        "/scheduling/programme": "programme",
+        "/scheduling/questionnaire": "questionnaire",
+      };
+      const storageKey = "treehubly:pending-lead-transition:v1";
+      const maxAgeMs = 4 * 60 * 60 * 1000;
+      const referrer = document.referrer ? new URL(document.referrer) : null;
+      const referrerPath = referrer?.pathname.replace(/\/+$/, "");
+      const referrerSource =
+        referrer?.origin === window.location.origin
+          ? sourceByPath[referrerPath]
+          : null;
+      const cameFromCrm = referrer?.hostname === "link.inkshapecrm.com";
+
+      try {
+        const pending = JSON.parse(
+          window.sessionStorage.getItem(storageKey) ?? "null",
+        );
+        if (
+          pending?.source &&
+          Number.isFinite(pending?.createdAt) &&
+          Date.now() - pending.createdAt <= maxAgeMs &&
+          (pending.source === referrerSource || cameFromCrm)
+        ) {
+          window.sessionStorage.removeItem(storageKey);
+          if (typeof window.fbq === "function") {
+            window.fbq("track", "Lead");
+          }
+        }
+      } catch {
+        // Do not interrupt the confirmation page if browser storage is unavailable.
+      }
+    })();
+  </script>
+  <ProgrammeFooter slot="footer" content={programmeContent.footer} />
+</LayoutScheduling>
