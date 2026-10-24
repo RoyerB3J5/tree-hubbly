@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /
+Allow: /scheduling/programme$
+Allow: /scheduling/programme/$
+Allow: /_astro/
+Allow: /images/
+Allow: /favicon.ico
+Allow: /favicon.svg
+Allow: /robots.txt
+Allow: /sitemap.xml
+
+Sitemap: https://treehubly.com/sitemap.xml

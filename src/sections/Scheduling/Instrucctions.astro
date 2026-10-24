@@ -1,0 +1,109 @@
+---
+
+const contentUS = {
+  eyebrow: "Before the call",
+  heading: "Watch these videos in order",
+  title:
+    'Before the call, <br /> <span class="text-secondary ">answer these questions</span>',
+  description:
+    'Each video takes under 2 minutes. <br class="md:hidden" />Watch them in order.',
+  videos: [
+    {
+      title: "What exactly is Treehubly?",
+      playerId: "6a8e1b69107f2d3d63441ccf", // Vid 2
+    },
+    {
+      title: "What results are possible and in what timeframe?",
+      playerId: "6a8e1b81efad49d8f1e1567a", // Vid 3
+    },
+    {
+      title: "What if it doesn't work for you?",
+      playerId: "6a8e1bae4f8274c280d53f28", // Vid 4
+    },
+  ],
+};
+
+const contentEs = {
+  heading: "Mira estos videos en orden",
+  title:
+    'Antes de la llamada, <br /> <span class="text-secondary font-title-libre">revisa los siguientes 4 videos</span>',
+  description:
+    'Cada video dura menos de 2 minutos. <br class="md:hidden" />Míralos en orden.',
+  videos: [
+    {
+      title: "¿Qué es exactamente Prestige Growth Partners?",
+      playerId: "6a8e1b69107f2d3d63441ccf", // Vid 2
+    },
+    {
+      title: "¿Qué resultados son posibles y en cuánto tiempo?",
+      playerId: "6a8e1b81efad49d8f1e1567a", // Vid 3
+    },
+    {
+      title: "¿Quién es Ronmel Charry?",
+      playerId: "6a8e1bae4f8274c280d53f28", // Vid 4
+    },
+    {
+      title: "¿Qué pasa si no funciona para ti?",
+      playerId: "6a8e1bd62755c475e3b4fc02", // Vid 5
+    },
+  ],
+};
+
+const content = contentUS;
+---
+
+<section
+  class="flex justify-center items-center w-full flex-col py-14 md:py-20 gap-10"
+>
+  <div class="flex justify-center items-center gap-4 w-[60%]">
+    <div class="w-[30%] h-[1px] bg-[#263A4B]"></div>
+    <p class="text-[10px] font-normal leading-[100%] tracking-[1.56px] uppercase text-white  whitespace-nowrap">{content.eyebrow}</p>
+    <div class="w-[30%] h-[1px] bg-[#263A4B]"></div>
+  </div>
+  <div class="flex flex-col justify-center items-center gap-6 text-white">
+    <p
+      class="text-[14px] font-bold leading-[100%] tracking-[2.24px] text-white uppercase"
+    >
+      {content.heading}
+    </p>
+    <h2
+      class="text-[24px] md:text-[36px] lg:text-[41px] font-bold leading-[140%] md:leading-[138%] text-white font-title-libre text-center"
+      set:html={content.title}
+    />
+    <p
+      class="text-[16px] md:text-[19px] font-normal leading-[150%] text-center text-white"
+      set:html={content.description}
+    />
+  </div>
+  <div
+    class="flex flex-col justify-center items-center w-full px-4 md:px-0 mt-10"
+  >
+    {
+      content.videos.map((item) => (
+        <>
+          <div class="flex flex-col jusitfy-center items-center gap-[14px] w-full">
+            <h2 class="txet-[16px] md:text-[24px] text-white leading-[130%] text-white">
+              {item.title}
+            </h2>
+            <div class="w-full md:w-auto h-auto p-2.5 flex justify-center items-center rounded-3xl border-2 border-white/20">
+              <div class="h-auto md:h-[388px] w-full md:w-auto rounded-2xl aspect-video overflow-hidden bg-white">
+                
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col justify-center items-center gap-[2px] py-5 last:hidden">
+            <span class="text-secondary/50 text-[20.8px] leading-[100%] font-family-times font-normal">
+              ↓
+            </span>
+            <span class="text-secondary text-[20.8px] leading-[100%] font-family-times font-normal">
+              ↓
+            </span>
+            <span class="text-secondary/25 text-[20.8px] leading-[100%] font-family-times font-normal">
+              ↓
+            </span>
+          </div>
+        </>
+      ))
+    }
+  </div>
+</section>

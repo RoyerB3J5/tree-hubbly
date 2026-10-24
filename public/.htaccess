@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Keep the published landing page and its static assets available.
+RewriteRule ^scheduling/programme/?$ - [L]
+RewriteRule ^(_astro|images)(/|$) - [L]
+RewriteRule ^(robots\.txt|sitemap\.xml|favicon\.ico|favicon\.svg)$ - [L]
+RewriteRule ^\.well-known(/|$) - [L]
+
+# Temporarily send every other page path to the published landing page.
+RewriteRule ^.*$ /scheduling/programme/ [R=302,L,NE]

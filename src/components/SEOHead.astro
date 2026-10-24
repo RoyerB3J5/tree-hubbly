@@ -13,6 +13,10 @@ export interface Props {
   keywords?: string;
   image?: string;
   canonicalPath?: string;
+  canonicalUrl?: string;
+  includeLanguageAlternates?: boolean;
+  includeLocationMetadata?: boolean;
+  websiteLanguage?: string;
   noindex?: boolean;
   type?: string;
   structuredData?: object | object[];
@@ -26,8 +30,12 @@ const {
   title = "Treehubly - The Growth System for Tree Services",
   description = "Treehubly helps tree companies generate better leads, book more jobs, and scale with a structured growth ecosystem.",
   keywords = "Tree Services, Lead Generation, Growth System, Marketing Automation, Tree Company Growth, Tree Service Marketing, Tree Service Leads, Tree Service Automation, Tree Service Performance, TreeHubly Growth System",
-  image = "/images/fondo.png",
+  image = "/images/portada.jpg",
   canonicalPath = "",
+  canonicalUrl,
+  includeLanguageAlternates = true,
+  includeLocationMetadata = true,
+  websiteLanguage,
   noindex = false,
   type = "website",
   structuredData,
@@ -40,7 +48,7 @@ const cleanPath = canonicalPath.startsWith("/")
 const formattedPath = cleanPath === "/" ? "" : cleanPath;
 
 // Formatted URLs for SEO & Hreflang
-const currentCanonical = `${SITE_URL}/${lang}${formattedPath}`;
+const currentCanonical = canonicalUrl ?? `${SITE_URL}/${lang}${formattedPath}`;
 const enUrl = `${SITE_URL}/en${formattedPath}`;
 const esUrl = `${SITE_URL}/es${formattedPath}`;
 const defaultUrl = enUrl;
@@ -49,6 +57,9 @@ const defaultUrl = enUrl;
 const absoluteImage = image.startsWith("http")
   ? image
   : `${SITE_URL}${image.startsWith("/") ? "" : "/"}${image}`;
+const socialProfiles = [instagramLink, facebookLink].filter(
+  (profile) => profile && profile !== "#",
+);
 
 // Base Organization Schema
 const organizationSchema = {
@@ -61,20 +72,24 @@ const organizationSchema = {
   logo: `${SITE_URL}/favicon.svg`,
   image: absoluteImage,
   description: description,
-  telephone: phoneNumber,
-  email: emailAddress,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Orlando",
-    addressRegion: "FL",
-    addressCountry: "US",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 28.5383,
-    longitude: -81.3792,
-  },
-  sameAs: [instagramLink, facebookLink].filter(Boolean),
+  ...(phoneNumber !== "#" ? { telephone: phoneNumber } : {}),
+  ...(emailAddress !== "#" ? { email: emailAddress } : {}),
+  ...(includeLocationMetadata
+    ? {
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Orlando",
+          addressRegion: "FL",
+          addressCountry: "US",
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: 28.5383,
+          longitude: -81.3792,
+        },
+      }
+    : {}),
+  ...(socialProfiles.length > 0 ? { sameAs: socialProfiles } : {}),
 };
 
 const websiteSchema = {
@@ -86,10 +101,12 @@ const websiteSchema = {
   publisher: {
     "@id": `${SITE_URL}/#organization`,
   },
-  inLanguage: [
-    { "@type": "Language", name: "English", alternateName: "en" },
-    { "@type": "Language", name: "Spanish", alternateName: "es" },
-  ],
+  inLanguage: websiteLanguage
+    ? websiteLanguage
+    : [
+        { "@type": "Language", name: "English", alternateName: "en" },
+        { "@type": "Language", name: "Spanish", alternateName: "es" },
+      ],
 };
 
 // Custom schemas passed via props
@@ -117,11 +134,14 @@ const allSchemas = [organizationSchema, websiteSchema, ...customSchemas];
     : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
 />
 
-<!-- Location Meta Tags -->
-<meta name="geo.region" content="US-FL" />
-<meta name="geo.placename" content="Orlando" />
-<meta name="geo.position" content="28.5383;-81.3792" />
-<meta name="ICBM" content="28.5383, -81.3792" />
+{includeLocationMetadata && (
+  <>
+    <meta name="geo.region" content="US-FL" />
+    <meta name="geo.placename" content="Orlando" />
+    <meta name="geo.position" content="28.5383;-81.3792" />
+    <meta name="ICBM" content="28.5383, -81.3792" />
+  </>
+)}
 
 <!-- Links & Preconnect -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -135,9 +155,13 @@ const allSchemas = [organizationSchema, websiteSchema, ...customSchemas];
 
 <!-- Canonical & Hreflang -->
 <link rel="canonical" href={currentCanonical} />
-<link rel="alternate" hreflang="en" href={enUrl} />
-<link rel="alternate" hreflang="es" href={esUrl} />
-<link rel="alternate" hreflang="x-default" href={defaultUrl} />
+{includeLanguageAlternates && (
+  <>
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="es" href={esUrl} />
+    <link rel="alternate" hreflang="x-default" href={defaultUrl} />
+  </>
+)}
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />

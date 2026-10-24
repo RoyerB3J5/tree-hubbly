@@ -1,0 +1,71 @@
+<link
+  rel="preconnect"
+  href="https://link.inkshapecrm.com"
+  crossorigin="anonymous"
+/>
+<div class="relative min-h-[800px] w-full">
+  <div
+    id="booking-form-spinner"
+    class="absolute inset-0 z-10 flex items-center justify-center"
+    aria-label="Cargando formulario"
+  >
+    <svg
+      class="h-8 w-8 animate-spin text-gray-500"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <circle
+        class="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        stroke-width="4"></circle>
+      <path
+        class="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+    </svg>
+  </div>
+  <iframe
+    src="https://link.inkshapecrm.com/widget/booking/pHdunwzN5jl2H4aBhNup"
+    class="relative z-20 min-h-[800px] w-full border-none"
+    style="width: 100%; border: none; overflow: hidden;"
+    scrolling="no"
+    loading="eager"
+    id="yFOH38N0H3OhKeWXG62l_1792264284443"
+    title="Formulario de reserva"
+    allow="payment"
+    onload={`document.getElementById('booking-form-spinner')?.style.setProperty('display', 'none');`}
+  ></iframe>
+  <p
+    id="booking-form-fallback"
+    class="absolute inset-x-4 top-1/2 z-10 hidden -translate-y-1/2 text-center text-white"
+  >
+    No se pudo cargar el formulario. <a
+      href="https://link.inkshapecrm.com/widget/booking/pHdunwzN5jl2H4aBhNup"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="underline">Abrir formulario</a
+    >
+  </p>
+  <script async defer src="https://link.inkshapecrm.com/js/form_embed.js"
+  ></script>
+</div>
+
+<script is:inline>
+  const bookingIframe = document.getElementById(
+    "pHdunwzN5jl2H4aBhNup_1792430583731",
+  );
+  const bookingSpinner = document.getElementById("booking-form-spinner");
+  const bookingFallback = document.getElementById("booking-form-fallback");
+
+  window.setTimeout(() => {
+    if (bookingIframe && bookingSpinner?.style.display !== "none") {
+      bookingSpinner.style.display = "none";
+      if (bookingFallback) bookingFallback.style.display = "block";
+    }
+  }, 15000);
+</script>

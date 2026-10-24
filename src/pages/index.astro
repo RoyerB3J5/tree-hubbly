@@ -3,8 +3,9 @@
     const p = window.location.pathname;
     // Solo redirigir si la ruta es exactamente "/" o cadena vacía
     if (p === '/' || p === '') {
-      // Redirige a "/en/", manteniendo query y hash si existen
-      const destino = '/en/' + window.location.search + window.location.hash;
+      // Mantiene la landing publicada como única página de entrada.
+      const destino =
+        '/scheduling/programme/' + window.location.search + window.location.hash;
       window.location.replace(destino);
     }
   }

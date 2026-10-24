@@ -9,6 +9,11 @@ export interface Props {
   keywords?: string;
   image?: string;
   canonicalPath?: string;
+  canonicalUrl?: string;
+  includeLanguageAlternates?: boolean;
+  includeLocationMetadata?: boolean;
+  websiteLanguage?: string;
+  structuredData?: object | object[];
   logoAlt?: string;
 }
 
@@ -45,6 +50,11 @@ const {
   keywords = content.keywords,
   image = content.image,
   canonicalPath = content.canonicalPath,
+  canonicalUrl,
+  includeLanguageAlternates,
+  includeLocationMetadata,
+  websiteLanguage,
+  structuredData,
   logoAlt = content.logoAlt,
 } = Astro.props;
 ---
@@ -60,6 +70,11 @@ const {
       keywords={keywords}
       image={image}
       canonicalPath={canonicalPath}
+      canonicalUrl={canonicalUrl}
+      includeLanguageAlternates={includeLanguageAlternates}
+      includeLocationMetadata={includeLocationMetadata}
+      websiteLanguage={websiteLanguage}
+      structuredData={structuredData}
     />
   </head>
 
@@ -69,7 +84,7 @@ const {
     <header
       class="w-full absolute top-0 left-0 flex justify-center items-center pt-7 md:pt-[54px] pb-2 md:pb-3 z-10"
     >
-      <a href="/" class="cursor-pointer">
+      <a href="/scheduling/programme/" class="cursor-pointer">
         <img
           src="/images/logo.svg"
           alt={logoAlt}

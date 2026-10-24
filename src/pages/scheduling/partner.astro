@@ -1,0 +1,54 @@
+---
+
+import FormContact from "../../components/FormContact.astro";
+import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
+
+const seoDescription =
+  "Sistema de marketing y automatización para compañías de tree service en Estados Unidos. Genera más reseñas, responde leads y agenda trabajos con un plan personalizado.";
+const programmeUrl = "https://treehubly.com/scheduling/programme/";
+const programmeSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": programmeUrl,
+    name: "Más llamadas y trabajos agendados para tree services",
+    description: seoDescription,
+    url: programmeUrl,
+    inLanguage: "es",
+    isPartOf: { "@id": "https://treehubly.com/#website" },
+    about: { "@id": `${programmeUrl}#service` },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${programmeUrl}#service`,
+    name: "Sistema de marketing para compañías de tree service",
+    serviceType:
+      "Marketing, seguimiento de leads y automatización de citas para empresas de tree service",
+    description: seoDescription,
+    url: programmeUrl,
+    provider: { "@id": "https://treehubly.com/#organization" },
+    areaServed: { "@type": "Country", name: "United States" },
+    audience: {
+      "@type": "BusinessAudience",
+      audienceType:
+        "Propietarios de compañías de tree service con equipos operativos en Estados Unidos",
+    },
+  },
+];
+---
+
+<LayoutScheduling
+  lang="es"
+  title="Marketing para tree services en EE. UU. | Treehubly"
+  description={seoDescription}
+  keywords="marketing para tree service, leads para tree service, automatización de citas, seguimiento de leads, más trabajos agendados"
+  image="/images/portada.jpg"
+  canonicalUrl={programmeUrl}
+  includeLanguageAlternates={false}
+  includeLocationMetadata={false}
+  websiteLanguage="es"
+  structuredData={programmeSchema}
+>
+  
+</LayoutScheduling>

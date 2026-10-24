@@ -20,6 +20,25 @@
   body {
     font-family: var(--font-family);
   }
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1;
+
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+
+    -webkit-text-size-adjust: 100%;
+  }
+
+  *::before,
+  *::after {
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
 }
 html {
   -webkit-text-size-adjust: 100%;
@@ -351,6 +370,15 @@ html {
     rgba(5, 23, 37, 0) 48.17%,
     #051725 109.02%
   );
+}
+@media (max-width: 768px) {
+  .results-back {
+    background: linear-gradient(
+      180deg,
+      rgba(5, 23, 37, 0) -9.04%,
+      #051725 90.03%
+    );
+  }
 }
 
 .card-back {

@@ -1,0 +1,66 @@
+/* Ajusta react-phone-number-input al mismo look de los <input> del formulario */
+
+.estimate-form input {
+  text-box-trim: none;
+  text-box-edge: auto;
+}
+
+.estimate-phone-input.PhoneInput {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border-radius: 0.5rem; /* rounded-lg */
+  border: 1px solid #e3e3e3;
+  background-color: rgba(0, 0, 0, 0.1); /* bg-black/10 */
+  padding: 0 1rem; /* px-4 */
+}
+
+.estimate-phone-input.PhoneInput--focus {
+  border-color: var(--color-secondary, #c9a961);
+}
+
+.estimate-phone-input .PhoneInputCountry {
+  margin-right: 0;
+}
+
+.estimate-phone-input .PhoneInputCountrySelect {
+  background: transparent;
+  /* El navegador pinta la lista nativa de países usando este color.
+     Sin esto, hereda el color blanco del formulario y el texto de las
+     opciones queda invisible (blanco sobre blanco). */
+  color: #1a1a1a;
+}
+
+.estimate-phone-input .PhoneInputCountrySelect option {
+  color: #1a1a1a;
+  background-color: #ffffff;
+}
+
+.estimate-phone-input .PhoneInputCountryIcon {
+  width: 24px;
+  height: 18px;
+  box-shadow: none;
+}
+
+.estimate-phone-input .PhoneInputCountrySelectArrow {
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 1;
+}
+
+.estimate-phone-input .PhoneInputInput {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 1.3125rem 0; /* aprox py-5.25 del input original */
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #ffffff;
+}
+
+.estimate-phone-input .PhoneInputInput::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}

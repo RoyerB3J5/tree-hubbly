@@ -1,0 +1,207 @@
+---
+import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
+import BookingWidget from "../../components/BookingWidget.astro";
+---
+
+<LayoutScheduling>
+  <main class="w-full flex flex-col justify-center items-center relative z-0">
+    <aside
+      id="lead-received-toast"
+      class="lead-received-toast"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      hidden
+    >
+      <div class="lead-received-toast__content">
+        <span class="lead-received-toast__icon" aria-hidden="true">✓</span>
+        <div>
+          <p class="lead-received-toast__title">
+            ¡Gracias! Recibimos tu solicitud.
+          </p>
+          <p class="lead-received-toast__message">
+            Nuestro equipo revisará la información de tu negocio para
+            identificar las alternativas disponibles. El siguiente paso es
+            programar una conversación con uno de nuestros especialistas.
+          </p>
+        </div>
+      </div>
+      <button
+        id="lead-received-toast-close"
+        class="lead-received-toast__close"
+        type="button"
+        aria-label="Cerrar mensaje"
+      >
+        ×
+      </button>
+    </aside>
+    <section
+      class="w-full min-h-screen overflow-hidden flex justify-center items-center relative"
+    >
+      <div
+        class="w-full h-full back-scheduling absolute inset-0 z-2"
+      >
+      </div>
+      <div
+        class="relative z-10 container-full flex justify-center items-center h-full pt-20 md:pt-34 pb-20 md:py-20"
+      >
+      {/* <BookingWidget />*/}
+        
+      </div>
+    </section>
+  </main>
+</LayoutScheduling>
+
+<style>
+  .lead-received-toast[hidden] {
+    display: none;
+  }
+
+  .lead-received-toast {
+    position: fixed;
+    z-index: 100;
+    top: max(1.25rem, env(safe-area-inset-top));
+    right: max(1.25rem, env(safe-area-inset-right));
+    width: min(26rem, calc(100vw - 2.5rem));
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1rem 1rem 1.1rem;
+    border: 1px solid rgb(211 174 106 / 55%);
+    border-radius: 0.875rem;
+    background: linear-gradient(145deg, #102719, #07140c);
+    color: #fff;
+    box-shadow: 0 18px 48px rgb(0 0 0 / 36%);
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    transition:
+      opacity 220ms ease,
+      transform 220ms ease;
+  }
+
+  .lead-received-toast[data-visible="true"] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .lead-received-toast__content {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .lead-received-toast__icon {
+    display: grid;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex: 0 0 1.5rem;
+    place-items: center;
+    border-radius: 9999px;
+    background: #d3ae6a;
+    color: #0a160d;
+    font-size: 0.95rem;
+    font-weight: 800;
+  }
+
+  .lead-received-toast__title {
+    margin: 0 1.25rem 0.4rem 0;
+    color: #f1d58c;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .lead-received-toast__message {
+    margin: 0;
+    color: rgb(255 255 255 / 88%);
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+
+  .lead-received-toast__close {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.65rem;
+    display: grid;
+    width: 1.75rem;
+    height: 1.75rem;
+    place-items: center;
+    border: 0;
+    border-radius: 9999px;
+    background: transparent;
+    color: rgb(255 255 255 / 76%);
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .lead-received-toast__close:hover {
+    background: rgb(255 255 255 / 10%);
+    color: #fff;
+  }
+
+  @media (max-width: 767px) {
+    .lead-received-toast {
+      top: max(5.5rem, calc(env(safe-area-inset-top) + 5rem));
+      right: 1rem;
+      width: calc(100vw - 2rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lead-received-toast {
+      transition: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  const initCalendarTracking = () => {
+    try {
+      const hasPendingLeadTransition =
+        window.sessionStorage.getItem("prestige-pending-lead-transition") === "1";
+      window.sessionStorage.removeItem("prestige-pending-lead-transition");
+
+      const referrer = document.referrer ? new URL(document.referrer) : null;
+      const cameFromEstimateForm =
+        referrer?.origin === window.location.origin &&
+        ["/scheduling/questions", "/scheduling/questionnaire"].includes(
+          referrer.pathname.replace(/\/$/, ""),
+        );
+
+      if (hasPendingLeadTransition && cameFromEstimateForm) {
+        fbq("track", "Lead");
+
+        const toast = document.getElementById("lead-received-toast");
+        const closeButton = document.getElementById("lead-received-toast-close");
+        if (toast && closeButton) {
+          toast.hidden = false;
+          window.requestAnimationFrame(() => {
+            toast.dataset.visible = "true";
+          });
+
+          let dismissTimer;
+          const dismissToast = () => {
+            toast.dataset.visible = "false";
+            window.clearTimeout(dismissTimer);
+            window.setTimeout(() => {
+              toast.hidden = true;
+            }, 240);
+            closeButton.removeEventListener("click", dismissToast);
+          };
+
+          closeButton.addEventListener("click", dismissToast);
+          dismissTimer = window.setTimeout(dismissToast, 3000);
+        }
+      }
+
+      // Used once by greatfulness to confirm this tab came through the calendar.
+      window.sessionStorage.setItem("prestige-pending-schedule-transition", "1");
+    } catch {
+      // Keep calendar rendering if browser storage is unavailable.
+    }
+  };
+
+  initCalendarTracking();
+</script>

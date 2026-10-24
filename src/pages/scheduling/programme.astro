@@ -1,0 +1,143 @@
+---
+
+import FormContact from "../../components/FormContact.astro";
+import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
+
+
+const contentEs = {
+  description: "El sistema automatizado que usan compañías de tree service en <br class='hidden md:block'/> EE. UU. para liderar su zona",
+  title:
+    "Más reseñas, más llamadas y <br class='hidden md:block'/><span class='text-secondary'>más trabajos agendados</span>",
+  description2:
+    "Con un Plan personalizado, sin depender de referidos no leads compartidos. <br class='hidden md:block'/> Agendamos por ti; tú solo llegas a la visita",
+  paragraph1:
+    "<span class='text-secondary underline'>PASO 1:</span> Mira el video",
+  paragraph2:
+    "*Agenda SOLO si eres dueño de una compañía de tree service con crews operando en Estados Unidos",
+};
+
+const content = contentEs;
+const seoDescription =
+  "Sistema de marketing y automatización para compañías de tree service en Estados Unidos. Genera más reseñas, responde leads y agenda trabajos con un plan personalizado.";
+const programmeUrl = "https://treehubly.com/scheduling/programme/";
+const programmeSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": programmeUrl,
+    name: "Más llamadas y trabajos agendados para tree services",
+    description: seoDescription,
+    url: programmeUrl,
+    inLanguage: "es",
+    isPartOf: { "@id": "https://treehubly.com/#website" },
+    about: { "@id": `${programmeUrl}#service` },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${programmeUrl}#service`,
+    name: "Sistema de marketing para compañías de tree service",
+    serviceType:
+      "Marketing, seguimiento de leads y automatización de citas para empresas de tree service",
+    description: seoDescription,
+    url: programmeUrl,
+    provider: { "@id": "https://treehubly.com/#organization" },
+    areaServed: { "@type": "Country", name: "United States" },
+    audience: {
+      "@type": "BusinessAudience",
+      audienceType:
+        "Propietarios de compañías de tree service con equipos operativos en Estados Unidos",
+    },
+  },
+];
+---
+
+<LayoutScheduling
+  lang="es"
+  title="Marketing para tree services en EE. UU. | Treehubly"
+  description={seoDescription}
+  keywords="marketing para tree service, leads para tree service, automatización de citas, seguimiento de leads, más trabajos agendados"
+  image="/images/portada.jpg"
+  canonicalUrl={programmeUrl}
+  includeLanguageAlternates={false}
+  includeLocationMetadata={false}
+  websiteLanguage="es"
+  structuredData={programmeSchema}
+>
+  <main class="w-full flex flex-col justify-center items-center relative z-0 back-scheduling gap-10">
+    
+    <div
+      class="container-full flex flex-col justify-center items-center pt-[91px] md:pt-35 gap-6"
+    >
+      <div class="flex flex-col justify-center items-center gap-[29px] w-full">
+        <p
+                    class="text-[16px] lg:text-[19px] font-normal leading-[150%] text-center text-white"
+
+          set:html={content.description}
+        />
+        <h1
+          class="text-[26px] md:text-[36px] lg:text-[44px] font-bold leading-[140%] md:leading-[138%] text-white max-w-[1118px] text-center font-title-libre tracking-[0.8px]"
+          set:html={content.title}
+        />
+      </div>
+      <div class="flex flex-col justify-center items-center gap-6 md:gap-[19px]">
+        <p
+          class="text-[16px] lg:text-[19px] font-normal leading-[150%] text-center text-white"
+          set:html={content.description2}
+        />
+        <p
+              class="text-[16px] md:text-[18px] lg:text-[26px] font-semibold leading-[150%] text-center text-white my-0 md:my-4"
+              set:html={content.paragraph1}
+            />
+        <div
+          class="relative w-full h-auto md:w-[530px] lg:w-[631px] max-w-full overflow-hidden rounded-3xl aspect-video bg-white"
+        >
+          
+        </div>
+      </div>
+      <div class="flex flex-col justify-center items-center gap-[19px]  border border-secondary py-4 w-full md:w-[530px] lg:w-[631px] mt-4 rounded-3xl">
+          <p class="text-[12px] md:text-[18px] font-medium leading-[150%] md:leading-[168%] text-center text-secondary">
+            {content.paragraph2}
+          </p>
+        </div>
+      
+    </div>
+    <section
+      class="w-full flex justify-center items-center"
+      id="form"
+    >
+      <div
+        class="relative z-10 container-full flex flex-col justify-center items-center h-full py-10 md:py-0 gap-10 md:gap-0"
+      >
+        <div class="flex flex-col justify-center items-center gap-8">
+          <h2
+            class="text-[16px] md:text-[18px] lg:text-[26px] font-semibold leading-[150%] text-center text-white my-0 md:my-4"
+          >
+            <span class="text-secondary underline">PASO 2:</span> Agenda tu llamada de diagnóstico
+          </h2>
+          <p class="text-white text-[14px] md:text-[16px] font-regular text-center">
+            (30 minutos. Si no encuentras un horario disponible, escríbenos por  <a
+              href="#"
+              class="hover:text-secondary">WhatsApp aquí</a>)
+          </p>
+        </div>
+        <FormContact />
+      </div>
+    </section>
+    <div class='container-full flex justify-between items-center py-6'>
+    <a href="/scheduling/programme/" class="cursor-pointer">
+        <img
+          src="/images/logo.svg"
+          alt="logo de Treehubly"
+          width="190"
+          height="40"
+          class="w-[154px] h-auto"
+          decoding="async"
+          loading="eager"
+        />
+      </a>
+      <p class='text-[13.6px] text-white font-normal leading-[100%]'>© 2026 Treehubly · Privacy</p>
+    </div>
+  </main>
+  
+</LayoutScheduling>
