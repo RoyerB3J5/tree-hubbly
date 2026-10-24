@@ -1,0 +1,54 @@
+---
+import type { ProgrammeContent } from "../../../content/schedulingProgramme";
+
+interface Props {
+  content: ProgrammeContent["footer"];
+}
+
+const { content } = Astro.props;
+---
+
+<footer class="w-full bg-[#04121E] flex flex-col justify-center items-center relative z-0">
+  <div class="container-full flex justify-between items-center py-6">
+    <a href={content.href} class="cursor-pointer">
+      <img
+        src="/images/logo.svg"
+        alt={content.logoAlt}
+        width="190"
+        height="40"
+        class="w-[154px] h-auto"
+        decoding="async"
+        loading="eager"
+      />
+    </a>
+    <p class="text-[13.6px] text-[#F7F7F7] font-normal leading-[100%]">
+      {content.copyright}
+    </p>
+  </div>
+  <div
+    class="bg-[#E5E5E5] w-full py-3.5 lg:py-4.5 flex justify-center items-center px-5 xl:px-0"
+  >
+    <div
+      class="w-full max-w-screen lg:max-w-7xl flex flex-col lg:flex-row justify-center items-center gap-2 lg:gap-6"
+    >
+      <a href="https://inkshapegroup.com/en/">
+        <img
+          src="/images/inkshape.svg"
+          alt=" Logo de Inkshape Group"
+          width="208"
+          height="40"
+          class="w-27.5 md:w-34 h-auto block "
+        />
+      </a>
+      <p
+        class="text-[10px] lg:text-[12px] lg:text-[13px] leading-[170%] lg:leading-[120%] text-[#404040] font-normal text-center"
+      >
+        Copyright © 2026&nbsp;by <a href="https://inkshapegroup.com"
+          >Inkshape Group</a
+        >&nbsp;|&nbsp;Privacy&nbsp;|&nbsp;<a href="/">TreeHubly</a> |&nbsp;Orlando&nbsp;|&nbsp;Call Now: <a
+          href="tel:+14075023684">407-502-3684</a
+        >
+      </p>
+    </div>
+  </div>
+</footer>

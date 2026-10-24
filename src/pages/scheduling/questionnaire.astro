@@ -1,0 +1,39 @@
+---
+import ProgrammeBooking from "../../components/scheduling/programme/ProgrammeBooking.astro";
+import ProgrammeFooter from "../../components/scheduling/programme/ProgrammeFooter.astro";
+import ProgrammeHero from "../../components/scheduling/programme/ProgrammeHero.astro";
+import { programmeContent } from "../../content/schedulingProgramme";
+import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
+
+const questionnaireUrl = "https://treehubly.com/scheduling/questionnaire/";
+const questionnaireDescription =
+  "Completa el cuestionario de Treehubly para evaluar si tu compañía de tree service en Estados Unidos califica para nuestro sistema de marketing y generación de trabajos.";
+const questionnaireSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": questionnaireUrl,
+  name: "Cuestionario para compañías de tree service | Treehubly",
+  description: questionnaireDescription,
+  url: questionnaireUrl,
+  inLanguage: "es",
+  isPartOf: { "@id": "https://treehubly.com/#website" },
+};
+---
+
+<LayoutScheduling
+  lang="es"
+  title="Cuestionario para compañías de tree service | Treehubly"
+  description={questionnaireDescription}
+  keywords="cuestionario para tree service, calificar compañía de tree service, marketing para tree service, Treehubly"
+  image="/images/portada.jpg"
+  canonicalUrl={questionnaireUrl}
+  includeLanguageAlternates={false}
+  includeLocationMetadata={false}
+  websiteLanguage="es"
+  structuredData={questionnaireSchema}
+  mainClass="w-full flex flex-col justify-center items-center relative z-0 gap-10 bg-[#04121E]"
+>
+  <ProgrammeHero content={programmeContent.hero} different={true} />
+  <ProgrammeBooking content={programmeContent.booking} />
+  <ProgrammeFooter slot="footer" content={programmeContent.footer} />
+</LayoutScheduling>

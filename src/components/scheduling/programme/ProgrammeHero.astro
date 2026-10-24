@@ -1,0 +1,65 @@
+---
+import type { ProgrammeContent } from "../../../content/schedulingProgramme";
+
+interface Props {
+  content: ProgrammeContent["hero"];
+  different?: boolean;
+}
+
+const { content, different = false } = Astro.props;
+---
+
+<section
+  class="container-full flex flex-col justify-center items-center pt-[59px] md:pt-[63px] gap-6"
+  aria-labelledby="programme-title"
+>
+  <div
+    class="w-full back-scheduling rounded-3xl flex flex-col justify-center items-center gap-6 py-6 px-4 md:py-10"
+  >
+    <div class="flex flex-col justify-center items-center gap-6 w-full">
+      <p class="text-[15px] md:text-[16px] font-normal leading-[150%] text-center text-[#F7F7F7]">
+        {content.intro}
+      </p>
+      <h1
+        id="programme-title"
+        class="text-[32px] md:text-[36px] lg:text-[48px] font-bold leading-[140%] md:leading-[138%] text-[#F7F7F7] max-w-[1118px] text-center font-title-libre tracking-[0.8px]"
+      >
+        {content.title} <span class="text-secondary">{content.titleHighlight}</span>
+      </h1>
+    </div>
+
+    <div class="flex flex-col justify-center items-center gap-6">
+      <p class="text-[15px] md:text-[16px] font-normal leading-[150%] text-center text-[#F7F7F7]">
+        {content.description}
+      </p>
+      {!different && (
+        <p class="text-[20px] font-semibold leading-[150%] text-center text-[#F7F7F7] my-0 md:my-4">
+          <span class="text-secondary">{content.videoStepLabel}</span>{" "}
+          {content.videoStepTitle}
+        </p>
+      )}
+      <div class="relative w-full h-auto md:w-[530px] lg:w-[631px] max-w-full overflow-hidden rounded-3xl aspect-video">
+        <video
+          controls
+          autoplay={true}
+          muted={true}
+          playsinline={true}
+          x-webkit-playsinline={true}
+          preload="auto"
+          aria-label={content.videoStepTitle}
+          class="block w-full h-full object-cover"
+        >
+          <source
+            src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/Treehubly_VSL_Georgia_v01.mp4"
+            type="video/mp4"
+          />
+          Tu navegador no puede reproducir este video.
+        </video>
+      </div>
+    </div>
+
+    <p class="text-[15px] md:text-[16px] font-normal leading-[150%] text-center text-[#F7F7F7]">
+      {content.eligibilityNote}
+    </p>
+  </div>
+</section>
