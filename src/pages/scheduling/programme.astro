@@ -1,4 +1,5 @@
 ---
+import BookingWidget from "../../components/BookingWidget.astro";
 import ProgrammeFooter from "../../components/scheduling/programme/ProgrammeFooter.astro";
 import ProgrammeHero from "../../components/scheduling/programme/ProgrammeHero.astro";
 import { programmeContent } from "../../content/schedulingProgramme";
@@ -51,10 +52,21 @@ const programmeSchema = [
   mainClass="w-full flex flex-col justify-center items-center relative z-0 gap-10 bg-[#04121E]"
 >
   <ProgrammeHero content={programmeContent.hero} />
-  <div class="container-full flex flex-col justify-center items-center py-6">
-    <p class="text-[20px] md:text-[24px] font-semibold text-center text-[#F7F7F7]">
-      calendario
-    </p>
-  </div>
+  <section
+      class="w-full flex justify-center items-center"
+      id="calendar"
+    >
+      <div
+        class="relative z-10 container-full flex flex-col justify-center items-center h-full pt-10"
+      >
+        <p class="text-[#F7F7F7] text-[15px] md:text-[16px] font-normal text-center">
+        (30 minutos. Si no encuentras un horario disponible, escríbenos por
+        <a href="https://wa.me/14075023684" class="text-secondary underline">
+          WhatsApp aquí
+        </a>{" "})
+      </p>
+        <BookingWidget />
+      </div>
+    </section>
   <ProgrammeFooter slot="footer" content={programmeContent.footer} />
 </LayoutScheduling>

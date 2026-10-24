@@ -7,7 +7,7 @@ export interface Props {
 }
 
 const {
-  widgetId = "rmSiScvpkyHytIZn7X06",
+  widgetId = "hk0RHHcDiexHGwWx8Ssh",
   minHeight = "500px", // ajusta según el alto real de tu widget
   lockDurationSeconds = 0,
 } = Astro.props;
@@ -79,8 +79,16 @@ const {
     padding: 24px;
     border: 1px solid rgb(255 255 255 / 12%);
     background:
-      radial-gradient(circle at 50% 0%, rgb(188 154 78 / 12%), transparent 55%),
-      linear-gradient(135deg, #07130b 0%, #0d2415 100%);
+      radial-gradient(
+        circle at 50% 0%,
+        color-mix(in srgb, var(--color-secondary) 14%, transparent),
+        transparent 55%
+      ),
+      linear-gradient(
+        135deg,
+        var(--color-primary-2) 0%,
+        var(--color-primary) 100%
+      );
     background-size: 200% 100%;
     animation: shimmer 1.4s infinite;
     color: rgb(255 255 255 / 82%);
@@ -92,7 +100,7 @@ const {
     width: 28px;
     height: 28px;
     border: 2px solid rgb(255 255 255 / 25%);
-    border-top-color: #bd9a4e;
+    border-top-color: var(--color-secondary);
     border-radius: 50%;
     content: "";
     animation: spin 0.8s linear infinite;
@@ -100,7 +108,7 @@ const {
 
   .booking-widget-fallback {
     display: none;
-    color: #d9bd78;
+    color: var(--color-secondary);
     font-size: 0.8rem;
     text-align: center;
     text-decoration: underline;
@@ -142,7 +150,11 @@ const {
     padding: 24px;
     border: 1px solid rgb(255 255 255 / 24%);
     border-radius: 8px;
-    background: rgb(94 101 95 / 70%);
+    background: color-mix(
+      in srgb,
+      var(--color-primary) 78%,
+      transparent
+    );
     backdrop-filter: grayscale(1) blur(2px);
     color: #fff;
     font-size: 1rem;
@@ -157,7 +169,7 @@ const {
   .booking-widget-lock strong {
     display: block;
     margin-top: 4px;
-    color: #f1d58c;
+    color: var(--color-secondary);
     font-size: 1.25rem;
   }
 
