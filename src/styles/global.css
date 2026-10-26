@@ -4,8 +4,6 @@
 @theme {
   --font-family: "Poppins", sans-serif;
   --font-title: "Poppins", sans-serif;
-  --font-size-p-desktop: 16px;
-  --font-size-p-mobile: 14px;
   --color-primary: #051725;
   --color-primary-2: #04121e;
   --color-primary-rgb: 0, 37, 108;
@@ -70,6 +68,132 @@ html {
   }
 }
 
+/* --- TITLES --- */
+.heading-h1 {
+  font-family: var(--font-family-poppins);
+  font-weight: 700; /* Bold */
+  font-size: 32px;
+  line-height: 120%;
+  letter-spacing: 0;
+}
+
+.heading-h2 {
+  font-family: var(--font-family-poppins);
+  font-weight: 700; /* Bold */
+  font-size: 40px;
+  line-height: 110%;
+  letter-spacing: 0;
+}
+
+.heading-h3 {
+  font-family: var(--font-family-poppins);
+  font-weight: 500; /* Medium */
+  font-size: 32px;
+  line-height: 120%;
+  letter-spacing: 0;
+}
+
+.heading-h4 {
+  font-family: var(--font-family-poppins);
+  font-weight: 700; /* Bold */
+  font-size: 40px;
+  line-height: 110%;
+  letter-spacing: 0;
+}
+
+.heading-h5 {
+  font-family: var(--font-family-poppins);
+  font-weight: 700; /* Bold */
+  font-size: 32px;
+  line-height: 120%;
+  letter-spacing: 0;
+}
+
+/* --- SUBTITLES --- */
+.subtitle-lg {
+  font-family: var(--font-family-poppins);
+  font-weight: 600; /* Semibold */
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+.subtitle-sm {
+  font-family: var(--font-family-poppins);
+  font-weight: 600; /* Semibold */
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+/* --- BODY TEXT --- */
+.body-xl {
+  font-family: var(--font-family-poppins);
+  font-weight: 700; /* Bold */
+  font-size: 24px;
+  line-height: 140%;
+  letter-spacing: 0;
+}
+
+.body-lg {
+  font-family: var(--font-family-poppins);
+  font-weight: 600; /* Semibold */
+  font-size: 18px;
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+.body-md {
+  font-family: var(--font-family-poppins);
+  font-weight: 400; /* Regular */
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+.body-sm {
+  font-family: var(--font-family-poppins);
+  font-weight: 400; /* Regular */
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+/* --- BUTTONS --- */
+.btn-text {
+  font-family: var(--font-family-poppins);
+  font-weight: 600; /* Semibold */
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0;
+}
+
+/* ===================================================
+   DESKTOP (Punto de quiebre: a partir de 728px)
+   =================================================== */
+@media (min-width: 728px) {
+  /* --- TITLES --- */
+  .heading-h1 {
+    font-size: 52px;
+    line-height: 110%;
+  }
+
+  .heading-h2 {
+    font-size: 48px;
+    line-height: 110%;
+  }
+
+  .heading-h3 {
+    font-size: 48px;
+    line-height: 110%;
+  }
+
+  /* --- BODY TEXT --- */
+  .body-lg {
+    font-size: 20px;
+  }
+}
+
 .animate-shake {
   animation: shake 2s ease-in-out infinite;
 }
@@ -77,66 +201,11 @@ html {
 @keyframes fadeUpFast {
   from {
     opacity: 0;
-    transform: translateY(15%);
+    transform: translateY(6.25rem);
   }
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes zoomIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes fadeUpFast2 {
-  from {
-    opacity: 0;
-    transform: translateY(15%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeUpFast3 {
-  from {
-    opacity: 0;
-    transform: translateY(15%);
-  }
-  to {
-    opacity: 0.3;
-    transform: translateY(0);
-  }
-}
-
-@keyframes zoomIn2 {
-  from {
-    opacity: 0;
-    transform: scale(0);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes zoomIn3 {
-  from {
-    opacity: 0;
-    transform: scale3d(0.8, 0.8, 1);
-  }
-  to {
-    opacity: 1;
-    transform: scale3d(1, 1, 1);
   }
 }
 
@@ -162,28 +231,6 @@ html {
   }
 }
 
-@keyframes fadeLeft2 {
-  from {
-    opacity: 0;
-    transform: translateX(15%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0%);
-  }
-}
-
-@keyframes zoomOut {
-  from {
-    opacity: 0;
-    transform: scale(1.5);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 @keyframes fadeRight {
   from {
     opacity: 0;
@@ -195,145 +242,45 @@ html {
   }
 }
 
-@keyframes containerImageFade {
-  from {
-    opacity: 0;
-    transform: scaleY(0);
-    transform-origin: top;
-  }
-  to {
-    opacity: 1;
-    transform: scaleY(1);
-    transform-origin: top;
-  }
-}
-
-@keyframes ImageFade {
-  from {
-    opacity: 0;
-    transform: translate3d(0px, 0%, 0px) scale3d(1.5, 1.5, 1);
-    filter: blur(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1);
-    filter: blur(0px);
-  }
-}
-
-.animation-up-fast {
+.fade-up-a {
   opacity: 0;
 }
 
-.animation-up-fast.active {
-  animation: fadeUpFast 0.4s ease-in-out forwards;
+.fade-up-a.active {
+  animation: fadeUpFast 0.3s ease-in-out var(--fade-up-delay, 0s) forwards;
 }
 
-.animation-zoom-in {
-  opacity: 0;
-}
-
-.animation-zoom-in.active {
-  animation: zoomIn 0.4s ease-in-out forwards;
-}
-
-.animation-up-fast-2 {
-  opacity: 0;
-}
-
-.animation-up-fast-2.active {
-  animation: fadeUpFast2 0.6s ease-in-out forwards;
-}
-
-.animation-up-fast-3 {
-  opacity: 0;
-}
-
-.animation-up-fast-3.active {
-  animation: fadeUpFast3 0.6s ease-in-out forwards;
-}
-
-.animation-zoom-in-2 {
-  opacity: 0;
-}
-
-.animation-zoom-in-2.active {
-  animation: zoomIn2 0.6s ease-in-out forwards;
-}
-
-.animation-zoom-in-3 {
-  opacity: 0;
-  transform-style: preserve-3d;
-}
-
-.animation-zoom-in-3.active {
-  animation: zoomIn3 0.8s ease-in-out forwards;
-  transform-style: preserve-3d;
-}
-
-.animation-fade-down {
+.fade-down-a {
   opacity: 0;
   transform: translateY(-100%);
 }
 
-.animation-fade-down.active {
+.fade-down-a.active {
   animation: fadeDown 0.6s ease-in-out forwards;
 }
 
-.animation-fade-left {
+/* Header intro: plays automatically on page load (no IntersectionObserver).
+   Deliberately NOT .fade-down-a and NOT `forwards`: a filled animation keeps
+   overriding the inline `transform` that the hide-on-scroll script writes to
+   #site-header, which would permanently break hiding/showing on scroll. */
+.header-intro {
+  animation: fadeDown 1s ease-in-out;
+}
+
+.fade-left-a {
   opacity: 0;
 }
 
-.animation-fade-left.active {
+.fade-left-a.active {
   animation: fadeLeft 0.6s ease-in-out forwards;
 }
 
-.animation-fade-left-2 {
+.fade-right-a {
   opacity: 0;
 }
 
-.animation-fade-left-2.active {
-  animation: fadeLeft 0.8s ease-in-out forwards;
-}
-
-.animation-fade-left-3 {
-  opacity: 0;
-}
-
-.animation-fade-left-3.active {
-  animation: fadeLeft2 0.6s ease-in-out forwards;
-}
-
-.animation-zoom-out {
-  opacity: 0;
-}
-
-.animation-zoom-out.active {
-  animation: zoomOut 0.6s ease-in-out forwards;
-}
-
-.animation-fade-right {
-  opacity: 0;
-}
-
-.animation-fade-right.active {
+.fade-right-a.active {
   animation: fadeRight 0.6s ease-in-out forwards;
-}
-
-.container-image-fade {
-  opacity: 0;
-}
-
-.container-image-fade.active {
-  animation: containerImageFade 0.6s ease-in-out forwards;
-}
-
-.image-fade {
-  opacity: 0;
-}
-
-.image-fade.active {
-  animation: ImageFade 0.6s ease-in-out forwards;
 }
 
 @keyframes colorShiftRight {
@@ -361,6 +308,30 @@ html {
   animation: colorShiftRight 5s linear infinite;
 }
 
+.back-hero {
+  background:
+    linear-gradient(0deg, rgba(5, 23, 37, 0.5) 0%, rgba(5, 23, 37, 0) 100%),
+    linear-gradient(0deg, rgba(5, 23, 37, 0.5) 0%, rgba(5, 23, 37, 0.5) 100%);
+}
+
+.back-main-2 {
+  background:
+    linear-gradient(
+      0deg,
+      rgba(7, 152, 240, 0.2) 0%,
+      rgba(7, 152, 240, 0.04) 65%,
+      rgba(7, 152, 240, 0) 100%
+    ),
+    #051725;
+}
+
+.back-main-3 {
+  background: linear-gradient(
+    180deg,
+    rgba(5, 23, 37, 0) 0%,
+    rgba(5, 23, 37, 0.6) 100%
+  );
+}
 .back-scheduling {
   background:
     linear-gradient(
@@ -395,20 +366,6 @@ html {
     rgba(7, 152, 240, 0.04) 51.74%,
     rgba(7, 152, 240, 0) 88.44%
   );
-}
-
-.back-hero {
-  background: linear-gradient(180deg, rgba(5, 23, 37, 0) 20.5%, #051725 84.11%);
-}
-
-@media (min-width: 768px) {
-  .back-hero {
-    background: linear-gradient(
-      180deg,
-      rgba(5, 23, 37, 0) 31.78%,
-      #051725 100%
-    );
-  }
 }
 
 .back-hero-2 {

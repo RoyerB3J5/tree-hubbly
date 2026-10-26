@@ -1,0 +1,47 @@
+---
+type Translations = typeof import("../../i18n/en-2").default;
+type Content = Translations["main"]["system"];
+interface Props {
+  content: Content;
+}
+const { content } = Astro.props as Props;
+---
+<section class="w-full flex justify-center items-center bg-primary-2">
+  <div class="container-full flex flex-col justify-center items-center py-8  overflow-hidden">
+    <div class="w-full flex flex-col justify-center items-center back-main-2 gap-7 py-20 rounded-2xl px-12">
+      <h2 set:html={content.title} class='heading-h2 text-paragraph'></h2>
+    <div class='w-full flex justify-center items-center gap-30 py-6 border-y border-white/10'>
+      {
+        content.items.map((item)=>(
+          <div class="flex justify-center items-center gap-[5px]">
+            <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="24" height="24" class='w-5 h-5' decoding="async" loading="lazy"/>
+            <p class="subtitle-lg text-paragraph">{item.title}</p>
+          </div>
+        ))
+      }
+    </div>
+    <div class="flex w-full flex-col md:flex-row justify-center items-center gap-6">
+        <div class="w-full md:w-1/2 flex flex-col justify-center items-center gap-6 md:gap-10 text-paragraph">
+          <p class="body-md">{content.description}</p>
+          <div class="flex flex-col justify-center items-start gap-4 md:gap-6 w-full">
+            {
+              content.list.map((l)=>(
+                <div class="flex justify-start items-center gap-2 ">
+                  <img src="/images/icons/check.svg" alt="Check" width="24" height="24" class="w-6 h-6">
+                  <p class="text-paragraph body-md">{l}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div class="w-full flex justify-center items-center py-8 rounded-2xl border border-[#263A4B]">
+            <p set:html={content.tag} class="body-lg text-paragraph text-center"></p>
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 relative rounded-lg lg:rounded-2xl aspect-130/79 md:aspect-628/375 h-auto overflow-hidden">
+          <img src="/images/faltantes.webp" alt="Companies TreeHubly" width="1536" height="1024" class="w-full h-full object-cover object-center" decoding="async" loading="lazy"/>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>

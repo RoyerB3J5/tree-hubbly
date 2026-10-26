@@ -1,18 +1,15 @@
 ---
 import Button from "../../components/Button.astro";
-import type { SystemPage } from "../../types/system.type";
-
-type HeroSection = SystemPage["hero"];
-type Translations = typeof import("../../i18n/en").default;
+type Translations = typeof import("../../i18n/en-2").default;
 type HeroContent = Translations["main"]["hero"];
 interface Props {
-  content: HeroContent | HeroSection;
+  content: HeroContent ;
 }
 const { content } = Astro.props as Props;
 ---
 
-<section class="w-full flex items-center justify-center relative overflow-hidden">
-  <video
+<section class="w-full h-[calc(100svh)] relative flex items-center justify-center text-white ">
+  {/*<video
     autoplay={true}
     muted={true}
     loop={true}
@@ -22,48 +19,44 @@ const { content } = Astro.props as Props;
     class="block absolute inset-0 w-full h-full object-cover object-center -z-20"
   >
     <source src="/images/video.mp4" type="video/mp4" />
-  </video>
-  <div class="absolute w-full h-full inset-0 -z-10 back-hero"></div>
+  </video> */}
+  <img src="/images/fondo-hero.webp" alt="Hero image" decoding="async" loading="lazy" width="1667" height="943" class='w-full h-full object-cover inset-0 absolute z-0 object-top' />
+  <div class="absolute w-full h-full inset-0 z-3 back-hero"></div>
   <div
-    class="w-full max-w-screen md:max-w-7xl flex flex-row justify-center items-end px-5 xl:px-0 h-[97vh] md:h-[90vh] lg:h-screen pb-8 md:pb-10 "
+    class="container-full flex flex-col justify-end items-center py-14 relative z-10 h-full"
   >
-    <div
-      class="flex flex-col justify-center items-center gap-8 "
-    >
-      <div class="flex flex-col justify-center items-center gap-6">
-        <h1 set:html={content.title} class="text-[32px] md:text-[54px] lg:text-[72px] font-bold leading-[110%] text-paragraph text-center animation-up-fast"></h1>
-        <p set:html={content.description} class="text-[18px] font-light md:font-normal leading-[150%] text-center text-paragraph animation-up-fast"></p>
-        <div class="w-full md:w-auto flex justify-between md:justify-center items-center gap-4 md:gap-7 lg:gap-10 animation-up-fast">
-          {
-            content.tags.map((tag)=>( 
-              <div class="flex justify-center items-center gap-4 border-l-0 md:border-l border-paragraph/50 pl-0 md:pl-7 lg:pl-10 first:border-l-0 first:pl-0 w-full">
-                <img src={`/images/${tag.icon}.svg`} alt={tag.title} class="block w-6 md:w-8 h-6 mdL:h-8" width="32" height="32" decoding="async" loading="eager"/>
-                <p class="text-[14px] lg:text-[18px] font-medium md:font-semibold text-paragraph ">{tag.title}</p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-      <div class="w-full md:w-auto flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6 animation-up-fast">
+    <div class="flex flex-col justify-center items-center gap-10">
+      <div class='flex flex-col justify-center items-center gap-6'>
         {
-          content.buttons.map((button) => (
-            <Button
-              text={button.label}
-              href={button.href}
-              extraBtnClass={button.styleButton}
-              textClass={button.styleLabel}
-            />))
+          content.tag !== "" && (
+            <p class="text-[16px] font-medium leading-[150%] text-secondary">{content.tag}</p>
+          )
         }
+        <h1 set:html={content.title} class="heading-h1 text-white text-center"></h1>
       </div>
-    </div>
+      {
+        content.description !== "" && (
+          <p set:html={content.description} class="text-paragraph body-md text-center"></p>
+        )
+      }
+      {
+        content.buttons.length > 0 && (
+          <div class="w-full md:w-auto flex flex-col md:flex-row justify-center items-center gap-4 md:gap-4">
+            <Button
+                  text={content.buttons[0].label}
+                  href={content.buttons[0].href}
+                  extraBtnClass="bg-secondary border-secondary"
+                  textClass="text-primary"
+                />
+            <Button
+                  text={content.buttons[1].label}
+                  href={content.buttons[1].href}
+                  extraBtnClass="bg-transparent border-white"
+                  textClass="white"
+                />
+          </div>
+        )
+      }
+    </div>   
   </div>
 </section>
-<script>
-  const video = document.querySelector("video") as HTMLVideoElement;
-  if (video) {
-    video.muted = true;
-    video.setAttribute("playsinline", "");
-    video.setAttribute("webkit-playsinline", "");
-    video.play().catch(() => {});
-  }
-</script>

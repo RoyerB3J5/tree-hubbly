@@ -1,11 +1,11 @@
 ---
-import en from '../../../i18n/en';
-import es from '../../../i18n/es';
+import en from '../../../i18n/en-2';
+import es from '../../../i18n/es-2';
 import Layout from '../../../layouts/Layout.astro';
 import Funcionality from '../../../sections/Funcionality.astro';
 import Book from '../../../sections/main/Book.astro';
 import CallAction from '../../../sections/main/CallAction.astro';
-import Hero from '../../../sections/main/Hero.astro';
+import HeroMain from '../../../sections/main/HeroMain.astro';
 import Questions from '../../../sections/main/Questions.astro';
 import Pillars from '../../../sections/Pillars.astro';
 import Reason from '../../../sections/Reason.astro';
@@ -21,7 +21,7 @@ const translations = { es, en };
 const t = translations[lang];
 ---
 <Layout lang={lang} t={t}>
-  <Hero content={t.systemPage.hero} />
+  {/* <Hero content={t.systemPage.hero} />
   <Reason content={t.systemPage.reason} />
   <Pillars content={t.systemPage.pilars} />
   <section class="w-full bg-[#F3F3F4] pb-10 md:pb-20 lg:pb-30 flex justify-center items-center" id="book">
@@ -29,5 +29,6 @@ const t = translations[lang];
   </section>
   <Funcionality content={t.systemPage.functionality} />
   <Questions content={t.main.questions} />
-  <CallAction content={t.systemPage.call} />
+  <CallAction content={t.systemPage.call} />*/}
+  <HeroMain content={t.theSystem.hero} />
 </Layout>

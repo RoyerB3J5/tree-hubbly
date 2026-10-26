@@ -1,12 +1,42 @@
-<script is:inline>
-  if (typeof window !== 'undefined') {
-    const p = window.location.pathname;
-    // Solo redirigir si la ruta es exactamente "/" o cadena vacía
-    if (p === '/' || p === '') {
-      // Mantiene la landing publicada como única página de entrada.
-      const destino =
-        '/scheduling/programme/' + window.location.search + window.location.hash;
-      window.location.replace(destino);
+<!doctype html>
+{import.meta.env.PROD && (
+  <script is:inline>
+    if (typeof window !== 'undefined') {
+      const p = window.location.pathname;
+      // Solo redirigir si la ruta es exactamente "/" o cadena vacía.
+      if (p === '/' || p === '') {
+        // Mantiene la landing publicada como única página de entrada.
+        const destino =
+          '/scheduling/programme/' + window.location.search + window.location.hash;
+        window.location.replace(destino);
+      }
     }
-  }
-</script>
+  </script>
+)}
+
+{import.meta.env.DEV && (
+  
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <title>Click Franchise</title>
+      <meta
+        name="description"
+        content="FOR U HVAC provides comprehensive cooling solutions for residential and commercial properties."
+      />
+      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      <!-- Redirección inmediata para Bots/SEO (al idioma por defecto) -->
+      <meta http-equiv="refresh" content="0;url=/en/" />
+
+      <!-- Evita que Google indexe esta raíz vacía -->
+      <meta name="robots" content="noindex, follow" />
+
+      <!-- Redirección inmediata para usuarios reales -->
+      <script is:inline>    
+        window.location.href = "/en/";
+      </script>
+    </head>
+    <body style="background-color: #FFF;"> </body>
+)}
+</html>
