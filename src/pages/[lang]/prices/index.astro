@@ -1,7 +1,7 @@
 ---
 import Button from '../../../components/Button.astro';
-import en from '../../../i18n/en';
-import es from '../../../i18n/es';
+import en from '../../../i18n/en-2';
+import es from '../../../i18n/es-2';
 import Layout from '../../../layouts/Layout.astro';
 import type { Language } from '../../../types/language.type';
 export function getStaticPaths() {
@@ -13,10 +13,10 @@ export const defaultRedirect = '/en';
 const lang = Astro.params.lang as Language;
 const translations = { es, en };
 const t = translations[lang];
-const content = t.prices
 ---
 <Layout lang={lang} t={t}>
-  <section class="w-full h-full flex justify-center items-center bg-primary">
+  {
+    /* <section class="w-full h-full flex justify-center items-center bg-primary">
     <div class="container-full pt-20 lg:pt-30 grid grid-cols-1 lg:grid-cols-3 justify-center items-center gap-6">
       {
         content.map((items)=>( 
@@ -61,5 +61,7 @@ const content = t.prices
         ))
       }
     </div>
-  </section>
+  </section>*/
+  }
+  
 </Layout>

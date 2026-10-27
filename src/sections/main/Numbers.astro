@@ -1,0 +1,70 @@
+---
+import Button from "../../components/Button.astro";
+
+type Translations = typeof import("../../i18n/en-2").default;
+type Content = Translations["main"]["numbers"];
+interface Props {
+  content: Content;
+}
+const { content } = Astro.props as Props;
+---
+<section class='w-full flex justify-center items-center bg-primary'>
+  <div class="container-full flex flex-col justify-center items-center gap-10 py-20">
+    <div class='w-full flex flex-col justify-center items-start gap-6'>
+      <p class='subtitle-lg text-secondary'>{content.tag}</p>
+      <h2 set:html={content.title} class='heading-h2 text-paragraph'></h2>
+    </div>
+    <div class="w-full flex justify-center items-stretch gap-6">
+      <div class="w-[40%] overflow-hidden rounded-2xl relative bg-secondary">
+
+      </div>
+      <div class='flex flex-col justify-center items-start gap-10 w-[60%] py-14 px-6 back-main-4 rounded-2xl'>
+        <h3 set:html={content.title2} class='heading-h2 text-paragraph'></h3>
+        <p class='body-md text-paragraph'>{content.description}</p>
+        <div class="w-full flex justify-center items-centrer gap-6">
+          {
+            content.statistics.map((item)=>(
+              <div class="w-1/2 flex justify-start items-center gap-6 py-4 px-6 bg-secondary/10 rounded-2xl">
+                <div class="w-20 h-[77px] rounded-full bg-secondary/10 flex justify-center items-center">
+                  <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="24" height="24" class='w-[33px] h-[33px]' decoding="async" loading="lazy" />
+                </div>
+                <div class="flex flex-col justify-center items-start gap-6">
+                  <h4 class="heading-h2 text-secondary">{item.title}</h4>
+                  <p class='body-md text-paragraph'>{item.description}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <div class='w-full flex justify-start items-center gap-4 '>
+          {
+            content.list.map((i, index)=>(
+              <>
+                <div class="flex justify-center items-center gap-2 " >
+                  <img src="/images/icons/check.svg" alt="Check" width="24" height="24" class='w-5 h-5' decoding="async" loading="lazy" />
+                  <p class='body-md text-paragraph'>{i}</p>
+                </div>
+                <div class={`h-full w-[1px] bg-paragraph ${index === content.list.length - 1 ? 'hidden' : 'block'}`}></div>
+              </>
+              
+            ))
+          }
+        </div>
+        <div class="w-full md:w-auto flex flex-col md:flex-row justify-center items-center gap-4 md:gap-4">
+            <Button
+                  text={content.buttons[0].label}
+                  href={content.buttons[0].href}
+                  extraBtnClass="bg-secondary border-secondary"
+                  textClass="text-primary"
+                />
+            <Button
+                  text={content.buttons[1].label}
+                  href={content.buttons[1].href}
+                  extraBtnClass="bg-transparent border-white"
+                  textClass="text-white"
+                />
+          </div>
+      </div>
+    </div>
+  </div>
+</section>

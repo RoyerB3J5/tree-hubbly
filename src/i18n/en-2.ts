@@ -230,76 +230,76 @@ export default {
         },
       ],
     },
-    reasons: [
-      {
-        title:
-          'Clientes nuevos de tu zona,<span class="text-secondary">de forma<br/>predecible.</span>',
-        description: "",
-        list2: [
-          "Campañas de clientes en Facebook, Instagram y TikTok",
-          "Google Ads conectado a tu tablero de trabajos",
-          "Perfil de Google Maps optimizado",
-          "Páginas de captura que convierten",
-        ],
-        list3: [
-          {
-            icon: "reasons1",
-            description: "Costo por lead predecible.",
-          },
-          {
-            icon: "reasons2",
-            description: "Visibilidad local.",
-          },
-        ],
-        tag: '<span class="text-secondary">01 · ATRAER</span>',
-      },
-      {
-        title:
-          'Cada cliente atendido.<br/><span class="text-secondary">Cada cotización con<br/>seguimiento.</span>',
-        description: "",
-        list4: [
-          "Asistente IA que responde por SMS, WhatsApp y Messenger en segundos, 24/7",
-          "ShapeHub — tu oficina digital y tablero de trabajos",
-          "Seguimiento automático y recordatorios de cita",
-          "Asesores que llaman y agendan por ti (Canopy)",
-        ],
-        list5: [
-          {
-            icon: "reasons3",
-            description: "Mayores trabajos cerrados",
-          },
-          {
-            icon: "reasons4",
-            description: "Cero llamadas perdidas",
-          },
-        ],
-        tag: '<span class="text-secondary">02 · CERRAR</span>',
-      },
-      {
-        title:
-          'Cada trabajo terminado<br/>te<span class="text-secondary">trae el siguiente.</span>',
-        description:
-          "Aquí es donde las otras agencias se detienen — y donde tu crecimiento se multiplica.",
-        list6: [
-          "Review Shield: más reviews de 5 estrellas en Google y alerta inmediata si un cliente quedó inconforme",
-          "ShapeHub Link + tarjetas QR para cada trabajo",
-          "Programa de referidos y campañas por temporada (huracanes, poda)",
-        ],
-        list7: [
-          {
-            icon: "reasons5",
-            description: "Los mejores calificados de tu ciudad.",
-          },
-          {
-            icon: "reasons6",
-            description: "Menor costo por trabajo.",
-          },
-        ],
-        tag: '<span class="text-secondary">03 · MULTIPLICAR</span>',
-      },
-    ],
+    reasons: {
+      items: [
+        {
+          title:
+            'Clientes nuevos de tu zona,<span class="text-secondary">de forma<br/>predecible.</span>',
+          description: "",
+          list: [
+            "Campañas de clientes en Facebook, Instagram y TikTok",
+            "Google Ads conectado a tu tablero de trabajos",
+            "Perfil de Google Maps optimizado",
+            "Páginas de captura que convierten",
+          ],
+          list1: [
+            {
+              icon: "reasons1-1",
+              description: "Costo por lead predecible.",
+            },
+            {
+              icon: "reasons1-2",
+              description: "Visibilidad local.",
+            },
+          ],
+        },
+        {
+          title:
+            'Cada cliente atendido.<br/><span class="text-secondary">Cada cotización con<br/>seguimiento.</span>',
+          description: "",
+          list: [
+            "Asistente IA que responde por SMS, WhatsApp y Messenger en segundos, 24/7",
+            "ShapeHub — tu oficina digital y tablero de trabajos",
+            "Seguimiento automático y recordatorios de cita",
+            "Asesores que llaman y agendan por ti (Canopy)",
+          ],
+          list1: [
+            {
+              icon: "reasons2-1",
+              description: "Mayores trabajos cerrados",
+            },
+            {
+              icon: "reasons2-2",
+              description: "Cero llamadas perdidas",
+            },
+          ],
+        },
+        {
+          title:
+            'Cada trabajo terminado <br/>te <span class="text-secondary">trae el siguiente.</span>',
+          description:
+            "Aquí es donde las otras agencias se detienen — y donde tu crecimiento se multiplica.",
+          list: [
+            "Review Shield: más reviews de 5 estrellas en Google y alerta inmediata si un cliente quedó inconforme",
+            "ShapeHub Link + tarjetas QR para cada trabajo",
+            "Programa de referidos y campañas por temporada (huracanes, poda)",
+          ],
+          list1: [
+            {
+              icon: "reasons3-1",
+              description: "Los mejores calificados de tu ciudad.",
+            },
+            {
+              icon: "reasons3-1",
+              description: "Menor costo por trabajo.",
+            },
+          ],
+        },
+      ],
+      indicators: ["01 · ATRAER", "02 · CERRAR", "03 · MULTIPLICAR"],
+    },
     numbers: {
-      tag: '<span class="text-secondary">Resultados reales</span>',
+      tag: "Resultados reales",
       title:
         'Empresas de árboles reales.<span class="text-secondary">Números reales.</span>',
       title2:
@@ -309,16 +309,16 @@ export default {
       statistics: [
         {
           icon: "numbers1",
-          title: '<span class="text-secondary">+38%</span>',
+          title: "+38%",
           description: "Clientes calificados",
         },
         {
           icon: "numbers2",
-          title: '<span class="text-secondary">+27%</span>',
+          title: "+27%",
           description: "Trabajos agendados",
         },
       ],
-      list8: [
+      list: [
         "Menor costo por trabajo agendado",
         "Control total de clientes y facturación",
       ],

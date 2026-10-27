@@ -1,11 +1,10 @@
 ---
-import en from '../../../i18n/en';
-import es from '../../../i18n/es';
+import en from '../../../i18n/en-2';
+import es from '../../../i18n/es-2';
 import Layout from '../../../layouts/Layout.astro';
 import Focus from '../../../sections/Focus.astro';
 import Book from '../../../sections/main/Book.astro';
 import CallAction from '../../../sections/main/CallAction.astro';
-import Hero from '../../../sections/main/Hero.astro';
 import Opinion from '../../../sections/Opinion.astro';
 import Philosophy from '../../../sections/Philosophy.astro';
 import type { Language } from '../../../types/language.type';
@@ -20,12 +19,15 @@ const translations = { es, en };
 const t = translations[lang];
 ---
 <Layout lang={lang} t={t}>
-  <Hero content={t.about.hero} />
+  {
+    /*<Hero content={t.about.hero} />
   <Focus content={t.about.focus} />
   <Philosophy content={t.about.philosophy} />
   <section class="w-full bg-[#F3F3F4] py-10 md:py-20 lg:py-30 flex justify-center items-center" id="book">
     <Book content={t.main.book} />
   </section>
   <Opinion content={t.about.opinion} />
-  <CallAction content={t.about.call} />
+  <CallAction content={t.about.call} /> */
+  }
+  
 </Layout>

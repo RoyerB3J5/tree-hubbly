@@ -8,6 +8,8 @@
   --color-primary-2: #04121e;
   --color-primary-rgb: 0, 37, 108;
   --color-secondary: #91d200;
+  --color-third: #0798f0;
+  --color-third-light: #daf0fd;
   --color-back: #f3f3f4;
   --color-paragraph: #f7f7f7;
   --breakpoint-xs: 400px;
@@ -331,6 +333,16 @@ html {
     rgba(5, 23, 37, 0) 0%,
     rgba(5, 23, 37, 0.6) 100%
   );
+}
+
+.back-main-4 {
+  background:
+    linear-gradient(
+      0deg,
+      rgba(7, 152, 240, 0.2) 0%,
+      rgba(7, 152, 240, 0.04) 100%
+    ),
+    #04121e;
 }
 .back-scheduling {
   background:

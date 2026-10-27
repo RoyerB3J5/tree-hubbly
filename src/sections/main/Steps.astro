@@ -1,0 +1,43 @@
+---
+type Translations = typeof import("../../i18n/en-2").default;
+type Content = Translations["main"]["steps"];
+interface Props {
+  content: Content;
+}
+const { content } = Astro.props as Props;
+const baseHeight = 424;
+const heightFactor = 0.91;
+---
+<section class='w-full flex justify-center items-center bg-third-light '>
+  <div class='container-full flex flex-col justify-center items-center py-20 gap-10'>
+    <div class='flex flex-col justify-center items-center gap-6'>
+      <p class="subtitle-lg text-primary">{content.tag}</p>
+      <h2 set:html={content.title} class="heading-h2 text-primary text-center"></h2>
+    </div>
+    <p class='body-md text-primary text-center' set:html={content.description}></p>
+    <div class='w-full grid grid-cols-1 md:grid-cols-5 flex justify-center items-end gap-6 '>
+      {
+        content.reasons.map((item,index)=>(
+          <div
+            class={`flex flex-col justify-between items-center px-6 py-8 rounded-2xl  ${index===3?'bg-third':'bg-white'}`}
+            style={`height: ${baseHeight * Math.pow(heightFactor, content.reasons.length - 1 - index)}px`}
+          >
+            <div class="w-full flex flex-col justify-center items-start gap-6">
+              <div class={`w-10 h-10 flex justify-center items-center rounded-lg  ${index===3?'bg-paragraph':'bg-third-light'}`}>
+                <p class="body-lg text-primary">{index+1}</p>
+              </div>
+              <h3 class='body-xl text-primary'>{item.title}</h3>
+              <p class='body-md text-primary'>{item.description}</p>  
+            </div>
+            <div class="w-full flex justify-between items-center ">
+              <p class='subtitle-lg text-primary'>{item.tag}</p>
+              <div class={`w-12 h-12  rounde-lg flex justify-center items-center rounded-lg ${index===3?'bg-paragraph':'bg-third-light'}`}>
+                <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="20" height="20" class='w-5 h-5' decoding="async" loading="lazy"/>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>  

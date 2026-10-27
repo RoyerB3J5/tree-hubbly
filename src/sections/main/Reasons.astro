@@ -1,0 +1,47 @@
+---
+type Translations = typeof import("../../i18n/en-2").default;
+type Content = Translations["main"]["reasons"];
+interface Props {
+  content: Content;
+}
+const { content } = Astro.props as Props;
+---
+<section class="w-full flex bg-primary jsutify-center items-center flex-col">
+  {
+    content.items.map((item,index)=>(
+      <div class="container-full flex justify-end items-center gap-6 py-20">
+        <div class="flex flex-col justify-center items-start gap-10 max-w-[627px]">
+          <h2 set:html={item.title} class="heading-h2 text-paragraph"></h2>
+          {
+            item.description !== "" && <p set:html={item.description} class="body-md text-paragraph"></p>
+          }
+          
+          <div class="flex flex-col justify-center items-start gap-6">
+            {
+              item.list.map((listItem)=>(
+                <div class="flex justify-center items-center gap-2">
+                  <img src="/images/icons/check.svg" alt="Check" width="24" height="24" class='w-5 h-5' decoding="async" loading="lazy" />
+                  <p class='body-md text-paragraph'>{listItem}</p>
+                </div>
+              ))
+            }
+          </div>
+          <div class="w-[51px] h-1 bg-secondary"></div>
+          <div class='flex flex-col  justify-center items-start gap-6'>
+            {
+              item.list1.map((listItem,i)=>(
+                <div class="flex justify-center items-center gap-1.25">
+                  <img src={`/images/icons/reasons${index+1}-${i+1}.svg`} alt="Check" width="24" height="24" class='w-5 h-5' decoding="async" loading="lazy" />
+                  <p class='body-md text-paragraph'>{listItem.description}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <div class="w-[30%] h-auto relative overflow-hidden rounded-2xl aspect-43/68">
+          <img src={`/images/steps-${index + 1}.webp`} alt={`Step ${index + 1}`} width="941" height="1672" decoding="async" loading="lazy" />
+        </div>
+      </div>
+    ))
+  }
+</section>

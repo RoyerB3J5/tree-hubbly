@@ -2,22 +2,16 @@
 import en from '../../i18n/en-2';
 import es from '../../i18n/es-2';
 import Layout from '../../layouts/Layout.astro';
-import BannerImages from '../../sections/main/BannerImages.astro';
-import Banners2 from '../../sections/main/Banners2.astro';
-import Banners from '../../sections/main/Banners.astro';
-import CallAction from '../../sections/main/CallAction.astro';
-import Hero from '../../sections/main/Hero.astro';
-import Path from '../../sections/main/Path.astro';
 import Questions from '../../sections/main/Questions.astro';
-import Results from '../../sections/main/Results.astro';
 import Scale from '../../sections/main/Scale.astro';
-import Traditional from '../../sections/main/Traditional.astro';
-import Vento from '../../sections/main/Vento.astro';
 import type { Language } from '../../types/language.type';
-import Traditional2 from '../../sections/main/Traditional2';
+
 import HeroMain from '../../sections/main/HeroMain.astro';
 import Book from '../../sections/main/Book.astro';
 import Faltantes from '../../sections/main/Faltantes.astro';
+import Steps from '../../sections/main/Steps.astro';
+import Reasons from '../../sections/main/Reasons.astro';
+import Numbers from '../../sections/main/Numbers.astro';
 export function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
 }
@@ -30,19 +24,19 @@ const t = translations[lang];
 ---
 <Layout lang={lang} t={t}>
   {/*
-  <Scale content={t.main.scale} />
-  <Vento content={t.main.vento} />
-  <Banners2 content={t.main.banners} />
-  <Results content={t.main.results} />
   <Path content={t.main.path} />
   <Traditional2 content={t.main.traditional} client:load/>
   <BannerImages content={t.main.bannerImage} />
   <CallAction content={t.main.call} />
-  <Questions content={t.main.questions} /> */}
+  */}
   <HeroMain content={t.main.hero} />
   <Faltantes content={t.main.system} />
   <section class="w-full bg-[#F7F7F7] py-10 md:py-20  flex justify-center items-center" id="book">
     <Book content={t.main.session} />
   </section>
   <Scale content={t.main.grow} />
+  <Steps content={t.main.steps} />
+  <Reasons content={t.main.reasons} />
+  <Numbers content={t.main.numbers} />
+  <Questions content={t.main.ask} /> 
 </Layout>
