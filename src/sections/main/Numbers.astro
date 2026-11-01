@@ -10,18 +10,18 @@ const { content } = Astro.props as Props;
 ---
 <section class='w-full flex justify-center items-center bg-primary'>
   <div class="container-full flex flex-col justify-center items-center gap-10 py-20">
-    <div class='w-full flex flex-col justify-center items-start gap-6'>
+    <div class='w-full flex flex-col justify-center items-center gap-6'>
       <p class='subtitle-lg text-secondary'>{content.tag}</p>
-      <h2 set:html={content.title} class='heading-h2 text-paragraph'></h2>
+      <h2 set:html={content.title} class='heading-h4 text-paragraph text-center'></h2>
     </div>
     <div class="w-full flex justify-center items-stretch gap-6">
       <div class="w-[40%] overflow-hidden rounded-2xl relative bg-secondary">
 
       </div>
-      <div class='flex flex-col justify-center items-start gap-10 w-[60%] py-14 px-6 back-main-4 rounded-2xl'>
-        <h3 set:html={content.title2} class='heading-h2 text-paragraph'></h3>
+      <div class='flex flex-col justify-center items-start gap-8 w-[60%] py-14 px-6 back-main-4 rounded-2xl'>
+        <h3 set:html={content.title2} class='heading-h4 text-paragraph'></h3>
         <p class='body-md text-paragraph'>{content.description}</p>
-        <div class="w-full flex justify-center items-centrer gap-6">
+        <div class="w-full flex justify-center items-center gap-6">
           {
             content.statistics.map((item)=>(
               <div class="w-1/2 flex justify-start items-center gap-6 py-4 px-6 bg-secondary/10 rounded-2xl">
@@ -29,7 +29,7 @@ const { content } = Astro.props as Props;
                   <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="24" height="24" class='w-[33px] h-[33px]' decoding="async" loading="lazy" />
                 </div>
                 <div class="flex flex-col justify-center items-start gap-6">
-                  <h4 class="heading-h2 text-secondary">{item.title}</h4>
+                  <h4 class="heading-h4 text-secondary">{item.title}</h4>
                   <p class='body-md text-paragraph'>{item.description}</p>
                 </div>
               </div>
@@ -50,17 +50,17 @@ const { content } = Astro.props as Props;
             ))
           }
         </div>
-        <div class="w-full md:w-auto flex flex-col md:flex-row justify-center items-center gap-4 md:gap-4">
+        <div class="w-full flex flex-col md:flex-row justify-center items-center gap-4 md:gap-4">
             <Button
                   text={content.buttons[0].label}
                   href={content.buttons[0].href}
-                  extraBtnClass="bg-secondary border-secondary"
+                  extraBtnClass="bg-secondary border-secondary w-1/2"
                   textClass="text-primary"
                 />
             <Button
                   text={content.buttons[1].label}
                   href={content.buttons[1].href}
-                  extraBtnClass="bg-transparent border-white"
+                  extraBtnClass="bg-transparent border-white w-1/2"
                   textClass="text-white"
                 />
           </div>

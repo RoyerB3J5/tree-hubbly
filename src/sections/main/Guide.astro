@@ -1,0 +1,59 @@
+---
+type Translations = typeof import("../../i18n/en-2").default;
+type Content = Translations["main"]["guide"];
+interface Props {
+  content: Content;
+}
+const { content } = Astro.props as Props;
+---
+<section class='w-full bg-third-light flex justify-center items-center'>
+  <div class="container-full flex flex-col justify-center items-center gap-10 py-20 text-primary">
+    <div class="flex flex-col justify-center items-center gap-6 ">
+      <p class='subtitle-lg '>{content.tag}</p>
+      <h2 set:html={content.title} class="heading-h4 text-center"></h2>
+      <p set:html={content.description} class="body-md text-center"></p>
+    </div>
+    <div class="w-full flex justify-center items-stretch gap-6">
+      <div class='w-1/2 bg-white py-10 px-6 flex flex-col justify-center items-start gap-8 rounded-2xl'>
+        <div class="w-full flex justify-between items-center ">
+          <p class='subtitle-sm'>{content.book.tag}</p>
+          <div class='flex justify-center items-center py-2 px-3 border border-third rounded-full'>
+            <p class="uppercase subtitle-sm">{content.book.subtag}</p>
+          </div>
+        </div>
+        <div class="w-full bg-third-light p-6 rounded-lg flex justify-center items-center gap-6">
+          <img src="/images/book.webp" alt="Book Cover" width="600" height="900" class="w-[35%] h-auto object-cover" decoding="async" loading="lazy"/>
+          <div class="flex flex-col justify-center items-start gap-6">
+            <h3 set:html={content.book.title} class="body-xl"></h3>
+            <p class='body-md'>{content.book.description}</p>
+          </div>
+        </div>
+        <div class='flex flex-col justify-center items-start gap-6'>
+          {
+            content.book.list10.map((item)=>(
+              <div class="flex justify-start items-center gap-2 ">
+                  <img src="/images/icons/check-blue.svg" alt="Check" width="24" height="24" class="w-5 h-5">
+                  <p class="text-primary body-md">{item}</p>
+                </div>
+            ))
+          }
+        </div>
+        <div class="w-full p-6 flex justify-center items-center gap-6 border border-[#05172526] rounded-2xl">
+          <div class='w-20 h-20 shrink-0 flex justify-center items-center bg-third-light rounded-lg'>
+            <img src="/images/icons/calendar.svg" alt="Check" width="24" height="24" class="w-10 h-10"/>
+          </div>
+          <div class='flex flex-col justify-center items-start gap-4'>
+            <p class="subtitle-sm uppercase">{content.bonus.tag}</p>
+            <h3 set:html={content.bonus.title} class="body-lg"></h3>
+            <p set:html={content.bonus.description} class="body-md"></p>
+          </div>
+        </div>
+      </div>
+      <div class='w-1/2 bg-white py-[45px] px-6 flex flex-col justify-start items-start gap-8 rounded-2xl'>
+        <p class="subtitle-sm uppercase">{content.form.tag}</p>
+        <h3 set:html={content.form.title} class="body-xl"></h3>
+        <p set:html={content.form.description} class="body-md"></p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -12,6 +12,9 @@ import Faltantes from '../../sections/main/Faltantes.astro';
 import Steps from '../../sections/main/Steps.astro';
 import Reasons from '../../sections/main/Reasons.astro';
 import Numbers from '../../sections/main/Numbers.astro';
+import Control from '../../sections/main/Control.astro';
+import Path from '../../sections/main/Path.astro';
+import Guide from '../../sections/main/Guide.astro';
 export function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
 }
@@ -38,5 +41,8 @@ const t = translations[lang];
   <Steps content={t.main.steps} />
   <Reasons content={t.main.reasons} />
   <Numbers content={t.main.numbers} />
+  <Control content={t.main.control} />
+  <Path content={t.main.path} />
+  <Guide content={t.main.guide} />
   <Questions content={t.main.ask} /> 
 </Layout>

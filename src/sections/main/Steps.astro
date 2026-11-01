@@ -12,7 +12,7 @@ const heightFactor = 0.91;
   <div class='container-full flex flex-col justify-center items-center py-20 gap-10'>
     <div class='flex flex-col justify-center items-center gap-6'>
       <p class="subtitle-lg text-primary">{content.tag}</p>
-      <h2 set:html={content.title} class="heading-h2 text-primary text-center"></h2>
+      <h2 set:html={content.title} class="heading-h4 text-primary text-center"></h2>
     </div>
     <p class='body-md text-primary text-center' set:html={content.description}></p>
     <div class='w-full grid grid-cols-1 md:grid-cols-5 flex justify-center items-end gap-6 '>
@@ -26,7 +26,7 @@ const heightFactor = 0.91;
               <div class={`w-10 h-10 flex justify-center items-center rounded-lg  ${index===3?'bg-paragraph':'bg-third-light'}`}>
                 <p class="body-lg text-primary">{index+1}</p>
               </div>
-              <h3 class='body-xl text-primary'>{item.title}</h3>
+              <h3 class='text-[20px] font-bold leading-[140%] text-primary'>{item.title}</h3>
               <p class='body-md text-primary'>{item.description}</p>  
             </div>
             <div class="w-full flex justify-between items-center ">

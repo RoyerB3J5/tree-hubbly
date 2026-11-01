@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="84" height="76" viewBox="0 0 84 76" fill="none">
+  <circle cx="17.5" cy="17.5" r="16" fill="#F7F7F7" stroke="#91D200" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M11.5 18.5L15.5 22.5L24.5 13.5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="#91D200"/>
+  <path d="M2 74H79" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="#91D200"/>
+  <path d="M62 31.5L62 5.5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="#91D200"/>
+  <mask id="stroke0_226_4683" fill="white">
+    <path d="M11.5 53C11.5 50.7909 13.2909 49 15.5 49H24.5C26.7091 49 28.5 50.7909 28.5 53V75H11.5V53Z"/>
+  </mask>
+  <path d="M28.5 75V53C28.5 50.7909 26.7091 49 24.5 49H15.5C13.2909 49 11.5 50.7909 11.5 53V75H28.5Z" stroke-width="6" stroke="#91D200" mask="url(#stroke0_226_4683)"/>
+  <mask id="stroke1_226_4683" fill="white">
+    <path d="M25.5 47C25.5 44.7909 27.2909 43 29.5 43H38.5C40.7091 43 42.5 44.7909 42.5 47V75H25.5V47Z"/>
+  </mask>
+  <path d="M42.5 75V47C42.5 44.7909 40.7091 43 38.5 43H29.5C27.2909 43 25.5 44.7909 25.5 47V75H42.5Z" stroke-width="6" stroke="#91D200" mask="url(#stroke1_226_4683)"/>
+  <mask id="stroke2_226_4683" fill="white">
+    <path d="M39.5 40C39.5 37.7909 41.2909 36 43.5 36H52.5C54.7091 36 56.5 37.7909 56.5 40V75H39.5V40Z"/>
+  </mask>
+  <path d="M56.5 75V40C56.5 37.7909 54.7091 36 52.5 36H43.5C41.2909 36 39.5 37.7909 39.5 40V75H56.5Z" stroke-width="6" stroke="#91D200" mask="url(#stroke2_226_4683)"/>
+  <mask id="stroke3_226_4683" fill="white">
+    <path d="M53.5 34C53.5 31.7909 55.2909 30 57.5 30H66.5C68.7091 30 70.5 31.7909 70.5 34V75H53.5V34Z"/>
+  </mask>
+  <path d="M70.5 75V34C70.5 31.7909 68.7091 30 66.5 30H57.5C55.2909 30 53.5 31.7909 53.5 34V75H70.5Z" stroke-width="6" stroke="#91D200" mask="url(#stroke3_226_4683)"/>
+  <mask id="stroke4_226_4683" fill="white">
+    <path d="M79.5 8C81.7091 8 83.5 9.79086 83.5 12L83.5 21C83.5 23.2091 81.7091 25 79.5 25L60.5 25L60.5 8L79.5 8Z"/>
+  </mask>
+  <path d="M60.5 25L79.5 25C81.7091 25 83.5 23.2091 83.5 21L83.5 12C83.5 9.79086 81.7091 8 79.5 8L60.5 8L60.5 25Z" stroke-width="6" stroke="#91D200" mask="url(#stroke4_226_4683)"/>
+</svg>

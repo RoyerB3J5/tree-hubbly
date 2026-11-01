@@ -142,7 +142,9 @@ export default {
       tag: "",
       title:
         'El sistema detrás de las empresas<br/>de árboles que <span class="text-secondary"> dominan su ciudad.</span>',
-      description: "",
+      description:
+        "Clientes, seguimiento, reviews y crecimiento — conectados en un solo ecosistema creado exclusivamente para tree services.",
+      items: ["Mejores clientes", "Más trabajos agendados", "Más facturación"],
       buttons: [
         {
           label: "Agenda tu sesión de estrategia",
@@ -234,7 +236,7 @@ export default {
       items: [
         {
           title:
-            'Clientes nuevos de tu zona,<span class="text-secondary">de forma<br/>predecible.</span>',
+            'Clientes nuevos de tu zona, <span class="text-secondary">de forma predecible.</span>',
           description: "",
           list: [
             "Campañas de clientes en Facebook, Instagram y TikTok",
@@ -301,9 +303,9 @@ export default {
     numbers: {
       tag: "Resultados reales",
       title:
-        'Empresas de árboles reales.<span class="text-secondary">Números reales.</span>',
+        'Empresas de árboles reales. <br/> <span class="text-secondary">Números reales.</span>',
       title2:
-        'H&A Tree Brothers<br/><span class="text-secondary">Orlando, FL.</span>',
+        'H&A Tree Brothers<br/><span class="text-secondary heading-h5">Orlando, FL.</span>',
       description:
         "El crecimiento estructurado reemplazó al marketing inconsistente.",
       statistics: [
@@ -336,7 +338,7 @@ export default {
     control: {
       tag: "Métricas y control",
       title:
-        'Si no se puede medir,<br/><span class="text-third">no se puede escalar.</span>',
+        'Si no se puede medir,<span class="text-third">no se puede escalar.</span>',
       description:
         "Sabrás cuánto te cuesta ganar cada trabajo — y cuánto te deja.",
       measuring: [
@@ -365,7 +367,7 @@ export default {
     path: {
       tag: "Un camino estructurado para escalar",
       title:
-        'Tus primeras 8<br/>semanas <span class="text-third">con<br/>Treehubly.</span>',
+        'Tus primeras 8 semanas <br/> <span class="text-secondary">con Treehubly.</span>',
       structure: [
         {
           icon: "path1",
@@ -510,14 +512,14 @@ export default {
       title:
         'Descarga la guía gratis<br/><span class="text-third">y recibe una consultoría de 30 minutos.</span>',
       description:
-        "Déjanos tus datos y te enviamos el eBook al instante. Luego un consultor especializado en Tree Services te ayuda a elegir el camino correcto para tu empresa.",
+        "Déjanos tus datos y te enviamos el eBook al instante. Luego un consultor especializado en <br/> Tree Services te ayuda a elegir el camino correcto para tu empresa.",
       book: {
         tag: "EBOOK GRATIS",
         subtag: "PDF DESCARGA INMEDIATA",
         title:
-          'La Guía de Crecimiento<br/>para<span class="text-third">Empresas de Tree<br/>Services en EE.UU</span>',
+          'La Guía de Crecimiento<br/>para<span class="text-third"> Empresas de Tree<br/>Services en EE.UU</span>',
         description:
-          "Una guía paso a paso para conseguir<br/>más clientes potenciales, más<br/>trabajos y crecimiento sostenible.",
+          "Una guía paso a paso para conseguir más clientes potenciales, más trabajos y crecimiento sostenible.",
         list10: [
           "Cómo atraer leads con Google y redes",
           "Cómo multiplicar reseñas y referidos.",
@@ -531,6 +533,11 @@ export default {
         description:
           "Con un consultor especializado en Tree Services. Revisamos tu negocio y te decimos qué plan te conviene.",
         icon: "guide1",
+      },
+      form: {
+        tag: "DESCARGA GRATIS",
+        title: "¿A dónde te enviamos tu eBook?",
+        description: "Toma menos de 30 segundos.",
       },
     },
     marketing: {
@@ -611,6 +618,7 @@ export default {
       tag: '<span class="text-secondary">TREE PROFIT SYSTEM™</span>',
       title:
         'Un sistema. 3 pilares.<br/><span class="text-secondary">Cada trabajo trae el siguiente.</span>',
+      items: [],
       buttons: [],
       description:
         "No vendemos piezas sueltas. Conectamos anuncios, respuesta inmediata y<br/> reputación en un solo loop que crece cada mes.",
@@ -656,7 +664,7 @@ export default {
       {
         tag: '<span class="text-secondary">01 · ATRAER</span>',
         title:
-          'Clientes nuevos que te<br/> llaman a ti,<span class="text-secondary">no a tu<br/>competencia.</span>',
+          'Clientes nuevos que te <br/> llaman a ti,<span class="text-secondary">no a tu<br/>competencia.</span>',
         description:
           "Ponemos tu empresa frente a dueños de casa de tu zona justo cuando necesitan cortar, podar o quitar un árbol,",
         what: [

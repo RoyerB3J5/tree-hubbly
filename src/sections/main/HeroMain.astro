@@ -32,11 +32,29 @@ const { content } = Astro.props as Props;
             <p class="text-[16px] font-medium leading-[150%] text-secondary">{content.tag}</p>
           )
         }
-        <h1 set:html={content.title} class="heading-h1 text-white text-center"></h1>
+        <h1 set:html={content.title} class="heading-h4 text-white text-center"></h1>
       </div>
       {
         content.description !== "" && (
           <p set:html={content.description} class="text-paragraph body-md text-center"></p>
+        )
+      }
+      {
+        content.items.length > 0 && (
+          <ul class="flex justify-center items-center gap-10 w-full">
+            {
+              content.items.map((item,index) => (
+                <>
+                <li class="text-[18px] font-semibold leading-[150%] text-paragraph flex justify-center items-center gap-2">
+                  <img src={`/images/icons/items-h-${index + 1}.svg`} alt={`Item ${index + 1}`} width="24" height="24" class="w-8 h-8">
+                  {item}
+                </li>
+                <div class='h-full w-[1px] bg-paragraph/40 last:hidden'></div>
+                </>
+                
+              ))
+            }
+          </ul>
         )
       }
       {
