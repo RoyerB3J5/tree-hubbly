@@ -1,8 +1,8 @@
 ---
 import Button from "../../components/Button.astro";
 
-type Translations = typeof import("../../i18n/en").default;
-type CallContent = Translations["systems"]["structured-lead-engine"]["call"];
+type Translations = typeof import("../../i18n/en-2").default;
+type CallContent = Translations["main"]["business"];
 interface Props {
   content: CallContent;
 }
@@ -10,55 +10,9 @@ const { content } = Astro.props as Props;
 ---
 
 <section
-  data-curtain-reveal
-  class="w-full relative overflow-hidden bg-secondary"
+  class="w-full flex justify-center items-center relative overflow-hidden bg-secondary"
 >
-  <div class="curtain-wrapper bg-secondary w-full h-full flex justify-center items-center relative will-change-transform">
-    
-    <div class="w-full max-w-screen xl:max-w-7xl px-5 xl:px-0 flex flex-col justify-start items-center gap-8 pt-10 md:pt-20 lg:pt-30 z-20 h-full pb-20 md:pb-40 lg:pb-55.75 3xl:pb-68">
-      <h2
-        set:html={content.title}
-        class="text-[32px] md:text-[48px] font-bold leading-[120%] text-primary text-center"
-      ></h2>
-      <p
-        set:html={content.description}
-        class="text-p-mobile md:text-p-desktop leading-[150%] font-normal text-primary text-center"
-      ></p>
-      
-      {content.items &&
-        <div class={`flex-col md:flex-row justify-center items-start md:items-center gap-2 md:gap-4 ${content.items.length > 0 ? "flex" : "hidden"}`}>
-          {content.items.map((item) => (
-            <div class="flex justify-center items-center gap-2">
-              <img
-                src="/images/check-3.svg"
-                alt="check Azul"
-                width="24"
-                height="24"
-                decoding="async"
-                loading="lazy"
-                class="w-6 h-6"
-              />
-              <p class="text-p-mobile md:text-p-desktop font-normal leading-[150%] text-primary">
-                {item}
-              </p>
-            </div>
-          ))}
-        </div>
-      }
-      
-      <div class="w-full md:w-auto flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6">
-        {content.buttons.map((button) => (
-          <Button
-            text={button.label}
-            href={button.href}
-            extraBtnClass={button.styleButton}
-            textClass={button.styleLabel}
-          />
-        ))}
-      </div>
-    </div>
-    
-    <img
+  <img
       src="/images/letter.webp"
       alt="Letter"
       class="absolute bottom-0 right-0 w-full h-full object-contain object-center translate-y-1/2 opacity-30"
@@ -66,69 +20,31 @@ const { content } = Astro.props as Props;
       height="308"
       decoding="async"
       loading="lazy"
-    />
+  />
+  <div class="container-full flex flex-col justify-center items-center gap-10 pt-30 pb-[223px]">
+    <div class='flex flex-col justify-center items-center gap-6 '>
+      <h2
+        set:html={content.title}
+        class="text-primary heading-h4 text-center"
+      ></h2>
+      {
+        content.description !== "" && (
+          <p
+            set:html={content.description}
+            class="body-md text-primary"
+          ></p>
+        )
+      }
+    </div>
+    <div class="w-full md:w-auto flex flex-col md:flex-row justify-center items-center gap-4 ">
+        {content.buttons.map((button,index) => (
+          <Button
+            text={button.label}
+            href={button.href}
+            extraBtnClass={`${index === 0 ? "bg-primary border-primary" : "bg-transparent border-primary"}`}
+            textClass={`${index === 0 ? "text-white" : "text-primary"}`}
+          />
+        ))}
+      </div>
   </div>
 </section>
-
-<script is:inline>
-  (function() {
-    let rafId = 0;
-    let elements = [];
-
-    function updateCurtain() {
-      const vh = window.innerHeight;
-
-      elements.forEach(({ section, wrapper }) => {
-        const rect = section.getBoundingClientRect();
-        const H = rect.height;
-        const visiblePixels = vh - rect.top;
-
-        if (visiblePixels <= 0) {
-          // La sección aún está fuera de pantalla
-          wrapper.style.transform = `translate3d(0, ${-H}px, 0)`;
-        } else if (visiblePixels < H) {
-          // 2. SOLUCIÓN AL JITTER: Usar translate3d para forzar la aceleración GPU
-          // y calcular la compensación directa sin redondeos agresivos.
-          const yOffset = visiblePixels - H;
-          wrapper.style.transform = `translate3d(0, ${yOffset}px, 0)`;
-        } else {
-          // Completamente visible
-          wrapper.style.transform = `translate3d(0, 0px, 0)`;
-        }
-      });
-    }
-
-    function onScroll() {
-      // Optimizamos el render loop limpiando frames redundantes
-      if (rafId) cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(updateCurtain);
-    }
-
-    function initCurtainEffect() {
-      const sections = document.querySelectorAll("[data-curtain-reveal]");
-      
-      elements = Array.from(sections).map(section => ({
-        section: section,
-        wrapper: section.querySelector(".curtain-wrapper")
-      })).filter(el => el.wrapper);
-
-      if (elements.length > 0) {
-        window.removeEventListener("scroll", onScroll);
-        window.removeEventListener("resize", updateCurtain);
-
-        window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", updateCurtain, { passive: true });
-        
-        updateCurtain();
-      }
-    }
-
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", initCurtainEffect);
-    } else {
-      initCurtainEffect();
-    }
-
-    document.addEventListener("astro:page-load", initCurtainEffect);
-  })();
-</script>

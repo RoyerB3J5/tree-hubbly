@@ -5,8 +5,11 @@ import Layout from '../../../layouts/Layout.astro';
 import Funcionality from '../../../sections/Funcionality.astro';
 import Book from '../../../sections/main/Book.astro';
 import CallAction from '../../../sections/main/CallAction.astro';
+import Control from '../../../sections/main/Control.astro';
 import HeroMain from '../../../sections/main/HeroMain.astro';
 import Questions from '../../../sections/main/Questions.astro';
+import Steps from '../../../sections/main/Steps.astro';
+
 import Pillars from '../../../sections/Pillars.astro';
 import Reason from '../../../sections/Reason.astro';
 import type { Language } from '../../../types/language.type';
@@ -31,4 +34,7 @@ const t = translations[lang];
   <Questions content={t.main.questions} />
   <CallAction content={t.systemPage.call} />*/}
   <HeroMain content={t.theSystem.hero} />
+  <Steps content={t.theSystem.profit} />
+  <Control content={t.theSystem.mYe} />
+  <CallAction content={t.theSystem.ready} />
 </Layout>

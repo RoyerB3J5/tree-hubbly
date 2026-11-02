@@ -1,9 +1,14 @@
 ---
+import {
+  emailAddress,
+  facebookLink,
+  phoneNumber,
+  phoneNumberLink,
+} from "../constants/info";
 import Button from "./Button.astro";
-import { Icon } from "astro-icon/components";
 import ChangeLanguage from "./ChangeLanguage.astro";
 
-type Translations = typeof import("../i18n/en").default;
+type Translations = typeof import("../i18n/en-2").default;
 type HeaderContent = Translations["header"];
 interface Props {
   content?: HeaderContent;
@@ -13,476 +18,260 @@ const { content } = Astro.props as Props;
 // Obtener la ruta actual y normalizar el path sin prefijo de idioma
 const currentPath = Astro.url.pathname;
 // Normalizar: remover idioma y trailing slash
-const normalized = currentPath.replace(/^\/(en|es)/, "").replace(/\/$/, "") || "/";
+const normalized =
+  currentPath.replace(/^\/(en|es)/, "").replace(/\/$/, "") || "/";
 // Detectar el idioma actual ('en' o 'es')
 const match = currentPath.match(/^\/(en|es)/);
 const lang = match ? match[1] : "en";
 ---
 
 <header
-  class={`fixed left-0 right-0 z-50 w-full flex flex-col justify-center items-center transition-top duration-300 ease-in-out border-0 top-0 `}
+  class={`fixed left-0 right-0 z-50 w-full flex flex-col justify-center items-center top-0`}
+  style="transition: transform 0.3s ease-out, background-color 0.3s ease-out; will-change: transform;"
   id="site-header"
 >
   <div
-    class={`w-[calc(100%-40px)] xl:w-full sm:max-w-7xl flex justify-between items-center relative  py-5 px-0 sm:px-5 xl:px-0`}
+    id="header-main-bar"
+    class={`w-full flex justify-center items-center h-18 md:h-20 transition-colors duration-300`}
   >
-    <a
-      href={`/${lang}`}
-      aria-label="Ir a la página principal"
-      title="Tree Hubly - Inicio"
-    >
-      <img
-        src="/images/logo.svg"
-        alt="Logo de Tree Hubly"
-        width="164"
-        height="33"
-        class="cursor-pointer w-41 h-auto block"
-      />
-    </a>
-    <nav>
-        <ul class="hidden relative lg:flex items-center flex-row justify-center w-auto gap-6">
-          {
-            content?.nav.map((item, index) => {
-              const itemPathWithoutHash = item.href.split("#")[0];
-              const isActive =
-                normalized === itemPathWithoutHash ||
-                (index === 0 && normalized.startsWith("/the-system")) ||
-                (index === 1 && normalized.startsWith("/solutions"));
-              const hasDropdown = index === 0 || index === 1;
-              return (
-                <li
-                  class={`flex flex-row items-center justify-center group hover:text-accent w-auto text-center ${hasDropdown ? " dropdown-parent" : ""} ${isActive ? "bg-transparent " : ""}`}
-                  id={`item-${index}`}
-                >
-                  <a
-                    href={`/${lang}${item.href}`}
-                    class=" relative transition-colors duration-300 flex justify-center items-center"
-                  >
-                    <p
-                      class="text-[14px] font-semibold leading-[150%] text-white transition-all duration-300 ease-in-out"
-                      set:html={item.label}
-                    />
-                    <span
-                      class={`absolute -bottom-2 left-1/2 h-0.5 bg-secondary transition-all duration-300 ease-out -translate-x-1/2 ${isActive ? "w-8" : "w-0 group-hover:w-8 group-hover:bg-secondary"}`}
-                    />
-                  </a>
-                  {hasDropdown && (
-                    <div class="dropdown-menu fixed top-20 left-0 right-0 items-center justify-center bg-white z-40 hidden opacity-0 pointer-events-none transition-all duration-200 ease-out shadow-lg h-auto">
-                      <div class="w-full h-full max-w-7xl px-5 xl:px-0 flex justify-center items-center mx-auto ">
-                        {index === 0 && (
-                          <div class="w-full flex items-center h-85.75">
-                            <div class="grid grid-cols-3 gap-6 w-full">
-                              {content?.system.map((systemItem) => (
-                                <a href={`/${lang}${systemItem.href}`} class="group/item">
-                                  <div class="flex flex-col justify-center items-start gap-4 ">
-                                    <div class="bg-primary aspect-384/158 w-full h-auto rounded-2xl relative overflow-hidden">
-                                      <img src={`/images/${systemItem.image}.webp`} alt={systemItem.title} width="384" height="158" class="absolute inset-0 h-full w-full object-cover object-center">
-                                    </div>
-                                    <div class="flex flex-col justify-center items-start gap-2">
-                                      <h3 class="text-[16px] text-primary font-bold leading-[150%]">{systemItem.title}</h3>
-                                      <p class="text-[14px] text-primary leading-[150%] text-start">{systemItem.description}</p>
-                                    </div>
-                                  </div>
-                                </a>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                        {index === 1 && (
-                          <div class="w-full flex items-center h-85.75 justify-center gap-6 ">
-                            <div class="grid grid-cols-3 gap-6 w-[70%]">
-                              {content?.solutions.items.map((solutionItem) => (
-                                <a href={`/${lang}${solutionItem.href}`} class="group/item">
-                                  <div class="flex flex-col justify-center items-start gap-4 ">
-                                    <div class="bg-primary aspect-282/158 w-full h-auto rounded-2xl relative overflow-hidden">
-                                      <img src={`/images/${solutionItem.image}.webp`} alt={solutionItem.title} width="282" height="158" class="absolute inset-0 h-full w-full object-cover object-center" />
-                                    </div>
-                                    <div class="flex flex-col justify-center items-start gap-2">
-                                        <h3 class="text-[16px] text-primary font-bold leading-[150%]">{solutionItem.title}</h3>
-                                      <p class="text-[14px] text-primary leading-[150%] text-start">{solutionItem.description}</p>
-                                    </div>
-                                  </div>
-                                </a>
-                              ))}
-                            </div>
-                            <div class="w-0.5 h-[80%] bg-[#D9D9D9]"></div>
-                            <div class="flex flex-col jusitfy-center items-center gap-10 w-[30%]">
-                              {
-                                content?.solutions.content.map((item)=> ( 
-                                  <a href={`/${lang}${item.href}`}>
-                                    <div class="flex flex-col justify-center items-start gap-2">
-                                      <h3 class="text-[16px] text-primary font-bold leading-[150%]">{item.title}</h3>
-                                      <p class="text-[14px] text-primary leading-[150%] text-start">{item.description}</p>
-                                    </div>
-                                  </a>
-                                  
-                                ))
-                              }
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </li>
-              );
-            })
-          }
-        </ul>
-      </nav>
-    <!-- Menú desktop (lg y arriba) -->
     <div
-      class="relative bg-transparent flex flex-row justify-center items-center h-auto w-auto z-10 py-0 transition-transform duration-300 ease-out gap-16"
+      class="max-w-[1280px] px-4 xl:px-0 w-full flex justify-between items-center relative"
     >
-      
-      <div class="flex justify-center items-center gap-6">
+      <a
+        href={`/${lang}`}
+        aria-label="Ir a la página principal"
+        title="Philly Steak - Init"
+      >
+        <img
+          src="/images/logo.svg"
+          alt="Logo de Tree Hubbly"
+          width="240"
+          height="127"
+          class="cursor-pointer w-[94px] md:w-[164px] h-auto"
+        />
+      </a>
+      <div class="flex justify-center items-center gap-2 md:gap-6">
         <Button
           text={content?.buttons[0].label}
-          textClass="text-primary"
           href={content?.buttons[0].href}
-          target="_blank"
-          extraBtnClass={`bg-secondary hover:bg-secondary/90 hidden lg:flex w-30 h-10`}
+          textClass="text-primary"
+          extraBtnClass="hidden lg:flex bg-secondary border-secondary"
         />
-        <ChangeLanguage />
-        <div class="flex lg:hidden justify-center items-center gap-7">
-          <button
-            type="button"
-            aria-label="Abrir menú de navegación"
-            title="Abrir menú"
-            class="flex items-center justify-center cursor-pointer"
-            id="hamburger-btn"
-          >
-            <Icon name={"hamburger"} class={"w-4.5 h-3 text-white"} aria-hidden="true" />
-            <span class="sr-only">Abrir menú de navegación</span>
-          </button>
-        </div>
+        {/*<ChangeLanguage /> */}
+        <button
+          type="button"
+          aria-label="Abrir menú de navegación"
+          title="Abrir menú"
+          class="flex items-center justify-center cursor-pointer w-12 h-12 rounded overflow-hidden"
+          id="hamburger-btn"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <path d="M24 4C35.0456 4 44 12.9543 44 24C44 35.0456 35.0456 44 24 44C12.9543 44 4 35.0456 4 24C4 12.9543 12.9543 4 24 4Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#F7F7F7"/>
+            <path d="M16 20H32M16 28H32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#F7F7F7"/>
+          </svg>
+        </button>
       </div>
-      
     </div>
-    <!-- Botones para móvil -->
   </div>
 </header>
 
-<style>
-  /* Mostrar dropdown al hacer hover sobre el parent */
-  .dropdown-parent:hover .dropdown-menu {
-    display: flex !important;
-    opacity: 100 !important;
-    pointer-events: auto !important;
-  }
-
-  /* Mantener visible cuando el mouse está sobre el dropdown */
-  .dropdown-menu:hover {
-    display: flex !important;
-    opacity: 100 !important;
-    pointer-events: auto !important;
-  }
-</style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const dropdownParents = document.querySelectorAll(".dropdown-parent");
-    
-    dropdownParents.forEach((parent) => {
-      const dropdown = parent.querySelector(".dropdown-menu");
-      if (!dropdown) return;
-
-      let hideTimeout : any;
-
-      parent.addEventListener("mouseenter", () => {
-        clearTimeout(hideTimeout);
-        dropdown.classList.remove("hidden", "opacity-0", "pointer-events-none");
-        dropdown.classList.add("opacity-100", "pointer-events-auto");
-      });
-
-      parent.addEventListener("mouseleave", () => {
-        hideTimeout = setTimeout(() => {
-          if (!dropdown.matches(":hover")) {
-            dropdown.classList.add("hidden", "opacity-0", "pointer-events-none");
-            dropdown.classList.remove("opacity-100", "pointer-events-auto");
-          }
-        }, 150);
-      });
-
-      dropdown.addEventListener("mouseenter", () => {
-        clearTimeout(hideTimeout);
-        dropdown.classList.remove("hidden", "opacity-0", "pointer-events-none");
-        dropdown.classList.add("opacity-100", "pointer-events-auto");
-      });
-
-      dropdown.addEventListener("mouseleave", () => {
-        hideTimeout = setTimeout(() => {
-          dropdown.classList.add("hidden", "opacity-0", "pointer-events-none");
-          dropdown.classList.remove("opacity-100", "pointer-events-auto");
-        }, 150);
-      });
-    });
-  });
-</script>
-
-<!-- Overlay móvil -->
 <div
-  class="fixed inset-0 lg:hidden bg-black/40 z-50 opacity-0 pointer-events-none transition-opacity duration-300 ease-out"
-  id="mobile-overlay"
-></div>
-
-<!-- Menú móvil independiente (lg para abajo) -->
-<div
-  class="fixed top-0 right-0 bottom-0 lg:hidden flex items-center bg-primary text-white flex-col justify-center h-full w-[90%] z-60 py-6 gap-12 transform translate-x-full transition-transform duration-300 ease-out px-4"
+  class="fixed top-0 right-0 bottom-0 xl:hidden flex items-start bg-paragraph text-white flex-col justify-start h-full z-60 pb-12 px-4 pt-6 gap-6 transform translate-x-full transition-transform duration-300 ease-out w-full"
   id="mobile-menu"
 >
-  <img
-    src="/images/back-arrow.svg"
-    alt="Cerrar menú"
-    width="24"
-    height="24"
-    class="block absolute bottom-12 right-6 cursor-pointer z-20 h-12 w-12"
-    id="close-btn"
-    aria-label="Cerrar menú de navegación"
-    title="Cerrar menú"
-    role="button"
-    tabindex="0"
-  />
-  <a
+  <div class="flex flex-col justify-center items-center gap-8 w-full">
+    {/*<X
+      class="block cursor-pointer z-20 w-6 h-6 text-white self-end"
+      id="close-btn"
+      aria-label="Cerrar menú de navegación"
+      title="Cerrar menú"
+      role="button"
+      tabindex="0"
+    /> */}
+    
+    <a
       href={`/${lang}`}
       aria-label="Ir a la página principal"
-      title="Tree Hubly - Inicio"
+      title="Philly Steak - Init"
     >
       <img
         src="/images/logo.svg"
-        alt="Logo de Tree Hubly"
-        width="164"
-        height="33"
-        class="cursor-pointer w-41 h-auto block"
+        alt="Logo de Tree Hubbly"
+        width="240"
+        height="127"
+        class="cursor-pointer w-[150px] h-auto"
       />
     </a>
-  <nav class="w-full">
-    <ul class="relative flex items-start flex-col justify-center w-full gap-10">
-      {
-        content?.nav.map((item, index) => {
-          const itemPathWithoutHash = item.href.split("#")[0];
-          const isActive =
-            normalized === itemPathWithoutHash ||
-            (index === 0 && normalized.startsWith("/the-system")) ||
-            (index === 1 && normalized.startsWith("/solutions"));
-          const hasDropdown = index === 0 || index === 1;
-          return (
-            <li
-              class={` flex flex-col items-start justify-center group gap-3.5 px-0 w-full text-center   ${hasDropdown ? "relative" : ""} ${isActive ? " text-secondary " : "text-white"}`}
-              id={`mobile-items-${index}`}
-            >
-              <a
-                href={`/${lang}${item.href}`}
-                class="relative transition-colors duration-300 flex justify-center items-center mobile-nav-item"
-                data-index={index}
-                data-has-dropdown={hasDropdown}
-              >
-                <p class={`text-[16px] font-medium leading-[120%] ${isActive ? "uppercase" : ""}`} set:html={item.label} />
-              </a>
-              {hasDropdown && (
-                <div
-                  class="flex-col justify-center items-center w-full bg-primary divide-y divide-secondary hidden absolute z-20 top-0 translate-y-12.5"
-                  id={`sub-menu-mobile-${index}`}
+    <nav class="w-full">
+      <ul
+        class="relative flex items-start flex-col justify-center w-full gap-6"
+      >
+        {
+          content?.nav.map((item, index) => {
+            const itemPathWithoutHash = item.href.split("#")[0];
+            const isActive = normalized === itemPathWithoutHash;
+            return (
+              <>
+                <li
+                  class={`flex flex-col items-start justify-start group gap-3.5 px-4 w-full text-start  ${isActive ? "bg-secondary text-white uppercase " : ""}`}
+                  id={`mobile-nav-item-${index}`}
                 >
-                  {index === 0 && (
-                    <>
-                      {content?.systemPhone.map((systemItem) => (
-                        <a href={`/${lang}${systemItem.href}`} class="w-full px-4 py-5 hover:bg-primary/80 transition-colors duration-200">
-                          <h3 class="text-[14px] text-white font-bold leading-[150%]">{systemItem.title}</h3>
-                        </a>
-                      ))}
-                    </>
-                  )}
-                  {index === 1 && (
-                    <>
-                      {content?.solutionsPhone.map((solutionItem) => (
-                        <a href={`/${lang}${solutionItem.href}`} class="w-full px-4 py-3 hover:bg-primary/80 transition-colors duration-200">
-                          <h3 class="text-[14px] text-white font-bold leading-[150%]">{solutionItem.title}</h3>
-                        </a>
-                      ))}
-                    </>
-                  )}
-                </div>
-              )}
-            </li>
-          );
-        })
-      }
-    </ul>
-  </nav>
-
-  <div class="flex flex-col justify-center items-center gap-5 w-full">
+                  <a
+                    href={`/${lang}${item.href}`}
+                    class="relative transition-colors duration-300 flex justify-start items-center w-full py-6 gap-6"
+                    aria-expanded="false"
+                  >
+                    {isActive && (
+                      <div class={`w-1.5 h-1.5 bg-accent rotate-45  `} />
+                    )}
+                    <p
+                      class={`text-[20px] font-normal leading-[100%] tracking-[-0.5px] ${isActive ? "text-white uppercase font-rust" : "text-white font-paragraph"}`}
+                      set:html={item.label}
+                    />
+                  </a>
+                </li>
+              </>
+            );
+          })
+        }
+      </ul>
+    </nav>
+  </div>
+  <div class="flex flex-col justify-center items-center gap-4 w-full">
     <Button
       text={content?.buttons[0].label}
-      textClass="text-primary"
       href={content?.buttons[0].href}
       target="_blank"
-      extraBtnClass={`bg-secondary w-full h-11.25 rounded-2xl`}
+      textClass="uppercase text-white"
+      extraBtnClass={`bg-secondary border-secondary w-full`}
     />
   </div>
-
-  <style>
-    /* Clase para texto solo visible para lectores de pantalla */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-  </style>
-
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", () => {
-      const menu = document.getElementById("mobile-menu");
-      const openBtn = document.getElementById("hamburger-btn");
-      const closeBtn = document.getElementById("close-btn");
-      const body = document.body;
-      const overlay = document.getElementById("mobile-overlay");
-
-      const isMobile = () => window.innerWidth < 1024;
-
-      function openMenu() {
-        if (isMobile()) {
-          menu.classList.replace("translate-x-full", "translate-x-0");
-          overlay.classList.replace("opacity-0", "opacity-100");
-          overlay.classList.replace("pointer-events-none", "pointer-events-auto");
-          body.classList.add("overflow-hidden");
-        }
-      }
-
-      function closeMenu() {
-        if (isMobile()) {
-          menu.classList.replace("translate-x-0", "translate-x-full");
-          overlay.classList.replace("opacity-100", "opacity-0");
-          overlay.classList.replace("pointer-events-auto", "pointer-events-none");
-          body.classList.remove("overflow-hidden");
-        }
-      }
-
-      openBtn.addEventListener("click", openMenu);
-      closeBtn.addEventListener("click", closeMenu);
-      overlay.addEventListener("click", closeMenu);
-
-      // Manejar toggle de submenus en items de navegación móvil
-      const mobileNavItems = document.querySelectorAll(".mobile-nav-item");
-      mobileNavItems.forEach((item) => {
-        item.addEventListener("click", (e) => {
-          if (!isMobile()) return;
-
-          const index = parseInt(item.getAttribute("data-index"));
-          const hasDropdown = item.getAttribute("data-has-dropdown") === "true";
-
-          if (!hasDropdown) return;
-
-          const subMenu = document.getElementById(`sub-menu-mobile-${index}`);
-          if (!subMenu) return;
-
-          const isSubMenuOpen = !subMenu.classList.contains("hidden");
-
-          // Prevenir navegación y toggle del submenú
-          e.preventDefault();
-
-          if (!isSubMenuOpen) {
-            // Si está cerrado, abrirlo
-            subMenu.classList.remove("hidden");
-            subMenu.classList.add("flex");
-          } else {
-            // Si está abierto, cerrarlo
-            subMenu.classList.add("hidden");
-            subMenu.classList.remove("flex");
-          }
-        });
-      });
-
-      // Asegurar estado inicial según tamaño
-      if (isMobile()) {
-        menu.classList.add("translate-x-full");
-        menu.classList.remove("translate-x-0");
-        body.classList.remove("overflow-hidden");
-      } else {
-        menu.classList.add("translate-x-0");
-        menu.classList.remove("translate-x-full");
-        body.classList.remove("overflow-hidden");
-      }
-
-      window.addEventListener("resize", () => {
-        if (!isMobile()) {
-          menu.classList.add("translate-x-0");
-          menu.classList.remove("translate-x-full");
-          overlay.classList.add("opacity-0");
-          overlay.classList.add("pointer-events-none");
-          body.classList.remove("overflow-hidden");
-        } else {
-          // Asegura que el menú esté oculto al volver a móvil
-          menu.classList.add("translate-x-full");
-          menu.classList.remove("translate-x-0");
-          overlay.classList.add("opacity-0");
-          overlay.classList.add("pointer-events-none");
-          body.classList.remove("overflow-hidden");
-        }
-      });
-      const header = document.getElementById("site-header");
-      const viewportHeight = window.innerHeight;
-      let lastScroll = window.pageYOffset;
-
-      // Detectar si estamos en la página principal
-      const currentPath = window.location.pathname;
-      const isHomePage = currentPath === "/" || currentPath === "/en" || currentPath === "/es" || currentPath === "/en/" || currentPath === "/es/";
-
-      function updateHeaderBackground() {
-        const currentScroll = window.pageYOffset;
-
-        if (isHomePage) {
-          // En la página principal: opacidad progresiva después del hero
-          // El color de fondo comienza cuando se pasa la sección Hero (primera viewport)
-          // Transición suave desde que pasa el Hero
-          const opacity = Math.min(Math.max(currentScroll - viewportHeight, 0) / (viewportHeight * 0.3), 1);
-          header.style.backgroundColor = `rgba(5, 23, 37, ${opacity})`;
-        } else {
-          // En otras páginas: background fijo con color primary
-          header.style.backgroundColor = "rgba(5, 23, 37, 1)";
-        }
-      }
-
-      window.addEventListener("scroll", () => {
-        const currentScroll = window.pageYOffset;
-
-        updateHeaderBackground();
-
-        // Mostrar/ocultar header según dirección del scroll, pero SOLO después de los primeros 100vh
-        if (currentScroll > viewportHeight) {
-          if (currentScroll > lastScroll && currentScroll > 100) {
-            // Scroll hacia abajo: escondemos el header
-            header.style.transform = "translateY(-120%)";
-          } else {
-            // Scroll hacia arriba: mostramos el header
-            header.style.transform = "translateY(0)";
-          }
-        } else {
-          // Dentro de los primeros 100vh, siempre mostrado
-          header.style.transform = "translateY(0)";
-        }
-
-        lastScroll = currentScroll;
-      });
-
-      // Aplicar el background al cargar la página
-      updateHeaderBackground();
-
-      // Observer para detectar cambios en el tema (clase 'dark')
-      const observer = new MutationObserver(() => {
-        // updateHeaderBackground();
-      });
-
-      observer.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ["class"],
-      });
-    });
-  </script>
 </div>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Mobile menu logic - matches xl breakpoint (1280px)
+    const menu = document.getElementById("mobile-menu");
+    const openBtn = document.getElementById("hamburger-btn");
+    const closeBtn = document.getElementById("close-btn");
+    const body = document.body;
+
+    const isMobile = () => window.innerWidth < 1280;
+
+    function openMenu() {
+      if (isMobile() && menu) {
+        menu.classList.replace("translate-x-full", "translate-x-0");
+        body.classList.add("overflow-hidden");
+      }
+    }
+
+    function closeMenu() {
+      if (isMobile() && menu) {
+        menu.classList.replace("translate-x-0", "translate-x-full");
+        body.classList.remove("overflow-hidden");
+      }
+    }
+
+    if (openBtn) openBtn.addEventListener("click", openMenu);
+    if (closeBtn) closeBtn.addEventListener("click", closeMenu);
+
+    // Close mobile menu when clicking a link
+    if (menu) {
+      menu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+      });
+    }
+
+    // Header: height var + hide on scroll down / show on scroll up
+    const header = document.getElementById("site-header");
+    const headerTopBar = document.getElementById("header-top-bar");
+    const headerMainBar = document.getElementById("header-main-bar");
+
+    function updateHeaderHeight() {
+      const height = headerTopBar?.offsetHeight || 0;
+      document.documentElement.style.setProperty(
+        "--header-height",
+        `${height}px`,
+      );
+    }
+    if (headerTopBar) {
+      updateHeaderHeight();
+      window.addEventListener("resize", updateHeaderHeight);
+    }
+
+    if (!header) return;
+
+    let lastScrollY = window.scrollY || document.documentElement.scrollTop;
+    let ticking = false;
+    const HIDE_AFTER = 80; // start hiding only after scrolling past this
+    const DELTA = 5; // ignore tiny jitter
+
+    const showHeader = () => {
+      header.style.transform = "translateY(0)";
+    };
+
+    const hideHeader = () => {
+      header.style.transform = "translateY(-100%)";
+    };
+
+    const isMenuOpen = () => menu?.classList.contains("translate-x-0") ?? false;
+
+    const updateMainBarBg = (currentY) => {
+      if (!headerMainBar) return;
+      // Solid pages (anything other than /, /menu, /about-us) always stay dark.
+      if (headerMainBar.dataset.solid === "true") {
+        headerMainBar.classList.add("bg-[#051725]");
+        headerMainBar.classList.remove("bg-transparent");
+        return;
+      }
+      // Past the initial viewport (with a small threshold so it triggers reliably)
+      const pastViewport = currentY > window.innerHeight - 80;
+      headerMainBar.classList.toggle("bg-[#051725]", pastViewport);
+      headerMainBar.classList.toggle("bg-transparent", !pastViewport);
+    };
+
+    const onScroll = () => {
+      const currentY = window.scrollY || document.documentElement.scrollTop;
+      const diff = currentY - lastScrollY;
+
+      updateMainBarBg(currentY);
+
+      // Don't hide while mobile menu is open
+      if (isMenuOpen()) {
+        showHeader();
+        lastScrollY = currentY;
+        ticking = false;
+        return;
+      }
+
+      // Always visible at the very top
+      if (currentY <= HIDE_AFTER) {
+        showHeader();
+      } else if (diff > DELTA) {
+        // Scrolling down -> hide
+        hideHeader();
+      } else if (diff < -DELTA) {
+        // Scrolling up -> show
+        showHeader();
+      }
+
+      lastScrollY = currentY;
+      ticking = false;
+    };
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(onScroll);
+        }
+      },
+      { passive: true },
+    );
+    window.addEventListener("resize", () => {
+      updateMainBarBg(window.scrollY || document.documentElement.scrollTop);
+    });
+    onScroll();
+  });
+</script>

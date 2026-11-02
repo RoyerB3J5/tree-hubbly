@@ -99,7 +99,7 @@ html {
   font-family: var(--font-family-poppins);
   font-weight: 700; /* Bold */
   font-size: 40px;
-  line-height: 110%;
+  line-height: 120%;
   letter-spacing: 0;
 }
 
@@ -310,6 +310,15 @@ html {
   animation: colorShiftRight 5s linear infinite;
 }
 
+.back-prices {
+  background:
+    linear-gradient(
+      0deg,
+      rgba(7, 152, 240, 0.2) 0%,
+      rgba(7, 152, 240, 0.04) 100%
+    ),
+    #04121e;
+}
 .back-hero {
   background:
     linear-gradient(0deg, rgba(5, 23, 37, 0.5) 0%, rgba(5, 23, 37, 0) 100%),

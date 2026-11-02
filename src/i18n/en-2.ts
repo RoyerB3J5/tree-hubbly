@@ -2,137 +2,25 @@ export default {
   header: {
     nav: [
       {
-        label:
-          'El Sistema <img src="/images/arrow-d-g.svg" alt="Flecha" class="inline-block w-6 h-6 ml-1"/>',
+        label: "El Sistema",
         href: "/the-system",
       },
       {
-        label:
-          'Soluciones <img src="/images/arrow-d-g.svg" alt="Flecha" class="inline-block w-6 h-6 ml-1"/>',
-        href: "/solutions",
+        label: "Rsultados",
+        href: "/results",
       },
       {
-        label: "Casos de Éxito",
-        href: "/case-studies",
+        label: "Planes",
+        href: "/plans",
       },
       {
-        label: "Recursos",
-        href: "/resources",
-      },
-      {
-        label: "Acerca de",
+        label: "Nosotros",
         href: "/about",
-      },
-    ],
-    system: [
-      {
-        title: "Motor de Prospectos Estructurado",
-        description:
-          "Un motor de prospectos predecible que atrae propietarios de alto interés en tu área.",
-        image: "structured",
-        href: "/the-system/structured-lead-engine",
-      },
-      {
-        title: "Infraestructura de Conversión y Automatización",
-        description:
-          "Convierte consultas en oportunidades estructuradas con seguimiento automatizado visible.",
-        image: "automation",
-        href: "/the-system/conversion-automation",
-      },
-      {
-        title: "Inteligencia de Rendimiento y Escalabilidad",
-        description:
-          "Rastrea prospectos, trabajos e inversión en marketing con paneles de desempeño real.",
-        image: "intelligence",
-        href: "/the-system/performance-intelligence-scale",
-      },
-    ],
-    solutions: {
-      items: [
-        {
-          title: "Marketing Servicios de Árboles",
-          description:
-            "Estrategias de marketing diseñadas para generar prospectos consistentes de servicios de árboles.",
-          image: "marketing",
-          href: "/solutions/marketing",
-        },
-        {
-          title: "SEO Servicios de Árboles",
-          description:
-            "Aparece en los primeros lugares de Google para servicios de árboles en tu área.",
-          image: "seo",
-          href: "/solutions/seo",
-        },
-        {
-          title: "Google Ads",
-          description:
-            "Campañas de Google Ads que atraen clientes de servicios de árboles de alto interés.",
-          image: "google",
-          href: "/solutions/google-ads",
-        },
-      ],
-      content: [
-        {
-          href: "/solutions/website-funnels",
-          title: "Sitio Web y Embudos",
-          description:
-            "Sitios web y embudos diseñados para convertir visitantes en prospectos de servicios de árboles.",
-        },
-        {
-          href: "/solutions/crm-automation",
-          title: "CRM y Automatización",
-          description:
-            "Sistemas automatizados para capturar, gestionar y dar seguimiento a prospectos.",
-        },
-      ],
-    },
-    systemPhone: [
-      {
-        title: "Motor de Prospectos Estructurado",
-        href: "/the-system/structured-lead-engine",
-      },
-      {
-        title: "Infraestructura de Conversión y Automatización",
-        href: "/the-system/conversion-automation",
-      },
-      {
-        title: "Inteligencia de Rendimiento y Escalabilidad",
-        href: "/the-system/performance-intelligence-scale",
-      },
-      {
-        title: "Todos los Sistemas",
-        href: "/the-system",
-      },
-    ],
-    solutionsPhone: [
-      {
-        title: "Marketing Servicios de Árboles",
-        href: "/solutions/marketing",
-      },
-      {
-        title: "SEO Servicios de Árboles",
-        href: "/solutions/seo",
-      },
-      {
-        title: "Google Ads",
-        href: "/solutions/google-ads",
-      },
-      {
-        href: "/solutions/website-funnels",
-        title: "Sitio Web y Embudos",
-      },
-      {
-        href: "/solutions/crm-automation",
-        title: "CRM y Automatización",
-      },
-      {
-        href: "/solutions",
-        title: "Todas las Soluciones",
       },
     ],
     buttons: [
       {
-        label: "Hablemos",
+        label: "¡Hablemos!",
         href: "#",
       },
     ],
@@ -336,6 +224,7 @@ export default {
       ],
     },
     control: {
+      img: "main-control",
       tag: "Métricas y control",
       title:
         'Si no se puede medir,<span class="text-third">no se puede escalar.</span>',
@@ -478,7 +367,7 @@ export default {
           tag2: "",
           title: "Scale",
           description:
-            "Tú cortas arboles y lideras a tu equipo.<br/> Nosotros llenamos tu agenda.",
+            "Tú cortas arboles y lideras a tu equipo. Nosotros llenamos tu agenda.",
           lists: [
             {
               title: "Todo lo de Grow",
@@ -546,9 +435,9 @@ export default {
         'Esto no es <span class="text-secondary">marketing profesional.</span>',
       pc: [
         {
-          icon: "marketing1",
+          icon: "equis",
           title: "Agencia tradicional",
-          list11: [
+          list: [
             "Vende un website, anuncios o SEO",
             "Se detiene cuando llega el lead",
             "Campañas que se apagan",
@@ -557,10 +446,9 @@ export default {
           ],
         },
         {
-          icon: "marketing2",
-          title:
-            '<span class="text-secondary">Treehubly · Tree Profit System™</span>',
-          list12: [
+          icon: "check",
+          title: "Treehubly · Tree Profit System™",
+          list: [
             "Construye un sistema de crecimiento conectado",
             "Responde, agenda y da seguimiento por ti",
             "Un loop que crece con cada trabajo",
@@ -572,7 +460,7 @@ export default {
     },
     business: {
       title:
-        "¿Listo para ser la empresa de <br/> árboles que domina tu ciudad?",
+        "¿Listo para ser la empresa de árboles que <br/> domina tu ciudad?",
       description:
         "Trabajamos con solo 10 empresas de árboles a la vez. Garantía de implementación incluida.",
       buttons: [
@@ -615,7 +503,7 @@ export default {
   },
   theSystem: {
     hero: {
-      tag: '<span class="text-secondary">TREE PROFIT SYSTEM™</span>',
+      tag: "TREE PROFIT SYSTEM™",
       title:
         'Un sistema. 3 pilares.<br/><span class="text-secondary">Cada trabajo trae el siguiente.</span>',
       items: [],
@@ -624,7 +512,8 @@ export default {
         "No vendemos piezas sueltas. Conectamos anuncios, respuesta inmediata y<br/> reputación en un solo loop que crece cada mes.",
     },
     profit: {
-      title: 'El<span class="text-third">Tree Profit Loop™</span>',
+      tag: "",
+      title: 'El <span class="text-third">Tree Profit Loop™</span>',
       description:
         "El diagnóstico se hace una vez. Atraer, Cerrar, Multiplicar y Escalar giran<br/>cada mes, y los reviews y referidos de cada vuelta abaratan la siguiente.",
       reasons: [
@@ -785,34 +674,37 @@ export default {
       },
     ],
     mYe: {
+      img: "system-control",
       tag: "Medir y escalar",
       title:
-        'Sabes cuánto te <br/>cuesta cada trabajo<br/>y<span class="text-third"> cuánto te deja.</span>',
-      metrics: [
+        'Sabes cuánto te cuesta cada trabajo y<span class="text-third"> cuánto te deja.</span>',
+      description: "",
+      measuring: [
         {
           tag: "Métrica",
           description: "Costo por lead",
-          icon: "mye1",
+          icon: "control1",
         },
         {
           tag: "Métrica",
           description: "% lead → cita → trabajo",
-          icon: "mye2",
+          icon: "control2",
         },
         {
           tag: "Métrica",
           description: "Reviews nuevos al mes",
-          icon: "mye3",
+          icon: "control3",
         },
         {
           tag: "Métrica",
           description: "Costo por trabajo agendado",
-          icon: "mye4",
+          icon: "control4",
         },
       ],
     },
     ready: {
       title: "¿Listo para que tu agenda se<br/> llene sola?",
+      description: "",
       buttons: [
         {
           label: "Quiero mi diagnóstico gratis",
@@ -1133,6 +1025,7 @@ export default {
     },
     choose: {
       title: "Tu empresa puede ser el próximo caso.",
+      description: "",
       buttons: [
         {
           label: "Quiero mi diagnóstico gratis",
@@ -1193,7 +1086,7 @@ export default {
   },
   footer: {
     description:
-      "El sistema de crecimiento definitivo para profesionales <br class='hidden lg:block'/> de servicios de árboles. No solo ofrecemos marketing: <br class='hidden lg:block'/> ofrecemos la infraestructura para tu éxito",
+      "El sistema de crecimiento definitivo para profesionales de servicios de árboles. No solo ofrecemos marketing: ofrecemos la infraestructura para tu éxito.",
     schedules: {
       title: "Contáctanos",
       items: [
@@ -1222,45 +1115,16 @@ export default {
           href: "/the-system",
         },
         {
-          label: "Soluciones",
-          href: "/solutions",
+          label: "Planes",
+          href: "/plans",
         },
         {
-          label: "Casos de Éxito",
-          href: "/case-studies",
+          label: "Resultados",
+          href: "/results",
         },
         {
-          label: "Recursos",
-          href: "/resources",
-        },
-        {
-          label: "Acerca de",
+          label: "Nosotros",
           href: "/about",
-        },
-      ],
-    },
-    services: {
-      title: "Soluciones",
-      items: [
-        {
-          label: "Marketing para Servicios de Árboles",
-          href: "/services/marketing",
-        },
-        {
-          label: "SEO para Servicios de Árboles",
-          href: "/services/seo",
-        },
-        {
-          label: "Google Ads",
-          href: "/services/google-ads",
-        },
-        {
-          label: "Sitio Web y Embudos",
-          href: "/services/website-funnels",
-        },
-        {
-          label: "CRM y Automatización",
-          href: "/services/crm-automation",
         },
       ],
     },

@@ -15,6 +15,9 @@ import Numbers from '../../sections/main/Numbers.astro';
 import Control from '../../sections/main/Control.astro';
 import Path from '../../sections/main/Path.astro';
 import Guide from '../../sections/main/Guide.astro';
+import Prices from '../../sections/main/Prices.astro';
+import Marketing from '../../sections/main/Marketing.astro';
+import CallAction from '../../sections/main/CallAction.astro';
 export function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
 }
@@ -43,6 +46,9 @@ const t = translations[lang];
   <Numbers content={t.main.numbers} />
   <Control content={t.main.control} />
   <Path content={t.main.path} />
+  <Prices content={t.main.ecosystem} />
   <Guide content={t.main.guide} />
+  <Marketing content={t.main.marketing} />
+  <CallAction content={t.main.business} />
   <Questions content={t.main.ask} /> 
 </Layout>

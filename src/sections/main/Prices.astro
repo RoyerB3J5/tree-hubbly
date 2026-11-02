@@ -1,0 +1,79 @@
+---
+import Button from "../../components/Button.astro";
+
+type Translations = typeof import("../../i18n/en-2").default;
+type Content = Translations["main"]["ecosystem"];
+interface Props {
+  content: Content;
+}
+const { content } = Astro.props as Props;
+---
+<section class='w-full flex justify-center items-center bg-primary text-paragraph'>
+  <div class="container-full flex flex-col justify-center items-center gap-10 py-20">
+    <div class='flex flex-col justify-center items-center gap-6 '>
+      <p class='subtitle-lg' set:html={content.tag}></p>
+      <h2 set:html={content.title} class='heading-h4 text-center'></h2>
+    </div>
+    <div class='prices-grid w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center items-stretch'>
+      {
+        content.service.map((item,index)=>(
+          <div class={`price-card w-full flex flex-col justify-start items-start gap-8 py-10 px-6 rounded-2xl border  ${index === 1 ? "back-prices border-secondary" : "bg-transparent border-[#263A4B]"}`}>
+            <div class="w-full flex justify-between items-center h-[27.8px]">
+              <p class='subtitle-sm uppercase'>{item.tag}</p>
+              {
+                item.tag2 !== "" && (<div class={`flex justify-center items-center py-2 px-3 border border-secondary rounded-full ${index === 1 ? "bg-secondary text-primary" : "bg-transparent "}`}>
+                <p class="uppercase subtitle-sm">{item.tag2}</p>
+              </div>)
+              }
+              
+            </div>
+            <h3 class='heading-h5 text-start'>{item.title}</h3>
+            <p class="body-md text-start ">{item.description}</p>
+            <div class="flex flex-col justify-start items-start gap-6 ">
+              {
+                item.lists.map((listItem)=>(
+                  <div class="flex justify-start items-center gap-2 ">
+                    <img src="/images/icons/check.svg" alt="Check" width="24" height="24" class="w-5 h-5">
+                    <div class='flex flex-col justify-center items-start gap-3'>
+                      <p class="text-paragraph body-md">{listItem.title}</p>
+                      {
+                        listItem.description !== "" && (<p class="text-[#8F979D] body-sm">{listItem.description}</p>)
+                      }
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+            <div class="w-full flex flex-col justify-start items-center gap-4 ">
+              <Button
+                  text={item.button[0].label}
+                  href={item.button[0].href}
+                  extraBtnClass={`${index === 1 ? "bg-secondary border-secondary" : "bg-transparent border-paragraph"} w-full`}
+                  textClass={`${index === 1 ? "text-primary" : "text-paragraph"} `}
+                />
+              <p class='body-sm text-[#8F979D] text-center'>{item.subtag}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (min-width: 64rem) {
+    .prices-grid {
+      grid-template-rows: repeat(5, auto);
+      row-gap: 2rem;
+    }
+
+    .price-card {
+      display: grid;
+      grid-row: span 5;
+      grid-template-rows: subgrid;
+      row-gap: 2rem;
+      column-gap: 0;
+      align-items: stretch;
+    }
+  }
+</style>

@@ -1,0 +1,27 @@
+---
+import en from '../../../i18n/en-2';
+import es from '../../../i18n/es-2';
+import Layout from '../../../layouts/Layout.astro';
+import CallAction from '../../../sections/main/CallAction.astro';
+import Guide from '../../../sections/main/Guide.astro';
+import Prices from '../../../sections/main/Prices.astro';
+import Questions from '../../../sections/main/Questions.astro';
+import Scale from '../../../sections/main/Scale.astro';
+import type { Language } from '../../../types/language.type';
+export function getStaticPaths() {
+  return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+}
+
+export const defaultRedirect = '/en';
+
+const lang = Astro.params.lang as Language;
+const translations = { es, en };
+const t = translations[lang];
+---
+<Layout lang={lang} t={t}>
+  <Prices content={t.main.ecosystem} />
+  <Guide content={t.main.guide} />
+  <Scale content={t.main.grow} />
+  <Questions content={t.plans.ask} /> 
+  <CallAction content={t.plans.diary} />
+</Layout>

@@ -12,10 +12,13 @@ const { content } = Astro.props as Props;
       <div class='flex flex-col justify-center items-start gap-6 text-primary max-w-[411px]'>
         <p class="subtitle-lg">{content.tag}</p>
         <h2 set:html={content.title} class='heading-h4'></h2>
-        <p class="body-md">{content.description}</p>
+        {
+          content.description !== "" && (<p class="body-md">{content.description}</p>)
+        }
+        
       </div>
       <div class='w-[55%] h-auto relative overflow-hidden rounded-2xl aspect-737/411'>
-        <img src="/images/control.webp" alt="Control" width="1400" height="788" class="w-full h-full absolute inset-0 object-cover" decoding="async" loading="lazy"/>
+        <img src={`/images/${content.img}.webp`} alt="Control" width="1400" height="788" class="w-full h-full absolute inset-0 object-cover" decoding="async" loading="lazy"/>
       </div>
     </div>
     <div class="w-full grid grid-cols-4 gap-6 justify-center items-stretch">

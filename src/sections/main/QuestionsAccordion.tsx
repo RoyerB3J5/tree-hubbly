@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function QuestionsAccordion({ content }: Props) {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(-1);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -47,7 +47,7 @@ export default function QuestionsAccordion({ content }: Props) {
         <h2
           ref={titleRef}
           dangerouslySetInnerHTML={{ __html: content.title }}
-          className="text-primary text-center heading-h2"
+          className="text-primary text-center heading-h4"
         ></h2>
         <div className="w-full flex flex-col justify-center items-center gap-4 md:gap-8">
           {content.questions.map((item, index) => (

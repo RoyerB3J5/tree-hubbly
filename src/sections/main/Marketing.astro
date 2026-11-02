@@ -1,0 +1,37 @@
+---
+type Translations = typeof import("../../i18n/en-2").default;
+type Content = Translations["main"]["marketing"];
+interface Props {
+  content: Content;
+}
+const { content } = Astro.props as Props;
+---
+<section class='w-full flex justify-center items-center bg-primary text-paragraph'>
+  <div class="container-full flex flex-col justify-center items-center gap-10 py-20">
+    <div class='flex flex-col justify-center items-center gap-6 '>
+      <p class='subtitle-lg' set:html={content.tag}></p>
+      <h2 set:html={content.title} class='heading-h4 text-center'></h2>
+    </div>
+    <div class="w-full grid grid-cols-2 gap-6 justify-center items-stretch">
+      {
+        content.pc.map((item,index)=>(
+          <div class={`w-full flex flex-col justify-center items-start gap-8 py-10 px-6 border rounded-2xl text-paragraph ${index === 0 ? "bg-transparent border-[#FF4E4E]" : "back-prices border-secondary"}`}>
+            <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="50" height="50" class='w-10 h-10' decoding="async" loading="lazy" />
+            <h3 class={`body-lg ${index === 0 ? "" : "text-secondary"}`}>{item.title}</h3>
+            <div class={`w-[51px] h-1 ${index === 0 ? "bg-[#FF4E4E]" : "bg-secondary"}`}></div>
+            <ul class="flex flex-col justify-center items-start gap-6 ">
+              {
+                item.list.map((i)=>(
+                  <li class={`body-md flex justify-start items-center gap-2`}>
+                    <div class={`w-1.5 h-1.5 ${index === 0 ? "bg-[#FF4E4E]" : "bg-secondary"}`}></div>
+                    {i}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
