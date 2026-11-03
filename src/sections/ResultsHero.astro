@@ -1,0 +1,66 @@
+---
+type Translations = typeof import("../i18n/en-2").default;
+type Content = Translations["results"]["numbers"];
+interface Props {
+  content: Content;
+}
+const { content } = Astro.props as Props;
+---
+<section class="w-full flex justify-center items-center bg-primary">
+  <div class="container-full flex flex-col justify-center items-center pb-20 pt-40 gap-10">
+    <div class="flex flex-col justify-center items-center gap-6">
+      <p class="subtitle-lg text-secondary">{content.tag}</p>
+      <h1 set:html={content.title} class="heading-h4 text-paragraph"></h1>
+      <p class="body-md text-paragraph mt-2">{content.description}</p>
+    </div>
+    <div class='w-full flex flex-col justify-center items-center gap-20'>
+      <div class='w-full flex justify-center items-stretch gap-6'>
+        <div class="w-[45%] h-auto relative overflow-hidden rounded-2xl aspect-603/645 bg-paragraph">
+        </div>
+        <div class='w-[55%] flex flex-col justify-center items-start gap-6 border border-[#263A4B] rounded-2xl p-6 back-main-4'>
+          <p class="subtitle-lg text-secondary">{content.section.tag}</p>
+          <h2 set:html={content.section.title} class="heading-h4 text-paragraph" ></h2>
+          <p class="body-md text-paragraph mt-2">{content.section.description}</p>
+          <div class='bg-secondary w-[51px] h-1 mt-4'></div>
+        </div>
+      </div>
+      <div class="w-full flex flex-col justify-center items-center gap-10">
+        <div class='w-full flex justify-between items-center gap-6'>
+          <h2 set:html={content.section2.title} class="heading-h4 text-paragraph"></h2>
+          <p class="body-md text-paragraph max-w-[70%]">{content.section2.description}</p>
+        </div>
+        <div class='w-full grid grid-cols-3 gap-6 justify-center items-stretch'>
+          {
+            content.section3.elements.map((item)=>(
+              <div class='w-full flex flex-col justify-center items-start gap-8 p-6 rounded-2xl border border-[#263A4B]'>
+                <h3 class='text-secondary body-lg'>{item.title}</h3>
+                <p class="body-md text-paragraph">{item.description}</p>
+              </div>
+            ))
+          }
+          <div class='w-full flex flex-col justify-center items-start gap-8 p-6 rounded-2xl border border-secondary back-main-4'>
+            <h4 class='text-secondary body-lg'>{content.section3.statistics.title}</h4>
+            <div class="w-full flex justify-between items-center">
+              {
+                content.section3.statistics.percentages.map((item)=>(
+                  <div class="flex flex-col justify-center items-start gap-4">
+                    <h5 class="heading-h5 text-secondary">{item.title}</h5>
+                    <p class="body-md text-paragraph">{item.description}</p>
+                  </div>
+                ))
+              }
+            </div>
+            <div class="flex justify-start items-center gap-2 ">
+              <img src="/images/icons/check.svg" alt="Check" width="24" height="24" class="w-6 h-6">
+              <p class="text-paragraph body-md">{content.section3.statistics.description}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-full flex flex-col justify-center items-center gap-8 py-10 px-20 rounded-2xl border border-[#263A4B] back-main-4">
+      <p class="text-paragraph text-center body-md">{content.description2}</p>
+      <p class="subtitle-lg text-secondary italic">H&A Brother Tree Services</p>
+    </div>
+  </div>
+</section>

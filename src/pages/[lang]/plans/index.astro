@@ -2,6 +2,7 @@
 import en from '../../../i18n/en-2';
 import es from '../../../i18n/es-2';
 import Layout from '../../../layouts/Layout.astro';
+import Calculadora from '../../../sections/Calculadora.astro';
 import CallAction from '../../../sections/main/CallAction.astro';
 import Guide from '../../../sections/main/Guide.astro';
 import Prices from '../../../sections/main/Prices.astro';
@@ -19,8 +20,9 @@ const translations = { es, en };
 const t = translations[lang];
 ---
 <Layout lang={lang} t={t}>
-  <Prices content={t.main.ecosystem} />
+  <Prices content={t.plans.complete} />
   <Guide content={t.main.guide} />
+  <Calculadora content={t.plans.clients} lang={lang} />
   <Scale content={t.main.grow} />
   <Questions content={t.plans.ask} /> 
   <CallAction content={t.plans.diary} />

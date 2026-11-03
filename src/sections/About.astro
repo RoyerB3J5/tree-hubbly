@@ -1,0 +1,36 @@
+---
+type Translations = typeof import("../i18n/en-2").default;
+type Content = Translations["us"]["history"];
+interface Props {
+  content: Content;
+}
+const { content } = Astro.props as Props;
+---
+<section class="w-full flex justify-center items-center bg-primary">
+  <div class='container-full flex flex-col justify-center items-center pb-20 pt-40 gap-10'>
+    <div class='w-full flex justify-center items-stretch gap-6'>
+      <div class="w-[47%] h-auto relative overflow-hidden rounded-2xl aspect-603/645 ">
+        <img src="/images/about.webp" alt="Results Hero" width="1200" height="1200" decoding="async" loading="lazy" class="w-full h-full object-cover absolute inset-0" />
+      </div>
+      <div class='w-[53%] flex flex-col justify-center items-start gap-6 border border-[#263A4B] rounded-2xl p-6 back-main-4'>
+        <p class="subtitle-lg text-secondary">{content.section.tag}</p>
+        <h1 set:html={content.section.title} class="heading-h4 text-paragraph" ></h1>
+        <p class="body-md text-paragraph mt-2" set:html={content.section.subtitle}></p>
+        <div class='bg-secondary w-[51px] h-1 mt-2'></div>
+        <p class="subtitle-lg text-paragraph mt-2" set:html={content.section.description}></p>
+        <p class="subtitle-lg text-secondary mt-2">Treehubly</p>
+      </div>
+    </div>
+    <div class='w-full flex flex-col justify-center items-start gap-10'>
+      <h2 set:html={content.title}></h2>
+      <div class='w-full grid grid-cols-4 gap-6 justify-center items-stretch'>
+        {content.diferences.map(item =>( 
+          <div class='w-full flex flex-col justify-center items-start gap-8 p-6 rounded-2xl border border-[#263A4B]'>
+            <h3 class='text-secondary body-lg' set:html={item.title}></h3>
+            <p class="body-md text-paragraph">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

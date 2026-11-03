@@ -549,130 +549,129 @@ export default {
         },
       ],
     },
-    reasons: [
-      {
-        tag: '<span class="text-secondary">01 · ATRAER</span>',
-        title:
-          'Clientes nuevos que te <br/> llaman a ti,<span class="text-secondary">no a tu<br/>competencia.</span>',
-        description:
-          "Ponemos tu empresa frente a dueños de casa de tu zona justo cuando necesitan cortar, podar o quitar un árbol,",
-        what: [
-          {
-            title: "¿Qué hacemos?",
-            list13: [
-              "Anuncios en Facebook e Instagram",
-              "Anuncios en TikTok",
-              "Conexión con Google Ads",
-              "Página de captura",
-              "Perfil de Google Maps optimizado",
-            ],
-          },
-          {
-            title: "¿Qué ganas?",
-            list14: [
-              "Llamadas de tu zona",
-              "No depender de referidos",
-              "Sabes cuánto cuesta cada cliente",
-            ],
-          },
-        ],
-        section: {},
-      },
-      {
-        tag: '<span class="text-secondary">02 · CERRAR</span>',
-        title:
-          'Tu asistente 24/7 <br/>contesta, cotiza y<br/> <span class="text-secondary">agenda por ti.</span>',
-        description:
-          "Mientras estás arriba del árbol, el sistema responde en segundos por SMS, WhatsApp o Messenger, y nadie se te escapa.",
-        what: [
-          {
-            title: "¿Qué hacemos?",
-            list15: [
-              "ShapeHub, tu oficina digital",
-              "Respuesta automática",
-              "Asistente con IA",
-              "Recordatorios de cita y cotización",
-              "Scripts de venta",
-            ],
-          },
-          {
-            title: "¿Qué ganas?",
-            list16: [
-              "Cero llamadas perdidas",
-              "Más cotizaciones cerradas",
-              "Todo en un solo lugar",
-            ],
-          },
-        ],
-        section: {},
-      },
-      {
-        tag: '<span class="text-secondary">03 · MULTIPLICAR</span>',
-        title:
-          'Cada trabajo terminado <br/>te<br/> <span class="text-secondary">trae el siguiente.</span>',
-        description:
-          "Aquí está lo que ninguna otra agencia hace: convertir a tus clientes de hoy en tu publicidad de mañana.",
-        what: [
-          {
-            title: "¿Qué hacemos?",
-            list17: [
-              "Review Shield",
-              "ShapeHub Link + tarjetas QR",
-              "Programa de referidos",
-              "Campañas por temporada: huracanes, poda",
-            ],
-          },
-          {
-            title: "¿Qué ganas?",
-            list18: [
-              "Más estrellas en Google",
-              "Clientes que regresan",
-              "Cada cliente cuesta menos",
-            ],
-          },
-        ],
-        section: {
-          system: {
-            title:
-              '<span class="text-secondary">Treehubly · Tree Profit System™</span>',
-            list19: [
-              "Después de cada trabajo, pedimos un review a todos tus clientes, con tu enlace de Google.",
-              "Si alguien tuvo una mala experiencia, te llega una alerta para llamarlo y arreglarlo.",
-              "Un problema bien resuelto se convierte en tu mejor review.",
-            ],
-          },
-          links: {
-            title: '<span class="text-secondary">ShapeHub Links</span>',
-            links: [
-              {
-                label: "Instagram",
-                href: "#",
-              },
-              {
-                label: "Facebook",
-                href: "#",
-              },
-              {
-                label: "Website",
-                href: "#",
-              },
-              {
-                label: "Nuestros Servicios",
-                href: "#",
-              },
-              {
-                label: "Guardar  contacto",
-                href: "#",
-              },
-              {
-                label: "Realizar una reserva",
-                href: "#",
-              },
-            ],
+    reasons: {
+      index: ["01 · ATRAER", "02 · CERRAR", "03 · MULTIPLICAR"],
+      items: [
+        {
+          title:
+            'Clientes nuevos que te llaman a ti,<span class="text-secondary"> no a tu competencia.</span>',
+          description:
+            "Ponemos tu empresa frente a dueños de casa de tu zona justo cuando necesitan cortar, podar o quitar un árbol,",
+          what: [
+            {
+              title: "¿Qué hacemos?",
+              list: [
+                "Anuncios en Facebook e Instagram",
+                "Anuncios en TikTok",
+                "Conexión con Google Ads",
+                "Página de captura",
+                "Perfil de Google Maps optimizado",
+              ],
+            },
+            {
+              title: "¿Qué ganas?",
+              list: [
+                "Llamadas de tu zona",
+                "No depender de referidos",
+                "Sabes cuánto cuesta cada cliente",
+              ],
+            },
+          ],
+          section: {},
+        },
+        {
+          title:
+            'Tu asistente 24/7 contesta, cotiza y <span class="text-secondary">agenda por ti.</span>',
+          description:
+            "Mientras estás arriba del árbol, el sistema responde en segundos por SMS, WhatsApp o Messenger, y nadie se te escapa.",
+          what: [
+            {
+              title: "¿Qué hacemos?",
+              list: [
+                "ShapeHub, tu oficina digital",
+                "Respuesta automática",
+                "Asistente con IA",
+                "Recordatorios de cita y cotización",
+                "Scripts de venta",
+              ],
+            },
+            {
+              title: "¿Qué ganas?",
+              list: [
+                "Cero llamadas perdidas",
+                "Más cotizaciones cerradas",
+                "Todo en un solo lugar",
+              ],
+            },
+          ],
+          section: {},
+        },
+        {
+          title:
+            'Cada trabajo terminado te <span class="text-secondary">trae el siguiente.</span>',
+          description:
+            "Aquí está lo que ninguna otra agencia hace: convertir a tus clientes de hoy en tu publicidad de mañana.",
+          what: [
+            {
+              title: "¿Qué hacemos?",
+              list: [
+                "Review Shield",
+                "ShapeHub Link + tarjetas QR",
+                "Programa de referidos",
+                "Campañas por temporada: huracanes, poda",
+              ],
+            },
+            {
+              title: "¿Qué ganas?",
+              list: [
+                "Más estrellas en Google",
+                "Clientes que regresan",
+                "Cada cliente cuesta menos",
+              ],
+            },
+          ],
+          section: {
+            system: {
+              title: "Treehubly · Tree Profit System™",
+              list: [
+                "Después de cada trabajo, pedimos un review a todos tus clientes, con tu enlace de Google.",
+                "Si alguien tuvo una mala experiencia, te llega una alerta para llamarlo y arreglarlo.",
+                "Un problema bien resuelto se convierte en tu mejor review.",
+              ],
+            },
+            links: {
+              title: "ShapeHub Links",
+              links: [
+                {
+                  label: "Instagram",
+                  href: "#",
+                },
+                {
+                  label: "Facebook",
+                  href: "#",
+                },
+                {
+                  label: "Website",
+                  href: "#",
+                },
+                {
+                  label: "Nuestros Servicios",
+                  href: "#",
+                },
+                {
+                  label: "Guardar  contacto",
+                  href: "#",
+                },
+                {
+                  label: "Realizar una reserva",
+                  href: "#",
+                },
+              ],
+            },
           },
         },
-      },
-    ],
+      ],
+    },
     mYe: {
       img: "system-control",
       tag: "Medir y escalar",
@@ -889,7 +888,7 @@ export default {
       plan: {
         icon: "complete1",
         title:
-          'Incluido en todos los planes:<span class="text-secondary">2 clases en vivo al mes</span>',
+          'Incluido en todos los planes:<span class="text-secondary"> 2 clases en vivo al mes</span>',
         description:
           "Te enseñamos paso a paso cómo escalar tu empresa de tree services con un sistema comprobado.",
         options: [
@@ -912,25 +911,26 @@ export default {
       },
     },
     clients: {
-      tag: '<span class="text-secondary">Calculadora</span>',
+      tag: "Calculator",
       title:
-        'Clientes nuevos que te<br/> llaman a ti;<span class="text-secondary">no a tu<br/> competencia.</span>',
+        'New customers call you, <span class="text-secondary">not your competition.</span>',
       description:
-        "Escribe lo que vale un trabajo promedio para ti y cuántos trabajos extra crees que puedes cerrar al mes.",
+        "Enter the value of an average job and how many extra jobs you think you can book per month.",
       section: {
         calculator: [
           {
-            title: "Valor de tu trabajo promedio (USD)",
+            title: "Average job value (USD)",
             placeholder: "1200",
           },
           {
-            title: "Trabajos extra al mes",
+            title: "Extra jobs per month",
             placeholder: "2",
           },
         ],
-        description: "Ingreso extra al mes:",
-        title: '<span class="text-secondary">$2,400</span>',
-        tag: "Cubre el Plan Grow ($997) y te deja $1,403 más.",
+        description: "Extra income per month:",
+        tag: "Covers the Grow Plan ($997) and leaves you {amount} more.",
+        shortfall:
+          "The Grow Plan costs $997; you need {amount} more to cover it.",
       },
     },
     ask: {
@@ -973,13 +973,13 @@ export default {
   },
   results: {
     numbers: {
-      tag: '<span class="text-secondary">Resultados reales</span>',
+      tag: "Resultados reales",
       title:
-        'Empresas de árboles reales.<span class="text-secondary">Números reales.</span>',
+        'Empresas de árboles reales.<span class="text-secondary"> Números reales.</span>',
       description:
         "Crecimiento estructurado en lugar de marketing a la suerte.",
       section: {
-        tag: 'span class="text-secondary">Caso destacado</span>',
+        tag: "Caso destacado",
         title:
           'H&A Tree Brothers<br/><span class="text-secondary">Orlando, FL.</span>',
         description:
@@ -994,25 +994,25 @@ export default {
       section3: {
         elements: [
           {
-            title: '<span class="text-secondary">Antes</span>',
+            title: "Antes",
             description:
               "Dependía principalmente de referencias y publicidad ocasional.",
           },
           {
-            title: '<span class="text-secondary">¿Qué hacemos?</span>',
+            title: "¿Qué hacemos?",
             description:
               "Captación estructurada, seguimiento automático, pipeline y tracking de ingresos.",
           },
         ],
         statistics: {
-          title: '<span class="text-secondary">Después</span>',
+          title: "Después",
           percentages: [
             {
-              title: '<span class="text-secondary">+38%</span>',
+              title: "+38%",
               description: "Leads calificados",
             },
             {
-              title: '<span class="text-secondary">+27%</span>',
+              title: "+27%",
               description: "Trabajos agendados",
             },
           ],
@@ -1021,7 +1021,6 @@ export default {
       },
       description2:
         "Trabajar con TreeHubly nos ayudó a estructurar cómo generamos y gestionamos prospectos. El sistema nos permitió responder más rápido a las consultas y mantenernos organizados mientras nuestro negocio sigue creciendo.",
-      tag2: '<span class="text-secondary">H&A Brother Tree Services</span>',
     },
     choose: {
       title: "Tu empresa puede ser el próximo caso.",
@@ -1040,13 +1039,9 @@ export default {
         tag: '<span class="text-secondary">Nuestra Historia</span>',
         title:
           'Los negocios no crecen<br/>por suerte.<span class="text-secondary">Crecen con<br/>sistemas.</span>',
-        list20: [
-          "TreeHubly fue creado con una misión: traer estructura, predictibilidad y crecimiento medible a la industria de servicios de árboles.",
-          "Creemos que las empresas de árboles no necesitan más tácticas, necesitan infraestructura.",
-        ],
+        subtitle:"TreeHubly fue creado con una misión: traer estructura, predictibilidad y crecimiento medible a la industria de servicios de árboles. <br/> Creemos que las empresas de árboles no necesitan más tácticas, necesitan infraestructura.",
         description:
           "Después de años de prueba y error, encontramos la forma de estructurar negocios de servicios para que dejen de depender del caos. Así nació el Tree Profit System™.",
-        tag2: 'span class="text-secondary">Treehubly</span>',
       },
       title: 'Lo que nos hace<span class="text-secondary">diferentes.</span>',
       diferences: [

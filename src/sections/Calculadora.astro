@@ -1,0 +1,59 @@
+---
+type Translations = typeof import("../i18n/en-2").default;
+type Content = Translations["plans"]["clients"];
+interface Props {
+  content: Content;
+  lang: string;
+}
+const { content, lang } = Astro.props as Props;
+---
+<section class='w-full bg-primary flex justify-center items-center'>
+  <div class='container-full flex justify-between items-center py-20'>
+    <div class='flex flex-col justify-center items-start gap-6 max-w-[520px]'>
+      <p class='subtitle-lg text-secondary'>{content.tag}</p>
+      <h2 set:html={content.title} class="heading-h4 text-paragraph"></h2>
+      <p class="body-md text-paragraph mt-2">{content.description}</p>
+    </div>
+    <div class='w-[50%] flex flex-col justify-center items-center gap-8 px-6 py-[45px] bg-white rounded-2xl' data-calculator data-lang={lang} data-covered={content.section.tag} data-shortfall={content.section.shortfall}>
+      {
+        content.section.calculator.map((item)=>(
+          <label class='flex flex-col justify-center items-start gap-4 w-full'>
+            <span class='body-md text-primary'>{item.title}</span>
+            <input type="number" min="0" step="any" value={item.placeholder} placeholder={item.placeholder} class='bg-paragraph border border-[#B2B7BB] p-4 rounded-lg body-md outline-none focus:border-secondary focus:ring-1 focus:ring-secondary w-full '/>
+          </label>
+        ))
+      }
+      <div class='w-full flex justify-between items-center gap-4'>
+        <p class='subtitle-lg text-primary'>{content.section.description}</p>
+        <p class='heading-h2 text-secondary' data-income aria-live="polite">$2,400</p> 
+      </div>
+      <div class="w-full rounded-lg bg-[#E6E8E9] p-4 flex justify-center items-center">
+        <p class="body-md text-primary" data-result aria-live="polite">{content.section.tag.replace('{amount}', '$1,403')}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-calculator]').forEach((calculator) => {
+    const inputs = calculator.querySelectorAll<HTMLInputElement>('input');
+    const income = calculator.querySelector<HTMLElement>('[data-income]');
+    const result = calculator.querySelector<HTMLElement>('[data-result]');
+    const format = new Intl.NumberFormat(calculator.dataset.lang === 'es' ? 'es-US' : 'en-US', {
+      style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 2,
+    });
+
+    const update = () => {
+      const total = Array.from(inputs).reduce((product, input) => product * Math.max(0, Number(input.value) || 0), 1);
+      const difference = total - 997;
+      if (income) income.textContent = format.format(total);
+      if (result) {
+        const template = difference >= 0 ? calculator.dataset.covered : calculator.dataset.shortfall;
+        result.textContent = (template ?? '').replace('{amount}', format.format(Math.abs(difference)));
+      }
+    };
+
+    inputs.forEach((input) => input.addEventListener('input', update));
+    update();
+  });
+</script>

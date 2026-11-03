@@ -3,6 +3,7 @@ import en from '../../../i18n/en-2';
 import es from '../../../i18n/es-2';
 import Layout from '../../../layouts/Layout.astro';
 import CallAction from '../../../sections/main/CallAction.astro';
+import ResultsHero from '../../../sections/ResultsHero.astro';
 import type { Language } from '../../../types/language.type';
 export function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
@@ -15,5 +16,6 @@ const translations = { es, en };
 const t = translations[lang];
 ---
 <Layout lang={lang} t={t}>
+  <ResultsHero content={t.results.numbers} />
   <CallAction content={t.results.choose} />
 </Layout>

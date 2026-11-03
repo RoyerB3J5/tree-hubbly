@@ -2,11 +2,9 @@
 import en from '../../../i18n/en-2';
 import es from '../../../i18n/es-2';
 import Layout from '../../../layouts/Layout.astro';
-import Focus from '../../../sections/Focus.astro';
+import About from '../../../sections/About.astro';
 import Book from '../../../sections/main/Book.astro';
 import CallAction from '../../../sections/main/CallAction.astro';
-import Opinion from '../../../sections/Opinion.astro';
-import Philosophy from '../../../sections/Philosophy.astro';
 import type { Language } from '../../../types/language.type';
 export function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
@@ -19,12 +17,7 @@ const translations = { es, en };
 const t = translations[lang];
 ---
 <Layout lang={lang} t={t}>
-  {
-    /*<Hero content={t.about.hero} />
-  <Focus content={t.about.focus} />
-  <Philosophy content={t.about.philosophy} />
-  <Opinion content={t.about.opinion} /> */
-  }
+  <About content={t.us.history} />
   <section class="w-full bg-[#F7F7F7] py-10 md:py-20  flex justify-center items-center" id="book">
     <Book content={t.main.session} />
   </section>

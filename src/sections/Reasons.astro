@@ -1,0 +1,76 @@
+---
+type Translations = typeof import("../i18n/en-2").default;
+type Content = Translations["theSystem"]["reasons"];
+interface Props {
+  content: Content;
+}
+const { content } = Astro.props as Props;
+---
+<section class="w-full flex bg-primary justify-center items-center flex-col py-20 gap-20">
+  {
+    content.items.map((item,index)=>(
+      <div class="container-full flex justify-between items-end gap-14 ">
+        <div class="flex flex-col justify-end items-start gap-8 max-w-[40%]">
+          <h2 set:html={item.title} class="heading-h4 text-paragraph"></h2>
+          <p set:html={item.description} class="body-md text-paragraph"></p>
+          <div class='w-full flex justify-center items-start gap-6'>
+            {
+              item.what.map((item)=>(
+                <div class='flex flex-col justify-start items-start gap-6 text-paragraph'>
+                  <h3 class="body-md">{item.title}</h3>
+                  <ul class='flex flex-col justify-start items-start gap-6 text-paragraph'>
+                    {
+                      item.list.map((i)=>(
+                        <li class=' flex justify-start items-start gap-2'> <div class={`w-1.5 h-1.5 bg-secondary shrink-0`}></div><p class='body-md'>{i}</p></li>
+                      ))
+                    }
+                  </ul>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        {
+          Object.keys(item.section).length === 0 && (
+            <div class="w-[50%] h-auto relative overflow-hidden rounded-2xl aspect-628/650">
+              <img src={`/images/reasons-${index + 1}.webp`} alt={`Step ${index + 1}`} width="941" height="941" decoding="async" loading="lazy" class="w-full h-full object-cover absolute inset-0 object-center" />
+            </div>
+          )
+        }
+        {
+          Object.keys(item.section).length !== 0 && (
+            <div class='w-[50%] flex flex-col justify-center items-center gap-8'>
+              <div class='flex flex-col justify-center items-start gap-8 px-8 py-10 border border-[#263A4B] rounded-2xl back-main-4 w-full'>
+                <h3 class="body-lg text-secondary">{item.section.system?.title}</h3>
+                <div class='w-[51px] h-1 bg-secondary'></div>
+                <ol class="flex flex-col justify-center items-start gap-8 list-decimal pl-4">
+                  {
+                    item.section.system?.list.map((i)=>(
+                      <li class='body-md text-paragraph'>
+                        {i}
+                      </li>
+                    ))
+                  }
+                </ol>
+              </div>
+              <div class='flex flex-col justify-center items-start gap-8 px-8 py-10 border border-[#263A4B] rounded-2xl back-main-4 w-full'>
+                <h3 class="body-lg text-secondary">{item.section.links?.title}</h3>
+                <div class='w-[51px] h-1 bg-secondary'></div>
+                <div class='w-full grid grid-cols-3 justify-center items-center gap-4'>
+                  {
+                    item.section.links?.links.map((i,index)=>(
+                      <a href={i.href} class=' w-full py-4 border border-paragraph rounded-lg last:border-secondary flex justify-center items-center'><p class="body-md text-paragraph">
+                        {i.label}
+                      </p>
+                      </a>
+                    ))
+                  }
+                </div>
+              </div>
+            </div>
+          )
+        }
+      </div>
+    ))
+  }
+</section>

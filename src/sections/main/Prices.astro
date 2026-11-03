@@ -2,19 +2,19 @@
 import Button from "../../components/Button.astro";
 
 type Translations = typeof import("../../i18n/en-2").default;
-type Content = Translations["main"]["ecosystem"];
+type Content = Translations["main"]["ecosystem"] | Translations["plans"]["complete"];
 interface Props {
   content: Content;
 }
 const { content } = Astro.props as Props;
 ---
 <section class='w-full flex justify-center items-center bg-primary text-paragraph'>
-  <div class="container-full flex flex-col justify-center items-center gap-10 py-20">
+  <div class={`container-full flex flex-col justify-center items-center gap-10  ${'plan' in content ? "pt-40 pb-20" : "py-20"}`}>
     <div class='flex flex-col justify-center items-center gap-6 '>
       <p class='subtitle-lg' set:html={content.tag}></p>
       <h2 set:html={content.title} class='heading-h4 text-center'></h2>
     </div>
-    <div class='prices-grid w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center items-stretch'>
+      <div class:list={['prices-grid w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center items-stretch', { 'prices-grid-complete': 'plan' in content }]}>
       {
         content.service.map((item,index)=>(
           <div class={`price-card w-full flex flex-col justify-start items-start gap-8 py-10 px-6 rounded-2xl border  ${index === 1 ? "back-prices border-secondary" : "bg-transparent border-[#263A4B]"}`}>
@@ -28,7 +28,7 @@ const { content } = Astro.props as Props;
               
             </div>
             <h3 class='heading-h5 text-start'>{item.title}</h3>
-            <p class="body-md text-start ">{item.description}</p>
+            <p class="body-md text-start" set:html={item.description}></p>
             <div class="flex flex-col justify-start items-start gap-6 ">
               {
                 item.lists.map((listItem)=>(
@@ -44,6 +44,7 @@ const { content } = Astro.props as Props;
                 ))
               }
             </div>
+            
             <div class="w-full flex flex-col justify-start items-center gap-4 ">
               <Button
                   text={item.button[0].label}
@@ -53,10 +54,47 @@ const { content } = Astro.props as Props;
                 />
               <p class='body-sm text-[#8F979D] text-center'>{item.subtag}</p>
             </div>
+
+            {
+              'steps' in item && (
+                <div class='w-full h-[1px] bg-[#263A4B]'></div>
+              )
+            }
+
+            {'steps' in item && (
+              <div class="flex flex-col gap-8 w-full mt-8">
+                  {item.steps.map((step,i) => (
+                    <div class='flex justify-start items-start gap-2'>
+                      <div class={`w-6 h-6  ${index === 1 ? "bg-black/25" : "bg-white/10"} rounded-[4px] flex justify-center items-center shrink-0`}>
+                        <p class='subtitle-sm'>{i+1}</p>
+                      </div>
+                      <div class="flex flex-col gap-3 justify-center items-start">
+                        <h4 class="subtitle-lg text-paragraph">{step.title}</h4>
+                        <p class="body-sm text-[#8F979D]">{step.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+            )}
           </div>
         ))
       }
     </div>
+    {'plan' in content && (
+      <div class="w-full flex justify-between items-center gap-6 rounded-2xl border border-[#263A4B] p-10 back-main-4">
+        <div class='flex justify-center items-center gap-8'>
+          <img src="/images/icons/film.svg" alt="Film" width="101" height="101" decoding="async" loading="lazy" />
+          <div class="flex flex-col justify-center items-start gap-6 text-paragraph">
+            <h3 class="body-lg" set:html={content.plan.title}></h3>
+            <p class="body-md" set:html={content.plan.description}></p>
+            <ul class="flex flex-wrap justify-center gap-4">
+              {content.plan.options.map((option) => <li class=" border border-secondary px-3 py-2 rounded-full flex justify-center items-center"><p class='subtitle-sm'>{option.title}</p></li>)}
+            </ul>
+          </div>
+        </div>
+        <Button text={content.plan.button[0].label} href={content.plan.button[0].href} extraBtnClass="bg-secondary border-secondary" textClass="text-primary" />
+      </div>
+    )}
   </div>
 </section>
 
@@ -74,6 +112,14 @@ const { content } = Astro.props as Props;
       row-gap: 2rem;
       column-gap: 0;
       align-items: stretch;
+    }
+
+    .prices-grid-complete {
+      grid-template-rows: repeat(6, auto);
+    }
+
+    .prices-grid-complete .price-card {
+      grid-row: span 6;
     }
   }
 </style>

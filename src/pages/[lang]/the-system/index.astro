@@ -2,16 +2,11 @@
 import en from '../../../i18n/en-2';
 import es from '../../../i18n/es-2';
 import Layout from '../../../layouts/Layout.astro';
-import Funcionality from '../../../sections/Funcionality.astro';
-import Book from '../../../sections/main/Book.astro';
 import CallAction from '../../../sections/main/CallAction.astro';
 import Control from '../../../sections/main/Control.astro';
 import HeroMain from '../../../sections/main/HeroMain.astro';
-import Questions from '../../../sections/main/Questions.astro';
 import Steps from '../../../sections/main/Steps.astro';
-
-import Pillars from '../../../sections/Pillars.astro';
-import Reason from '../../../sections/Reason.astro';
+import Reasons from '../../../sections/Reasons.astro';
 import type { Language } from '../../../types/language.type';
 export function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
@@ -24,17 +19,9 @@ const translations = { es, en };
 const t = translations[lang];
 ---
 <Layout lang={lang} t={t}>
-  {/* <Hero content={t.systemPage.hero} />
-  <Reason content={t.systemPage.reason} />
-  <Pillars content={t.systemPage.pilars} />
-  <section class="w-full bg-[#F3F3F4] pb-10 md:pb-20 lg:pb-30 flex justify-center items-center" id="book">
-    <Book content={t.main.book} />
-  </section>
-  <Funcionality content={t.systemPage.functionality} />
-  <Questions content={t.main.questions} />
-  <CallAction content={t.systemPage.call} />*/}
   <HeroMain content={t.theSystem.hero} />
   <Steps content={t.theSystem.profit} />
+  <Reasons content={t.theSystem.reasons} />
   <Control content={t.theSystem.mYe} />
   <CallAction content={t.theSystem.ready} />
 </Layout>
