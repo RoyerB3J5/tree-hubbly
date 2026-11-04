@@ -3,19 +3,19 @@ export default {
     nav: [
       {
         label: "El Sistema",
-        href: "/the-system",
+        href: "/en/the-system",
       },
       {
-        label: "Rsultados",
-        href: "/results",
+        label: "Resultados",
+        href: "/en/results",
       },
       {
         label: "Planes",
-        href: "/plans",
+        href: "/en/plans",
       },
       {
         label: "Nosotros",
-        href: "/about",
+        href: "/en/about",
       },
     ],
     buttons: [

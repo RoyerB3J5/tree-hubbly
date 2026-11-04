@@ -55,7 +55,7 @@ const lang = match ? match[1] : "en";
           text={content?.buttons[0].label}
           href={content?.buttons[0].href}
           textClass="text-primary"
-          extraBtnClass="hidden lg:flex bg-secondary border-secondary"
+          extraBtnClass="header-cta hidden lg:flex bg-secondary border-secondary"
         />
         {/*<ChangeLanguage /> */}
         <button
@@ -64,11 +64,14 @@ const lang = match ? match[1] : "en";
           title="Abrir menú"
           class="flex items-center justify-center cursor-pointer w-12 h-12 rounded overflow-hidden"
           id="hamburger-btn"
+          aria-expanded="false"
+          aria-controls="desktop-menu mobile-menu"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <svg id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
             <path d="M24 4C35.0456 4 44 12.9543 44 24C44 35.0456 35.0456 44 24 44C12.9543 44 4 35.0456 4 24C4 12.9543 12.9543 4 24 4Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#F7F7F7"/>
             <path d="M16 20H32M16 28H32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#F7F7F7"/>
           </svg>
+          <img id="menu-close-icon" src="/images/icons/equis-header.svg" alt="" width="48" height="48" class="hidden w-12 h-12" />
         </button>
       </div>
     </div>
@@ -76,18 +79,13 @@ const lang = match ? match[1] : "en";
 </header>
 
 <div
-  class="fixed top-0 right-0 bottom-0 xl:hidden flex items-start bg-paragraph text-white flex-col justify-start h-full z-60 pb-12 px-4 pt-6 gap-6 transform translate-x-full transition-transform duration-300 ease-out w-full"
+  class="fixed top-0 right-0 bottom-0 lg:hidden flex items-start bg-paragraph text-white flex-col justify-start h-full z-60 pb-12 px-4 pt-6 gap-6 transform translate-x-full transition-transform duration-300 ease-out w-full"
   id="mobile-menu"
 >
   <div class="flex flex-col justify-center items-center gap-8 w-full">
-    {/*<X
-      class="block cursor-pointer z-20 w-6 h-6 text-white self-end"
-      id="close-btn"
-      aria-label="Cerrar menú de navegación"
-      title="Cerrar menú"
-      role="button"
-      tabindex="0"
-    /> */}
+    <button id="close-btn" type="button" class="self-end cursor-pointer" aria-label="Cerrar menú de navegación">
+      <img src="/images/icons/equis-header.svg" alt="" width="48" height="48" />
+    </button>
     
     <a
       href={`/${lang}`}
@@ -109,7 +107,7 @@ const lang = match ? match[1] : "en";
         {
           content?.nav.map((item, index) => {
             const itemPathWithoutHash = item.href.split("#")[0];
-            const isActive = normalized === itemPathWithoutHash;
+            const isActive = normalized === (itemPathWithoutHash.replace(/^\/(en|es)(?=\/|$)/, "").replace(/\/$/, "") || "/");
             return (
               <>
                 <li
@@ -117,7 +115,7 @@ const lang = match ? match[1] : "en";
                   id={`mobile-nav-item-${index}`}
                 >
                   <a
-                    href={`/${lang}${item.href}`}
+                    href={item.href}
                     class="relative transition-colors duration-300 flex justify-start items-center w-full py-6 gap-6"
                     aria-expanded="false"
                   >
@@ -156,7 +154,26 @@ const lang = match ? match[1] : "en";
     const closeBtn = document.getElementById("close-btn");
     const body = document.body;
 
-    const isMobile = () => window.innerWidth < 1280;
+    const desktopMenu = document.getElementById("desktop-menu");
+    const openIcon = document.getElementById("menu-open-icon");
+    const closeIcon = document.getElementById("menu-close-icon");
+    const isMobile = () => window.innerWidth < 1024;
+    let desktopOpen = false;
+
+    function setDesktopMenu(open) {
+      desktopOpen = open;
+      body.classList.toggle("desktop-menu-open", open);
+      document.documentElement.classList.toggle("desktop-menu-open", open);
+      if (desktopMenu) {
+        desktopMenu.inert = !open;
+        desktopMenu.setAttribute("aria-hidden", String(!open));
+      }
+      openBtn?.setAttribute("aria-expanded", String(open));
+      openBtn?.setAttribute("aria-label", open ? "Cerrar menú de navegación" : "Abrir menú de navegación");
+      openBtn?.setAttribute("title", open ? "Cerrar menú" : "Abrir menú");
+      openIcon?.classList.toggle("hidden", open);
+      closeIcon?.classList.toggle("hidden", !open);
+    }
 
     function openMenu() {
       if (isMobile() && menu) {
@@ -172,8 +189,28 @@ const lang = match ? match[1] : "en";
       }
     }
 
-    if (openBtn) openBtn.addEventListener("click", openMenu);
+    if (openBtn) openBtn.addEventListener("click", () => {
+      if (isMobile()) {
+        openMenu();
+      } else {
+        if (!desktopOpen) window.scrollTo({ top: 0, behavior: "instant" });
+        setDesktopMenu(!desktopOpen);
+      }
+    });
     if (closeBtn) closeBtn.addEventListener("click", closeMenu);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        if (desktopOpen) { setDesktopMenu(false); openBtn?.focus(); }
+        else closeMenu();
+      }
+    });
+    window.addEventListener("resize", () => {
+      if (isMobile() && desktopOpen) setDesktopMenu(false);
+      if (!isMobile() && menu?.classList.contains("translate-x-0")) {
+        menu.classList.replace("translate-x-0", "translate-x-full");
+        body.classList.remove("overflow-hidden");
+      }
+    });
 
     // Close mobile menu when clicking a link
     if (menu) {
@@ -214,7 +251,7 @@ const lang = match ? match[1] : "en";
       header.style.transform = "translateY(-100%)";
     };
 
-    const isMenuOpen = () => menu?.classList.contains("translate-x-0") ?? false;
+    const isMenuOpen = () => desktopOpen || (menu?.classList.contains("translate-x-0") ?? false);
 
     const updateMainBarBg = (currentY) => {
       if (!headerMainBar) return;

@@ -1,0 +1,8 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect width="24" height="24" rx="4" fill="#91D200"/>
+<use xlink:href="#stroke0_226_4811" fill="#051725"/>
+<use xlink:href="#stroke0_226_4811" fill="black" fill-opacity="0.2"/>
+<defs>
+<path id="stroke0_226_4811" d="M10.5 8.20407C10.5 7.91149 10.8575 7.76494 11.0667 7.97187L14.9028 11.7677C15.0324 11.896 15.0324 12.1039 14.9028 12.2322L11.0667 16.0281C10.8575 16.235 10.5 16.0884 10.5 15.7959V8.20407Z"/>
+</defs>
+</svg>

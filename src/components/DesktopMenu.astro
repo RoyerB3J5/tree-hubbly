@@ -1,0 +1,61 @@
+---
+type Translations = typeof import("../i18n/en-2").default;
+interface Props { contentHeader: Translations["header"]; }
+const { contentHeader } = Astro.props as Props;
+const currentLang = Astro.url.pathname.match(/^\/(en|es)(?=\/|$)/)?.[1] ?? 'en';
+const languageUrl = (lang: string) => {
+  const pathname = Astro.url.pathname.replace(/^\/(en|es)(?=\/|$)/, `/${lang}`);
+  return `${pathname}${Astro.url.search}${Astro.url.hash}`;
+};
+const normalizePath = (path: string) => path.replace(/^\/(en|es)(?=\/|$)/, '').replace(/\/+$/, '') || '/';
+const isCurrentPage = (href: string) => href.startsWith('/') && normalizePath(href.split(/[?#]/)[0]) === normalizePath(Astro.url.pathname);
+const icons = [
+  {
+    icon: 'facebook',
+    href: 'https://www.facebook.com/treehubly',
+  },
+  {
+    icon: 'instagram',
+    href: 'https://www.instagram.com/treehubly?igsh=dHFsbzB0NjdmdXpp&utm_source=qr',
+  }
+];
+---
+  <div id='desktop-menu' class='absolute inset-x-0 top-0 z-0 hidden h-[280px] bg-primary lg:flex justify-center items-start' inert aria-hidden='true'>
+    <div class='container-full grid grid-cols-3 justify-center items-start h-full pt-32 pb-8 gap-10'>
+      <div class='w-full flex flex-col justify-center items-start gap-4'>
+        {[contentHeader.nav[0], contentHeader.nav[2]].map((item) => (
+          <a href={item.href} aria-current={isCurrentPage(item.href) ? 'page' : undefined} class="group inline-flex items-center heading-h5 text-paragraph">
+            <span class:list={['shrink-0 overflow-hidden transition-[width] duration-300 group-hover:w-8 group-focus-visible:w-8 motion-reduce:transition-none', isCurrentPage(item.href) ? 'w-8' : 'w-0']} aria-hidden="true">
+              <img src="/images/icons/arrow-header.svg" alt="" width="24" height="24" class:list={['w-6 h-6 transition-transform duration-300 group-hover:translate-x-0 group-focus-visible:translate-x-0 motion-reduce:transition-none', isCurrentPage(item.href) ? 'translate-x-0' : '-translate-x-full']} />
+            </span>
+            {item.label}
+          </a>
+        ))}
+      </div>
+      <div class='w-full flex flex-col justify-center items-start gap-4'>
+        {[contentHeader.nav[1], contentHeader.nav[3]].map((item) => (
+          <a href={item.href} aria-current={isCurrentPage(item.href) ? 'page' : undefined} class="group inline-flex items-center heading-h5 text-paragraph">
+            <span class:list={['shrink-0 overflow-hidden transition-[width] duration-300 group-hover:w-8 group-focus-visible:w-8 motion-reduce:transition-none', isCurrentPage(item.href) ? 'w-8' : 'w-0']} aria-hidden="true">
+              <img src="/images/icons/arrow-header.svg" alt="" width="24" height="24" class:list={['w-6 h-6 transition-transform duration-300 group-hover:translate-x-0 group-focus-visible:translate-x-0 motion-reduce:transition-none', isCurrentPage(item.href) ? 'translate-x-0' : '-translate-x-full']} />
+            </span>
+            {item.label}
+          </a>
+        ))}
+      </div>
+      <div class='w-full flex flex-col justify-center items-start gap-4'>
+        <div class='flex justify-center items-center gap-4 text-paragraph'>
+          <a href={languageUrl('en')} lang="en" hreflang="en" aria-current={currentLang === 'en' ? 'page' : undefined} class:list={['heading-h5 transition-colors', currentLang === 'en' ? 'text-secondary' : 'hover:text-secondary']}>En</a>
+          <a href={languageUrl('es')} lang="es" hreflang="es" aria-current={currentLang === 'es' ? 'page' : undefined} class:list={['heading-h5 transition-colors', currentLang === 'es' ? 'text-secondary' : 'hover:text-secondary']}>Es</a>
+        </div>
+        <div class="flex justify-center items-center gap-5">
+          {
+            icons.map(item => ( 
+              <a href={item.href} class="bg-transparent p-2 rounded-full group flex justify-center items-center transition-colors duration-300 cursor-pointer border border-transparent hover:border-secondary" target="_blank" rel="noopener noreferrer">
+                <img src={`/images/${item.icon}.svg`} alt="Icono de redes" class='w-5 h-5' width="12" height="12" decoding="async" loading="lazy">
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>

@@ -6,9 +6,10 @@ interface Props {
   content: HeroContent ;
 }
 const { content } = Astro.props as Props;
+
 ---
 
-<section class="w-full h-[calc(100svh)] relative flex items-center justify-center text-white ">
+<section class="hero-main w-full h-[calc(100svh)] relative flex items-center justify-center bg-primary overflow-hidden">
   {/*<video
     autoplay={true}
     muted={true}
@@ -20,61 +21,65 @@ const { content } = Astro.props as Props;
   >
     <source src="/images/video.mp4" type="video/mp4" />
   </video> */}
-  <img src="/images/fondo-hero.webp" alt="Hero image" decoding="async" loading="lazy" width="1667" height="943" class='w-full h-full object-cover inset-0 absolute z-0 object-top' />
-  <div class="absolute w-full h-full inset-0 z-3 back-hero"></div>
-  <div
-    class="container-full flex flex-col justify-end items-center py-14 relative z-10 h-full"
-  >
-    <div class="flex flex-col justify-center items-center gap-10">
-      <div class='flex flex-col justify-center items-center gap-6'>
+  <div class="w-full h-full flex relative items-center justify-center text-paragraph z-0">
+    <img src="/images/fondo-hero.webp" alt="Hero image" decoding="async" loading="lazy" width="1667" height="943" class='w-full h-full object-cover inset-0 absolute z-0 object-top' />
+    <div class="absolute w-full h-full inset-0 z-3 back-hero"></div>
+    <div
+      class="container-full flex flex-col justify-end items-center py-14 relative z-10 h-full"
+    >
+      <div class="flex flex-col justify-center items-center gap-10">
+        <div class='flex flex-col justify-center items-center gap-6'>
+          {
+            content.tag !== "" && (
+              <p class="text-[16px] font-medium leading-[150%] text-secondary fade-up-lines-raw">{content.tag}</p>
+            )
+          }
+          <h1 set:html={content.title} class="heading-h4 text-white text-center fade-up-lines-raw"></h1>
+        </div>
         {
-          content.tag !== "" && (
-            <p class="text-[16px] font-medium leading-[150%] text-secondary">{content.tag}</p>
+          content.description !== "" && (
+            <p set:html={content.description} class="text-paragraph body-md text-center fade-up-lines-raw"></p>
           )
         }
-        <h1 set:html={content.title} class="heading-h4 text-white text-center"></h1>
-      </div>
-      {
-        content.description !== "" && (
-          <p set:html={content.description} class="text-paragraph body-md text-center"></p>
-        )
-      }
-      {
-        content.items.length > 0 && (
-          <ul class="flex justify-center items-center gap-10 w-full">
-            {
-              content.items.map((item,index) => (
-                <>
-                <li class="text-[18px] font-semibold leading-[150%] text-paragraph flex justify-center items-center gap-2">
-                  <img src={`/images/icons/items-h-${index + 1}.svg`} alt={`Item ${index + 1}`} width="24" height="24" class="w-8 h-8">
-                  {item}
-                </li>
-                <div class='h-full w-[1px] bg-paragraph/40 last:hidden'></div>
-                </>
-                
-              ))
-            }
-          </ul>
-        )
-      }
-      {
-        content.buttons.length > 0 && (
-          <div class="w-full md:w-auto flex flex-col md:flex-row justify-center items-center gap-4 md:gap-4">
-            <Button
-                  text={content.buttons[0].label}
-                  href={content.buttons[0].href}
-                  extraBtnClass="bg-secondary border-secondary"
-                  textClass="text-primary"
-                />
-            <Button
-                  text={content.buttons[1].label}
-                  href={content.buttons[1].href}
-                  extraBtnClass="bg-transparent border-white"
-                  textClass="white"
-                />
-          </div>
-        )
-      }
-    </div>   
+        {
+          content.items.length > 0 && (
+            <ul class="flex justify-center items-center gap-10 w-full">
+              {
+                content.items.map((item,index) => (
+                  <>
+                  <li class=" flex justify-center items-center gap-2">
+                    
+                    <img src={`/images/icons/items-h-${index + 1}.svg`} alt={`Item ${index + 1}`} width="24" height="24" class="w-8 h-8 fade-up-a">
+                    <span class="fade-up-lines-raw text-[18px] font-semibold leading-[150%] text-paragraph">{item}</span>
+                  </li>
+                  <div class='h-full w-[1px] bg-paragraph/40 last:hidden'></div>
+                  </>
+                  
+                ))
+              }
+            </ul>
+          )
+        }
+        {
+          content.buttons.length > 0 && (
+            <div class="w-full md:w-auto flex flex-col md:flex-row justify-center items-center gap-4 md:gap-4">
+              <Button
+                    text={content.buttons[0].label}
+                    href={content.buttons[0].href}
+                    extraBtnClass="bg-secondary border-secondary fade-up-a"
+                    textClass="text-primary"
+                  />
+              <Button
+                    text={content.buttons[1].label}
+                    href={content.buttons[1].href}
+                    extraBtnClass="bg-transparent border-white fade-up-a"
+                    textClass="white"
+                  />
+            </div>
+          )
+        }
+      </div>   
+    </div>
   </div>
+  
 </section>

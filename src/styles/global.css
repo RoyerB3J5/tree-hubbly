@@ -45,6 +45,31 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Scale the group; reveal its mask independently from the right. */
+@media (prefers-reduced-motion: no-preference) {
+  .animation-image-reveal.reveal-ready {
+    transform: scale(1.5);
+    transform-origin: right center;
+    transition: transform 0.95s cubic-bezier(0.4, 0, 0.6, 1);
+  }
+
+  .animation-image-reveal.reveal-ready.active {
+    transform: scale(1);
+  }
+
+  .animation-image-reveal.reveal-ready > :is(.animation-image-reveal-mask, img) {
+    clip-path: inset(0 0 0 100%);
+    opacity: 0.5;
+    transition: clip-path 0.9s cubic-bezier(0.45, 0, 0.55, 1) 0.1s,
+      opacity 0.6s linear 0.1s;
+  }
+
+  .animation-image-reveal.reveal-ready.active > :is(.animation-image-reveal-mask, img) {
+    clip-path: inset(0);
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -249,7 +274,7 @@ html {
 }
 
 .fade-up-a.active {
-  animation: fadeUpFast 0.3s ease-in-out var(--fade-up-delay, 0s) forwards;
+  animation: fadeUpFast 0.5s ease-in-out var(--fade-up-delay, 0s) forwards;
 }
 
 .fade-down-a {
@@ -488,5 +513,50 @@ html {
     padding-left: 0;
     padding-right: 0;
     max-width: 1280px;
+  }
+}
+
+.fade-up-lines-raw,
+.fade-up-lines-raw .fade-up-line-word,
+.fade-up-lines-raw .fade-up-line-fragment {
+  text-box-trim: none;
+  text-box-edge: auto;
+}
+
+.fade-up-lines-raw .fade-up-line-word {
+  display: inline-block;
+  vertical-align: baseline;
+  overflow: visible;
+  clip-path: inset(-0.3em -0.15em);
+}
+
+.fade-up-lines-raw .fade-up-line-fragment {
+  display: inline-block;
+  vertical-align: baseline;
+  transform: translateY(calc(100% + 0.3em));
+  transition:
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(
+    var(--zoom-out-duration, 0s) +
+    var(--fade-up-lines-delay, 0s) +
+    var(--fade-up-line-delay, 0s)
+  );
+  will-change: transform;
+}
+
+.fade-up-lines-raw.active .fade-up-line-fragment {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up-lines-raw .fade-up-line-word {
+    overflow: visible;
+    clip-path: none;
+  }
+
+  .fade-up-lines-raw .fade-up-line-fragment {
+    transform: none;
+    transition: none;
+    will-change: auto;
   }
 }

@@ -3,6 +3,7 @@
 import "../styles/global.css";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import DesktopMenu from "../components/DesktopMenu.astro";
 import Chatbot from "../components/Chatbot.astro";
 
 type Translations = typeof import("../i18n/en-2").default;
@@ -10,13 +11,14 @@ type Translations = typeof import("../i18n/en-2").default;
 export interface Props {
   lang: string;
   t?: Translations;
+  pageClass?: string;
 }
 
-const { lang, t } = Astro.props;
+const { lang, t, pageClass } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={lang} class="overflow-x-hidden scroll-smooth">
+<html lang={lang} class="overflow-x-clip scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,6 +30,33 @@ const { lang, t } = Astro.props;
       }
       body.visible {
         visibility: visible;
+      }
+      html { background: var(--color-primary); scrollbar-width: none; }
+      html::-webkit-scrollbar { display: none; }
+      @media (prefers-reduced-motion: no-preference) {
+        #site-main > .hero-main { position: sticky; top: 0; z-index: 1; }
+        #site-main > .hero-main ~ section,
+        #site-main > .hero-main ~ .questions-section { position: relative; z-index: 2; }
+        #site-main.home-page-sections > .pin-spacer:has(> .home-steps) { position: relative; z-index: 3; flex-shrink: 0; }
+      }
+      @media (min-width: 1024px) {
+        html.desktop-menu-open { overflow: hidden; }
+        body.desktop-menu-open .header-cta { display: none; }
+        #site-main { min-height: 100svh; background: var(--color-primary); transition: padding-top 0.5s ease; }
+        #site-main > section:first-of-type:not(.hero-main) { position: relative; }
+        #site-main > section:first-of-type {
+          z-index: 1;
+          transition: width 0.5s ease, border-radius 0.5s ease;
+        }
+        body.desktop-menu-open #site-main { padding-top: 280px; }
+        body.desktop-menu-open #site-main > section:first-of-type {
+          width: min(1280px, calc(100% - 32px));
+          border-radius: 1rem;
+          overflow: hidden;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #site-main, #site-main > section:first-of-type { transition: none; }
       }
     </style>
 
@@ -111,10 +140,14 @@ const { lang, t } = Astro.props;
     </script>
   </head>
   <body
-    class="font-family antialiased overflow-x-hidden bg-white flex flex-col justify-center items-center w-full"
+    class="font-family antialiased overflow-x-clip bg-white flex flex-col justify-center items-center w-full"
   >
     <Header content={t?.header} />
-    <main class="flex flex-col w-full items-center">
+    <main
+      id="site-main"
+      class:list={["relative flex flex-col w-full items-center", pageClass]}
+    >
+      {t && <DesktopMenu contentHeader={t.header} />}
       <slot />
     </main>
     <Footer content={t?.footer} />
@@ -151,24 +184,172 @@ const { lang, t } = Astro.props;
   document.addEventListener("DOMContentLoaded", () => {
     // Observer para animaciones: services-header, animation-left, hero-content
     const animationElements = document.querySelectorAll(
-      ".animation-up-fast, .animation-zoom-in, .animation-up-fast-2, .animation-zoom-in-2, .animation-fade-down, .animation-fade-left, .animation-zoom-out, .animation-fade-right, .animation-fade-left-2, .animation-up-fast-3 , .animation-zoom-in-3, .animation-fade-left-3, .container-image-fade, .image-fade"
+      ".fade-up-a, .fade-down-a, .fade-left-a, .fade-right-a"
     );
 
-    const animationObserver = new IntersectionObserver(
-      (entries) => {
+    if (!("IntersectionObserver" in window)) {
+      animationElements.forEach((element) => element.classList.add("active"));
+    } else {
+      const animationObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              animationObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      animationElements.forEach((element) => {
+        animationObserver.observe(element);
+      });
+    }
+
+    const textRevealSections = document.querySelectorAll(
+      "#site-main.home-page-sections > section, #site-main.home-page-sections > .questions-section"
+    );
+    const textRevealSelector = "h1, h2, h3, h4, h5, p, li";
+    const textRevealElements = [
+      ...textRevealSections,
+    ].flatMap((section) => [...section.querySelectorAll(textRevealSelector)]);
+
+    textRevealElements.forEach((element) => {
+      element.classList.add("fade-up-lines-raw");
+    });
+
+    const lineRevealElements = document.querySelectorAll(
+      "#site-main.home-page-sections > section.fade-up-lines-raw, #site-main.home-page-sections > section .fade-up-lines-raw, #site-main.home-page-sections > .questions-section .fade-up-lines-raw"
+    );
+    const lineRevealRoots = [...lineRevealElements].filter(
+      (element) => !element.parentElement?.closest(textRevealSelector)
+    );
+
+    const prepareLineReveal = (element) => {
+      element
+        .querySelectorAll(".fade-up-line-word, .fade-up-line-fragment")
+        .forEach((wrapper) => {
+          wrapper.replaceWith(...wrapper.childNodes);
+        });
+
+      const textNodes = [];
+      const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+      let node;
+
+      while ((node = walker.nextNode())) {
+        if (/\S/.test(node.textContent ?? "")) {
+          textNodes.push(node);
+        }
+      }
+
+      textNodes.forEach((textNode) => {
+        const tokens = textNode.textContent.match(/\s+|\S+/gu) ?? [];
+        const fragment = document.createDocumentFragment();
+
+        tokens.forEach((token) => {
+          if (/^\s+$/u.test(token)) {
+            fragment.append(document.createTextNode(token));
+            return;
+          }
+
+          const word = document.createElement("span");
+          word.className = "fade-up-line-word";
+
+          const wordFragment = document.createElement("span");
+          wordFragment.className = "fade-up-line-fragment";
+          wordFragment.textContent = token;
+
+          word.append(wordFragment);
+          fragment.append(word);
+        });
+
+        textNode.replaceWith(fragment);
+      });
+
+      const words = [...element.querySelectorAll(".fade-up-line-word")];
+      const lineHeight = parseFloat(getComputedStyle(element).lineHeight);
+      const lineTolerance = Number.isFinite(lineHeight) ? lineHeight * 0.35 : 4;
+      let lineIndex = -1;
+      let previousTop = null;
+
+      words.forEach((word) => {
+        const top = word.getBoundingClientRect().top;
+
+        if (
+          previousTop === null ||
+          Math.abs(top - previousTop) > lineTolerance
+        ) {
+          lineIndex += 1;
+          previousTop = top;
+        }
+
+        word.firstElementChild.style.setProperty(
+          "--fade-up-line-delay",
+          `${lineIndex * 0.1}s`
+        );
+      });
+    };
+
+    lineRevealRoots.forEach(prepareLineReveal);
+
+    if ("IntersectionObserver" in window) {
+      const lineRevealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting || entry.intersectionRatio < 0.3) {
+              return;
+            }
+
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                entry.target.classList.add("active");
+              });
+            });
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: [0.3, 0.55] }
+      );
+
+      lineRevealRoots.forEach((element) => {
+        if (!element.closest(".steps-scroll-controlled .steps-card")) lineRevealObserver.observe(element);
+      });
+    } else {
+      lineRevealRoots.forEach((element) => element.classList.add("active"));
+    }
+
+    window.addEventListener("resize", () => {
+      lineRevealRoots.forEach(prepareLineReveal);
+    });
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-            animationObserver.unobserve(entry.target);
+          if (!entry.isIntersecting) return;
+          const target = entry.target;
+          const element = target.classList.contains("animation-image-reveal")
+            ? target : target.querySelector(".animation-image-reveal");
+          observer.unobserve(target);
+          if (!element) return;
+          const image = element.querySelector(":scope > img, :scope > .animation-image-reveal-mask > img");
+          const reveal = () => element.classList.add("active");
+          if (image && !image.complete) {
+            image.addEventListener("load", reveal, { once: true });
+            image.addEventListener("error", reveal, { once: true });
+            if (image.complete) reveal();
+          } else {
+            reveal();
           }
         });
-      },
-      { threshold: 0.3 }
-    );
+      }, { threshold: 0.3 });
 
-    animationElements.forEach((element) => {
-      animationObserver.observe(element);
-    });
+      document.querySelectorAll(".animation-image-reveal").forEach((element) => {
+        if (!element.querySelector(":scope > img, :scope > .animation-image-reveal-mask > img")) return;
+        element.classList.add("reveal-ready");
+        imageObserver.observe(element.closest(".animation-image-reveal-trigger") || element);
+      });
+    }
 
     // Observer para carousels: .hero-carousel[data-interval]
     const carousels = Array.from(document.querySelectorAll(".hero-carousel[data-interval]"));
