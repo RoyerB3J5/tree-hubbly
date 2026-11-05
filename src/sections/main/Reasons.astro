@@ -6,10 +6,16 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<section class="w-full flex bg-primary justify-center items-center flex-col">
+<section class="reasons-section relative w-full bg-primary py-20">
+  <div class="reasons-inner container-full relative mx-auto">
+    <nav class="reasons-index" aria-label="System stages">
+      <span class="reasons-index-track" aria-hidden="true"><span class="reasons-index-fill"></span></span>
+      <ol>{content.indicators.map((label) => <li class="reasons-index-item subtitle-sm">{label}</li>)}</ol>
+    </nav>
+    <div class="reasons-slides">
   {
     content.items.map((item,index)=>(
-      <div class="container-full flex justify-end items-center gap-14 py-20">
+      <div class="reasons-slide flex justify-end items-center gap-14">
         <div class="flex flex-col justify-center items-start gap-10 max-w-[520px]">
           <h2 set:html={item.title} class="heading-h4 text-paragraph"></h2>
           {
@@ -38,10 +44,162 @@ const { content } = Astro.props as Props;
             }
           </div>
         </div>
-        <div class="w-[30%] h-auto relative overflow-hidden rounded-2xl aspect-43/68">
-          <img src={`/images/steps-${index + 1}.webp`} alt={`Step ${index + 1}`} width="941" height="1672" decoding="async" loading="lazy" />
+        <div class="animation-image-reveal-trigger w-[38%] shrink-0">
+          <div class="animation-image-reveal w-full h-auto relative overflow-hidden rounded-2xl aspect-43/68">
+            <div class="animation-image-reveal-mask w-full h-full overflow-hidden rounded-2xl">
+              <img src={`/images/steps-${index + 1}.webp`} alt={`Step ${index + 1}`} width="941" height="1672" class="w-full h-full object-cover object-center" decoding="async" loading="lazy" />
+            </div>
+          </div>
         </div>
       </div>
     ))
   }
+    </div>
+  </div>
 </section>
+<style>
+  .reasons-index { position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 1; }
+  .reasons-index ol { display: flex; flex-direction: column; gap: 0.5rem; padding-left: 1rem; }
+  .reasons-index-item { color: var(--color-paragraph); font-size: 0.875rem; }
+  .reasons-index-item.is-active { color: var(--color-secondary); opacity: 1; }
+  .reasons-index-track { position: absolute; left: 0; top: 0; width: 2px; height: 100%;  }
+  .reasons-index-fill { display: block; width: 100%; height: 100%; background: var(--color-secondary); transform: scaleY(0.3333); transform-origin: top left; }
+  .reasons-slides { display: flex; flex-direction: column; gap: 5rem; padding-left: 12rem; }
+  .reasons-section.is-pinned { min-height: 100svh; display: flex; align-items: center; }
+  .reasons-section.is-pinned .reasons-slides { display: grid; }
+  .reasons-section.is-pinned .reasons-slide { grid-area: 1 / 1; }
+  @media (max-width: 767px) {
+    .reasons-index { position: relative; top: auto; transform: none; margin-bottom: 3rem; }
+    .reasons-slides { padding-left: 0; }
+    .reasons-slide { flex-direction: column; align-items: stretch; gap: 2rem; }
+    .reasons-slide > div { width: 100%; max-width: none; }
+  }
+</style>
+
+<script>
+  import { gsap, ScrollTrigger } from "../../scripts/gsap";
+
+  document.querySelectorAll<HTMLElement>(".reasons-section").forEach((section) => {
+    const slides = gsap.utils.toArray<HTMLElement>(section.querySelectorAll(".reasons-slide"));
+    const items = gsap.utils.toArray<HTMLElement>(section.querySelectorAll(".reasons-index-item"));
+    const fill = section.querySelector<HTMLElement>(".reasons-index-fill");
+    if (!slides.length || !fill) return;
+
+    const media = gsap.matchMedia();
+    media.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+      // Keep the normal document flow when the content cannot fit on screen.
+      section.classList.add("is-pinned");
+      if (section.offsetHeight > window.innerHeight) {
+        section.classList.remove("is-pinned");
+        return;
+      }
+
+      gsap.set(slides.slice(1), { autoAlpha: 0 });
+      gsap.set(fill, { scaleY: 1 / slides.length });
+      items[0]?.classList.add("is-active");
+      let revealedIndex = -1;
+      const revealSlide = (index: number) => {
+        if (index === revealedIndex) return;
+        const previousIndex = revealedIndex;
+        revealedIndex = index;
+        slides.forEach((slide, slideIndex) => {
+          if (slideIndex === previousIndex) return;
+          slide.querySelectorAll("h1, h2, h3, h4, h5, p, .animation-image-reveal")
+            .forEach((element) => element.classList.remove("active"));
+        });
+        // Reset the incoming slide before replaying its CSS transitions.
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          if (revealedIndex !== index) return;
+          slides[index].querySelectorAll("h1, h2, h3, h4, h5, p, .animation-image-reveal")
+            .forEach((element) => element.classList.add("active"));
+        }));
+      };
+      slides.forEach((slide) => {
+        slide.querySelectorAll("h1, h2, h3, h4, h5, p, .animation-image-reveal").forEach((element) => element.classList.remove("active"));
+        slide.querySelector(".animation-image-reveal")?.classList.add("reveal-ready");
+      });
+      const timeline = gsap.timeline({
+        onUpdate(this: gsap.core.Animation) {
+          const activeIndex = Math.min(slides.length - 1, Math.floor((this.time() + 0.225) / 0.5));
+          items.forEach((item, index) => item.classList.toggle("is-active", index === activeIndex));
+          if (this.scrollTrigger && this.scrollTrigger.progress > 0) revealSlide(activeIndex);
+        },
+        scrollTrigger: {
+          trigger: section,
+          refreshPriority: -1,
+          start: "top top",
+          end: () => `+=${window.innerHeight * (slides.length - 1) * 0.35}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: true,
+          onEnter: () => {
+            if (revealedIndex === -1) revealSlide(0);
+          },
+          onEnterBack: () => revealSlide(slides.length - 1),
+          invalidateOnRefresh: true,
+        },
+      });
+
+      slides.slice(1).forEach((slide, index) => {
+        const at = 0.5 * index + 0.2;
+        timeline.to(slide, { autoAlpha: 1, duration: 0.15 }, at)
+          .set(slides[index], { autoAlpha: 0 }, at + 0.15);
+      });
+      timeline.to(fill, { scaleY: 1, ease: "none", duration: timeline.duration() }, 0)
+        .to({}, { duration: 0.15 });
+
+      const firstSlideObserver = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting) && revealedIndex === -1) {
+          revealSlide(0);
+          firstSlideObserver.disconnect();
+        }
+      }, { rootMargin: "0px 0px -30% 0px", threshold: 0 });
+      firstSlideObserver.observe(section);
+
+      let wheelLockedUntil = 0;
+      const onWheel = (event: WheelEvent) => {
+        const trigger = timeline.scrollTrigger;
+        if (!trigger?.isActive || event.ctrlKey || Math.abs(event.deltaY) < 2 ||
+            document.documentElement.classList.contains("desktop-menu-open") ||
+            document.getElementById("mobile-menu")?.classList.contains("translate-x-0")) return;
+        const now = performance.now();
+        if (now < wheelLockedUntil) {
+          event.preventDefault();
+          return;
+        }
+        const direction = event.deltaY > 0 ? 1 : -1;
+        const current = Math.max(0, Math.min(slides.length - 1, revealedIndex));
+        const next = current + direction;
+        if (next < 0 || next >= slides.length) return;
+        event.preventDefault();
+        wheelLockedUntil = now + 900;
+        // Stay inside the pin range at both ends; scrolling exactly to end
+        // releases the pin while the last slide is still revealing.
+        const progress = 0.125 + (next / (slides.length - 1)) * 0.75;
+        window.scrollTo({ top: trigger.start + (trigger.end - trigger.start) * progress, behavior: "smooth" });
+      };
+      window.addEventListener("wheel", onWheel, { passive: false, capture: true });
+
+      // Earlier pinned sections must be measured before this section.
+      ScrollTrigger.sort();
+      ScrollTrigger.refresh();
+
+      return () => {
+        firstSlideObserver.disconnect();
+        window.removeEventListener("wheel", onWheel, true);
+        section.classList.remove("is-pinned");
+        items.forEach((item) => item.classList.remove("is-active"));
+        slides.forEach((slide) => {
+          slide.querySelectorAll("h1, h2, h3, h4, h5, p, .animation-image-reveal").forEach((element) => element.classList.add("active"));
+        });
+      };
+    });
+
+    // Re-evaluate whether the section fits after viewport resizing.
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => gsap.matchMediaRefresh(), 150);
+    });
+  });
+</script>

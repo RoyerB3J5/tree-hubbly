@@ -17,7 +17,7 @@ const { content } = Astro.props as Props;
       <div class:list={['prices-grid w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center items-stretch', { 'prices-grid-complete': 'plan' in content }]}>
       {
         content.service.map((item,index)=>(
-          <div class={`price-card w-full flex flex-col justify-start items-start gap-8 py-10 px-6 rounded-2xl border  ${index === 1 ? "back-prices border-secondary" : "bg-transparent border-[#263A4B]"}`}>
+          <div class={`price-card w-full flex flex-col justify-start items-start gap-8 py-10 px-6 rounded-2xl border fade-up-a  ${index === 1 ? "back-prices border-secondary" : "bg-transparent border-[#263A4B]"}`} style={`animation-delay: ${index * 0.2}s`}>
             <div class="w-full flex justify-between items-center h-[27.8px]">
               <p class='subtitle-sm uppercase'>{item.tag}</p>
               {
@@ -49,7 +49,7 @@ const { content } = Astro.props as Props;
               <Button
                   text={item.button[0].label}
                   href={item.button[0].href}
-                  extraBtnClass={`${index === 1 ? "bg-secondary border-secondary" : "bg-transparent border-paragraph"} w-full`}
+                  extraBtnClass={`${index === 1 ? "bg-secondary border-secondary" : "bg-transparent border-paragraph"} w-full fade-up-a`}
                   textClass={`${index === 1 ? "text-primary" : "text-paragraph"} `}
                 />
               <p class='body-sm text-[#8F979D] text-center'>{item.subtag}</p>

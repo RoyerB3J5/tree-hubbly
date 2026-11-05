@@ -12,15 +12,12 @@ const { content } = Astro.props as Props;
 <section
   class="w-full flex justify-center items-center relative overflow-hidden bg-secondary"
 >
-  <img
-      src="/images/letter.webp"
-      alt="Letter"
-      class="absolute bottom-0 right-0 w-full h-full object-contain object-center translate-y-1/2 opacity-30"
-      width="1440"
-      height="308"
-      decoding="async"
-      loading="lazy"
-  />
+  <div class="call-action-marquee" aria-hidden="true">
+    <div class="call-action-marquee-track">
+      <img src="/images/letter.webp" alt="" width="1440" height="308" decoding="async" loading="lazy" />
+      <img src="/images/letter.webp" alt="" width="1440" height="308" decoding="async" loading="lazy" />
+    </div>
+  </div>
   <div class="container-full flex flex-col justify-center items-center gap-10 pt-30 pb-[223px]">
     <div class='flex flex-col justify-center items-center gap-6 '>
       <h2
@@ -48,3 +45,23 @@ const { content } = Astro.props as Props;
       </div>
   </div>
 </section>
+<style>
+  .call-action-marquee {
+    position: absolute; inset: 0; transform: translateY(50%);
+    overflow: hidden; opacity: 0.3; pointer-events: none;
+  }
+  .call-action-marquee-track {
+    display: flex; width: 200%; height: 100%;
+    animation: call-action-scroll 24s linear infinite;
+  }
+  .call-action-marquee-track img {
+    display: block; width: 50%; height: 100%; flex: none;
+    object-fit: contain; object-position: center;
+  }
+  @keyframes call-action-scroll {
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .call-action-marquee-track { animation: none; }
+  }
+</style>

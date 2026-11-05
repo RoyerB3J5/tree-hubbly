@@ -28,13 +28,9 @@ export default function QuestionsAccordion({ content }: Props) {
 
     if (titleRef.current) observer.observe(titleRef.current);
     if (descRef.current) observer.observe(descRef.current);
-    if (containerRef.current) observer.observe(containerRef.current);
+    containerRef.current?.querySelectorAll(".question-item").forEach((item) => observer.observe(item));
 
-    return () => {
-      if (titleRef.current) observer.unobserve(titleRef.current);
-      if (descRef.current) observer.unobserve(descRef.current);
-      if (containerRef.current) observer.unobserve(containerRef.current);
-    };
+    return () => observer.disconnect();
   }, []);
 
   const toggleAccordion = (index: number) => {
@@ -49,12 +45,11 @@ export default function QuestionsAccordion({ content }: Props) {
           dangerouslySetInnerHTML={{ __html: content.title }}
           className="text-primary text-center heading-h4"
         ></h2>
-        <div className="w-full flex flex-col justify-center items-center gap-4 md:gap-8">
+        <div ref={containerRef} className="w-full flex flex-col justify-center items-center gap-4 md:gap-8">
           {content.questions.map((item, index) => (
             <div
-              ref={containerRef}
               key={index}
-              className="w-full flex justify-between items-center p-4 md:p-6 bg-white rounded-3xl  transition-all duration-300 ease-in-out "
+              className="question-item fade-up-a w-full flex justify-between items-center p-4 md:p-6 bg-white rounded-3xl transition-all duration-300 ease-in-out"
             >
               <div
                 className={`flex flex-col justify-start items-start w-full transition-all duration-300 ease-in-out ${

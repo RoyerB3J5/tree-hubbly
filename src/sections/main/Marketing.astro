@@ -12,19 +12,19 @@ const { content } = Astro.props as Props;
       <p class='subtitle-lg' set:html={content.tag}></p>
       <h2 set:html={content.title} class='heading-h4 text-center'></h2>
     </div>
-    <div class="w-full grid grid-cols-2 gap-6 justify-center items-stretch">
+    <div class="marketing-cards w-full grid grid-cols-2 gap-6 justify-center items-stretch">
       {
         content.pc.map((item,index)=>(
-          <div class={`w-full flex flex-col justify-center items-start gap-8 py-10 px-6 border rounded-2xl text-paragraph ${index === 0 ? "bg-transparent border-[#FF4E4E]" : "back-prices border-secondary"}`}>
-            <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="50" height="50" class='w-10 h-10' decoding="async" loading="lazy" />
+          <div class={`marketing-card w-full flex flex-col justify-center items-start gap-8 py-10 px-6 border rounded-2xl text-paragraph ${index === 0 ? "bg-transparent border-[#FF4E4E]" : "back-prices border-secondary"}`} style={`--glow-color: ${index === 0 ? "255, 78, 78" : "145, 210, 0"}`} >
+            <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="50" height="50" class='w-10 h-10 fade-up-a' decoding="async" loading="lazy" />
             <h3 class={`body-lg ${index === 0 ? "" : "text-secondary"}`}>{item.title}</h3>
-            <div class={`w-[51px] h-1 ${index === 0 ? "bg-[#FF4E4E]" : "bg-secondary"}`}></div>
+            <div class={`fade-up-a w-[51px] h-1 ${index === 0 ? "bg-[#FF4E4E]" : "bg-secondary"}`}></div>
             <ul class="flex flex-col justify-center items-start gap-6 ">
               {
                 item.list.map((i)=>(
-                  <li class={`body-md flex justify-start items-center gap-2`}>
-                    <div class={`w-1.5 h-1.5 ${index === 0 ? "bg-[#FF4E4E]" : "bg-secondary"}`}></div>
-                    {i}
+                  <li class={` flex justify-start items-center gap-2`}>
+                    <div class={`w-1.5 h-1.5 fade-up-a ${index === 0 ? "bg-[#FF4E4E]" : "bg-secondary"}`}></div>
+                    <span class='body-md'>{i}</span>
                   </li>
                 ))
               }
@@ -35,3 +35,44 @@ const { content } = Astro.props as Props;
     </div>
   </div>
 </section>
+
+
+<style>
+  .marketing-card { position: relative; isolation: isolate; }
+  .marketing-card::before, .marketing-card::after {
+    content: ""; position: absolute; pointer-events: none; border-radius: inherit;
+    opacity: var(--glow-opacity, 0); transition: opacity 0.25s ease;
+  }
+  .marketing-card::before {
+    inset: -1px; padding: 2px; z-index: 1;
+    background: radial-gradient(circle 55px at var(--glow-x, 0px) var(--glow-y, 0px), rgba(255, 255, 255, 0.45), transparent),
+      radial-gradient(circle 150px at var(--glow-x, 0px) var(--glow-y, 0px), rgba(var(--glow-color), 1), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+  .marketing-card::after {
+    inset: 0; z-index: -1;
+    background: radial-gradient(circle 120px at var(--glow-x, 0px) var(--glow-y, 0px), rgba(var(--glow-color), 0.28), transparent);
+  }
+  @media (hover: none) { .marketing-card::before, .marketing-card::after { display: none; } }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".marketing-cards").forEach((container) => {
+    const cards = container.querySelectorAll<HTMLElement>(".marketing-card");
+    container.addEventListener("pointermove", (event) => {
+      if (event.pointerType === "touch") return;
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--glow-x", `${event.clientX - rect.left}px`);
+        card.style.setProperty("--glow-y", `${event.clientY - rect.top}px`);
+        card.style.setProperty("--glow-opacity", "1");
+      });
+    });
+    container.addEventListener("pointerleave", () => {
+      cards.forEach((card) => card.style.setProperty("--glow-opacity", "0"));
+    });
+  });
+</script>

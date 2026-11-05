@@ -55,6 +55,10 @@ const t = translations[lang];
   const bookSection = document.querySelector<HTMLElement>(".home-page-sections > #book");
   const scaleSection = document.querySelector<HTMLElement>(".home-page-sections > .home-scale");
   const stepsSection = document.querySelector<HTMLElement>(".home-page-sections > .home-steps");
+  const reasonsSection = document.querySelector<HTMLElement>(".home-page-sections .reasons-section");
+  const numbersSection = document.querySelector<HTMLElement>(".home-page-sections .numbers-section");
+  const controlSection = document.querySelector<HTMLElement>(".home-page-sections .control-section");
+  const pathSection = document.querySelector<HTMLElement>(".home-page-sections .path-section");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   // Reserve the line reveals for the card sequence only when the section fits.
@@ -78,6 +82,7 @@ const t = translations[lang];
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: stepsSection,
+          refreshPriority: 1,
           start: "top top",
           end: () => `+=${window.innerHeight * cards.length * 0.6}`,
           pin: true,
@@ -89,16 +94,15 @@ const t = translations[lang];
       });
 
       cards.forEach((card, index) => {
-        const background = card.querySelector(".steps-card-background");
         const content = card.querySelectorAll(".steps-card-content");
         const text = card.querySelectorAll<HTMLElement>("h1.fade-up-lines-raw, h2.fade-up-lines-raw, h3.fade-up-lines-raw, h4.fade-up-lines-raw, h5.fade-up-lines-raw, h6.fade-up-lines-raw, p.fade-up-lines-raw");
         text.forEach((element, textIndex) => {
           element.classList.remove("active");
           element.style.setProperty("--fade-up-lines-delay", `${textIndex * 0.18}s`);
         });
-        gsap.set(background, { scaleY: 0, transformOrigin: "center bottom" });
+        gsap.set(card, { yPercent: 100 });
         gsap.set(content, { autoAlpha: 0 });
-        timeline.to(background, { scaleY: 1, duration: 0.45, ease: "power2.out" }, index)
+        timeline.to(card, { yPercent: 0, duration: 0.45, ease: "none" }, index)
           .set(content, { autoAlpha: 1 }, index + 0.45)
           .call(() => text.forEach((element) => element.classList.add("active")), [], index + 0.45)
           .to({}, { duration: 0.55 }, index + 0.45);
@@ -140,9 +144,15 @@ const t = translations[lang];
     const getDestination = (): HTMLElement | null => {
       const faltantesTop = nextSection.getBoundingClientRect().top + window.scrollY;
       if (window.scrollY < faltantesTop - 8) return nextSection;
-      const pairs = [[nextSection, bookSection], [scaleSection, stepsSection]] as const;
+      const pairs = [
+        [nextSection, bookSection], [scaleSection, stepsSection],
+        [reasonsSection, numbersSection], [numbersSection, controlSection],
+        [controlSection, pathSection],
+      ] as const;
       for (const [current, destination] of pairs) {
         if (!current || !destination) continue;
+        const pin = ScrollTrigger.getAll().find((trigger) => trigger.trigger === current && trigger.pin);
+        if (pin && window.scrollY < pin.end - 1) continue;
         const currentTop = current.getBoundingClientRect().top + window.scrollY;
         const destinationTop = destination.getBoundingClientRect().top + window.scrollY;
         const nearEnd = Math.max(currentTop, destinationTop - window.innerHeight);

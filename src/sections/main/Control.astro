@@ -6,8 +6,8 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<section class='w-full flex justify-center items-center bg-third-light '>
-  <div class='container-full flex flex-col justify-center items-center py-20 gap-10'>
+<section class='control-section w-full flex justify-center items-center bg-third-light '>
+  <div class='container-full flex flex-col justify-between items-center py-20 gap-10 h-[100svh]'>
     <div class="w-full flex justify-between items-center">
       <div class='flex flex-col justify-center items-start gap-6 text-primary max-w-[411px]'>
         <p class="subtitle-lg">{content.tag}</p>
@@ -17,14 +17,18 @@ const { content } = Astro.props as Props;
         }
         
       </div>
-      <div class='w-[55%] h-auto relative overflow-hidden rounded-2xl aspect-737/411'>
-        <img src={`/images/${content.img}.webp`} alt="Control" width="1400" height="788" class="w-full h-full absolute inset-0 object-cover" decoding="async" loading="lazy"/>
+      <div class='animation-image-reveal-trigger w-[55%]'>
+        <div class='animation-image-reveal w-full h-auto relative overflow-hidden rounded-2xl aspect-737/411'>
+          <div class='animation-image-reveal-mask w-full h-full overflow-hidden rounded-2xl'>
+            <img src={`/images/${content.img}.webp`} alt="Control" width="1400" height="788" class="w-full h-full object-cover object-center" decoding="async" loading="lazy"/>
+          </div>
+        </div>
       </div>
     </div>
     <div class="w-full grid grid-cols-4 gap-6 justify-center items-stretch">
       {
         content.measuring.map((item)=>( 
-          <div class="w-full flex flex-col justify-center items-start gap-6 bg-white p-6 rounded-2xl">
+          <div class="control-item w-full flex flex-col justify-center items-start gap-6 bg-white p-6 rounded-2xl">
             <p class="body-md">{item.tag}</p>
             <h3 class='body-lg grow'>{item.description}</h3>
             <div class={`w-12 h-12  rounde-lg flex justify-center items-center rounded-lg bg-third-light self-end`}>
@@ -36,3 +40,59 @@ const { content } = Astro.props as Props;
     </div>
   </div>
 </section>
+
+<script>
+  import { gsap, ScrollTrigger } from "../../scripts/gsap";
+
+  document.querySelectorAll<HTMLElement>(".control-section").forEach((section) => {
+    const items = gsap.utils.toArray<HTMLElement>(section.querySelectorAll(".control-item"));
+    if (!items.length) return;
+    const media = gsap.matchMedia();
+    media.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
+      if (section.scrollHeight > window.innerHeight + 1) return;
+      section.classList.add("control-scroll-controlled");
+      gsap.set(items, { y: 50, autoAlpha: 0 });
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => `+=${window.innerHeight * items.length * 0.6}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: true,
+          refreshPriority: -2,
+          invalidateOnRefresh: true,
+        },
+      });
+      items.forEach((item, index) => {
+        timeline.to(item, { y: 0, autoAlpha: 1, duration: 0.45, ease: "power2.out" }, index)
+          .call(() => item.querySelectorAll(".fade-up-lines-raw").forEach((text) => text.classList.add("active")), [], index + 0.1)
+          .to({}, { duration: 0.55 }, index + 0.45);
+      });
+      let lockedUntil = 0;
+      const onWheel = (event: WheelEvent) => {
+        const trigger = timeline.scrollTrigger;
+        if (!trigger || event.ctrlKey || document.documentElement.classList.contains("desktop-menu-open") ||
+            document.getElementById("mobile-menu")?.classList.contains("translate-x-0")) return;
+        const now = performance.now();
+        if (trigger.isActive && now < lockedUntil) { event.preventDefault(); return; }
+        if (!trigger.isActive || Math.abs(event.deltaY) < 2) return;
+        if ((event.deltaY < 0 && trigger.progress <= 0.001) ||
+            (event.deltaY > 0 && trigger.progress >= 0.999)) return;
+        const current = Math.round(trigger.progress * items.length);
+        const next = gsap.utils.clamp(0, items.length, current + (event.deltaY > 0 ? 1 : -1));
+        event.preventDefault();
+        lockedUntil = now + 900;
+        window.scrollTo({ top: trigger.start + (trigger.end - trigger.start) * next / items.length, behavior: "smooth" });
+      };
+      window.addEventListener("wheel", onWheel, { passive: false, capture: true });
+      ScrollTrigger.sort();
+      ScrollTrigger.refresh();
+      return () => {
+        window.removeEventListener("wheel", onWheel, true);
+        section.classList.remove("control-scroll-controlled");
+        items.forEach((item) => item.querySelectorAll(".fade-up-lines-raw").forEach((text) => text.classList.add("active")));
+      };
+    });
+  });
+</script>

@@ -37,7 +37,9 @@ const { lang, t, pageClass } = Astro.props;
         #site-main > .hero-main { position: sticky; top: 0; z-index: 1; }
         #site-main > .hero-main ~ section,
         #site-main > .hero-main ~ .questions-section { position: relative; z-index: 2; }
-        #site-main.home-page-sections > .pin-spacer:has(> .home-steps) { position: relative; z-index: 3; flex-shrink: 0; }
+        #site-main.home-page-sections > .pin-spacer:has(> .home-steps),
+        #site-main.home-page-sections > .pin-spacer:has(> .reasons-section),
+        #site-main.home-page-sections > .pin-spacer:has(> .control-section) { position: relative; z-index: 3; flex-shrink: 0; }
       }
       @media (min-width: 1024px) {
         html.desktop-menu-open { overflow: hidden; }
@@ -208,19 +210,20 @@ const { lang, t, pageClass } = Astro.props;
     }
 
     const textRevealSections = document.querySelectorAll(
-      "#site-main.home-page-sections > section, #site-main.home-page-sections > .questions-section"
+      "#site-main.home-page-sections > section, #site-main.home-page-sections > .questions-section, #site-main.home-page-sections > .pin-spacer > .reasons-section, #site-main.home-page-sections > .pin-spacer > .control-section"
     );
     const textRevealSelector = "h1, h2, h3, h4, h5, p, li";
     const textRevealElements = [
       ...textRevealSections,
-    ].flatMap((section) => [...section.querySelectorAll(textRevealSelector)]);
+    ].flatMap((section) => [...section.querySelectorAll(textRevealSelector)])
+      .filter((element) => !element.matches(".numbers-counter"));
 
     textRevealElements.forEach((element) => {
       element.classList.add("fade-up-lines-raw");
     });
 
     const lineRevealElements = document.querySelectorAll(
-      "#site-main.home-page-sections > section.fade-up-lines-raw, #site-main.home-page-sections > section .fade-up-lines-raw, #site-main.home-page-sections > .questions-section .fade-up-lines-raw"
+      "#site-main.home-page-sections > section.fade-up-lines-raw, #site-main.home-page-sections > section .fade-up-lines-raw, #site-main.home-page-sections > .questions-section .fade-up-lines-raw, #site-main.home-page-sections > .pin-spacer > .reasons-section .fade-up-lines-raw, #site-main.home-page-sections > .pin-spacer > .control-section .fade-up-lines-raw"
     );
     const lineRevealRoots = [...lineRevealElements].filter(
       (element) => !element.parentElement?.closest(textRevealSelector)
@@ -293,6 +296,43 @@ const { lang, t, pageClass } = Astro.props;
 
     lineRevealRoots.forEach(prepareLineReveal);
 
+    // A text reveal inside an animated container starts only after every
+    // enclosing entrance animation has finished.
+    const waitForContainerEntrance = (container) => new Promise((resolve) => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        resolve();
+        return;
+      }
+      let observer;
+      const check = () => {
+        if (!container.classList.contains("active")) return;
+        observer?.disconnect();
+        requestAnimationFrame(() => {
+          const animations = container.getAnimations().filter((animation) =>
+            "animationName" in animation &&
+            (animation.playState === "running" || animation.playState === "pending")
+          );
+          Promise.allSettled(animations.map((animation) => animation.finished)).then(resolve);
+        });
+      };
+      if (!container.classList.contains("active")) {
+        observer = new MutationObserver(check);
+        observer.observe(container, { attributes: true, attributeFilter: ["class"] });
+      }
+      check();
+    });
+    const revealAfterContainers = (element) => {
+      const containers = [];
+      let ancestor = element.parentElement;
+      while (ancestor) {
+        if (ancestor.matches(".fade-up-a, .fade-down-a, .fade-left-a, .fade-right-a")) containers.push(ancestor);
+        ancestor = ancestor.parentElement;
+      }
+      Promise.all(containers.map(waitForContainerEntrance)).then(() => {
+        requestAnimationFrame(() => element.classList.add("active"));
+      });
+    };
+
     if ("IntersectionObserver" in window) {
       const lineRevealObserver = new IntersectionObserver(
         (entries, observer) => {
@@ -301,11 +341,7 @@ const { lang, t, pageClass } = Astro.props;
               return;
             }
 
-            requestAnimationFrame(() => {
-              requestAnimationFrame(() => {
-                entry.target.classList.add("active");
-              });
-            });
+            revealAfterContainers(entry.target);
             observer.unobserve(entry.target);
           });
         },
@@ -313,7 +349,7 @@ const { lang, t, pageClass } = Astro.props;
       );
 
       lineRevealRoots.forEach((element) => {
-        if (!element.closest(".steps-scroll-controlled .steps-card")) lineRevealObserver.observe(element);
+        if (!element.closest(".steps-scroll-controlled .steps-card, .reasons-section.is-pinned .reasons-slide, .numbers-reveal-controlled .numbers-card, .control-scroll-controlled .control-item")) lineRevealObserver.observe(element);
       });
     } else {
       lineRevealRoots.forEach((element) => element.classList.add("active"));
@@ -347,6 +383,7 @@ const { lang, t, pageClass } = Astro.props;
       document.querySelectorAll(".animation-image-reveal").forEach((element) => {
         if (!element.querySelector(":scope > img, :scope > .animation-image-reveal-mask > img")) return;
         element.classList.add("reveal-ready");
+        if (element.closest(".reasons-section.is-pinned")) return;
         imageObserver.observe(element.closest(".animation-image-reveal-trigger") || element);
       });
     }
