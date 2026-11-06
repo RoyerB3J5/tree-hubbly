@@ -29,8 +29,8 @@ const icons = [
 
 <footer class="flex flex-col justify-center items-center w-full">
   <div class=" flex justify-center items-center  bg-primary w-full">
-    <div class="container-full flex justify-between items-start py-20">
-      <div class="flex flex-col justify-center items-center sm:items-start gap-6 md:gap-8 max-w-[80%] md:max-w-62.5 lg:max-w-[633px]">
+    <div class="container-full flex flex-col md:flex-row justify-center md:justify-between items-start py-12 md:py-20 gap-12 md:gap-0">
+      <div class="flex flex-col justify-center items-start gap-8 max-w-none md:max-w-62.5 lg:max-w-[633px]">
         <a href={`/${lang}/`} class="flex justify-center items-center">
           <img src="/images/logo.svg" alt="Logo de TreeHubly" width="234" height="43" class="w-60 sm:w-40 lg:w-58.5 h-auto" />
         </a>
@@ -39,17 +39,17 @@ const icons = [
         <div class="flex justify-center items-center gap-5">
           {
             icons.map(item => ( 
-              <a href={item.href} class="bg-transparent p-2 rounded-full group flex justify-center items-center transition-colors duration-300 cursor-pointer border border-transparent hover:border-secondary" target="_blank" rel="noopener noreferrer">
-                <img src={`/images/${item.icon}.svg`} alt="Icono de redes" class='w-5 h-5' width="12" height="12" decoding="async" loading="lazy">
+              <a href={item.href} class="bg-transparent md:p-2 rounded-full group flex justify-center items-center transition-colors duration-300 cursor-pointer border border-transparent hover:border-secondary" target="_blank" rel="noopener noreferrer">
+                <img src={`/images/${item.icon}.svg`} alt="Icono de redes" class='w-6 md:w-5 h-6 md:h-5' width="12" height="12" decoding="async" loading="lazy">
               </a>
             ))
           }
         </div>
       </div>
-      <div class="flex flex-col justify-center items-center sm:items-start gap-4 md:gap-8">
+      <div class="flex flex-col justify-center items-center sm:items-start gap-8">
           <h3 class="text-paragraph subtitle-lg ">{content?.nav.title}</h3>
           <nav >
-            <ul class="flex flex-col justify-center items-center sm:items-start gap-2 md:gap-6">
+            <ul class="flex flex-col justify-center items-start gap-6">
               {
                 content?.nav.items.map((item) =>( 
                  <li class='flex justify-center items-start gap-2'>
@@ -63,7 +63,7 @@ const icons = [
             </ul>
           </nav>
         </div>
-      <div class="flex flex-col justify-center items-center sm:items-start gap-6 md:gap-8 ">
+      <div class="flex flex-col justify-center items-start gap-8 ">
           <h3 class="text-paragraph subtitle-lg ">{content?.schedules.title}</h3>
           <div class="flex flex-col justify-center items-start gap-4">
             {

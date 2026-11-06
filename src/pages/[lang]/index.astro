@@ -31,7 +31,7 @@ const t = translations[lang];
 <Layout lang={lang} t={t} pageClass="home-page-sections">
   <HeroMain content={t.main.hero}/>
   <Faltantes content={t.main.system} />
-  <section class="w-full bg-[#F7F7F7] py-10 md:py-20  flex justify-center items-center" id="book">
+  <section class="w-full bg-[#F7F7F7] py-12 md:py-20  flex justify-center items-center" id="book">
     <Book content={t.main.session} />
   </section>
   <Scale content={t.main.grow} />
@@ -60,6 +60,7 @@ const t = translations[lang];
   const controlSection = document.querySelector<HTMLElement>(".home-page-sections .control-section");
   const pathSection = document.querySelector<HTMLElement>(".home-page-sections .path-section");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const desktopScroll = window.matchMedia("(min-width: 768px)");
   let snapping = false;
 
   if (hero && nextSection) {
@@ -98,7 +99,7 @@ const t = translations[lang];
     };
 
     window.addEventListener("wheel", (event) => {
-      if (reduceMotion.matches || menuIsOpen() || event.ctrlKey) return;
+      if (!desktopScroll.matches || reduceMotion.matches || menuIsOpen() || event.ctrlKey) return;
       if (snapping) {
         if (event.deltaY > 0) event.preventDefault();
         else if (event.deltaY < 0) { snapping = false; document.documentElement.classList.remove("section-transitioning"); clearTimeout(unlockTimer); }
@@ -114,12 +115,12 @@ const t = translations[lang];
     }, { passive: false });
 
     window.addEventListener("touchstart", (event) => {
-      const destination = !snapping && !reduceMotion.matches && !menuIsOpen() ? getDestination() : null;
+      const destination = desktopScroll.matches && !snapping && !reduceMotion.matches && !menuIsOpen() ? getDestination() : null;
       touchStart = destination && event.touches.length === 1
         ? { y: event.touches[0].clientY, destination } : null;
     }, { passive: true });
     window.addEventListener("touchend", (event) => {
-      if (touchStart && event.changedTouches.length === 1 &&
+      if (desktopScroll.matches && touchStart && event.changedTouches.length === 1 &&
           touchStart.y - event.changedTouches[0].clientY > 50 && !menuIsOpen() &&
           touchStart.destination.getBoundingClientRect().top > 8) {
         goToNextSection(touchStart.destination);

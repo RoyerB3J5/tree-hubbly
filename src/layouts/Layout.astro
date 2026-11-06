@@ -43,22 +43,21 @@ const { lang, t, pageClass } = Astro.props;
         #site-main.home-page-sections > .pin-spacer:has(> .path-section),
         #site-main > .pin-spacer:has(> .system-reasons) { position: relative; z-index: 3; flex-shrink: 0; }
       }
-      @media (min-width: 1024px) {
         html.desktop-menu-open { overflow: hidden; }
         body.desktop-menu-open .header-cta { display: none; }
-        #site-main { min-height: 100svh; background: var(--color-primary); transition: padding-top 0.5s ease; }
+        #site-main { --menu-height: 320px; min-height: 100svh; background: var(--color-primary); transition: padding-top 0.5s ease; }
         #site-main > section:first-of-type:not(.hero-main) { position: relative; }
         #site-main > section:first-of-type {
           z-index: 1;
           transition: width 0.5s ease, border-radius 0.5s ease;
         }
-        body.desktop-menu-open #site-main { padding-top: 280px; }
+        body.desktop-menu-open #site-main { padding-top: var(--menu-height, 280px); }
         body.desktop-menu-open #site-main > section:first-of-type {
           width: min(1280px, calc(100% - 32px));
           border-radius: 1rem;
           overflow: hidden;
         }
-      }
+      @media (min-width: 768px) { #site-main { --menu-height: 280px; } }
       @media (prefers-reduced-motion: reduce) {
         #site-main, #site-main > section:first-of-type { transition: none; }
       }

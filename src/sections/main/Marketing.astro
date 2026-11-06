@@ -7,19 +7,19 @@ interface Props {
 const { content } = Astro.props as Props;
 ---
 <section class='w-full flex justify-center items-center bg-primary text-paragraph'>
-  <div class="container-full flex flex-col justify-center items-center gap-10 py-20">
-    <div class='flex flex-col justify-center items-center gap-6 '>
+  <div class="container-full flex flex-col justify-center items-center gap-10 py-12 md:py-20">
+    <div class='flex flex-col justify-center item-start md:items-center gap-6 '>
       <p class='subtitle-lg' set:html={content.tag}></p>
-      <h2 set:html={content.title} class='heading-h4 text-center'></h2>
+      <h2 set:html={content.title} class='heading-h4 text-start md:text-center'></h2>
     </div>
-    <div class="marketing-cards w-full grid grid-cols-2 gap-6 justify-center items-stretch">
+    <div class="marketing-cards w-full grid grid-cols-1 md:grid-cols-2 gap-6 justify-center items-center md:items-stretch">
       {
         content.pc.map((item,index)=>(
-          <div class={`marketing-card w-full flex flex-col justify-center items-start gap-8 py-10 px-6 border rounded-2xl text-paragraph ${index === 0 ? "bg-transparent border-[#FF4E4E]" : "back-prices border-secondary"}`} style={`--glow-color: ${index === 0 ? "255, 78, 78" : "145, 210, 0"}`} >
+          <div class={`marketing-card w-full flex flex-col justify-center items-start gap-8 py-8 md:py-10 px-4 md:px-6 border rounded-2xl text-paragraph ${index === 0 ? "bg-transparent border-[#FF4E4E]" : "back-prices border-secondary"}`} style={`--glow-color: ${index === 0 ? "255, 78, 78" : "145, 210, 0"}`} >
             <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="50" height="50" class='w-10 h-10 fade-up-a' decoding="async" loading="lazy" />
             <h3 class={`body-lg ${index === 0 ? "" : "text-secondary"}`}>{item.title}</h3>
             <div class={`fade-up-a w-[51px] h-1 ${index === 0 ? "bg-[#FF4E4E]" : "bg-secondary"}`}></div>
-            <ul class="flex flex-col justify-center items-start gap-6 ">
+            <ul class="flex flex-col justify-center items-start gap-8 md:gap-6 ">
               {
                 item.list.map((i)=>(
                   <li class={` flex justify-start items-center gap-2`}>

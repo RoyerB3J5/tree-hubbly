@@ -7,38 +7,39 @@ interface Props {
 const { content } = Astro.props as Props;
 ---
 <section class="w-full flex justify-center items-center bg-primary">
-  <div class="container-full flex flex-col justify-center items-center pb-20 pt-40 gap-10">
-    <div class="flex flex-col justify-center items-center gap-6">
+  <div class="container-full flex flex-col justify-center items-center pb-12 md:pb-20 pt-26 md:pt-40 gap-8 md:gap-10">
+    <div class="flex flex-col justify-center items-start md:items-center gap-6">
       <p class="subtitle-lg text-secondary">{content.tag}</p>
-      <h1 set:html={content.title} class="heading-h4 text-paragraph"></h1>
-      <p class="body-md text-paragraph mt-2">{content.description}</p>
+      <h1 set:html={content.title} class="heading-h4 text-paragraph text-start md:text-center"></h1>
+      <p class="body-md text-paragraph mt-2 text-start md:text-center">{content.description}</p>
     </div>
     <div class='w-full flex flex-col justify-center items-center gap-20'>
-      <div class='w-full flex justify-center items-stretch gap-6'>
-        <div class="w-[45%] h-auto relative overflow-hidden rounded-2xl aspect-603/645 bg-paragraph">
+      <div class='w-full flex flex-col md:flex-row justify-center items-center md:items-stretch gap-8 md:gap-6'>
+        <div class="w-full md:w-[45%] h-auto relative overflow-hidden rounded-2xl aspect-118/123 md:aspect-603/645 bg-paragraph">
         </div>
-        <div class='w-[55%] flex flex-col justify-center items-start gap-6 border border-[#263A4B] rounded-2xl p-6 back-main-4 fade-up-a'>
+        <div class='w-full md:w-[55%] flex flex-col justify-center items-start gap-6 border border-[#263A4B] rounded-2xl px-4 py-12 md:p-6 back-main-4 fade-up-a'>
           <p class="subtitle-lg text-secondary">{content.section.tag}</p>
           <h2 set:html={content.section.title} class="heading-h4 text-paragraph" ></h2>
           <p class="body-md text-paragraph mt-2">{content.section.description}</p>
           <div class='bg-secondary w-[51px] h-1 mt-4 fade-up-a'></div>
+          <p class="text-paragraph text-start md:text-center subtitle-lg block md:hidden">{content.description2}</p>
         </div>
       </div>
-      <div class="w-full flex flex-col justify-center items-center gap-10">
-        <div class='w-full flex justify-between items-center gap-6'>
-          <h2 set:html={content.section2.title} class="heading-h4 text-paragraph"></h2>
-          <p class="body-md text-paragraph max-w-[70%]">{content.section2.description}</p>
+      <div class="w-full flex flex-col justify-center items-start md:items-center gap-10">
+        <div class='w-full flex flex-col md:flex-row justify-center md:justify-between items-start md:items-center gap-6'>
+          <h2 set:html={content.section2.title} class="heading-h4 text-paragraph "></h2>
+          <p class="body-md text-paragraph max-w-none md:max-w-[70%] text-start">{content.section2.description}</p>
         </div>
-        <div class='w-full grid grid-cols-3 gap-6 justify-center items-stretch'>
+        <div class='w-full grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 justify-center items-center md:items-stretch'>
           {
             content.section3.elements.map((item,index)=>(
-              <div class='w-full flex flex-col justify-center items-start gap-8 p-6 rounded-2xl border border-[#263A4B] fade-up-a' style={`animation-delay: ${ index * 0.1}s`}>
+              <div class='w-full flex flex-col justify-center items-start gap-6 md:gap-8 px-4 py-6 md:p-6 rounded-2xl border border-[#263A4B] fade-up-a' style={`animation-delay: ${ index * 0.1}s`}>
                 <h3 class='text-secondary body-lg'>{item.title}</h3>
                 <p class="body-md text-paragraph">{item.description}</p>
               </div>
             ))
           }
-          <div class='w-full flex flex-col justify-center items-start gap-8 p-6 rounded-2xl border border-secondary back-main-4 fade-up-a' style={`animation-delay: ${ content.section3.elements.length * 0.1}s`}>
+          <div class='w-full flex flex-col justify-center items-start gap-8 px-4 py-6 md:p-6 rounded-2xl border border-secondary back-main-4 fade-up-a' style={`animation-delay: ${ content.section3.elements.length * 0.1}s`}>
             <h4 class='text-secondary body-lg'>{content.section3.statistics.title}</h4>
             <div class="w-full flex justify-between items-center">
               {
@@ -58,7 +59,7 @@ const { content } = Astro.props as Props;
         </div>
       </div>
     </div>
-    <div class="w-full flex flex-col justify-center items-center gap-8 py-10 px-20 rounded-2xl border border-[#263A4B] back-main-4 fade-up-a">
+    <div class="w-full flex flex-col justify-center items-center gap-8 py-10 px-20 rounded-2xl border border-[#263A4B] back-main-4 fade-up-a hidden md:block">
       <p class="text-paragraph text-center body-md">{content.description2}</p>
       <p class="subtitle-lg text-secondary italic">H&A Brother Tree Services</p>
     </div>

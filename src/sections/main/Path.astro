@@ -4,26 +4,26 @@ type Content = Translations["main"]["path"];
 interface Props { content: Content; }
 const { content } = Astro.props as Props;
 ---
-<section class="path-section w-full bg-white flex justify-center items-center">
-  <div class="path-layout container-full">
+<section class="path-section flex min-h-svh w-full items-center justify-center bg-white">
+  <div class="path-layout container-full flex flex-col items-start justify-between gap-10 md:gap-12 py-10 md:py-20 lg:flex-row">
     <div class="path-intro flex flex-col justify-center items-start gap-6 text-primary">
       <p class="subtitle-lg">{content.tag}</p>
       <h2 set:html={content.title} class="heading-h4"></h2>
     </div>
-    <div class="path-list">
-      <div class="path-rail" aria-hidden="true"><div class="path-progress"></div></div>
-      <img class="path-marker" src="/images/index-steps.png" alt="" aria-hidden="true" />
+    <div class="path-list relative w-full max-w-[440px] shrink-0 self-end lg:w-[440px] lg:self-auto">
+      <div class="path-rail absolute top-0 bottom-0 left-[76px] w-px max-md:w-[2px] bg-[#b2b7bb] max-[481px]:left-[49px]" aria-hidden="true"><div class="path-progress h-0 w-full bg-primary"></div></div>
+      <img class="path-marker absolute top-0 right-[calc(100%+32px)] z-2 hidden h-auto w-[120px] -translate-y-1/2" src="/images/index-steps.png" alt="" aria-hidden="true" />
       {content.structure.map((item, index) => (
-        <div class="path-item">
-          <div class="path-number body-md">0{index + 1}</div>
-          <div class="path-dot" aria-hidden="true"></div>
+        <div class="path-item relative grid grid-cols-[36px_8px_minmax(0,304px)] items-start gap-x-9 pb-16 text-primary last:pb-0 max-[481px]:grid-cols-[26px_8px_minmax(0,1fr)] max-[481px]:gap-x-5">
+          <div class="path-number body-md pt-2.5">0{index + 1}</div>
+          <div class="path-dot relative z-1 mt-3.5 size-2 rounded-full bg-primary" aria-hidden="true"></div>
           <div class="path-copy">
             <h3 class="path-title heading-h4">{item.title}</h3>
             <div class="path-details">
-              <div class="path-details-inner">
+              <div class="path-details-inner flex flex-col items-start gap-6 pt-6">
                 <p class="subtitle-lg">{item.tag}</p>
                 <p class="body-md">{item.description}</p>
-                <img src={`/images/icons/${item.icon}.svg`} alt="" width="66" height="77" decoding="async" loading="lazy" />
+                <img src={`/images/icons/${item.icon}.svg`} alt="" width="66" height="77" class="h-[77px] w-[66px] flex-none object-contain object-left" decoding="async" loading="lazy" />
               </div>
             </div>
           </div>
@@ -34,28 +34,16 @@ const { content } = Astro.props as Props;
 </section>
 
 <style>
-  .path-section { min-height: 100svh; }
-  .path-layout { display: flex; justify-content: space-between; align-items: flex-start; gap: 3rem; padding-block: 5rem; }
-  .path-list { position: relative; width: 440px; flex-shrink: 0; }
-  .path-item { position: relative; display: grid; grid-template-columns: 36px 8px minmax(0, 304px); column-gap: 36px; align-items: start; padding-bottom: 64px; color: var(--color-primary); }
-  .path-item:last-child { padding-bottom: 0; }
-  .path-number { padding-top: 10px; }
-  .path-dot { position: relative; z-index: 1; width: 8px; height: 8px; margin-top: 14px; border-radius: 50%; background: var(--color-primary); }
-  .path-rail { position: absolute; top: 0; bottom: 0; left: 76px; width: 1px; background: #b2b7bb; }
-  .path-progress { width: 100%; height: 0; background: var(--color-primary); }
-  .path-marker { display: none; position: absolute; z-index: 2; right: calc(100% + 32px); top: 0; width: 120px; height: auto; transform: translateY(-50%); }
-  .path-details-inner { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; padding-top: 24px; }
-  .path-details-inner img { width: 66px; height: 77px; object-fit: contain; object-position: left center; flex: none; }
   .path-scroll-controlled { height: 100svh; }
-  .path-scroll-controlled .path-marker { display: block; }
-  .path-scroll-controlled .path-details { overflow: hidden; }
-  @media (max-width: 1023px) {
-    .path-layout { flex-direction: column; gap: 3rem; }
-    .path-list { width: min(100%, 440px); align-self: flex-end; }
+  @media (min-width: 1024px) {
+    .path-scroll-controlled .path-marker { display: block; }
   }
-  @media (max-width: 480px) {
-    .path-item { grid-template-columns: 26px 8px minmax(0, 1fr); column-gap: 20px; }
-    .path-rail { left: 49px; }
+  .path-scroll-controlled .path-details { overflow: hidden; }
+  @media (max-width: 767px) {
+    .path-copy :global(.fade-up-line-fragment) {
+      transform: none;
+      transition: none;
+    }
   }
 </style>
 
@@ -69,6 +57,47 @@ const { content } = Astro.props as Props;
     const marker = section.querySelector<HTMLElement>(".path-marker");
     const progress = section.querySelector<HTMLElement>(".path-progress");
     const media = gsap.matchMedia();
+
+    media.add("(max-width: 767px) and (prefers-reduced-motion: no-preference)", () => {
+      if (!list || !progress || !items.length) return;
+      const animated = items.flatMap((item) => {
+        const number = item.querySelector<HTMLElement>(".path-number");
+        const copy = item.querySelector<HTMLElement>(".path-copy");
+        number?.classList.add("fade-right-a");
+        copy?.classList.add("fade-left-a");
+        return [number, copy].filter((element): element is HTMLElement => Boolean(element));
+      });
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.3 });
+      animated.forEach((element) => observer.observe(element));
+
+      const firstDot = items[0].querySelector<HTMLElement>(".path-dot")!;
+      const lastDot = items[items.length - 1].querySelector<HTMLElement>(".path-dot")!;
+      const line = gsap.fromTo(progress, { height: 0 }, {
+        height: () => list.offsetHeight,
+        ease: "none",
+        scrollTrigger: {
+          trigger: firstDot,
+          start: "center 75%",
+          endTrigger: lastDot,
+          end: "center 75%",
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      });
+      return () => {
+        observer.disconnect();
+        line.scrollTrigger?.kill();
+        line.kill();
+        gsap.set(progress, { clearProps: "height" });
+        animated.forEach((element) => element.classList.remove("fade-right-a", "fade-left-a", "active"));
+      };
+    });
 
     media.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
       if (!list || !marker || !progress || items.length < 2) return;
@@ -121,7 +150,7 @@ const { content } = Astro.props as Props;
       let lockedUntil = 0;
       const onWheel = (event: WheelEvent) => {
         const trigger = timeline.scrollTrigger;
-        if (!trigger?.isActive || event.ctrlKey || Math.abs(event.deltaY) < 2 ||
+        if (window.innerWidth < 1024 || !trigger?.isActive || event.ctrlKey || Math.abs(event.deltaY) < 2 ||
             document.documentElement.classList.contains("desktop-menu-open") ||
             document.getElementById("mobile-menu")?.classList.contains("translate-x-0")) return;
         if (performance.now() < lockedUntil) { event.preventDefault(); return; }

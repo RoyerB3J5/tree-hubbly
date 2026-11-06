@@ -20,11 +20,11 @@ const icons = [
   }
 ];
 ---
-  <div id='desktop-menu' class='absolute inset-x-0 top-0 z-0 hidden h-[280px] bg-primary lg:flex justify-center items-start' inert aria-hidden='true'>
-    <div class='container-full grid grid-cols-3 justify-center items-start h-full pt-32 pb-8 gap-10'>
+  <div id='desktop-menu' class='absolute inset-x-0 top-0 z-0 flex h-[var(--menu-height)] justify-center items-start bg-primary [--menu-height:320px] md:[--menu-height:280px]' inert aria-hidden='true'>
+    <div class='container-full grid grid-cols-2 md:grid-cols-3 justify-center items-start h-full pt-24 md:pt-32 pb-6 md:pb-8 gap-x-4 gap-y-5 md:gap-10'>
       <div class='w-full flex flex-col justify-center items-start gap-4'>
         {[contentHeader.nav[0], contentHeader.nav[2]].map((item) => (
-          <a href={item.href} aria-current={isCurrentPage(item.href) ? 'page' : undefined} class="group inline-flex items-center heading-h5 text-paragraph">
+          <a href={item.href} aria-current={isCurrentPage(item.href) ? 'page' : undefined} class="group inline-flex items-center heading-h5 !text-xl md:!text-[32px] text-paragraph">
             <span class:list={['shrink-0 overflow-hidden transition-[width] duration-300 group-hover:w-8 group-focus-visible:w-8 motion-reduce:transition-none', isCurrentPage(item.href) ? 'w-8' : 'w-0']} aria-hidden="true">
               <img src="/images/icons/arrow-header.svg" alt="" width="24" height="24" class:list={['w-6 h-6 transition-transform duration-300 group-hover:translate-x-0 group-focus-visible:translate-x-0 motion-reduce:transition-none', isCurrentPage(item.href) ? 'translate-x-0' : '-translate-x-full']} />
             </span>
@@ -34,7 +34,7 @@ const icons = [
       </div>
       <div class='w-full flex flex-col justify-center items-start gap-4'>
         {[contentHeader.nav[1], contentHeader.nav[3]].map((item) => (
-          <a href={item.href} aria-current={isCurrentPage(item.href) ? 'page' : undefined} class="group inline-flex items-center heading-h5 text-paragraph">
+          <a href={item.href} aria-current={isCurrentPage(item.href) ? 'page' : undefined} class="group inline-flex items-center heading-h5 !text-xl md:!text-[32px] text-paragraph">
             <span class:list={['shrink-0 overflow-hidden transition-[width] duration-300 group-hover:w-8 group-focus-visible:w-8 motion-reduce:transition-none', isCurrentPage(item.href) ? 'w-8' : 'w-0']} aria-hidden="true">
               <img src="/images/icons/arrow-header.svg" alt="" width="24" height="24" class:list={['w-6 h-6 transition-transform duration-300 group-hover:translate-x-0 group-focus-visible:translate-x-0 motion-reduce:transition-none', isCurrentPage(item.href) ? 'translate-x-0' : '-translate-x-full']} />
             </span>
@@ -42,10 +42,10 @@ const icons = [
           </a>
         ))}
       </div>
-      <div class='w-full flex flex-col justify-center items-start gap-4'>
+      <div class='w-full col-span-2 md:col-span-1 flex flex-row md:flex-col justify-between md:justify-center items-center md:items-start gap-4'>
         <div class='flex justify-center items-center gap-4 text-paragraph'>
-          <a href={languageUrl('en')} lang="en" hreflang="en" aria-current={currentLang === 'en' ? 'page' : undefined} class:list={['heading-h5 transition-colors', currentLang === 'en' ? 'text-secondary' : 'hover:text-secondary']}>En</a>
-          <a href={languageUrl('es')} lang="es" hreflang="es" aria-current={currentLang === 'es' ? 'page' : undefined} class:list={['heading-h5 transition-colors', currentLang === 'es' ? 'text-secondary' : 'hover:text-secondary']}>Es</a>
+          <a href={languageUrl('en')} lang="en" hreflang="en" aria-current={currentLang === 'en' ? 'page' : undefined} class:list={['heading-h5 !text-xl md:!text-[32px] transition-colors', currentLang === 'en' ? 'text-secondary' : 'hover:text-secondary']}>En</a>
+          <a href={languageUrl('es')} lang="es" hreflang="es" aria-current={currentLang === 'es' ? 'page' : undefined} class:list={['heading-h5 !text-xl md:!text-[32px] transition-colors', currentLang === 'es' ? 'text-secondary' : 'hover:text-secondary']}>Es</a>
         </div>
         <div class="flex justify-center items-center gap-5">
           {

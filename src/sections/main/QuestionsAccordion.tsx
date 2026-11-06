@@ -28,7 +28,9 @@ export default function QuestionsAccordion({ content }: Props) {
 
     if (titleRef.current) observer.observe(titleRef.current);
     if (descRef.current) observer.observe(descRef.current);
-    containerRef.current?.querySelectorAll(".question-item").forEach((item) => observer.observe(item));
+    containerRef.current
+      ?.querySelectorAll(".question-item")
+      .forEach((item) => observer.observe(item));
 
     return () => observer.disconnect();
   }, []);
@@ -39,28 +41,31 @@ export default function QuestionsAccordion({ content }: Props) {
 
   return (
     <section className=" flex flex-col justify-center items-center w-full bg-paragraph">
-      <div className="container-full gap-8 md:gap-10 flex flex-col justify-center items-center py-10 md:py-20 ">
+      <div className="container-full gap-8 md:gap-10 flex flex-col justify-center items-center py-12 md:py-20 ">
         <h2
           ref={titleRef}
           dangerouslySetInnerHTML={{ __html: content.title }}
-          className="text-primary text-center heading-h4"
+          className="text-primary text-start md:text-center heading-h4"
         ></h2>
-        <div ref={containerRef} className="w-full flex flex-col justify-center items-center gap-4 md:gap-8">
+        <div
+          ref={containerRef}
+          className="w-full flex flex-col justify-center items-center gap-4 md:gap-8"
+        >
           {content.questions.map((item, index) => (
             <div
               key={index}
-              className="question-item fade-up-a w-full flex justify-between items-center p-4 md:p-6 bg-white rounded-3xl transition-all duration-300 ease-in-out"
+              className="question-item fade-up-a w-full flex justify-between items-center px-4 py-6 md:p-6 bg-white rounded-3xl transition-all duration-300 ease-in-out"
             >
               <div
                 className={`flex flex-col justify-start items-start w-full transition-all duration-300 ease-in-out ${
                   openIndex === index ? "gap-6" : "gap-0"
                 }`}
               >
-                <div className="w-full flex justify-between items-start gap-18.25">
-                  <h3 className="subtitle-lg text-primary">{item.title}</h3>
+                <div className="w-full flex justify-between items-center md:items-start gap-3 md:gap-18.25">
+                  <h3 className="subtitle-lg text-primary w-full">{item.title}</h3>
                   <button
                     onClick={() => toggleAccordion(index)}
-                    className="shrink-0 ml-4 bg-none border-none cursor-pointer p-0 hover:opacity-80 transition-opacity block md:hidden"
+                    className="shrink-0 md:ml-4 bg-none border-none cursor-pointer p-0 hover:opacity-80 transition-opacity block md:hidden"
                     aria-label={
                       openIndex === index ? "Cerrar pregunta" : "Abrir pregunta"
                     }

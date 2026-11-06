@@ -29,7 +29,7 @@ export default {
     hero: {
       tag: "",
       title:
-        'El sistema detrás de las empresas<br/>de árboles que <span class="text-secondary"> dominan su ciudad.</span>',
+        'El sistema detrás de las empresas<br class="hidden md:block"/> de árboles que <span class="text-secondary"> dominan su ciudad.</span>',
       description:
         "Clientes, seguimiento, reviews y crecimiento — conectados en un solo ecosistema creado exclusivamente para tree services.",
       items: ["Mejores clientes", "Más trabajos agendados", "Más facturación"],
@@ -46,7 +46,7 @@ export default {
     },
     system: {
       title:
-        'A la mayoría de empresas de árboles no<br/>les faltan clientes. <span class="text-secondary">Les falta un sistema. </span>',
+        'A la mayoría de empresas de árboles no<br class="hidden md:block"/> les faltan clientes. <span class="text-secondary">Les falta un sistema. </span>',
       items: [
         {
           icon: "arbol",
@@ -69,14 +69,14 @@ export default {
         "Crecimiento que depende de referidos y del clima",
         "No sabes cuánto te cuesta realmente ganar cada trabajo",
       ],
-      tag: 'El marketing sin sistema crea picos temporales, no<br/><span class="text-secondary"> crecimiento sostenible.</span>',
+      tag: 'El marketing sin sistema crea picos temporales, no<br class="hidden md:block"/> <span class="text-secondary"> crecimiento <br class="md:hidden block"/> sostenible.</span>',
     },
     session: {
       tag: "Empecemos",
       title:
         'Agenda una sesión de <br/> <span class="text-secondary">estrategia gratis.</span>',
       description:
-        "30 minutos. Encontramos dónde tu empresa está perdiendo trabajos y te<br/>mostramos cómo el Tree Profit System™ lo resuelve. Sin presión.",
+        "30 minutos. Encontramos dónde tu empresa está perdiendo trabajos y te<br class='hidden md:block'/> mostramos cómo el Tree Profit System™ lo resuelve. Sin presión.",
     },
     grow: {
       title: "Donde las empresas de tree service escalan.",
@@ -191,7 +191,7 @@ export default {
     numbers: {
       tag: "Resultados reales",
       title:
-        'Empresas de árboles reales. <br/> <span class="text-secondary">Números reales.</span>',
+        'Empresas de árboles reales. <br class="hidden md:block"/> <span class="text-secondary">Números reales.</span>',
       title2:
         'H&A Tree Brothers<br/><span class="text-secondary heading-h5">Orlando, FL.</span>',
       description:
@@ -1038,7 +1038,7 @@ export default {
       section: {
         tag: '<span class="text-secondary">Nuestra Historia</span>',
         title:
-          'Los negocios no crecen<br/>por suerte.<span class="text-secondary">Crecen con<br/>sistemas.</span>',
+          'Los negocios no crecen<br class="hidden md:block"/> por suerte.<span class="text-secondary">Crecen con<br class="hidden md:block"/> sistemas.</span>',
         subtitle:
           "TreeHubly fue creado con una misión: traer estructura, predictibilidad y crecimiento medible a la industria de servicios de árboles. <br/> Creemos que las empresas de árboles no necesitan más tácticas, necesitan infraestructura.",
         description:

@@ -7,10 +7,10 @@ interface Props {
 const { content } = Astro.props as Props;
 ---
 <section id="faltantes" class="w-full flex justify-center items-center bg-primary-2 min-h-screen">
-  <div class="w-full flex flex-col justify-center items-center p-8 overflow-hidden max-w-[1536px] min-h-screen">
-    <div class="w-full flex-1 flex flex-col justify-between items-center back-main-2 gap-10 py-[74px] rounded-2xl px-12">
-      <h2 set:html={content.title} class='heading-h4 text-paragraph text-center'></h2>
-    <div class='w-full flex justify-center items-center gap-40 py-6 border-y border-white/10'>
+  <div class="w-full flex flex-col justify-center items-center p-4 md:p-8 overflow-hidden max-w-[1536px] min-h-screen">
+    <div class="w-full flex-1 flex flex-col justify-between items-start md:items-center back-main-2 gap-8 md:gap-10 py-[74px] rounded-2xl px-4 md:px-12">
+      <h2 set:html={content.title} class='heading-h4 text-paragraph text-start md:text-center'></h2>
+    <div class='w-full flex justify-center items-center gap-40 py-6 border-y border-white/10 hidden md:block'>
       {
         content.items.map((item)=>(
           <div class="flex justify-center items-center gap-[5px]">
@@ -20,25 +20,25 @@ const { content } = Astro.props as Props;
         ))
       }
     </div>
-    <div class="flex w-full flex-col md:flex-row justify-center items-center gap-6">
-        <div class="w-full md:w-1/2 flex flex-col justify-center items-start gap-6 md:gap-8 text-paragraph">
+    <div class="flex w-full flex-col md:flex-row justify-center items-center gap-8 md:gap-6">
+        <div class="w-full md:w-1/2 flex flex-col justify-center items-start gap-8 text-paragraph">
           <p class="body-md">{content.description}</p>
           <div class="flex flex-col justify-center items-start gap-4 md:gap-6 w-full">
             {
               content.list.map((l)=>(
                 <div class="flex justify-start items-center gap-2 ">
-                  <img src="/images/icons/check.svg" alt="Check" width="24" height="24" class="w-6 h-6 fade-up-a">
+                  <img src="/images/icons/check.svg" alt="Check" width="24" height="24" class="w-5 md:w-6 h-5 md:h-6 fade-up-a">
                   <p class="text-paragraph body-md">{l}</p>
                 </div>
               ))
             }
           </div>
-          <div class="w-full flex justify-center items-center py-8 rounded-2xl border border-[#263A4B]">
+          <div class="w-full flex justify-center items-center px-4 py-8 rounded-2xl border border-[#263A4B]">
             <p set:html={content.tag} class="body-lg text-paragraph text-center"></p>
           </div>
         </div>
         <div class="animation-image-reveal-trigger w-full md:w-1/2">
-          <div class="w-full relative rounded-lg lg:rounded-2xl aspect-130/79 md:aspect-628/375 h-auto overflow-hidden animation-image-reveal">
+          <div class="w-full relative rounded-lg lg:rounded-2xl aspect-366/375 md:aspect-628/375 h-auto overflow-hidden animation-image-reveal">
             <div class="animation-image-reveal-mask w-full h-full overflow-hidden rounded-lg lg:rounded-2xl">
               <img src="/images/faltantes.webp" alt="Companies TreeHubly" width="1536" height="1024" class="w-full h-full object-cover object-center" decoding="async" loading="lazy"/>
             </div>

@@ -6,15 +6,15 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<div class="container-full flex flex-col md:flex-row justify-center items-stretch gap-[32px] lg:gap-6" >
-  <div class="w-full md:w-[50%] flex flex-col justify-center items-start gap-10">
+<div class="container-full flex flex-col md:flex-row justify-center items-start md:items-stretch gap-[32px] lg:gap-6" >
+  <div class="w-full md:w-[50%] flex flex-col justify-center items-start gap-8 md:gap-10">
     <div class="flex flex-col justify-center items-start gap-6">
       <p set:html={content.tag} class="subtitle-lg text-primary"></p>
       <h2 set:html={content.title} class="heading-h4"></h2>
     </div>
     <p set:html={content.description} class="body-md"></p>
-    <div class="hidden md:block w-full relative h-auto rounded-2xl overflow-hidden bg-amber-50" style="aspect-ratio: 628 / 413;">
+    <div class="w-full relative h-auto rounded-2xl overflow-hidden bg-amber-50" style="aspect-ratio: 628 / 413;">
     </div>
   </div>
-  <div class="w-1/2 fade-up-a bg-primary rounde-2xl"></div>
+  <div class="w-full md:w-1/2 h-[60vh] md:h-auto fade-up-a bg-primary rounded-2xl"></div>
 </div>

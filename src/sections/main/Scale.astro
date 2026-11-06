@@ -6,11 +6,11 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<section class="home-scale w-full flex justify-center items-center relative h-auto md:h-[40dvh] lg:h-[80dvh] bg-white">
+<section class="home-scale w-full flex justify-center items-center relative h-[600px] md:h-[40dvh] lg:h-[80dvh] bg-white">
   {/*<img src="/images/bg-scale.webp" alt="Where Tree Companies Scale" width="2100" height="1172" class="w-full h-full object-cover object-center -z-20 absolute"> */}
   
   <div class="absolute w-full h-full inset-0 z-1 back-main-3"></div>
-  <div class=" container-full py-20 flex justify-start items-end gap-6 h-full relative z-10">
+  <div class=" container-full py-10 md:py-20 flex justify-start items-end gap-6 h-full relative z-10">
     <div class="flex jusitfy-center items-center gap-6">
       <img src="/images/icons/hoja.svg" alt="Tree Company Logo" width="38" height="56" class="w-[38px] h-auto fade-up-a" decoding="async" loading="lazy"/>
     <h3 set:html={content.title} class="heading-h4 text-paragraph"></h3>

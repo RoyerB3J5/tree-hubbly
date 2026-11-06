@@ -4,8 +4,9 @@ type Translations = typeof import("../../i18n/en-2").default;
 type HeroContent = Translations["main"]["hero"];
 interface Props {
   content: HeroContent ;
+  showDescriptionOnMobile?: boolean;
 }
-const { content } = Astro.props as Props;
+const { content, showDescriptionOnMobile = false } = Astro.props as Props;
 
 ---
 
@@ -25,25 +26,25 @@ const { content } = Astro.props as Props;
     <img src="/images/fondo-hero.webp" alt="Hero image" decoding="async" loading="lazy" width="1667" height="943" class='w-full h-full object-cover inset-0 absolute z-0 object-top' />
     <div class="absolute w-full h-full inset-0 z-3 back-hero"></div>
     <div
-      class="container-full flex flex-col justify-end items-center py-14 relative z-10 h-full"
+      class="container-full flex flex-col justify-end items-center pb-12 md:py-14 relative z-10 h-full"
     >
-      <div class="flex flex-col justify-center items-center gap-10">
+      <div class="flex flex-col justify-center items-center gap-8 md:gap-10">
         <div class='flex flex-col justify-center items-center gap-6'>
           {
             content.tag !== "" && (
-              <p class="text-[16px] font-medium leading-[150%] text-secondary fade-up-lines-raw">{content.tag}</p>
+              <p class={`text-[16px] font-medium leading-[150%] text-secondary fade-up-lines-raw`}>{content.tag}</p>
             )
           }
           <h1 set:html={content.title} class="heading-h4 text-white text-center fade-up-lines-raw"></h1>
         </div>
         {
           content.description !== "" && (
-            <p set:html={content.description} class="text-paragraph body-md text-center fade-up-lines-raw"></p>
+            <p set:html={content.description} class:list={["text-paragraph body-md text-center fade-up-lines-raw", { "hidden md:block": !showDescriptionOnMobile }]}></p>
           )
         }
         {
           content.items.length > 0 && (
-            <ul class="flex justify-center items-center gap-10 w-full">
+            <ul class="flex justify-center items-center gap-10 w-full hidden md:block">
               {
                 content.items.map((item,index) => (
                   <>
@@ -66,13 +67,13 @@ const { content } = Astro.props as Props;
               <Button
                     text={content.buttons[0].label}
                     href={content.buttons[0].href}
-                    extraBtnClass="bg-secondary border-secondary fade-up-a"
+                    extraBtnClass="bg-secondary border-secondary fade-up-a w-full md:w-auto"
                     textClass="text-primary"
                   />
               <Button
                     text={content.buttons[1].label}
                     href={content.buttons[1].href}
-                    extraBtnClass="bg-transparent border-white fade-up-a"
+                    extraBtnClass="bg-transparent border-white fade-up-a w-full md:w-auto"
                     textClass="white"
                   />
             </div>

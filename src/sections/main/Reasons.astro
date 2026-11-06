@@ -6,7 +6,7 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<section class="reasons-section relative w-full bg-primary py-20">
+<section class="reasons-section relative w-full bg-primary py-12 md:py-20">
   <div class="reasons-inner container-full relative mx-auto">
     <nav class="reasons-index" aria-label="System stages">
       <span class="reasons-index-track" aria-hidden="true"><span class="reasons-index-fill"></span></span>
@@ -15,8 +15,8 @@ const { content } = Astro.props as Props;
     <div class="reasons-slides">
   {
     content.items.map((item,index)=>(
-      <div class="reasons-slide flex justify-end items-center gap-14">
-        <div class="flex flex-col justify-center items-start gap-10 max-w-[520px]">
+      <div class="reasons-slide flex justify-end items-center gap-14 h-full md:h-auto">
+        <div class="flex flex-col justify-center items-start gap-8 md:gap-10 max-w-[520px]">
           <h2 set:html={item.title} class="heading-h4 text-paragraph"></h2>
           {
             item.description !== "" && <p set:html={item.description} class="body-md text-paragraph"></p>
@@ -44,7 +44,7 @@ const { content } = Astro.props as Props;
             }
           </div>
         </div>
-        <div class="animation-image-reveal-trigger w-[38%] shrink-0">
+        <div class="animation-image-reveal-trigger w-[38%] shrink-0 hidden md:block">
           <div class="animation-image-reveal w-full h-auto relative overflow-hidden rounded-2xl aspect-43/68">
             <div class="animation-image-reveal-mask w-full h-full overflow-hidden rounded-2xl">
               <img src={`/images/steps-${index + 1}.webp`} alt={`Step ${index + 1}`} width="941" height="1672" class="w-full h-full object-cover object-center" decoding="async" loading="lazy" />
@@ -86,12 +86,32 @@ const { content } = Astro.props as Props;
     if (!slides.length || !fill) return;
 
     const media = gsap.matchMedia();
-    media.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+    media.add("(prefers-reduced-motion: no-preference)", () => {
       // Keep the normal document flow when the content cannot fit on screen.
       section.classList.add("is-pinned");
-      if (section.offsetHeight > window.innerHeight) {
+      if (section.scrollHeight > window.innerHeight) {
         section.classList.remove("is-pinned");
-        return;
+        if (window.innerWidth >= 768) return;
+
+        // On short screens, keep every slide readable in the normal flow.
+        const setActiveSlide = (index: number) => {
+          items.forEach((item, itemIndex) => item.classList.toggle("is-active", itemIndex === index));
+          gsap.set(fill, { scaleY: (index + 1) / slides.length });
+        };
+        const triggers = slides.map((slide, index) => ScrollTrigger.create({
+          trigger: slide,
+          start: "top center",
+          end: "bottom center",
+          onEnter: () => setActiveSlide(index),
+          onEnterBack: () => setActiveSlide(index),
+        }));
+        setActiveSlide(0);
+        ScrollTrigger.refresh();
+        return () => {
+          triggers.forEach((trigger) => trigger.kill());
+          items.forEach((item) => item.classList.remove("is-active"));
+          gsap.set(fill, { clearProps: "transform" });
+        };
       }
 
       gsap.set(slides.slice(1), { autoAlpha: 0 });
