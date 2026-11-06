@@ -60,82 +60,9 @@ const t = translations[lang];
   const controlSection = document.querySelector<HTMLElement>(".home-page-sections .control-section");
   const pathSection = document.querySelector<HTMLElement>(".home-page-sections .path-section");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-  // Reserve the line reveals for the card sequence only when the section fits.
-  const canPinSteps = () => Boolean(stepsSection && window.innerWidth >= 1024 &&
-    !reduceMotion.matches && stepsSection.offsetHeight <= window.innerHeight);
-  if (canPinSteps()) stepsSection?.classList.add("steps-scroll-controlled");
-
-  document.addEventListener("DOMContentLoaded", () => {
-    if (!stepsSection?.classList.contains("steps-scroll-controlled")) return;
-    const cards = gsap.utils.toArray<HTMLElement>(stepsSection.querySelectorAll(".steps-card"));
-    if (!cards.length) return;
-
-    const media = gsap.matchMedia();
-    media.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
-      if (!canPinSteps()) {
-        stepsSection.classList.remove("steps-scroll-controlled");
-        stepsSection.querySelectorAll(".steps-card .fade-up-lines-raw").forEach((text) => text.classList.add("active"));
-        return;
-      }
-
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: stepsSection,
-          refreshPriority: 1,
-          start: "top top",
-          end: () => `+=${window.innerHeight * cards.length * 0.6}`,
-          pin: true,
-          pinSpacing: true,
-          scrub: true,
-          invalidateOnRefresh: true,
-          anticipatePin: 1,
-        },
-      });
-
-      cards.forEach((card, index) => {
-        const content = card.querySelectorAll(".steps-card-content");
-        const text = card.querySelectorAll<HTMLElement>("h1.fade-up-lines-raw, h2.fade-up-lines-raw, h3.fade-up-lines-raw, h4.fade-up-lines-raw, h5.fade-up-lines-raw, h6.fade-up-lines-raw, p.fade-up-lines-raw");
-        text.forEach((element, textIndex) => {
-          element.classList.remove("active");
-          element.style.setProperty("--fade-up-lines-delay", `${textIndex * 0.18}s`);
-        });
-        gsap.set(card, { yPercent: 100 });
-        gsap.set(content, { autoAlpha: 0 });
-        timeline.to(card, { yPercent: 0, duration: 0.45, ease: "none" }, index)
-          .set(content, { autoAlpha: 1 }, index + 0.45)
-          .call(() => text.forEach((element) => element.classList.add("active")), [], index + 0.45)
-          .to({}, { duration: 0.55 }, index + 0.45);
-      });
-
-      let lockedUntil = 0;
-      const onWheel = (event: WheelEvent) => {
-        const trigger = timeline.scrollTrigger;
-        if (!trigger || event.ctrlKey || document.documentElement.classList.contains("desktop-menu-open") ||
-            document.getElementById("mobile-menu")?.classList.contains("translate-x-0")) return;
-        const now = performance.now();
-        if (now < lockedUntil) { event.preventDefault(); return; }
-        if (!trigger.isActive || Math.abs(event.deltaY) < 2) return;
-        if ((event.deltaY < 0 && trigger.progress <= 0.001) ||
-            (event.deltaY > 0 && trigger.progress >= 0.999)) return;
-        const current = Math.round(trigger.progress * cards.length);
-        const step = gsap.utils.clamp(0, cards.length, current + (event.deltaY > 0 ? 1 : -1));
-        event.preventDefault();
-        lockedUntil = now + 900;
-        window.scrollTo({ top: trigger.start + (trigger.end - trigger.start) * step / cards.length, behavior: "smooth" });
-      };
-      window.addEventListener("wheel", onWheel, { passive: false, capture: true });
-      ScrollTrigger.refresh();
-      return () => {
-        window.removeEventListener("wheel", onWheel, true);
-        stepsSection.classList.remove("steps-scroll-controlled");
-        stepsSection.querySelectorAll(".steps-card .fade-up-lines-raw").forEach((text) => text.classList.add("active"));
-      };
-    });
-  });
+  let snapping = false;
 
   if (hero && nextSection) {
-    let snapping = false;
     let unlockTimer: ReturnType<typeof setTimeout>;
     let touchStart: { y: number; destination: HTMLElement } | null = null;
 
@@ -162,16 +89,19 @@ const t = translations[lang];
     };
     const goToNextSection = (destination: HTMLElement) => {
       snapping = true;
-      destination.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.documentElement.classList.add("section-transitioning");
+      const pin = ScrollTrigger.getAll().find((trigger) => trigger.trigger === destination && trigger.pin);
+      const top = pin ? pin.start : destination.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: "smooth" });
       clearTimeout(unlockTimer);
-      unlockTimer = setTimeout(() => { snapping = false; }, 1100);
+      unlockTimer = setTimeout(() => { snapping = false; document.documentElement.classList.remove("section-transitioning"); }, 1100);
     };
 
     window.addEventListener("wheel", (event) => {
       if (reduceMotion.matches || menuIsOpen() || event.ctrlKey) return;
       if (snapping) {
         if (event.deltaY > 0) event.preventDefault();
-        else if (event.deltaY < 0) { snapping = false; clearTimeout(unlockTimer); }
+        else if (event.deltaY < 0) { snapping = false; document.documentElement.classList.remove("section-transitioning"); clearTimeout(unlockTimer); }
         return;
       }
       if (event.deltaY <= 0) return;

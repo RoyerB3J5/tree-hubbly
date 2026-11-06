@@ -21,11 +21,15 @@ const { content } = Astro.props as Props;
             <p class="uppercase subtitle-sm">{content.book.subtag}</p>
           </div>
         </div>
-        <div class="w-full bg-third-light p-6 rounded-lg flex justify-center items-center gap-6">
-          <img src="/images/book.webp" alt="Book Cover" width="600" height="900" class="w-[35%] h-auto object-cover" decoding="async" loading="lazy"/>
+        <div class="animation-image-reveal-trigger w-full">
+          <div class="guide-book-reveal animation-image-reveal w-full rounded-lg overflow-hidden">
+          <div class="animation-image-reveal-mask w-full bg-third-light p-6 rounded-lg flex justify-center items-center gap-6">
+          <img src="/images/book.webp" alt="Book Cover" width="600" height="900" class="guide-book-image fade-up-a w-[35%] h-auto object-cover" decoding="async" loading="lazy"/>
           <div class="flex flex-col justify-center items-start gap-6">
             <h3 set:html={content.book.title} class="body-xl"></h3>
             <p class='body-md'>{content.book.description}</p>
+          </div>
+          </div>
           </div>
         </div>
         <div class='flex flex-col justify-center items-start gap-6'>
@@ -57,3 +61,14 @@ const { content } = Astro.props as Props;
     </div>
   </div>
 </section>
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .guide-book-reveal :global(.fade-up-lines-raw) { --fade-up-lines-delay: 0.1s; }
+    .guide-book-reveal:not(.active) :global(.fade-up-lines-raw.active .fade-up-line-fragment) {
+      transform: translateY(calc(100% + 0.3em));
+    }
+    .guide-book-image { --fade-up-delay: 0.1s; }
+    .guide-book-reveal:not(.active) .guide-book-image { animation-play-state: paused; }
+  }
+</style>
+

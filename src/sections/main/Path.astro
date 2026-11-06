@@ -1,35 +1,152 @@
 ---
 type Translations = typeof import("../../i18n/en-2").default;
 type Content = Translations["main"]["path"];
-interface Props {
-  content: Content;
-}
+interface Props { content: Content; }
 const { content } = Astro.props as Props;
 ---
 <section class="path-section w-full bg-white flex justify-center items-center">
-  <div class="container-full flex justify-between items-start py-20">
-    <div class="flex flex-col justify-center items-start gap-6 text-primary">
+  <div class="path-layout container-full">
+    <div class="path-intro flex flex-col justify-center items-start gap-6 text-primary">
       <p class="subtitle-lg">{content.tag}</p>
-      <h2 set:html={content.title} class='heading-h4'></h2>
+      <h2 set:html={content.title} class="heading-h4"></h2>
     </div>
-    <div class="flex flex-col justify-center items-end gap-[50px] relative ">
-      <div class="w-[1px] h-full bg-primary absolute top-0 left-15"></div>
-      {
-        content.structure.map((item,index)=>(
-          <div class='flex justify-center items-start gap-10 '>
-            <div class='flex justify-center items-center gap-9 mt-2'>
-              <p class='body-md text-primary'>0{index + 1}</p>
-              <div class='w-2 h-2 bg-primary rounded-full'></div>
-            </div>
-            <div class="flex flex-col justify-center items-start gap-8 text-primary max-w-[304px] w-full">
-              <h3 class="heading-h4">{item.title}</h3>
-              <p class="subtitle-lg">{item.tag}</p>
-              <p class="body-md">{item.description}</p>
-              <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="66" height="77" class='w-[30%] h-auto' decoding="async" loading="lazy"/>
+    <div class="path-list">
+      <div class="path-rail" aria-hidden="true"><div class="path-progress"></div></div>
+      <img class="path-marker" src="/images/index-steps.png" alt="" aria-hidden="true" />
+      {content.structure.map((item, index) => (
+        <div class="path-item">
+          <div class="path-number body-md">0{index + 1}</div>
+          <div class="path-dot" aria-hidden="true"></div>
+          <div class="path-copy">
+            <h3 class="path-title heading-h4">{item.title}</h3>
+            <div class="path-details">
+              <div class="path-details-inner">
+                <p class="subtitle-lg">{item.tag}</p>
+                <p class="body-md">{item.description}</p>
+                <img src={`/images/icons/${item.icon}.svg`} alt="" width="66" height="77" decoding="async" loading="lazy" />
+              </div>
             </div>
           </div>
-        ))
-      }
+        </div>
+      ))}
     </div>
   </div>
 </section>
+
+<style>
+  .path-section { min-height: 100svh; }
+  .path-layout { display: flex; justify-content: space-between; align-items: flex-start; gap: 3rem; padding-block: 5rem; }
+  .path-list { position: relative; width: 440px; flex-shrink: 0; }
+  .path-item { position: relative; display: grid; grid-template-columns: 36px 8px minmax(0, 304px); column-gap: 36px; align-items: start; padding-bottom: 64px; color: var(--color-primary); }
+  .path-item:last-child { padding-bottom: 0; }
+  .path-number { padding-top: 10px; }
+  .path-dot { position: relative; z-index: 1; width: 8px; height: 8px; margin-top: 14px; border-radius: 50%; background: var(--color-primary); }
+  .path-rail { position: absolute; top: 0; bottom: 0; left: 76px; width: 1px; background: #b2b7bb; }
+  .path-progress { width: 100%; height: 0; background: var(--color-primary); }
+  .path-marker { display: none; position: absolute; z-index: 2; right: calc(100% + 32px); top: 0; width: 120px; height: auto; transform: translateY(-50%); }
+  .path-details-inner { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; padding-top: 24px; }
+  .path-details-inner img { width: 66px; height: 77px; object-fit: contain; object-position: left center; flex: none; }
+  .path-scroll-controlled { height: 100svh; }
+  .path-scroll-controlled .path-marker { display: block; }
+  .path-scroll-controlled .path-details { overflow: hidden; }
+  @media (max-width: 1023px) {
+    .path-layout { flex-direction: column; gap: 3rem; }
+    .path-list { width: min(100%, 440px); align-self: flex-end; }
+  }
+  @media (max-width: 480px) {
+    .path-item { grid-template-columns: 26px 8px minmax(0, 1fr); column-gap: 20px; }
+    .path-rail { left: 49px; }
+  }
+</style>
+
+<script>
+  import { gsap, ScrollTrigger } from "../../scripts/gsap";
+
+  const section = document.querySelector<HTMLElement>(".path-section");
+  if (section) {
+    const items = gsap.utils.toArray<HTMLElement>(section.querySelectorAll(".path-item"));
+    const list = section.querySelector<HTMLElement>(".path-list");
+    const marker = section.querySelector<HTMLElement>(".path-marker");
+    const progress = section.querySelector<HTMLElement>(".path-progress");
+    const media = gsap.matchMedia();
+
+    media.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
+      if (!list || !marker || !progress || items.length < 2) return;
+      const details = items.map(item => item.querySelector<HTMLElement>(".path-details")!);
+      const dots = items.map(item => item.querySelector<HTMLElement>(".path-dot")!);
+      const targets = items.map(item => item.querySelectorAll<HTMLElement>(".path-title, .path-number, .path-dot"));
+      // Measure the inner content even when its animated wrapper is collapsed.
+      const detailHeight = () => Math.max(...details.map(detail =>
+        detail.querySelector<HTMLElement>(".path-details-inner")!.scrollHeight
+      ));
+      section.classList.add("path-scroll-controlled");
+      gsap.set(details[0], { height: detailHeight() });
+      gsap.set(details.slice(1), { height: 0, autoAlpha: 0 });
+      gsap.set(targets.slice(1).flatMap(group => Array.from(group)), { color: "#B2B7BB" });
+      gsap.set(dots.slice(1), { backgroundColor: "#B2B7BB" });
+
+      // Keep the full content available when the pinned layout cannot fit the viewport.
+      if (section.scrollHeight > window.innerHeight + 1) {
+        section.classList.remove("path-scroll-controlled");
+        gsap.set([...details, ...targets.flatMap(group => Array.from(group))], { clearProps: "all" });
+        return;
+      }
+
+      const updateIndicator = (value: number) => {
+        const position = value * (items.length - 1);
+        const from = Math.min(Math.floor(position), items.length - 2);
+        const fraction = position - from;
+        const dotY = (dot: HTMLElement) => dot.getBoundingClientRect().top - list.getBoundingClientRect().top + dot.offsetHeight / 2;
+        const y = gsap.utils.interpolate(dotY(dots[from]), dotY(dots[from + 1]), fraction);
+        gsap.set(marker, { top: y });
+        gsap.set(progress, { height: y });
+      };
+
+      const timeline = gsap.timeline({ scrollTrigger: {
+        trigger: section, start: "top top", end: () => `+=${window.innerHeight * (items.length - 1) * 0.7}`,
+        pin: true, pinSpacing: true, scrub: true, refreshPriority: -3, invalidateOnRefresh: true, anticipatePin: 1,
+        snap: { snapTo: 1 / (items.length - 1), duration: 0.3, delay: 0.15 },
+        onUpdate: self => updateIndicator(self.progress),
+        onRefresh: self => updateIndicator(self.progress),
+      }});
+      for (let i = 0; i < items.length - 1; i++) {
+        timeline.to(details[i], { height: 0, autoAlpha: 0, duration: 0.5, ease: "none" }, i * 0.5)
+          .to(targets[i], { color: "#B2B7BB", duration: 0.5, ease: "none" }, i * 0.5)
+          .to(dots[i], { backgroundColor: "#B2B7BB", duration: 0.5, ease: "none" }, i * 0.5)
+          .to(details[i + 1], { height: () => detailHeight(), autoAlpha: 1, duration: 0.5, ease: "none" }, i * 0.5)
+          .to(targets[i + 1], { color: "#051725", duration: 0.5, ease: "none" }, i * 0.5)
+          .to(dots[i + 1], { backgroundColor: "#051725", duration: 0.5, ease: "none" }, i * 0.5);
+      }
+      updateIndicator(0);
+      let lockedUntil = 0;
+      const onWheel = (event: WheelEvent) => {
+        const trigger = timeline.scrollTrigger;
+        if (!trigger?.isActive || event.ctrlKey || Math.abs(event.deltaY) < 2 ||
+            document.documentElement.classList.contains("desktop-menu-open") ||
+            document.getElementById("mobile-menu")?.classList.contains("translate-x-0")) return;
+        if (performance.now() < lockedUntil) { event.preventDefault(); return; }
+        if ((event.deltaY < 0 && trigger.progress <= 0.001) || (event.deltaY > 0 && trigger.progress >= 0.999)) return;
+        event.preventDefault();
+        const step = gsap.utils.clamp(0, items.length - 1, Math.round(trigger.progress * (items.length - 1)) + Math.sign(event.deltaY));
+        lockedUntil = performance.now() + 900;
+        window.scrollTo({ top: trigger.start + (trigger.end - trigger.start) * step / (items.length - 1), behavior: "smooth" });
+      };
+      window.addEventListener("wheel", onWheel, { passive: false, capture: true });
+      ScrollTrigger.sort();
+      ScrollTrigger.refresh();
+      document.fonts.ready.then(() => {
+        if (timeline.scrollTrigger && timeline.scrollTrigger.progress === 0) gsap.set(details[0], { height: detailHeight() });
+        ScrollTrigger.refresh();
+      });
+      return () => {
+        window.removeEventListener("wheel", onWheel, true);
+        section.classList.remove("path-scroll-controlled");
+        gsap.set([...details, ...targets.flatMap(group => Array.from(group)), marker, progress], { clearProps: "all" });
+      };
+    });
+  }
+</script>
+
+
+
+

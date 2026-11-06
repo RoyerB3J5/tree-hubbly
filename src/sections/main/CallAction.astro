@@ -38,7 +38,7 @@ const { content } = Astro.props as Props;
           <Button
             text={button.label}
             href={button.href}
-            extraBtnClass={`${index === 0 ? "bg-primary border-primary" : "bg-transparent border-primary"}`}
+            extraBtnClass={`${index === 0 ? "bg-primary border-primary fade-up-a" : "bg-transparent border-primary fade-up-a"}`}
             textClass={`${index === 0 ? "text-white" : "text-primary"}`}
           />
         ))}

@@ -6,10 +6,16 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<section class="w-full flex bg-primary justify-center items-center flex-col py-20 gap-20">
+<section class="system-reasons w-full bg-primary py-20 flex justify-center items-center">
+  <div class="system-reasons-inner container-full">
+    <nav class="system-reasons-index" aria-label="System stages">
+      <span class="system-reasons-index-track" aria-hidden="true"><span class="system-reasons-index-fill"></span></span>
+      <ol>{content.index.map((label) => <li class="system-reasons-index-item subtitle-sm">{label}</li>)}</ol>
+    </nav>
+    <div class="system-reasons-slides">
   {
     content.items.map((item,index)=>(
-      <div class="container-full flex justify-between items-end gap-14 ">
+      <div class="system-reasons-slide flex justify-between items-end gap-14">
         <div class="flex flex-col justify-end items-start gap-8 max-w-[40%]">
           <h2 set:html={item.title} class="heading-h4 text-paragraph"></h2>
           <p set:html={item.description} class="body-md text-paragraph"></p>
@@ -32,8 +38,12 @@ const { content } = Astro.props as Props;
         </div>
         {
           Object.keys(item.section).length === 0 && (
-            <div class="w-[50%] h-auto relative overflow-hidden rounded-2xl aspect-628/650">
-              <img src={`/images/reasons-${index + 1}.webp`} alt={`Step ${index + 1}`} width="941" height="941" decoding="async" loading="lazy" class="w-full h-full object-cover absolute inset-0 object-center" />
+            <div class="animation-image-reveal-trigger w-[50%] shrink-0">
+              <div class="animation-image-reveal w-full relative overflow-hidden rounded-2xl aspect-628/650">
+                <div class="animation-image-reveal-mask w-full h-full overflow-hidden rounded-2xl">
+                  <img src={`/images/reasons-${index + 1}.webp`} alt={`Step ${index + 1}`} width="941" height="941" decoding="async" loading="lazy" class="w-full h-full object-cover object-center" />
+                </div>
+              </div>
             </div>
           )
         }
@@ -59,7 +69,7 @@ const { content } = Astro.props as Props;
                 <div class='w-full grid grid-cols-3 justify-center items-center gap-4'>
                   {
                     item.section.links?.links.map((i,index)=>(
-                      <a href={i.href} class=' w-full py-4 border border-paragraph rounded-lg last:border-secondary flex justify-center items-center'><p class="body-md text-paragraph">
+                      <a href={i.href} class=' w-full py-4 border border-paragraph rounded-lg last:border-secondary flex justify-center items-center hover:border-secondary last:hover:border-white transition-all duration-300 ease-in-out'><p class="body-md text-paragraph">
                         {i.label}
                       </p>
                       </a>
@@ -73,4 +83,153 @@ const { content } = Astro.props as Props;
       </div>
     ))
   }
+    </div>
+  </div>
 </section>
+
+<style>
+  .system-reasons-index { position: relative; margin-bottom: 3rem; }
+  .system-reasons-index ol { display: flex; flex-direction: column; gap: .5rem; padding-left: 1rem; }
+  .system-reasons-index-item { color: var(--color-paragraph); font-size: .875rem; }
+  .system-reasons-index-item.is-active { color: var(--color-secondary); }
+  .system-reasons-index-track { position: absolute; left: 0; top: 0; width: 2px; height: 100%; }
+  .system-reasons-index-fill { display: block; width: 100%; height: 100%; background: var(--color-secondary); transform: scaleY(.3333); transform-origin: top left; }
+  .system-reasons-slides { display: flex; flex-direction: column; gap: 5rem; }
+  .system-reasons.is-pinned { min-height: 100svh; display: flex; align-items: center; padding-block: clamp(24px, 4vh, 48px); }
+  .system-reasons.is-pinned .animation-image-reveal-trigger { max-width: min(50%, calc((100svh - 210px) * 628 / 650)); }
+  .system-reasons.is-pinned .system-reasons-slides { display: grid; }
+  .system-reasons.is-pinned .system-reasons-slide { grid-area: 1 / 1; }
+  @media (max-width: 767px) {
+    .system-reasons-slide { flex-direction: column; align-items: stretch; gap: 2rem; }
+    .system-reasons-slide > div { width: 100%; max-width: none; }
+  }
+</style>
+
+
+<script>
+  import { gsap, ScrollTrigger } from "../scripts/gsap";
+
+  document.querySelectorAll<HTMLElement>(".system-reasons").forEach((section) => {
+    const slides = gsap.utils.toArray<HTMLElement>(section.querySelectorAll(".system-reasons-slide"));
+    const items = gsap.utils.toArray<HTMLElement>(section.querySelectorAll(".system-reasons-index-item"));
+    const fill = section.querySelector<HTMLElement>(".system-reasons-index-fill");
+    if (!slides.length || !fill) return;
+
+    const media = gsap.matchMedia();
+    media.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+      // Keep the normal document flow when the content cannot fit on screen.
+      section.classList.add("is-pinned");
+      if (section.offsetHeight > window.innerHeight) {
+        section.classList.remove("is-pinned");
+        return;
+      }
+
+      gsap.set(slides.slice(1), { autoAlpha: 0 });
+      gsap.set(fill, { scaleY: 1 / slides.length });
+      items[0]?.classList.add("is-active");
+      let revealedIndex = -1;
+      const revealSlide = (index: number) => {
+        if (index === revealedIndex) return;
+        const previousIndex = revealedIndex;
+        revealedIndex = index;
+        slides.forEach((slide, slideIndex) => {
+          if (slideIndex === previousIndex) return;
+          slide.querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, .animation-image-reveal")
+            .forEach((element) => { if (!element.closest("a, button")) element.classList.remove("active"); });
+        });
+        // Reset the incoming slide before replaying its CSS transitions.
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          if (revealedIndex !== index) return;
+          slides[index].querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, .animation-image-reveal")
+            .forEach((element) => { if (!element.closest("a, button")) element.classList.add("active"); });
+        }));
+      };
+      slides.forEach((slide) => {
+        slide.querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, .animation-image-reveal").forEach((element) => { if (!element.closest("a, button")) element.classList.remove("active"); });
+        slide.querySelector(".animation-image-reveal")?.classList.add("reveal-ready");
+      });
+      const timeline = gsap.timeline({
+        onUpdate(this: gsap.core.Animation) {
+          const activeIndex = Math.min(slides.length - 1, Math.floor((this.time() + 0.225) / 0.5));
+          items.forEach((item, index) => item.classList.toggle("is-active", index === activeIndex));
+          if (this.scrollTrigger && this.scrollTrigger.progress > 0) revealSlide(activeIndex);
+        },
+        scrollTrigger: {
+          trigger: section,
+          refreshPriority: -1,
+          start: "top top",
+          end: () => `+=${window.innerHeight * (slides.length - 1) * 0.35}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: true,
+          onEnter: () => {
+            if (revealedIndex === -1) revealSlide(0);
+          },
+          onEnterBack: () => revealSlide(slides.length - 1),
+          invalidateOnRefresh: true,
+        },
+      });
+
+      slides.slice(1).forEach((slide, index) => {
+        const at = 0.5 * index + 0.2;
+        timeline.to(slide, { autoAlpha: 1, duration: 0.15 }, at)
+          .set(slides[index], { autoAlpha: 0 }, at + 0.15);
+      });
+      timeline.to(fill, { scaleY: 1, ease: "none", duration: timeline.duration() }, 0)
+        .to({}, { duration: 0.15 });
+
+      const firstSlideObserver = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting) && revealedIndex === -1) {
+          revealSlide(0);
+          firstSlideObserver.disconnect();
+        }
+      }, { rootMargin: "0px 0px -30% 0px", threshold: 0 });
+      firstSlideObserver.observe(section);
+
+      let wheelLockedUntil = 0;
+      const onWheel = (event: WheelEvent) => {
+        const trigger = timeline.scrollTrigger;
+        if (!trigger?.isActive || event.ctrlKey || Math.abs(event.deltaY) < 2 ||
+            document.documentElement.classList.contains("desktop-menu-open") ||
+            document.getElementById("mobile-menu")?.classList.contains("translate-x-0")) return;
+        const now = performance.now();
+        if (now < wheelLockedUntil) {
+          event.preventDefault();
+          return;
+        }
+        const direction = event.deltaY > 0 ? 1 : -1;
+        const current = Math.max(0, Math.min(slides.length - 1, revealedIndex));
+        const next = current + direction;
+        if (next < 0 || next >= slides.length) return;
+        event.preventDefault();
+        wheelLockedUntil = now + 900;
+        // Stay inside the pin range at both ends; scrolling exactly to end
+        // releases the pin while the last slide is still revealing.
+        const progress = 0.125 + (next / (slides.length - 1)) * 0.75;
+        window.scrollTo({ top: trigger.start + (trigger.end - trigger.start) * progress, behavior: "smooth" });
+      };
+      window.addEventListener("wheel", onWheel, { passive: false, capture: true });
+
+      // Earlier pinned sections must be measured before this section.
+      ScrollTrigger.sort();
+      ScrollTrigger.refresh();
+
+      return () => {
+        firstSlideObserver.disconnect();
+        window.removeEventListener("wheel", onWheel, true);
+        section.classList.remove("is-pinned");
+        items.forEach((item) => item.classList.remove("is-active"));
+        slides.forEach((slide) => {
+          slide.querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, .animation-image-reveal").forEach((element) => { if (!element.closest("a, button")) element.classList.add("active"); });
+        });
+      };
+    });
+
+    // Re-evaluate whether the section fits after viewport resizing.
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => gsap.matchMediaRefresh(), 150);
+    });
+  });
+</script>

@@ -3,19 +3,19 @@ export default {
     nav: [
       {
         label: "El Sistema",
-        href: "/the-system",
+        href: "/en/the-system",
       },
       {
-        label: "Rsultados",
-        href: "/results",
+        label: "Resultados",
+        href: "/en/results",
       },
       {
         label: "Planes",
-        href: "/plans",
+        href: "/en/plans",
       },
       {
         label: "Nosotros",
-        href: "/about",
+        href: "/en/about",
       },
     ],
     buttons: [
@@ -1044,7 +1044,7 @@ export default {
         description:
           "Después de años de prueba y error, encontramos la forma de estructurar negocios de servicios para que dejen de depender del caos. Así nació el Tree Profit System™.",
       },
-      title: 'Lo que nos hace<span class="text-secondary">diferentes.</span>',
+      title: 'Lo que nos hace<span class="text-secondary"> diferentes.</span>',
       diferences: [
         {
           title: '<span class="text-secondary">Solo tree services</span>',

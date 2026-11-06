@@ -14,10 +14,13 @@ const { content, lang } = Astro.props as Props;
       <h2 set:html={content.title} class="heading-h4 text-paragraph"></h2>
       <p class="body-md text-paragraph mt-2">{content.description}</p>
     </div>
-    <div class='w-[50%] flex flex-col justify-center items-center gap-8 px-6 py-[45px] bg-white rounded-2xl' data-calculator data-lang={lang} data-covered={content.section.tag} data-shortfall={content.section.shortfall}>
+    <div class='animation-image-reveal-trigger w-[50%]'>
+      <div class='calculator-reveal animation-image-reveal w-full rounded-2xl overflow-hidden'>
+        <div class='animation-image-reveal-mask w-full bg-white rounded-2xl'>
+    <div class='calculator-content w-full flex flex-col justify-center items-center gap-8 px-6 py-[45px]' data-calculator data-lang={lang} data-covered={content.section.tag} data-shortfall={content.section.shortfall}>
       {
         content.section.calculator.map((item)=>(
-          <label class='flex flex-col justify-center items-start gap-4 w-full'>
+          <label class='flex flex-col justify-center items-start gap-4 w-full fade-up-a'>
             <span class='body-md text-primary'>{item.title}</span>
             <input type="number" min="0" step="any" value={item.placeholder} placeholder={item.placeholder} class='bg-paragraph border border-[#B2B7BB] p-4 rounded-lg body-md outline-none focus:border-secondary focus:ring-1 focus:ring-secondary w-full '/>
           </label>
@@ -31,8 +34,26 @@ const { content, lang } = Astro.props as Props;
         <p class="body-md text-primary" data-result aria-live="polite">{content.section.tag.replace('{amount}', '$1,403')}</p>
       </div>
     </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .calculator-reveal.reveal-ready .calculator-content {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .45s ease, transform .45s ease;
+    }
+    .calculator-reveal.reveal-ready.active .calculator-content {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: .3s;
+    }
+  }
+</style>
 
 <script>
   document.querySelectorAll<HTMLElement>('[data-calculator]').forEach((calculator) => {
