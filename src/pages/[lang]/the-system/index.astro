@@ -46,6 +46,8 @@ const t = translations[lang];
   const getDestination = (): HTMLElement | null => {
     for (const [current, destination] of pairs) {
       if (!current || !destination) continue;
+      if (current === hero && hero.classList.contains("is-sequence-ready") &&
+          destination.getBoundingClientRect().top > 8) continue;
       const pin = ScrollTrigger.getAll().find(trigger => trigger.trigger === current && trigger.pin);
       if (pin && window.scrollY < pin.end - 1) continue;
       const currentTop = current.getBoundingClientRect().top + window.scrollY;

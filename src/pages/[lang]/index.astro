@@ -71,7 +71,10 @@ const t = translations[lang];
       document.getElementById("mobile-menu")?.classList.contains("translate-x-0");
     const getDestination = (): HTMLElement | null => {
       const faltantesTop = nextSection.getBoundingClientRect().top + window.scrollY;
-      if (window.scrollY < faltantesTop - 8) return nextSection;
+      if (window.scrollY < faltantesTop - 8) {
+        if (hero.classList.contains("is-sequence-ready")) return null;
+        return nextSection;
+      }
       const pairs = [
         [nextSection, bookSection], [scaleSection, stepsSection],
         [reasonsSection, numbersSection], [numbersSection, controlSection],

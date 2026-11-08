@@ -10,20 +10,13 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
 
 ---
 
-<section class="hero-main w-full h-[calc(100svh)] relative flex items-center justify-center bg-primary overflow-hidden">
-  {/*<video
-    autoplay={true}
-    muted={true}
-    loop={true}
-    playsinline={true}
-    x-webkit-playsinline={true}
-    preload="auto"
-    class="block absolute inset-0 w-full h-full object-cover object-center -z-20"
-  >
-    <source src="/images/video.mp4" type="video/mp4" />
-  </video> */}
-  <div class="w-full h-full flex relative items-center justify-center text-paragraph z-0">
-    <img src="/images/fondo-hero.webp" alt="Hero image" decoding="async" loading="lazy" width="1667" height="943" class='w-full h-full object-cover inset-0 absolute z-0 object-top' />
+<section class="hero-main hero-sequence w-full relative bg-primary">
+  <div class="hero-sequence__viewport w-full flex items-center justify-center text-paragraph">
+    <img src="/images/hero-frames/frame_0000.webp" alt="" aria-hidden="true" fetchpriority="high" width="1904" height="1072" class="hero-sequence__media object-cover object-center" />
+    <canvas class="hero-sequence__media hero-sequence__canvas" aria-hidden="true"></canvas>
+    <video class="hero-sequence__media hero-sequence__video object-cover object-center" muted playsinline preload="metadata" poster="/images/hero-frames/frame_0000.webp" aria-hidden="true" tabindex="-1">
+      <source src="/images/video_hero.mp4" type="video/mp4" />
+    </video>
     <div class="absolute w-full h-full inset-0 z-3 back-hero"></div>
     <div
       class="container-full flex flex-col justify-end items-center pb-12 md:py-14 relative z-10 h-full"
@@ -84,3 +77,143 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
   </div>
   
 </section>
+
+<style>
+  .hero-sequence { height: 100svh; }
+  .hero-sequence__viewport { position: relative; height: 100svh; overflow: hidden; }
+  .hero-sequence__media { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-sequence__canvas, .hero-sequence__video { visibility: hidden; pointer-events: none; }
+  .hero-sequence__canvas.is-visible, .hero-sequence__video.is-visible { visibility: visible; }
+</style>
+
+<script>
+  import { gsap, ScrollTrigger } from "../../scripts/gsap";
+
+  const FRAME_COUNT = 73;
+  const INTRO_END = 5;
+
+  document.querySelectorAll<HTMLElement>(".hero-sequence").forEach((hero) => {
+    const canvas = hero.querySelector<HTMLCanvasElement>(".hero-sequence__canvas");
+    const video = hero.querySelector<HTMLVideoElement>(".hero-sequence__video");
+    const context = canvas?.getContext("2d");
+    if (!canvas || !video || !context) return;
+
+    const media = gsap.matchMedia();
+    media.add("(prefers-reduced-motion: no-preference)", () => {
+      const frames: (HTMLImageElement | undefined)[] = new Array(FRAME_COUNT);
+      const requested = new Set<number>();
+      let current = 0;
+      let active = true;
+      let introFinished = false;
+      let loading = 0;
+      let introTick = 0;
+      const queue: number[] = [];
+
+      const draw = () => {
+        let image = frames[current];
+        if (!image?.naturalWidth) {
+          for (let distance = 1; distance < FRAME_COUNT; distance++) {
+            image = frames[current - distance] || frames[current + distance];
+            if (image?.naturalWidth) break;
+          }
+        }
+        if (!image?.naturalWidth) return false;
+        const scale = Math.max(canvas.width / image.naturalWidth, canvas.height / image.naturalHeight);
+        const width = image.naturalWidth * scale;
+        const height = image.naturalHeight * scale;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, (canvas.width - width) / 2, (canvas.height - height) / 2, width, height);
+        canvas.classList.add("is-visible");
+        if (introFinished) video.classList.remove("is-visible");
+        return true;
+      };
+
+      const resize = () => {
+        const rect = canvas.getBoundingClientRect();
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(rect.width * dpr);
+        canvas.height = Math.round(rect.height * dpr);
+        draw();
+      };
+
+      const pump = () => {
+        while (active && loading < 4 && queue.length) {
+          const index = queue.shift()!;
+          const image = new Image();
+          loading++;
+          image.onload = () => {
+            loading--;
+            if (!active) return;
+            frames[index] = image;
+            draw();
+            pump();
+          };
+          image.onerror = () => { loading--; if (active) pump(); };
+          image.src = `/images/hero-frames/frame_${String(index).padStart(4, "0")}.webp`;
+        }
+      };
+      const requestFrame = (index: number, priority = false) => {
+        if (requested.has(index)) {
+          if (priority && queue.includes(index)) {
+            queue.splice(queue.indexOf(index), 1);
+            queue.unshift(index);
+          }
+          return;
+        }
+        requested.add(index);
+        if (priority) queue.unshift(index); else queue.push(index);
+        pump();
+      };
+      const finishIntro = () => {
+        if (!active || introFinished) return;
+        introFinished = true;
+        cancelAnimationFrame(introTick);
+        video.pause();
+        if (!draw()) requestFrame(0, true);
+      };
+      const checkIntro = () => {
+        if (video.currentTime >= INTRO_END) finishIntro();
+        else if (active && !introFinished) introTick = requestAnimationFrame(checkIntro);
+      };
+
+      hero.classList.add("is-sequence-ready");
+      requestFrame(0, true);
+      for (let index = 1; index < FRAME_COUNT; index++) requestFrame(index);
+      resize();
+      window.addEventListener("resize", resize);
+      video.addEventListener("ended", finishIntro);
+      video.addEventListener("error", finishIntro);
+      video.classList.add("is-visible");
+      video.play().then(() => { if (active && !introFinished) introTick = requestAnimationFrame(checkIntro); }).catch(finishIntro);
+
+      const state = { frame: 0 };
+      const tween = gsap.to(state, {
+        frame: FRAME_COUNT - 1,
+        ease: "none",
+        scrollTrigger: { trigger: hero, start: "top top", end: () => `+=${hero.offsetHeight}`, scrub: 0.5, invalidateOnRefresh: true },
+        onUpdate: () => {
+          current = Math.round(state.frame);
+          requestFrame(current, true);
+          draw();
+        },
+      });
+      ScrollTrigger.sort();
+      ScrollTrigger.refresh();
+
+      return () => {
+        active = false;
+        cancelAnimationFrame(introTick);
+        tween.scrollTrigger?.kill();
+        tween.kill();
+        window.removeEventListener("resize", resize);
+        video.removeEventListener("ended", finishIntro);
+        video.removeEventListener("error", finishIntro);
+        video.pause();
+        video.classList.remove("is-visible");
+        canvas.classList.remove("is-visible");
+        hero.classList.remove("is-sequence-ready");
+        ScrollTrigger.refresh();
+      };
+    });
+  });
+</script>
