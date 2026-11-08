@@ -10,7 +10,7 @@ const heightFactor = 0.91;
 const anotherPage = content.tag =="" ? true : false;
 const baseHeight = anotherPage ? 523 : 424;
 ---
-<section class='home-steps w-full flex justify-center items-center bg-third-light min-h-[100svh]'>
+<section class='home-steps w-full flex justify-center items-center bg-third-light min-h-[100svh] md:min-h-0 xl:min-h-[100svh]'>
   <div class={`container-full flex flex-col justify-center md:justify-between ${anotherPage ? 'items-start' : 'items-start md:items-center'} gap-8 md:gap-10 py-12 md:py-20`}>
     <div class='flex flex-col justify-center items-start md:items-center gap-6'>
       {
@@ -19,11 +19,11 @@ const baseHeight = anotherPage ? 523 : 424;
       <h2 set:html={content.title} class="heading-h4 text-primary text-start md:text-center"></h2>
     </div>
     <p class='body-md text-primary text-start md:text-center' set:html={content.description}></p>
-    <div class='w-full grid grid-cols-1 md:grid-cols-5 justify-center items-center md:items-end gap-4 md:gap-6 steps-card-list '>
+    <div class='w-full grid grid-cols-1 lg:grid-cols-5 justify-center items-center lg:items-end gap-4 md:gap-6 steps-card-list '>
       {
         content.reasons.map((item,index)=>(
           <div
-            class="steps-card relative flex flex-col justify-between items-center px-6 py-8 rounded-2xl gap-4 md:gap-0"
+            class="steps-card relative flex flex-col justify-between items-center px-6 py-8 rounded-2xl gap-4 lg:gap-0"
             style={`--steps-card-height: ${baseHeight * Math.pow(heightFactor, content.reasons.length - 1 - index)}px`}
           >
             <div class={`steps-card-background absolute inset-0 rounded-2xl ${index===3?'bg-third':'bg-white'}`} aria-hidden="true"></div>
@@ -55,10 +55,14 @@ const baseHeight = anotherPage ? 523 : 424;
     height: auto;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .steps-card {
-      height: var(--steps-card-height);
+      min-height: var(--steps-card-height);
     }
+  }
+
+  @media (min-width: 1280px) {
+    .steps-card { height: var(--steps-card-height); }
   }
 
   :global(.steps-scroll-controlled) .steps-card-list { overflow: hidden; }
@@ -69,23 +73,46 @@ const baseHeight = anotherPage ? 523 : 424;
   const stepsSection = document.querySelector<HTMLElement>(".home-steps");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   // Reserve the line reveals for the card sequence only when the section fits.
-  const canPinSteps = () => Boolean(stepsSection && window.innerWidth >= 1024 &&
+  const canPinSteps = () => Boolean(stepsSection && window.innerWidth >= 1280 &&
     !reduceMotion.matches && stepsSection.offsetHeight <= window.innerHeight);
   if (canPinSteps()) stepsSection?.classList.add("steps-scroll-controlled");
 
   document.addEventListener("DOMContentLoaded", () => queueMicrotask(() => {
-    if (!stepsSection?.classList.contains("steps-scroll-controlled")) return;
+    if (!stepsSection) return;
     const cards = gsap.utils.toArray<HTMLElement>(stepsSection.querySelectorAll(".steps-card"));
     if (!cards.length) return;
 
     const media = gsap.matchMedia();
-    media.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
+    media.add("(min-width: 768px) and (max-width: 1279px) and (prefers-reduced-motion: no-preference)", () => {
+      cards.forEach((card, index) => {
+        card.classList.add("fade-up-a");
+        card.style.setProperty("--fade-up-delay", `${index * 0.2}s`);
+      });
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.3 });
+      cards.forEach((card) => observer.observe(card));
+      return () => {
+        observer.disconnect();
+        cards.forEach((card) => {
+          card.classList.remove("fade-up-a", "active");
+          card.style.removeProperty("--fade-up-delay");
+        });
+      };
+    });
+
+    media.add("(min-width: 1280px) and (prefers-reduced-motion: no-preference)", () => {
       if (!canPinSteps()) {
         stepsSection.classList.remove("steps-scroll-controlled");
         stepsSection.querySelectorAll(".steps-card .fade-up-lines-raw").forEach((text) => text.classList.add("active"));
         return;
       }
 
+      stepsSection.classList.add("steps-scroll-controlled");
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: stepsSection,

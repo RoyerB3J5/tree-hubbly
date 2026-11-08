@@ -5,16 +5,16 @@ interface Props { content: Content; }
 const { content } = Astro.props as Props;
 ---
 <section class="path-section flex min-h-svh w-full items-center justify-center bg-white">
-  <div class="path-layout container-full flex flex-col items-start justify-between gap-10 md:gap-12 py-10 md:py-20 lg:flex-row">
+  <div class="path-layout container-full flex flex-col items-start justify-between gap-10 md:gap-12 py-10 md:py-20 min-[728px]:flex-row">
     <div class="path-intro flex flex-col justify-center items-start gap-6 text-primary">
       <p class="subtitle-lg">{content.tag}</p>
       <h2 set:html={content.title} class="heading-h4"></h2>
     </div>
-    <div class="path-list relative w-full max-w-[440px] shrink-0 self-end lg:w-[440px] lg:self-auto">
+    <div class="path-list relative w-full max-w-[440px] shrink-0 self-end min-[728px]:w-[440px] min-[728px]:self-auto lg:w-[52%] lg:max-w-none xl:w-[440px] xl:max-w-[440px]">
       <div class="path-rail absolute top-0 bottom-0 left-[76px] w-px max-md:w-[2px] bg-[#b2b7bb] max-[481px]:left-[49px]" aria-hidden="true"><div class="path-progress h-0 w-full bg-primary"></div></div>
       <img class="path-marker absolute top-0 right-[calc(100%+32px)] z-2 hidden h-auto w-[120px] -translate-y-1/2" src="/images/index-steps.png" alt="" aria-hidden="true" />
       {content.structure.map((item, index) => (
-        <div class="path-item relative grid grid-cols-[36px_8px_minmax(0,304px)] items-start gap-x-9 pb-16 text-primary last:pb-0 max-[481px]:grid-cols-[26px_8px_minmax(0,1fr)] max-[481px]:gap-x-5">
+        <div class="path-item relative grid grid-cols-[36px_8px_minmax(0,304px)] lg:grid-cols-[36px_8px_minmax(0,1fr)] xl:grid-cols-[36px_8px_minmax(0,304px)] items-start gap-x-9 pb-16 text-primary last:pb-0 max-[481px]:grid-cols-[26px_8px_minmax(0,1fr)] max-[481px]:gap-x-5">
           <div class="path-number body-md pt-2.5">0{index + 1}</div>
           <div class="path-dot relative z-1 mt-3.5 size-2 rounded-full bg-primary" aria-hidden="true"></div>
           <div class="path-copy">
@@ -35,11 +35,11 @@ const { content } = Astro.props as Props;
 
 <style>
   .path-scroll-controlled { height: 100svh; }
-  @media (min-width: 1024px) {
+  @media (min-width: 1281px) {
     .path-scroll-controlled .path-marker { display: block; }
   }
   .path-scroll-controlled .path-details { overflow: hidden; }
-  @media (max-width: 767px) {
+  @media (max-width: 727px) {
     .path-copy :global(.fade-up-line-fragment) {
       transform: none;
       transition: none;
@@ -58,7 +58,7 @@ const { content } = Astro.props as Props;
     const progress = section.querySelector<HTMLElement>(".path-progress");
     const media = gsap.matchMedia();
 
-    media.add("(max-width: 767px) and (prefers-reduced-motion: no-preference)", () => {
+    media.add("(max-width: 727px) and (prefers-reduced-motion: no-preference)", () => {
       if (!list || !progress || !items.length) return;
       const animated = items.flatMap((item) => {
         const number = item.querySelector<HTMLElement>(".path-number");
@@ -99,7 +99,7 @@ const { content } = Astro.props as Props;
       };
     });
 
-    media.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
+    media.add("(min-width: 728px) and (prefers-reduced-motion: no-preference)", () => {
       if (!list || !marker || !progress || items.length < 2) return;
       const details = items.map(item => item.querySelector<HTMLElement>(".path-details")!);
       const dots = items.map(item => item.querySelector<HTMLElement>(".path-dot")!);
@@ -150,7 +150,7 @@ const { content } = Astro.props as Props;
       let lockedUntil = 0;
       const onWheel = (event: WheelEvent) => {
         const trigger = timeline.scrollTrigger;
-        if (window.innerWidth < 1024 || !trigger?.isActive || event.ctrlKey || Math.abs(event.deltaY) < 2 ||
+        if (window.innerWidth < 728 || !trigger?.isActive || event.ctrlKey || Math.abs(event.deltaY) < 2 ||
             document.documentElement.classList.contains("desktop-menu-open") ||
             document.getElementById("mobile-menu")?.classList.contains("translate-x-0")) return;
         if (performance.now() < lockedUntil) { event.preventDefault(); return; }
@@ -163,11 +163,24 @@ const { content } = Astro.props as Props;
       window.addEventListener("wheel", onWheel, { passive: false, capture: true });
       ScrollTrigger.sort();
       ScrollTrigger.refresh();
-      document.fonts.ready.then(() => {
-        if (timeline.scrollTrigger && timeline.scrollTrigger.progress === 0) gsap.set(details[0], { height: detailHeight() });
-        ScrollTrigger.refresh();
-      });
+      // Text wrapping and font loading can change the content height after setup.
+      let measureFrame = 0;
+      let disposed = false;
+      const updateMeasurements = () => {
+        cancelAnimationFrame(measureFrame);
+        measureFrame = requestAnimationFrame(() => {
+          if (disposed || !timeline.scrollTrigger) return;
+          if (timeline.scrollTrigger.progress === 0) gsap.set(details[0], { height: detailHeight() });
+          ScrollTrigger.refresh();
+        });
+      };
+      const sizeObserver = new ResizeObserver(updateMeasurements);
+      details.forEach((detail) => sizeObserver.observe(detail.querySelector<HTMLElement>(".path-details-inner")!));
+      document.fonts.ready.then(updateMeasurements);
       return () => {
+        disposed = true;
+        cancelAnimationFrame(measureFrame);
+        sizeObserver.disconnect();
         window.removeEventListener("wheel", onWheel, true);
         section.classList.remove("path-scroll-controlled");
         gsap.set([...details, ...targets.flatMap(group => Array.from(group)), marker, progress], { clearProps: "all" });
@@ -175,7 +188,6 @@ const { content } = Astro.props as Props;
     });
   }
 </script>
-
 
 
 

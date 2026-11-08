@@ -6,24 +6,24 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<section id="faltantes" class="w-full flex justify-center items-center bg-primary-2 min-h-screen">
-  <div class="w-full flex flex-col justify-center items-center p-4 md:p-8 overflow-hidden max-w-[1536px] min-h-screen">
+<section id="faltantes" class="w-full flex justify-center items-center bg-primary-2 ">
+  <div class="w-full flex flex-col justify-center items-center p-4 md:p-8 overflow-hidden max-w-[1536px] min-h-screen md:min-h-0 xl:min-h-screen">
     <div class="w-full flex-1 flex flex-col justify-between items-start md:items-center back-main-2 gap-8 md:gap-10 py-[74px] rounded-2xl px-4 md:px-12">
       <h2 set:html={content.title} class='heading-h4 text-paragraph text-start md:text-center'></h2>
-    <div class='w-full flex justify-center items-center gap-40 py-6 border-y border-white/10 hidden md:block'>
+    <div class='w-full md:flex justify-center items-center gap-10 xl:gap-40 py-6 border-y border-white/10 hidden block'>
       {
         content.items.map((item)=>(
-          <div class="flex justify-center items-center gap-[5px]">
+          <div class="flex justify-center items-center gap-[5px] ">
             <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="24" height="24" class='w-5 h-5 fade-up-a' decoding="async" loading="lazy"/>
             <p class="subtitle-lg text-paragraph">{item.title}</p>
           </div>
         ))
       }
     </div>
-    <div class="flex w-full flex-col md:flex-row justify-center items-center gap-8 md:gap-6">
-        <div class="w-full md:w-1/2 flex flex-col justify-center items-start gap-8 text-paragraph">
+    <div class="flex w-full flex-col lg:flex-row justify-center items-center gap-8 md:gap-6">
+        <div class="w-full lg:w-1/2 flex flex-col justify-center items-start gap-8 text-paragraph">
           <p class="body-md">{content.description}</p>
-          <div class="flex flex-col justify-center items-start gap-4 md:gap-6 w-full">
+          <div class="flex flex-col justify-center items-start gap-4 xl:gap-6 w-full">
             {
               content.list.map((l)=>(
                 <div class="flex justify-start items-center gap-2 ">
@@ -37,8 +37,8 @@ const { content } = Astro.props as Props;
             <p set:html={content.tag} class="body-lg text-paragraph text-center"></p>
           </div>
         </div>
-        <div class="animation-image-reveal-trigger w-full md:w-1/2">
-          <div class="w-full relative rounded-lg lg:rounded-2xl aspect-366/375 md:aspect-628/375 h-auto overflow-hidden animation-image-reveal">
+        <div class="animation-image-reveal-trigger w-full lg:w-1/2">
+          <div class="w-full relative rounded-lg lg:rounded-2xl aspect-366/375 md:aspect-628/375 lg:aspect-628/575 xl:aspect-628/375 h-auto overflow-hidden animation-image-reveal">
             <div class="animation-image-reveal-mask w-full h-full overflow-hidden rounded-lg lg:rounded-2xl">
               <img src="/images/faltantes.webp" alt="Companies TreeHubly" width="1536" height="1024" class="w-full h-full object-cover object-center" decoding="async" loading="lazy"/>
             </div>

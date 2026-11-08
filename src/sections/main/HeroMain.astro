@@ -44,14 +44,14 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
         }
         {
           content.items.length > 0 && (
-            <ul class="flex justify-center items-center gap-10 w-full hidden md:block">
+            <ul class="md:flex justify-center items-center gap-10 w-full hidden ">
               {
                 content.items.map((item,index) => (
                   <>
                   <li class=" flex justify-center items-center gap-2">
                     
                     <img src={`/images/icons/items-h-${index + 1}.svg`} alt={`Item ${index + 1}`} width="24" height="24" class="w-8 h-8 fade-up-a">
-                    <span class="fade-up-lines-raw text-[18px] font-semibold leading-[150%] text-paragraph">{item}</span>
+                    <span class="fade-up-lines-raw text-[18px] font-semibold leading-[150%] text-paragraph text-center">{item}</span>
                   </li>
                   <div class='h-full w-[1px] bg-paragraph/40 last:hidden'></div>
                   </>

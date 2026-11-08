@@ -8,13 +8,13 @@ interface Props {
 const { content, lang } = Astro.props as Props;
 ---
 <section class='w-full bg-primary flex justify-center items-center'>
-  <div class='container-full flex flex-col md:flex-row justify-center md:justify-between items-start md:items-center py-12 md:py-20 gap-6'>
-    <div class='flex flex-col justify-center items-start gap-6 max-w-[520px]'>
+  <div class='container-full flex flex-col lg:flex-row justify-center lg:justify-between items-start lg:items-center py-12 md:py-20 gap-6'>
+    <div class='flex flex-col justify-center items-start gap-6 max-w-none lg:max-w-[520px]'>
       <p class='subtitle-lg text-secondary'>{content.tag}</p>
       <h2 set:html={content.title} class="heading-h4 text-paragraph"></h2>
       <p class="body-md text-paragraph mt-2">{content.description}</p>
     </div>
-    <div class='animation-image-reveal-trigger w-full md:w-[50%]'>
+    <div class='animation-image-reveal-trigger w-full lg:w-[50%]'>
       <div class='calculator-reveal animation-image-reveal w-full rounded-2xl overflow-hidden'>
         <div class='animation-image-reveal-mask w-full bg-white rounded-2xl'>
     <div class='calculator-content w-full flex flex-col justify-center items-center gap-8 px-4 md:px-6 py-8 md:py-[45px]' data-calculator data-lang={lang} data-covered={content.section.tag} data-shortfall={content.section.shortfall}>

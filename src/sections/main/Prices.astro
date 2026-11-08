@@ -81,18 +81,18 @@ const { content } = Astro.props as Props;
       }
     </div>
     {'plan' in content && (
-      <div class="w-full flex flex-col md:flex-row justify-center md:justify-between items-start md:items-center gap-6 rounded-2xl border border-[#263A4B] py-10 px-4 md:p-10 back-main-4 fade-up-a">
-        <div class='flex flex-col md:flex-row justify-center items-start md:items-center gap-6 md:gap-8'>
+      <div class="w-full flex flex-col lg:flex-row justify-center lg:justify-between items-start lg:items-center gap-6 rounded-2xl border border-[#263A4B] py-10 px-4 md:p-10 back-main-4 fade-up-a">
+        <div class='flex flex-col lg:flex-row justify-center items-start lg:items-center gap-6 md:gap-8'>
           <img src="/images/icons/film.svg" alt="Film" width="101" height="101" decoding="async" loading="lazy" class='fade-up-a w-[50px] h-[50px] md:w-[101px] md:h-[101px]' />
           <div class="flex flex-col justify-center items-start gap-6 text-paragraph">
             <h3 class="body-lg" set:html={content.plan.title}></h3>
             <p class="body-md" set:html={content.plan.description}></p>
-            <ul class="flex flex-wrap justify-start md:justify-center gap-4 fade-up-a">
+            <ul class="flex flex-wrap justify-start lg:justify-center gap-4 fade-up-a">
               {content.plan.options.map((option) => <li class=" border border-secondary px-3 py-2 rounded-full flex justify-center items-center fade-up-a"><span class='subtitle-sm'>{option.title}</span></li>)}
             </ul>
           </div>
         </div>
-        <Button text={content.plan.button[0].label} href={content.plan.button[0].href} extraBtnClass="bg-secondary border-secondary" textClass="text-primary" />
+        <Button text={content.plan.button[0].label} href={content.plan.button[0].href} extraBtnClass="bg-secondary border-secondary text-center" textClass="text-primary" />
       </div>
     )}
   </div>

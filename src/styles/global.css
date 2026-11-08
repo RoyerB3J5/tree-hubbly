@@ -218,7 +218,7 @@ html {
     line-height: 110%;
   }
 
-  .heading-h3 {
+  .heading-h4 {
     font-size: 40px;
     line-height: 110%;
   }
@@ -353,19 +353,19 @@ html {
     #04121e;
 }
 .back-hero {
-  background:
-    linear-gradient(0deg, rgba(5, 23, 37, 0.5) 0%, rgba(5, 23, 37, 0) 100%),
-    linear-gradient(0deg, rgba(5, 23, 37, 0.5) 0%, rgba(5, 23, 37, 0.5) 100%);
+  background: linear-gradient(
+    0deg,
+    #051725 0%,
+    rgba(5, 23, 37, 0) 50.48%,
+    #051725 100%
+  );
 }
 
 @media (min-width: 768px) {
   .back-hero {
-    background: linear-gradient(
-      0deg,
-      #051725 0%,
-      rgba(5, 23, 37, 0) 50.48%,
-      #051725 100%
-    );
+    background:
+      linear-gradient(0deg, rgba(5, 23, 37, 0.5) 0%, rgba(5, 23, 37, 0) 100%),
+      linear-gradient(0deg, rgba(5, 23, 37, 0.5) 0%, rgba(5, 23, 37, 0.5) 100%);
   }
 }
 

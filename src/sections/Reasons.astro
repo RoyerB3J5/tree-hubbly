@@ -15,8 +15,8 @@ const { content } = Astro.props as Props;
     <div class="system-reasons-slides">
   {
     content.items.map((item,index)=>(
-      <div class="system-reasons-slide flex justify-between items-end gap-14">
-        <div class="flex flex-col justify-end items-start gap-8 max-w-[40%]">
+      <div class="system-reasons-slide flex justify-between items-end gap-8 lg:gap-14">
+        <div class="system-reasons-copy flex flex-col justify-end items-start gap-8 max-w-[40%]">
           <h2 set:html={item.title} class="heading-h4 text-paragraph"></h2>
           <p set:html={item.description} class="body-md text-paragraph"></p>
           <div class='w-full flex flex-col md:flex-row justify-center items-start gap-6'>
@@ -49,8 +49,8 @@ const { content } = Astro.props as Props;
         }
         {
           Object.keys(item.section).length !== 0 && (
-            <div class='w-[50%] flex flex-col justify-center items-center gap-8 hidden md:block'>
-              <div class='flex flex-col justify-center items-start gap-8 px-8 py-10 border border-[#263A4B] rounded-2xl back-main-4 w-full'>
+            <div class='system-reasons-panels w-[50%] md:flex flex-col justify-center items-center gap-8 hidden '>
+              <div class='system-reasons-panel flex flex-col justify-center items-start gap-8 px-4 lg:px-8 py-6 md:py-10 border border-[#263A4B] rounded-2xl back-main-4 w-full'>
                 <h3 class="body-lg text-secondary">{item.section.system?.title}</h3>
                 <div class='w-[51px] h-1 bg-secondary'></div>
                 <ol class="flex flex-col justify-center items-start gap-8 list-decimal pl-4">
@@ -63,13 +63,13 @@ const { content } = Astro.props as Props;
                   }
                 </ol>
               </div>
-              <div class='flex flex-col justify-center items-start gap-8 px-8 py-10 border border-[#263A4B] rounded-2xl back-main-4 w-full'>
+              <div class='system-reasons-panel flex flex-col justify-center items-start gap-8 px-4 lg:px-8 py-6 lg:py-10 border border-[#263A4B] rounded-2xl back-main-4 w-full'>
                 <h3 class="body-lg text-secondary">{item.section.links?.title}</h3>
                 <div class='w-[51px] h-1 bg-secondary'></div>
-                <div class='w-full grid grid-cols-3 justify-center items-center gap-4'>
+                <div class='w-full grid grid-cols-2 lg:grid-cols-3 justify-center items-center gap-4'>
                   {
                     item.section.links?.links.map((i,index)=>(
-                      <a href={i.href} class=' w-full py-4 border border-paragraph rounded-lg last:border-secondary flex justify-center items-center hover:border-secondary last:hover:border-white transition-all duration-300 ease-in-out'><p class="body-md text-paragraph">
+                      <a href={i.href} class=' w-full py-4 border border-paragraph rounded-lg last:border-secondary flex justify-center items-center hover:border-secondary last:hover:border-white transition-all duration-300 ease-in-out '><p class="body-md text-paragraph text-center">
                         {i.label}
                       </p>
                       </a>
@@ -99,6 +99,20 @@ const { content } = Astro.props as Props;
   .system-reasons.is-pinned .animation-image-reveal-trigger { max-width: min(50%, calc((100svh - 210px) * 628 / 650)); }
   .system-reasons.is-pinned .system-reasons-slides { display: grid; }
   .system-reasons.is-pinned .system-reasons-slide { grid-area: 1 / 1; }
+  @media (min-width: 768px) and (max-width: 1028px) {
+    .system-reasons.is-pinned { padding-block: 16px; }
+    .system-reasons.is-pinned .system-reasons-index { margin-bottom: 1rem; }
+    .system-reasons.is-pinned .system-reasons-slide { gap: 1.5rem; }
+    .system-reasons.is-pinned .system-reasons-copy { max-width: 46%; gap: 1rem; }
+    .system-reasons.is-pinned .system-reasons-copy > div,
+    .system-reasons.is-pinned .system-reasons-copy ul,
+    .system-reasons.is-pinned .system-reasons-copy > div > div { gap: 0.75rem; }
+    .system-reasons.is-pinned .system-reasons-panels { gap: 1rem; }
+    .system-reasons.is-pinned .system-reasons-panel { gap: 0.75rem; padding: 1rem; }
+    .system-reasons.is-pinned .system-reasons-panel ol { gap: 0.75rem; }
+    .system-reasons.is-pinned .system-reasons-panel a { padding-block: 0.5rem; }
+    .system-reasons.is-pinned .animation-image-reveal-trigger { max-width: min(50%, calc((100svh - 160px) * 628 / 650)); }
+  }
   @media (max-width: 767px) {
     .system-reasons-slide { flex-direction: column; align-items: stretch; gap: 2rem; }
     .system-reasons-slide > div { width: 100%; max-width: none; }
@@ -121,7 +135,7 @@ const { content } = Astro.props as Props;
       section.classList.add("is-pinned");
       if (section.scrollHeight > window.innerHeight) {
         section.classList.remove("is-pinned");
-        if (window.innerWidth >= 768) return;
+        if (window.innerWidth > 1028) return;
 
         // On short screens, keep every slide readable in the normal flow.
         const setActiveSlide = (index: number) => {

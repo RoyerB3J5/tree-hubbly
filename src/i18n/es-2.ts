@@ -46,7 +46,7 @@ export default {
     },
     system: {
       title:
-        'A la mayoría de empresas de árboles no<br class="hidden md:block"/> les faltan clientes. <span class="text-secondary">Les falta un sistema. </span>',
+        'A la mayoría de empresas de árboles no<br class="hidden lg:block"/> les faltan clientes. <span class="text-secondary">Les falta un sistema. </span>',
       items: [
         {
           icon: "arbol",
@@ -69,14 +69,14 @@ export default {
         "Crecimiento que depende de referidos y del clima",
         "No sabes cuánto te cuesta realmente ganar cada trabajo",
       ],
-      tag: 'El marketing sin sistema crea picos temporales, no<br class="hidden md:block"/> <span class="text-secondary"> crecimiento <br class="md:hidden block"/> sostenible.</span>',
+      tag: 'El marketing sin sistema crea picos temporales, no<br class="hidden lg:block"/> <span class="text-secondary"> crecimiento <br class="md:hidden block"/> sostenible.</span>',
     },
     session: {
       tag: "Empecemos",
       title:
         'Agenda una sesión de <br/> <span class="text-secondary">estrategia gratis.</span>',
       description:
-        "30 minutos. Encontramos dónde tu empresa está perdiendo trabajos y te<br class='hidden md:block'/> mostramos cómo el Tree Profit System™ lo resuelve. Sin presión.",
+        "30 minutos. Encontramos dónde tu empresa está perdiendo trabajos y te<br class='hidden xl:block'/> mostramos cómo el Tree Profit System™ lo resuelve. Sin presión.",
     },
     grow: {
       title: "Donde las empresas de tree service escalan.",
@@ -227,7 +227,7 @@ export default {
       img: "main-control",
       tag: "Métricas y control",
       title:
-        'Si no se puede medir,<span class="text-third">no se puede escalar.</span>',
+        'Si no se puede medir, <span class="text-third">no se puede escalar.</span>',
       description:
         "Sabrás cuánto te cuesta ganar cada trabajo — y cuánto te deja.",
       measuring: [
@@ -406,7 +406,7 @@ export default {
         tag: "EBOOK GRATIS",
         subtag: "PDF DESCARGA INMEDIATA",
         title:
-          'La Guía de Crecimiento<br/>para<span class="text-third"> Empresas de Tree<br/>Services en EE.UU</span>',
+          'La Guía de Crecimiento<br class="hidden xl:block"/> para<span class="text-third"> Empresas de Tree<br class="hidden xl:block"/> Services en EE.UU</span>',
         description:
           "Una guía paso a paso para conseguir más clientes potenciales, más trabajos y crecimiento sostenible.",
         list10: [
@@ -1038,7 +1038,7 @@ export default {
       section: {
         tag: '<span class="text-secondary">Nuestra Historia</span>',
         title:
-          'Los negocios no crecen<br class="hidden md:block"/> por suerte.<span class="text-secondary">Crecen con<br class="hidden md:block"/> sistemas.</span>',
+          'Los negocios no crecen<br class="hidden xl:block"/> por suerte.<span class="text-secondary">Crecen con<br class="hidden xl:block"/>  sistemas.</span>',
         subtitle:
           "TreeHubly fue creado con una misión: traer estructura, predictibilidad y crecimiento medible a la industria de servicios de árboles. <br/> Creemos que las empresas de árboles no necesitan más tácticas, necesitan infraestructura.",
         description:

@@ -14,11 +14,11 @@ const { content } = Astro.props as Props;
       <p class='subtitle-lg text-secondary'>{content.tag}</p>
       <h2 set:html={content.title} class='heading-h4 text-paragraph text-start md:text-center'></h2>
     </div>
-    <div class="w-full flex flex-col md:flex-row justify-center items-center md:items-stretch gap-8 md:gap-6">
-      <div class="w-full md:w-[40%] overflow-hidden rounded-2xl relative bg-secondary aspect-398/414 md:aspect-auto">
+    <div class="w-full flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-8 md:gap-6">
+      <div class="w-full lg:w-[40%] overflow-hidden rounded-2xl relative bg-secondary aspect-398/414 md:aspect-798/414 lg:aspect-auto">
 
       </div>
-      <div class='numbers-card-frame w-full md:w-[60%] overflow-hidden rounded-2xl'>
+      <div class='numbers-card-frame w-full lg:w-[60%] overflow-hidden rounded-2xl'>
       <div class='numbers-card flex flex-col justify-center items-start gap-8 w-full h-full py-12 md:py-14 px-4 md:px-6 back-main-4 rounded-2xl border border-[#263A4B]'>
         <div class='numbers-content w-full flex flex-col items-start gap-8'>
         <h3 set:html={content.title2} class='heading-h4 text-paragraph'></h3>

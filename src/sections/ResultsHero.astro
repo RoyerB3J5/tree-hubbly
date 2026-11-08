@@ -14,10 +14,10 @@ const { content } = Astro.props as Props;
       <p class="body-md text-paragraph mt-2 text-start md:text-center">{content.description}</p>
     </div>
     <div class='w-full flex flex-col justify-center items-center gap-20'>
-      <div class='w-full flex flex-col md:flex-row justify-center items-center md:items-stretch gap-8 md:gap-6'>
-        <div class="w-full md:w-[45%] h-auto relative overflow-hidden rounded-2xl aspect-118/123 md:aspect-603/645 bg-paragraph">
+      <div class='w-full flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-8 md:gap-6'>
+        <div class="w-full lg:w-[45%] h-auto relative overflow-hidden rounded-2xl aspect-118/123 md:aspect-903/645 lg:aspect-603/645 bg-paragraph">
         </div>
-        <div class='w-full md:w-[55%] flex flex-col justify-center items-start gap-6 border border-[#263A4B] rounded-2xl px-4 py-12 md:p-6 back-main-4 fade-up-a'>
+        <div class='w-full lg:w-[55%] flex flex-col justify-center items-start gap-6 border border-[#263A4B] rounded-2xl px-4 py-12 md:p-6 back-main-4 fade-up-a'>
           <p class="subtitle-lg text-secondary">{content.section.tag}</p>
           <h2 set:html={content.section.title} class="heading-h4 text-paragraph" ></h2>
           <p class="body-md text-paragraph mt-2">{content.section.description}</p>
@@ -26,11 +26,11 @@ const { content } = Astro.props as Props;
         </div>
       </div>
       <div class="w-full flex flex-col justify-center items-start md:items-center gap-10">
-        <div class='w-full flex flex-col md:flex-row justify-center md:justify-between items-start md:items-center gap-6'>
+        <div class='w-full flex flex-col lg:flex-row justify-center lg:justify-between items-start lg:items-center gap-6'>
           <h2 set:html={content.section2.title} class="heading-h4 text-paragraph "></h2>
-          <p class="body-md text-paragraph max-w-none md:max-w-[70%] text-start">{content.section2.description}</p>
+          <p class="body-md text-paragraph max-w-none lg:max-w-[70%] text-start">{content.section2.description}</p>
         </div>
-        <div class='w-full grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 justify-center items-center md:items-stretch'>
+        <div class='w-full grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 justify-center items-center lg:items-stretch'>
           {
             content.section3.elements.map((item,index)=>(
               <div class='w-full flex flex-col justify-center items-start gap-6 md:gap-8 px-4 py-6 md:p-6 rounded-2xl border border-[#263A4B] fade-up-a' style={`animation-delay: ${ index * 0.1}s`}>
@@ -59,7 +59,7 @@ const { content } = Astro.props as Props;
         </div>
       </div>
     </div>
-    <div class="w-full flex flex-col justify-center items-center gap-8 py-10 px-20 rounded-2xl border border-[#263A4B] back-main-4 fade-up-a hidden md:block">
+    <div class="w-full md:flex flex-col justify-center items-center gap-8 py-10 px-20 rounded-2xl border border-[#263A4B] back-main-4 fade-up-a hidden">
       <p class="text-paragraph text-center body-md">{content.description2}</p>
       <p class="subtitle-lg text-secondary italic">H&A Brother Tree Services</p>
     </div>

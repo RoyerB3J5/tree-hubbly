@@ -68,6 +68,14 @@ const { content } = Astro.props as Props;
   .reasons-section.is-pinned { min-height: 100svh; display: flex; align-items: center; }
   .reasons-section.is-pinned .reasons-slides { display: grid; }
   .reasons-section.is-pinned .reasons-slide { grid-area: 1 / 1; }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .reasons-section.is-pinned { padding-block: 24px; }
+    .reasons-section.is-pinned .reasons-index { position: relative; top: auto; transform: none; margin-bottom: 1.5rem; }
+    .reasons-section.is-pinned .reasons-slides { padding-left: 0; }
+    .reasons-section.is-pinned .reasons-slide { gap: 1.5rem; }
+    .reasons-section.is-pinned .reasons-slide > div:first-child { gap: 1rem; }
+    .reasons-section.is-pinned .animation-image-reveal-trigger { width: min(38%, calc((100svh - 200px) * 43 / 68)); }
+  }
   @media (max-width: 767px) {
     .reasons-index { position: relative; top: auto; transform: none; margin-bottom: 3rem; }
     .reasons-slides { padding-left: 0; }
@@ -91,7 +99,7 @@ const { content } = Astro.props as Props;
       section.classList.add("is-pinned");
       if (section.scrollHeight > window.innerHeight) {
         section.classList.remove("is-pinned");
-        if (window.innerWidth >= 768) return;
+        if (window.innerWidth >= 1024) return;
 
         // On short screens, keep every slide readable in the normal flow.
         const setActiveSlide = (index: number) => {

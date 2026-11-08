@@ -35,7 +35,7 @@ const t = translations[lang];
   const reasons = main?.querySelector<HTMLElement>(".system-reasons");
   const control = main?.querySelector<HTMLElement>(".control-section");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const desktopScroll = window.matchMedia("(min-width: 768px)");
+  const desktopScroll = window.matchMedia("(min-width: 1281px)");
   const pairs = [[hero, steps], [steps, reasons], [reasons, control]] as const;
   let snapping = false;
   let unlockTimer: ReturnType<typeof setTimeout>;

@@ -8,15 +8,15 @@ const { content } = Astro.props as Props;
 ---
 <section class="w-full flex justify-center items-center bg-primary">
   <div class='container-full flex flex-col justify-center items-center pb-12 md:pb-20 pt-26 md:pt-40 gap-20 md:gap-10'>
-    <div class='w-full flex flex-col md:flex-row justify-center items-center md:items-stretch gap-6'>
-      <div class="animation-image-reveal-trigger w-full md:w-[47%]">
-        <div class="animation-image-reveal w-full h-full relative overflow-hidden rounded-2xl aspect-71/76 md:aspect-603/645">
+    <div class='w-full flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-6'>
+      <div class="animation-image-reveal-trigger w-full lg:w-[47%]">
+        <div class="animation-image-reveal w-full h-full relative overflow-hidden rounded-2xl aspect-71/76 md:aspect-903/645 lg:aspect-603/645">
           <div class="animation-image-reveal-mask w-full h-full relative overflow-hidden rounded-2xl">
             <img src="/images/about.webp" alt="Results Hero" width="1200" height="1200" decoding="async" loading="lazy" class="w-full h-full object-cover absolute inset-0" />
           </div>
         </div>
       </div>
-      <div class='w-full md:w-[53%] flex flex-col justify-center items-start gap-6 border border-[#263A4B] rounded-2xl py-12 px-4 md:p-6 back-main-4 fade-up-a'>
+      <div class='w-full lg:w-[53%] flex flex-col justify-center items-start gap-6 border border-[#263A4B] rounded-2xl py-12 px-4 md:p-6 back-main-4 fade-up-a'>
         <p class="subtitle-lg text-secondary" set:html={content.section.tag}></p>
         <h1 set:html={content.section.title} class="heading-h4 text-paragraph" ></h1>
         <p class="body-md text-paragraph mt-2" set:html={content.section.subtitle}></p>
@@ -27,7 +27,7 @@ const { content } = Astro.props as Props;
     </div>
     <div class='w-full flex flex-col justify-center items-start gap-10'>
       <h2 set:html={content.title} class="text-white heading-h4"></h2>
-      <div class='w-full grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6 justify-center items-center md:items-stretch'>
+      <div class='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6 justify-center items-center md:items-stretch'>
         {content.diferences.map((item,index) =>( 
           <div class='w-full flex flex-col justify-center items-start gap-8 py-6 px-4 md:p-6 rounded-2xl border border-[#263A4B] fade-up-a' style={`animation-delay: ${ index * 0.1}s`}>
             <h3 class='text-secondary body-lg' set:html={item.title}></h3>
