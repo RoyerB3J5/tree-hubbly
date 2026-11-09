@@ -14,9 +14,7 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
   <div class="hero-sequence__viewport w-full flex items-center justify-center text-paragraph">
     <img src="/images/hero-frames/frame_0000.webp" alt="" aria-hidden="true" fetchpriority="high" width="1904" height="1072" class="hero-sequence__media object-cover object-center" />
     <canvas class="hero-sequence__media hero-sequence__canvas" aria-hidden="true"></canvas>
-    <video class="hero-sequence__media hero-sequence__video object-cover object-center" muted playsinline preload="metadata" poster="/images/hero-frames/frame_0000.webp" aria-hidden="true" tabindex="-1">
-      <source src="/images/video_hero.mp4" type="video/mp4" />
-    </video>
+    <video class="hero-sequence__media hero-sequence__video object-cover object-center" muted playsinline preload="none" data-src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/video_hero.mp4" poster="/images/hero-frames/frame_0000.webp" aria-hidden="true" tabindex="-1"></video>
     <div class="absolute w-full h-full inset-0 z-3 back-hero"></div>
     <div
       class="container-full flex flex-col justify-end items-center pb-12 md:py-14 relative z-10 h-full"
@@ -100,76 +98,94 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
 
     const media = gsap.matchMedia();
     media.add("(prefers-reduced-motion: no-preference)", () => {
-      const frames: (HTMLImageElement | undefined)[] = new Array(FRAME_COUNT);
-      const requested = new Set<number>();
+      const frames = new Map<number, HTMLImageElement>();
+      const pending = new Set<number>();
+      const failed = new Set<number>();
+      const anchors = [0, 12, 24, 36, 48, 60, 72];
+      const maxFrames = 24;
       let current = 0;
       let active = true;
       let introFinished = false;
+      let nearHero = true;
       let loading = 0;
       let introTick = 0;
-      const queue: number[] = [];
+      let drawTick = 0;
+      let lastDrawn = -1;
 
-      const draw = () => {
-        let image = frames[current];
-        if (!image?.naturalWidth) {
-          for (let distance = 1; distance < FRAME_COUNT; distance++) {
-            image = frames[current - distance] || frames[current + distance];
-            if (image?.naturalWidth) break;
-          }
+      const draw = (force = false) => {
+        let nearest = -1;
+        for (const index of frames.keys()) {
+          if (nearest < 0 || Math.abs(index - current) < Math.abs(nearest - current)) nearest = index;
         }
-        if (!image?.naturalWidth) return false;
+        const image = frames.get(nearest);
+        if (!image || !canvas.width || !canvas.height) return false;
+        if (!force && nearest === lastDrawn) return true;
         const scale = Math.max(canvas.width / image.naturalWidth, canvas.height / image.naturalHeight);
         const width = image.naturalWidth * scale;
         const height = image.naturalHeight * scale;
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.drawImage(image, (canvas.width - width) / 2, (canvas.height - height) / 2, width, height);
+        lastDrawn = nearest;
         canvas.classList.add("is-visible");
-        if (introFinished) video.classList.remove("is-visible");
         return true;
+      };
+      const scheduleDraw = () => {
+        if (drawTick) return;
+        drawTick = requestAnimationFrame(() => { drawTick = 0; if (active) draw(); });
       };
 
       const resize = () => {
         const rect = canvas.getBoundingClientRect();
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        if (!rect.width || !rect.height) return;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2, Math.sqrt(2073600 / (rect.width * rect.height)));
         canvas.width = Math.round(rect.width * dpr);
         canvas.height = Math.round(rect.height * dpr);
-        draw();
+        draw(true);
       };
 
+      const trimFrames = () => {
+        while (frames.size > maxFrames) {
+          const candidates = [...frames.keys()].filter((index) => !anchors.includes(index) && index !== current);
+          if (!candidates.length) break;
+          candidates.sort((a, b) => Math.abs(b - current) - Math.abs(a - current));
+          frames.delete(candidates[0]);
+        }
+      };
+      const wantedFrames = () => {
+        const nearby = [current];
+        for (let distance = 1; distance <= 8; distance++) nearby.push(current + distance, current - distance);
+        // A few distributed previews make large scroll jumps usable while nearby frames load.
+        return [current, ...anchors, ...nearby].filter((index, position, list) =>
+          index >= 0 && index < FRAME_COUNT && list.indexOf(index) === position);
+      };
       const pump = () => {
-        while (active && loading < 4 && queue.length) {
-          const index = queue.shift()!;
+        while (active && nearHero && loading < 3) {
+          const index = wantedFrames().find((item) => !frames.has(item) && !pending.has(item) && !failed.has(item));
+          if (index === undefined) break;
           const image = new Image();
+          pending.add(index);
           loading++;
           image.onload = () => {
             loading--;
+            pending.delete(index);
             if (!active) return;
-            frames[index] = image;
-            draw();
+            frames.set(index, image);
+            trimFrames();
+            scheduleDraw();
             pump();
           };
-          image.onerror = () => { loading--; if (active) pump(); };
+          image.onerror = () => { loading--; pending.delete(index); failed.add(index); if (active) pump(); };
           image.src = `/images/hero-frames/frame_${String(index).padStart(4, "0")}.webp`;
         }
-      };
-      const requestFrame = (index: number, priority = false) => {
-        if (requested.has(index)) {
-          if (priority && queue.includes(index)) {
-            queue.splice(queue.indexOf(index), 1);
-            queue.unshift(index);
-          }
-          return;
-        }
-        requested.add(index);
-        if (priority) queue.unshift(index); else queue.push(index);
-        pump();
       };
       const finishIntro = () => {
         if (!active || introFinished) return;
         introFinished = true;
         cancelAnimationFrame(introTick);
         video.pause();
-        if (!draw()) requestFrame(0, true);
+        draw();
+        video.classList.remove("is-visible");
+        pump();
       };
       const checkIntro = () => {
         if (video.currentTime >= INTRO_END) finishIntro();
@@ -177,12 +193,12 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
       };
 
       hero.classList.add("is-sequence-ready");
-      requestFrame(0, true);
-      for (let index = 1; index < FRAME_COUNT; index++) requestFrame(index);
       resize();
+      pump();
       window.addEventListener("resize", resize);
       video.addEventListener("ended", finishIntro);
       video.addEventListener("error", finishIntro);
+      video.src = video.dataset.src || "";
       video.classList.add("is-visible");
       video.play().then(() => { if (active && !introFinished) introTick = requestAnimationFrame(checkIntro); }).catch(finishIntro);
 
@@ -190,11 +206,23 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
       const tween = gsap.to(state, {
         frame: FRAME_COUNT - 1,
         ease: "none",
-        scrollTrigger: { trigger: hero, start: "top top", end: () => `+=${hero.offsetHeight}`, scrub: 0.5, invalidateOnRefresh: true },
+        scrollTrigger: {
+          trigger: hero,
+          start: "top top",
+          end: () => `+=${hero.offsetHeight}`,
+          scrub: 0.5,
+          invalidateOnRefresh: true,
+          onLeave: () => { nearHero = false; },
+          onEnterBack: () => { nearHero = true; pump(); },
+        },
         onUpdate: () => {
-          current = Math.round(state.frame);
-          requestFrame(current, true);
-          draw();
+          const next = Math.round(state.frame);
+          if (next === current) return;
+          current = next;
+          if (current > 0) finishIntro();
+          trimFrames();
+          pump();
+          scheduleDraw();
         },
       });
       ScrollTrigger.sort();
@@ -203,12 +231,16 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
       return () => {
         active = false;
         cancelAnimationFrame(introTick);
+        cancelAnimationFrame(drawTick);
         tween.scrollTrigger?.kill();
         tween.kill();
         window.removeEventListener("resize", resize);
         video.removeEventListener("ended", finishIntro);
         video.removeEventListener("error", finishIntro);
         video.pause();
+        video.removeAttribute("src");
+        video.load();
+        frames.clear();
         video.classList.remove("is-visible");
         canvas.classList.remove("is-visible");
         hero.classList.remove("is-sequence-ready");

@@ -86,7 +86,9 @@ const t = translations[lang];
         if (pin && window.scrollY < pin.end - 1) continue;
         const currentTop = current.getBoundingClientRect().top + window.scrollY;
         const destinationTop = destination.getBoundingClientRect().top + window.scrollY;
-        const nearEnd = Math.max(currentTop, destinationTop - window.innerHeight);
+        // Let Book enter partway before snapping, so Faltantes remains readable.
+        const visibleOffset = current === nextSection ? 0.55 : 1;
+        const nearEnd = Math.max(currentTop, destinationTop - window.innerHeight * visibleOffset);
         if (window.scrollY >= nearEnd - 8 && window.scrollY < destinationTop - 8) return destination;
       }
       return null;

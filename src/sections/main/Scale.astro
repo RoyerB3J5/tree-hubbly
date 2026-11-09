@@ -7,14 +7,54 @@ interface Props {
 const { content } = Astro.props as Props;
 ---
 <section class="home-scale w-full flex justify-center items-center relative h-[600px] md:h-[40dvh] xl:h-[80dvh] bg-white">
-  {/*<img src="/images/bg-scale.webp" alt="Where Tree Companies Scale" width="2100" height="1172" class="w-full h-full object-cover object-center -z-20 absolute"> */}
-  
+  <video
+    autoplay
+    loop
+    muted
+    playsinline
+    preload="metadata"
+    poster="/images/fondo-hero.webp"
+    aria-label="Where Tree Companies Scale"
+    class="home-scale__video w-full h-full object-cover object-center z-0 absolute inset-0"
+  >
+    <source src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/banner.mp4" type="video/mp4">
+    Tu navegador no puede reproducir este video.
+  </video>
   <div class="absolute w-full h-full inset-0 z-1 back-main-3"></div>
   <div class=" container-full py-10 md:py-20 flex justify-start items-end gap-6 h-full relative z-10">
     <div class="flex jusitfy-center items-center gap-6">
       <img src="/images/icons/hoja.svg" alt="Tree Company Logo" width="38" height="56" class="w-[38px] h-auto fade-up-a" decoding="async" loading="lazy"/>
     <h3 set:html={content.title} class="heading-h4 text-paragraph"></h3>
     </div>
-    
   </div>
 </section>
+
+<script>
+  import { gsap } from "../../scripts/gsap";
+
+  document.querySelectorAll<HTMLElement>(".home-scale").forEach((section) => {
+    const video = section.querySelector<HTMLVideoElement>(".home-scale__video");
+    if (!video) return;
+
+    const media = gsap.matchMedia();
+    media.add("(prefers-reduced-motion: no-preference)", () => {
+      const animation = gsap.fromTo(video, { scale: 0.5 }, {
+        scale: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top bottom",
+          end: "top 35%",
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      return () => {
+        animation.scrollTrigger?.kill();
+        animation.kill();
+        gsap.set(video, { clearProps: "transform" });
+      };
+    });
+  });
+</script>
