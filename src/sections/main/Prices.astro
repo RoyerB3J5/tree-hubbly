@@ -17,7 +17,7 @@ const { content } = Astro.props as Props;
       <div class:list={['prices-grid w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center items-stretch', { 'prices-grid-complete': 'plan' in content }]}>
       {
         content.service.map((item,index)=>(
-          <div class={`price-card w-full flex flex-col justify-start items-start gap-8 py-6 md:py-10 px-4 md:px-6 rounded-2xl border fade-up-a  ${index === 1 ? "back-prices border-secondary" : "bg-transparent border-[#263A4B]"}`} style={`animation-delay: ${index * 0.15}s`}>
+          <div class={`price-card w-full flex flex-col justify-start items-start gap-8 py-6 md:py-10 px-4 md:px-6 rounded-2xl border fade-up-a  ${index === 1 ? "back-prices border-secondary" : "bg-transparent border-[#263A4B]"}`} style={`animation-delay: ${index * 0.3}s`}>
             <div class="w-full flex justify-between items-center h-[27.8px]">
               <p class='subtitle-sm uppercase'>{item.tag}</p>
               {
@@ -31,13 +31,13 @@ const { content } = Astro.props as Props;
             <p class="body-md text-start" set:html={item.description}></p>
             <div class="flex flex-col justify-start items-start gap-6 ">
               {
-                item.lists.map((listItem)=>(
-                  <div class="flex justify-start items-center gap-2 ">
-                    <img src="/images/icons/check.svg" alt="Check" width="24" height="24" class="w-5 h-5 fade-up-a" decoding="async" loading="lazy" />
+                item.lists.map((listItem,index)=>(
+                  <div class="flex justify-start items-center gap-2 fade-up-a " style={`animation-delay: ${index * 0.2}s`}>
+                    <img src="/images/icons/check.svg" alt="Check" width="24" height="24" class="w-5 h-5 " decoding="async" loading="lazy" />
                     <div class='flex flex-col justify-center items-start gap-3'>
-                      <p class="text-paragraph body-md">{listItem.title}</p>
+                      <span class="text-paragraph body-md">{listItem.title}</span>
                       {
-                        listItem.description !== "" && (<p class="text-[#8F979D] body-sm">{listItem.description}</p>)
+                        listItem.description !== "" && (<span class="text-[#8F979D] body-sm">{listItem.description}</span>)
                       }
                     </div>
                   </div>

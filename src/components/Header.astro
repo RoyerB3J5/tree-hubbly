@@ -84,11 +84,22 @@ const lang = match ? match[1] : "en";
     const body = document.body;
 
     const desktopMenu = document.getElementById("desktop-menu");
+    const pageContent = document.getElementById("page-content");
     const openIcon = document.getElementById("menu-open-icon");
     const closeIcon = document.getElementById("menu-close-icon");
     let desktopOpen = false;
 
+    function updateMenuScale() {
+      if (!pageContent) return;
+      const width = document.documentElement.clientWidth;
+      pageContent.style.setProperty("--menu-scale", String(Math.min(1, (width - 32) / width, 1280 / width)));
+    }
+
     function setDesktopMenu(open) {
+      if (open && pageContent) {
+        pageContent.style.setProperty("--menu-origin-y", `${-pageContent.getBoundingClientRect().top}px`);
+        updateMenuScale();
+      }
       desktopOpen = open;
       body.classList.toggle("desktop-menu-open", open);
       document.documentElement.classList.toggle("desktop-menu-open", open);
@@ -104,7 +115,6 @@ const lang = match ? match[1] : "en";
     }
 
     openBtn?.addEventListener("click", () => {
-      if (!desktopOpen) window.scrollTo({ top: 0, behavior: "instant" });
       setDesktopMenu(!desktopOpen);
     });
     document.addEventListener("keydown", (event) => {
@@ -205,6 +215,7 @@ const lang = match ? match[1] : "en";
       { passive: true },
     );
     window.addEventListener("resize", () => {
+      if (desktopOpen) updateMenuScale();
       updateMainBarBg(window.scrollY || document.documentElement.scrollTop);
     });
     onScroll();

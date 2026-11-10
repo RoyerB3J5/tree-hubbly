@@ -74,7 +74,7 @@ export default {
     session: {
       tag: "Empecemos",
       title:
-        'Agenda una sesión de <br/> <span class="text-secondary">estrategia gratis.</span>',
+        'Agenda una sesión de <br class="hidden md:block"/> <span class="text-secondary">estrategia gratis.</span>',
       description:
         "30 minutos. Encontramos dónde tu empresa está perdiendo trabajos y te<br class='hidden xl:block'/> mostramos cómo el Tree Profit System™ lo resuelve. Sin presión.",
     },
@@ -86,7 +86,7 @@ export default {
       title:
         'Un ecosistema de crecimiento completo.<br/><span class="text-third">No servicios sueltos.</span>',
       description:
-        "La mayoría de agencias se detienen en el lead. El Tree Profit System™ sigue — cada trabajo<br/> terminado alimenta el siguiente.",
+        "La mayoría de agencias se detienen en el lead. El Tree Profit System™ sigue — cada trabajo<br class='hidden md:block'/> terminado alimenta el siguiente.",
       reasons: [
         {
           title: "Diagnóstico",
@@ -399,9 +399,9 @@ export default {
     guide: {
       tag: "¿Aún no sabes qué plan es para ti? Empieza gratis.",
       title:
-        'Descarga la guía gratis<br/><span class="text-third">y recibe una consultoría de 30 minutos.</span>',
+        'Descarga la guía gratis<br classs="hidden md:block"/> <span class="text-third">y recibe una consultoría de 30 minutos.</span>',
       description:
-        "Déjanos tus datos y te enviamos el eBook al instante. Luego un consultor especializado en <br/> Tree Services te ayuda a elegir el camino correcto para tu empresa.",
+        "Déjanos tus datos y te enviamos el eBook al instante. Luego un consultor especializado en <br classs='hidden md:block'/> Tree Services te ayuda a elegir el camino correcto para tu empresa.",
       book: {
         tag: "EBOOK GRATIS",
         subtag: "PDF DESCARGA INMEDIATA",

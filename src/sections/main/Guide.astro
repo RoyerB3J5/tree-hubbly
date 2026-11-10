@@ -14,15 +14,15 @@ const { content } = Astro.props as Props;
       <p set:html={content.description} class="body-md text-center"></p>
     </div>
     <div class="w-full flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-6">
-      <div class='w-full lg:w-1/2 bg-white py-8 md:py-10 px-4 md:px-6 flex flex-col justify-center items-start gap-6 md:gap-8 rounded-2xl'>
-        <div class="w-full flex justify-between items-center ">
+      <div data-reveal-sequence class='guide-book-card w-full lg:w-1/2 bg-white py-8 md:py-10 px-4 md:px-6 flex flex-col justify-center items-start gap-6 md:gap-8 rounded-2xl'>
+        <div class="guide-book-header fade-up-a w-full flex justify-between items-center ">
           <p class='subtitle-sm'>{content.book.tag}</p>
           <div class='flex justify-center items-center py-2 px-3 border border-third rounded-full'>
             <p class="uppercase subtitle-sm">{content.book.subtag}</p>
           </div>
         </div>
         <div class="animation-image-reveal-trigger w-full">
-          <div class="guide-book-reveal animation-image-reveal w-full rounded-lg overflow-hidden">
+          <div class="guide-book-reveal animation-image-reveal w-full rounded-lg overflow-hidden [--image-reveal-radius:0.5rem]" data-reveal-without-image>
           <div class="animation-image-reveal-mask w-full bg-third-light px-4 py-6 md:p-6 rounded-lg flex flex-col md:flex-row justify-center items-center gap-6">
           <img src="/images/book.webp" alt="Book Cover" width="600" height="900" class="guide-book-image fade-up-a w-[60%] md:w-[35%] h-auto object-cover" decoding="async" loading="lazy"/>
           <div class="flex flex-col justify-center items-center md:items-start gap-6">
@@ -32,18 +32,18 @@ const { content } = Astro.props as Props;
           </div>
           </div>
         </div>
-        <div class='flex flex-col justify-center items-start gap-6'>
+        <div class='guide-book-list flex flex-col justify-center items-start gap-6'>
           {
-            content.book.list10.map((item)=>(
-              <div class="flex justify-start items-center gap-2 ">
+            content.book.list10.map((item,index)=>(
+              <div class="flex justify-start items-center gap-2 fade-up-a" style={`animation-delay: ${index * 0.2}s`}>
                   <img src="/images/icons/check-blue.svg" alt="Check" width="24" height="24" class="w-5 h-5">
-                  <p class="text-primary body-md">{item}</p>
+                  <span class="text-primary body-md">{item}</span>
                 </div>
             ))
           }
         </div>
-        <div class="w-full px-4 py-6 lg:p-6 flex justify-center items-center gap-6 border border-[#05172526] rounded-2xl">
-          <div class='w-20 h-20 shrink-0 flex justify-center items-center bg-third-light rounded-lg'>
+        <div class="guide-book-bonus w-full px-4 py-6 lg:p-6 flex justify-center items-center gap-6 border border-[#05172526] rounded-2xl fade-up-a">
+          <div class='w-20 h-20 shrink-0 flex justify-center items-center bg-third-light rounded-lg '>
             <img src="/images/icons/calendar.svg" alt="Check" width="24" height="24" class="w-10 h-10"/>
           </div>
           <div class='flex flex-col justify-center items-start gap-6 md:gap-4'>
@@ -72,3 +72,46 @@ const { content } = Astro.props as Props;
   }
 </style>
 
+<script>
+  const card = document.querySelector<HTMLElement>(".guide-book-card");
+  if (card) {
+    const header = card.querySelector<HTMLElement>(".guide-book-header");
+    const image = card.querySelector<HTMLElement>(".guide-book-reveal");
+    const list = card.querySelector<HTMLElement>(".guide-book-list");
+    const bonus = card.querySelector<HTMLElement>(".guide-book-bonus");
+    const steps = [header, image, list, bonus].filter((element): element is HTMLElement => Boolean(element));
+
+    const activateStep = (element: HTMLElement, includeChildren = true) => {
+      element.classList.add("active");
+      if (includeChildren) {
+        element.querySelectorAll(".fade-up-a").forEach((child) => child.classList.add("active"));
+        element.querySelectorAll(".fade-up-lines-raw").forEach((text) => text.classList.add("active"));
+      }
+    };
+    const activateNestedContent = (element: HTMLElement | null) => {
+      element?.querySelectorAll(".fade-up-a, .fade-up-lines-raw").forEach((child) => child.classList.add("active"));
+    };
+    const reveal = () => {
+      steps.forEach((element) => activateStep(element));
+      activateNestedContent(image);
+      activateNestedContent(bonus);
+    };
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+      reveal();
+    } else {
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        steps.forEach((element, index) => {
+          window.setTimeout(() => {
+            activateStep(element, element !== image);
+            if (element === image) window.setTimeout(() => activateNestedContent(image), 1000);
+            if (element === bonus) window.setTimeout(() => activateNestedContent(bonus), 500);
+          }, index * 300);
+        });
+      }, { threshold: 0.3 });
+      observer.observe(card);
+    }
+  }
+</script>

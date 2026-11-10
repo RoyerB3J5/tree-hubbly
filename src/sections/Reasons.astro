@@ -6,7 +6,7 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<section class="system-reasons w-full bg-primary py-12 md:py-20 flex justify-center items-center">
+<section class="system-reasons w-full bg-primary flex justify-center items-center">
   <div class="system-reasons-inner container-full">
     <nav class="system-reasons-index" aria-label="System stages">
       <span class="system-reasons-index-track" aria-hidden="true"><span class="system-reasons-index-fill"></span></span>
@@ -15,19 +15,19 @@ const { content } = Astro.props as Props;
     <div class="system-reasons-slides">
   {
     content.items.map((item,index)=>(
-      <div class="system-reasons-slide flex justify-between items-end gap-8 lg:gap-14">
+      <div class="system-reasons-slide flex justify-between items-end gap-8 lg:gap-14 h-full md:h-auto xl:[@media(height_<_810px)]:h-screen py-12 md:py-20 xl:[@media(height_<_810px)]:py-0">
         <div class="system-reasons-copy flex flex-col justify-end items-start gap-8 max-w-[40%]">
           <h2 set:html={item.title} class="heading-h4 text-paragraph"></h2>
           <p set:html={item.description} class="body-md text-paragraph"></p>
-          <div class='w-full flex flex-col md:flex-row justify-center items-start gap-6'>
+          <div class='system-reasons-what w-full flex flex-col md:flex-row justify-center items-start gap-6'>
             {
               item.what.map((item)=>(
                 <div class='flex flex-col justify-start items-start gap-6 text-paragraph'>
-                  <h3 class="body-md">{item.title}</h3>
+                  <h3 class="body-md mb-0 md:mb-3 lg:mb-0">{item.title}</h3>
                   <ul class='flex flex-col justify-start items-start gap-6 text-paragraph'>
                     {
                       item.list.map((i)=>(
-                        <li class=' flex justify-start items-start gap-2'> <div class={`w-1.5 h-1.5 bg-secondary shrink-0`}></div><p class='body-md'>{i}</p></li>
+                      <li class='fade-up-a flex justify-start items-start gap-2'> <div class={`w-1.5 h-1.5 bg-secondary shrink-0`}></div><p class='body-md'>{i}</p></li>
                       ))
                     }
                   </ul>
@@ -50,7 +50,7 @@ const { content } = Astro.props as Props;
         {
           Object.keys(item.section).length !== 0 && (
             <div class='system-reasons-panels w-[50%] md:flex flex-col justify-center items-center gap-8 hidden '>
-              <div class='system-reasons-panel flex flex-col justify-center items-start gap-8 px-4 lg:px-8 py-6 md:py-10 border border-[#263A4B] rounded-2xl back-main-4 w-full'>
+              <div class='system-reasons-panel fade-up-a flex flex-col justify-center items-start gap-8 px-4 lg:px-8 py-6 md:py-10 border border-[#263A4B] rounded-2xl back-main-4 w-full'>
                 <h3 class="body-lg text-secondary">{item.section.system?.title}</h3>
                 <div class='w-[51px] h-1 bg-secondary'></div>
                 <ol class="flex flex-col justify-center items-start gap-8 list-decimal pl-4">
@@ -63,7 +63,7 @@ const { content } = Astro.props as Props;
                   }
                 </ol>
               </div>
-              <div class='system-reasons-panel flex flex-col justify-center items-start gap-8 px-4 lg:px-8 py-6 lg:py-10 border border-[#263A4B] rounded-2xl back-main-4 w-full'>
+              <div class='system-reasons-panel fade-up-a flex flex-col justify-center items-start gap-8 px-4 lg:px-8 py-6 lg:py-10 border border-[#263A4B] rounded-2xl back-main-4 w-full'>
                 <h3 class="body-lg text-secondary">{item.section.links?.title}</h3>
                 <div class='w-[51px] h-1 bg-secondary'></div>
                 <div class='w-full grid grid-cols-2 lg:grid-cols-3 justify-center items-center gap-4'>
@@ -88,6 +88,7 @@ const { content } = Astro.props as Props;
 </section>
 
 <style>
+  .system-reasons-inner { position: relative; }
   .system-reasons-index { position: relative; margin-bottom: 3rem; }
   .system-reasons-index ol { display: flex; flex-direction: column; gap: .5rem; padding-left: 1rem; }
   .system-reasons-index-item { color: var(--color-paragraph); font-size: .875rem; }
@@ -98,7 +99,21 @@ const { content } = Astro.props as Props;
   .system-reasons.is-pinned { min-height: 100svh; display: flex; align-items: center; padding-block: clamp(24px, 4vh, 48px); }
   .system-reasons.is-pinned .animation-image-reveal-trigger { max-width: min(50%, calc((100svh - 210px) * 628 / 650)); }
   .system-reasons.is-pinned .system-reasons-slides { display: grid; }
-  .system-reasons.is-pinned .system-reasons-slide { grid-area: 1 / 1; }
+  .system-reasons.is-pinned .system-reasons-slide { grid-area: 1 / 1; padding-block: 0; }
+  @media (prefers-reduced-motion: no-preference) {
+    .system-reasons-copy > p { --fade-up-lines-delay: 0.2s; }
+    .system-reasons-what { --fade-up-lines-delay: 0.4s; --fade-up-delay: 0.4s; }
+    .system-reasons-panel + .system-reasons-panel { --fade-up-delay: 0.2s; }
+  }
+  @media (min-width: 1029px) and (max-height: 809px) {
+    .system-reasons.is-pinned { padding-block: 24px; }
+    .system-reasons.is-pinned .system-reasons-index { position: absolute; top: 0; left: 0; margin-bottom: 0; z-index: 1; }
+    .system-reasons.is-pinned .system-reasons-slide { height: calc(100svh - 48px); padding-block: 0; }
+    .system-reasons.is-pinned .animation-image-reveal-trigger { height: 100%; max-width: none; }
+    .system-reasons.is-pinned .animation-image-reveal { height: 100%; aspect-ratio: auto; }
+    .system-reasons.is-pinned .system-reasons-panels { height: 100%; }
+    .system-reasons.is-pinned .system-reasons-panel { flex: 1 1 0; }
+  }
   @media (min-width: 768px) and (max-width: 1028px) {
     .system-reasons.is-pinned { padding-block: 16px; }
     .system-reasons.is-pinned .system-reasons-index { margin-bottom: 1rem; }
@@ -133,7 +148,7 @@ const { content } = Astro.props as Props;
     media.add("(prefers-reduced-motion: no-preference)", () => {
       // Keep the normal document flow when the content cannot fit on screen.
       section.classList.add("is-pinned");
-      if (section.scrollHeight > window.innerHeight) {
+      if (section.scrollHeight > window.innerHeight + 1) {
         section.classList.remove("is-pinned");
         if (window.innerWidth > 1028) return;
 
@@ -162,29 +177,48 @@ const { content } = Astro.props as Props;
       gsap.set(fill, { scaleY: 1 / slides.length });
       items[0]?.classList.add("is-active");
       let revealedIndex = -1;
+      let revealVersion = 0;
       const revealSlide = (index: number) => {
         if (index === revealedIndex) return;
         const previousIndex = revealedIndex;
         revealedIndex = index;
+        const version = ++revealVersion;
         slides.forEach((slide, slideIndex) => {
           if (slideIndex === previousIndex) return;
-          slide.querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, .animation-image-reveal")
+          slide.querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, .fade-up-a, .animation-image-reveal")
             .forEach((element) => { if (!element.closest("a, button")) element.classList.remove("active"); });
         });
         // Reset the incoming slide before replaying its CSS transitions.
         requestAnimationFrame(() => requestAnimationFrame(() => {
           if (revealedIndex !== index) return;
-          slides[index].querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, .animation-image-reveal")
-            .forEach((element) => { if (!element.closest("a, button")) element.classList.add("active"); });
+          const slide = slides[index];
+          slide.querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, .fade-up-a, .animation-image-reveal")
+            .forEach((element) => {
+              if (!element.closest("a, button") && (!element.closest(".system-reasons-panel") || element.classList.contains("system-reasons-panel"))) {
+                element.classList.add("active");
+              }
+            });
+          slide.querySelectorAll<HTMLElement>(".system-reasons-panel").forEach((panel) => {
+            requestAnimationFrame(() => {
+              const animations = panel.getAnimations().filter((animation) =>
+                "animationName" in animation && animation.playState === "running"
+              );
+              Promise.allSettled(animations.map((animation) => animation.finished)).then(() => {
+                if (revealVersion !== version || revealedIndex !== index) return;
+                panel.querySelectorAll(".fade-up-lines-raw").forEach((text) => text.classList.add("active"));
+              });
+            });
+          });
         }));
       };
       slides.forEach((slide) => {
-        slide.querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, .animation-image-reveal").forEach((element) => { if (!element.closest("a, button")) element.classList.remove("active"); });
+        slide.querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, .fade-up-a, .animation-image-reveal").forEach((element) => { if (!element.closest("a, button")) element.classList.remove("active"); });
         slide.querySelector(".animation-image-reveal")?.classList.add("reveal-ready");
       });
       const timeline = gsap.timeline({
         onUpdate(this: gsap.core.Animation) {
-          const activeIndex = Math.min(slides.length - 1, Math.floor((this.time() + 0.225) / 0.5));
+          // Start the entrance after the incoming slide has finished fading in.
+          const activeIndex = Math.min(slides.length - 1, Math.floor((this.time() + 0.15) / 0.5));
           items.forEach((item, index) => item.classList.toggle("is-active", index === activeIndex));
           if (this.scrollTrigger && this.scrollTrigger.progress > 0) revealSlide(activeIndex);
         },
@@ -223,7 +257,7 @@ const { content } = Astro.props as Props;
       let wheelLockedUntil = 0;
       const onWheel = (event: WheelEvent) => {
         const trigger = timeline.scrollTrigger;
-        if (!trigger?.isActive || event.ctrlKey || Math.abs(event.deltaY) < 2 ||
+        if (!trigger?.isActive || document.documentElement.classList.contains("section-transitioning") || event.ctrlKey || Math.abs(event.deltaY) < 2 ||
             document.documentElement.classList.contains("desktop-menu-open") ||
             document.getElementById("mobile-menu")?.classList.contains("translate-x-0")) return;
         const now = performance.now();
@@ -249,12 +283,13 @@ const { content } = Astro.props as Props;
       ScrollTrigger.refresh();
 
       return () => {
+        revealVersion++;
         firstSlideObserver.disconnect();
         window.removeEventListener("wheel", onWheel, true);
         section.classList.remove("is-pinned");
         items.forEach((item) => item.classList.remove("is-active"));
         slides.forEach((slide) => {
-          slide.querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, .animation-image-reveal").forEach((element) => { if (!element.closest("a, button")) element.classList.add("active"); });
+          slide.querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, .fade-up-a, .animation-image-reveal").forEach((element) => { if (!element.closest("a, button")) element.classList.add("active"); });
         });
       };
     });

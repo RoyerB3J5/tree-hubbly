@@ -8,22 +8,22 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<section class='numbers-section w-full flex justify-center items-center bg-primary'>
-  <div class="container-full flex flex-col justify-center xl:justify-between items-center gap-8 md:gap-10 py-12 md:py-20 xl:min-h-[100vh]">
+<section data-reveal-sequence class='numbers-section w-full flex justify-center items-center bg-primary'>
+  <div class="container-full flex flex-col justify-center xl:justify-between xl:[@media(height_<_810px)]:justify-center items-center gap-8 md:gap-10 xl:[@media(height_<_810px)]:gap-6 py-12 md:py-20 xl:[@media(height_<_810px)]:py-0 h-auto xl:h-[100vh]">
     <div class='w-full flex flex-col justify-center items-start md:items-center gap-6'>
-      <p class='subtitle-lg text-secondary'>{content.tag}</p>
-      <h2 set:html={content.title} class='heading-h4 text-paragraph text-start md:text-center'></h2>
+      <p class='numbers-tag fade-up-a subtitle-lg text-secondary'>{content.tag}</p>
+      <h2 set:html={content.title} class='numbers-title fade-up-a heading-h4 text-paragraph text-start md:text-center'></h2>
     </div>
     <div class="w-full flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-8 md:gap-6">
       <div class="w-full lg:w-[40%] overflow-hidden rounded-2xl relative bg-secondary aspect-398/414 md:aspect-798/414 lg:aspect-auto">
 
       </div>
-      <div class='numbers-card-frame w-full lg:w-[60%] overflow-hidden rounded-2xl'>
-      <div class='numbers-card flex flex-col justify-center items-start gap-8 w-full h-full py-12 md:py-14 px-4 md:px-6 back-main-4 rounded-2xl border border-[#263A4B]'>
+      <div class='numbers-card-frame fade-up-a w-full lg:w-[60%] overflow-hidden rounded-2xl'>
+      <div class='numbers-card flex flex-col justify-center items-start gap-8 w-full h-full py-12 md:py-14 xl:[@media(height_<_810px)]:py-8 px-4 md:px-6 back-main-4 rounded-2xl border border-[#263A4B]'>
         <div class='numbers-content w-full flex flex-col items-start gap-8'>
-        <h3 set:html={content.title2} class='heading-h4 text-paragraph'></h3>
-        <p class='body-md text-paragraph'>{content.description}</p>
-        <div class="w-full flex flex-col md:flex-row justify-center items-center gap-6">
+        <h3 set:html={content.title2} class='numbers-reveal-item heading-h4 text-paragraph'></h3>
+        <p class='numbers-reveal-item body-md text-paragraph'>{content.description}</p>
+        <div class="numbers-reveal-item w-full flex flex-col md:flex-row justify-center items-center gap-6">
           {
             content.statistics.map((item)=>(
               <div class="w-full md:w-1/2 flex justify-start items-center gap-6 py-4 px-6 bg-secondary/10 rounded-2xl fade-up-a">
@@ -31,38 +31,38 @@ const { content } = Astro.props as Props;
                   <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="24" height="24" class='w-[33px] h-[33px]' decoding="async" loading="lazy" />
                 </div>
                 <div class="flex flex-col justify-center items-start gap-6">
-                  <h4 class="numbers-counter text-[40px] leading-[120% font-bold text-secondary" data-value={item.title}>{item.title}</h4>
+                  <h4 class="numbers-counter text-[40px] leading-[120%] font-bold text-secondary whitespace-nowrap" data-value={item.title}>{item.title}</h4>
                   <p class='body-md text-paragraph'>{item.description}</p>
                 </div>
               </div>
             ))
           }
         </div>
-        <div class='w-full flex flex-col md:flex-row justify-center md:justify-start items-start md:items-center gap-4 '>
+        <ul class='numbers-reveal-item w-full flex flex-col md:flex-row justify-center md:justify-start items-start md:items-center gap-4 '>
           {
             content.list.map((i, index)=>(
               <>
-                <div class="flex justify-center items-center gap-2 " >
+                <li class="flex justify-center items-center gap-2 fade-up-a " >
                   <img src="/images/icons/check.svg" alt="Check" width="24" height="24" class='w-5 h-5' decoding="async" loading="lazy" />
                   <p class='body-md text-paragraph'>{i}</p>
-                </div>
+                </li>
                 <div class={`h-full w-[1px] bg-paragraph ${index === content.list.length - 1 ? 'hidden' : 'block'}`}></div>
               </>
               
             ))
           }
-        </div>
-        <div class="w-full flex flex-col md:flex-row justify-center items-center gap-4 md:gap-4">
+        </ul>
+        <div class="numbers-reveal-item w-full flex flex-col md:flex-row justify-center items-center gap-4 md:gap-4">
             <Button
                   text={content.buttons[0].label}
                   href={content.buttons[0].href}
-                  extraBtnClass="bg-secondary border-secondary w-full md:w-1/2 fade-up-a"
+                  extraBtnClass="bg-secondary border-secondary w-full md:w-1/2"
                   textClass="text-primary"
                 />
             <Button
                   text={content.buttons[1].label}
                   href={content.buttons[1].href}
-                  extraBtnClass="bg-transparent border-white w-full md:w-1/2 fade-up-a"
+                  extraBtnClass="bg-transparent border-white w-full md:w-1/2"
                   textClass="text-white"
                 />
           </div>
@@ -77,39 +77,92 @@ const { content } = Astro.props as Props;
   import { gsap } from "../../scripts/gsap";
 
   document.querySelectorAll<HTMLElement>(".numbers-section").forEach((section) => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const frame = section.querySelector<HTMLElement>(".numbers-card-frame");
     const card = section.querySelector<HTMLElement>(".numbers-card");
     const content = section.querySelector<HTMLElement>(".numbers-content");
-    if (!frame || !card || !content) return;
+    const tag = section.querySelector<HTMLElement>(".numbers-tag");
+    const title = section.querySelector<HTMLElement>(".numbers-title");
+    const revealItems = Array.from(section.querySelectorAll<HTMLElement>(".numbers-reveal-item"));
+    if (!frame || !card || !content || !tag || !title) return;
+
+    const activate = (element: HTMLElement) => element.classList.add("active");
+    const finishReveal = () => {
+      activate(tag);
+      activate(title);
+      activate(frame);
+      revealItems.forEach(activate);
+      content.querySelectorAll<HTMLElement>(".fade-up-a, .fade-up-lines-raw").forEach(activate);
+    };
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      finishReveal();
+      return;
+    }
+
+    const animateCounters = (container: HTMLElement) => {
+      container.querySelectorAll<HTMLElement>(".numbers-counter").forEach((counter) => {
+        const value = counter.dataset.value || "";
+        const match = value.match(/^(.*?)([0-9]+(?:\.[0-9]+)?)(.*)$/);
+        if (!match) return;
+        const [, prefix, number, suffix] = match;
+        const target = Number(number);
+        const decimals = number.split(".")[1]?.length || 0;
+        const state = { value: 0 };
+        counter.textContent = `${prefix}0${suffix}`;
+        gsap.to(state, {
+          value: target, duration: 1.2, ease: "power2.out",
+          onUpdate: () => { counter.textContent = `${prefix}${state.value.toFixed(decimals)}${suffix}`; },
+          onComplete: () => { counter.textContent = value; },
+        });
+      });
+    };
+
+    if (window.matchMedia("(max-width: 1023px)").matches) {
+      const revealVisible = (element: HTMLElement) => {
+        activate(element);
+        if (element.classList.contains("numbers-reveal-item")) {
+          element.querySelectorAll<HTMLElement>(".fade-up-a, .fade-up-lines-raw").forEach(activate);
+          animateCounters(element);
+        }
+      };
+      const targets = [tag, title, frame, ...revealItems];
+      if (!("IntersectionObserver" in window)) {
+        targets.forEach(revealVisible);
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          observer.unobserve(entry.target);
+          revealVisible(entry.target as HTMLElement);
+        });
+      }, { threshold: 0.1 });
+      targets.forEach((target) => observer.observe(target));
+      return;
+    }
+
     section.classList.add("numbers-reveal-controlled");
     gsap.set(card, { yPercent: 100 });
     gsap.set(content, { autoAlpha: 0 });
 
     const reveal = () => {
-      const timeline = gsap.timeline();
-      timeline.to(card, { yPercent: 0, duration: 0.7, ease: "power2.out" })
-        .set(content, { autoAlpha: 1 })
+      const timeline = gsap.timeline({ delay: 0.1 });
+      activate(tag);
+      timeline.call(() => activate(title), [], 0.1)
+        .call(() => activate(frame), [], 0.2)
+        .to(card, { yPercent: 0, duration: 0.7, ease: "power2.out" }, 0.2)
+        .set(content, { autoAlpha: 1 }, 0.9)
+        .call(() => revealItems.forEach((element, index) => {
+          activate(element);
+          element.querySelectorAll<HTMLElement>(".fade-up-a").forEach((child, childIndex) => {
+            window.setTimeout(() => activate(child), childIndex * 100);
+          });
+        }), [], 0.9)
         .call(() => {
           content.querySelectorAll<HTMLElement>(".fade-up-lines-raw").forEach((text, index) => {
             text.style.setProperty("--fade-up-lines-delay", `${index * 0.08}s`);
             text.classList.add("active");
           });
-          content.querySelectorAll<HTMLElement>(".numbers-counter").forEach((counter) => {
-            const value = counter.dataset.value || "";
-            const match = value.match(/^(.*?)([0-9]+(?:\.[0-9]+)?)(.*)$/);
-            if (!match) return;
-            const [, prefix, number, suffix] = match;
-            const target = Number(number);
-            const decimals = number.split(".")[1]?.length || 0;
-            const state = { value: 0 };
-            counter.textContent = `${prefix}0${suffix}`;
-            gsap.to(state, {
-              value: target, duration: 1.2, ease: "power2.out",
-              onUpdate: () => { counter.textContent = `${prefix}${state.value.toFixed(decimals)}${suffix}`; },
-              onComplete: () => { counter.textContent = value; },
-            });
-          });
+          animateCounters(content);
         });
     };
     if (!("IntersectionObserver" in window)) { reveal(); return; }

@@ -6,15 +6,56 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<div class="container-full flex flex-col md:flex-row justify-center items-start md:items-stretch gap-[32px] lg:gap-6" >
-  <div class="w-full md:w-[50%] flex flex-col justify-center items-start gap-8 md:gap-10">
-    <div class="flex flex-col justify-center items-start gap-6">
+<div data-reveal-sequence class="book-sequence container-full flex flex-col md:flex-row justify-center items-start md:items-stretch gap-[32px] lg:gap-6" >
+  <div class="w-full md:w-[50%] flex flex-col justify-center items-start gap-8 md:gap-10 xl:[@media(height_<_810px)]:gap-6">
+    <div class="book-heading flex flex-col justify-center items-start gap-6">
       <p set:html={content.tag} class="subtitle-lg text-primary"></p>
       <h2 set:html={content.title} class="heading-h4"></h2>
     </div>
-    <p set:html={content.description} class="body-md"></p>
-    <div class="w-full relative h-auto rounded-2xl overflow-hidden bg-amber-50" style="aspect-ratio: 628 / 413;">
+    <p set:html={content.description} class="book-description body-md"></p>
+    <div class="book-card fade-up-a w-full relative h-auto rounded-2xl overflow-hidden bg-secondary" style="aspect-ratio: 628 / 413;">
     </div>
   </div>
-  <div class="w-full md:w-1/2 h-[60vh] md:h-auto fade-up-a bg-primary rounded-2xl"></div>
+  <div class="book-panel w-full md:w-1/2 h-[60vh] md:h-auto fade-up-a bg-primary rounded-2xl"></div>
 </div>
+
+<script>
+  const initBookSequences = () => {
+    document.querySelectorAll<HTMLElement>(".book-sequence").forEach((book) => {
+      const heading = book.querySelector<HTMLElement>(".book-heading");
+      const panel = book.querySelector<HTMLElement>(".book-panel");
+      const description = book.querySelector<HTMLElement>(".book-description");
+      const card = book.querySelector<HTMLElement>(".book-card");
+
+      const groups = [
+        { target: heading, delay: 0, reveal: () => heading?.querySelectorAll("p, h2").forEach((element) => element.classList.add("active")) },
+        { target: panel, delay: 0, reveal: () => panel?.classList.add("active") },
+        { target: description, delay: 500, reveal: () => description?.classList.add("active") },
+        { target: card, delay: 1000, reveal: () => card?.classList.add("active") },
+      ];
+
+      if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        groups.forEach((group) => group.reveal());
+        return;
+      }
+
+      let start: number | undefined;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const group = groups.find((item) => item.target === entry.target);
+          if (!group) return;
+          observer.unobserve(entry.target);
+          start ??= performance.now();
+          const remaining = Math.max(0, start + group.delay - performance.now());
+          if (remaining) window.setTimeout(group.reveal, remaining);
+          else group.reveal();
+        });
+      }, { threshold: 0.3 });
+      groups.forEach((group) => { if (group.target) observer.observe(group.target); });
+    });
+  };
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initBookSequences, { once: true });
+  else initBookSequences();
+</script>

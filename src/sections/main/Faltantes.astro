@@ -6,39 +6,39 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<section id="faltantes" class="w-full flex justify-center items-center bg-primary-2 ">
-  <div class="w-full flex flex-col justify-center items-center p-4 md:p-8 overflow-hidden max-w-[1536px] min-h-screen md:min-h-0 xl:min-h-screen">
-    <div class="w-full flex-1 flex flex-col justify-between items-start md:items-center back-main-2 gap-8 md:gap-10 py-[74px] rounded-2xl px-4 md:px-12">
+<section id="faltantes" data-reveal-sequence class="w-full flex justify-center items-center bg-primary-2 ">
+  <div class="w-full flex flex-col justify-center items-center p-4 md:p-8 overflow-hidden max-w-[1536px] min-h-screen md:min-h-0 h-auto xl:h-screen">
+    <div class="w-full flex-1 flex flex-col justify-between items-start md:items-center back-main-2 gap-8 md:gap-10 py-[74px] xl:[@media(height_<_810px)]:gap-4 xl:[@media(height_<_810px)]:justify-center rounded-2xl px-4 md:px-12 xl:[@media(height_<_810px)]:py-0">
       <h2 set:html={content.title} class='heading-h4 text-paragraph text-start md:text-center'></h2>
-    <div class='w-full md:flex justify-center items-center gap-10 xl:gap-40 py-6 border-y border-white/10 hidden block'>
+    <div class='faltantes-items w-full md:flex justify-center items-center gap-10 xl:gap-40 py-6 border-y border-white/10 hidden block'>
       {
         content.items.map((item)=>(
-          <div class="flex justify-center items-center gap-[5px] ">
-            <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="24" height="24" class='w-5 h-5 fade-up-a' decoding="async" loading="lazy"/>
-            <p class="subtitle-lg text-paragraph">{item.title}</p>
+          <div class="flex justify-center items-center gap-[5px] fade-up-a ">
+            <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="24" height="24" class='w-5 h-5 ' decoding="async" loading="lazy"/>
+            <span class="subtitle-lg text-paragraph">{item.title}</span>
           </div>
         ))
       }
     </div>
     <div class="flex w-full flex-col lg:flex-row justify-center items-center gap-8 md:gap-6">
-        <div class="w-full lg:w-1/2 flex flex-col justify-center items-start gap-8 text-paragraph">
-          <p class="body-md">{content.description}</p>
-          <div class="flex flex-col justify-center items-start gap-4 xl:gap-6 w-full">
+        <div class="faltantes-details w-full lg:w-1/2 flex flex-col justify-center items-start gap-8 text-paragraph">
+          <p class="faltantes-description fade-up-a body-md">{content.description}</p>
+          <ul class="faltantes-list fade-up-a flex flex-col justify-center items-start gap-4 xl:gap-6 w-full">
             {
               content.list.map((l)=>(
-                <div class="flex justify-start items-center gap-2 ">
-                  <img src="/images/icons/check.svg" alt="Check" width="24" height="24" class="w-5 md:w-6 h-5 md:h-6 fade-up-a">
-                  <p class="text-paragraph body-md">{l}</p>
-                </div>
+                <li class="flex justify-start items-center gap-2">
+                  <img src="/images/icons/check.svg" alt="Check" width="24" height="24" class="w-5 md:w-6 h-5 md:h-6 ">
+                  <span class="text-paragraph body-md">{l}</span>
+                </li>
               ))
             }
-          </div>
-          <div class="w-full flex justify-center items-center px-4 py-8 rounded-2xl border border-[#263A4B]">
-            <p set:html={content.tag} class="body-lg text-paragraph text-center"></p>
+          </ul>
+          <div class="faltantes-tag fade-up-a w-full flex justify-center items-center px-4 py-8 rounded-2xl border border-[#263A4B]">
+            <span set:html={content.tag} class="body-lg text-paragraph text-center"></span>
           </div>
         </div>
         <div class="animation-image-reveal-trigger w-full lg:w-1/2">
-          <div class="w-full relative rounded-lg lg:rounded-2xl aspect-366/375 md:aspect-628/375 lg:aspect-628/575 xl:aspect-628/375 h-auto overflow-hidden animation-image-reveal">
+          <div class="w-full relative rounded-lg lg:rounded-2xl [--image-reveal-radius:0.5rem] lg:[--image-reveal-radius:1rem] aspect-366/375 md:aspect-628/375 lg:aspect-628/575 xl:aspect-628/375 h-auto overflow-hidden animation-image-reveal">
             <div class="animation-image-reveal-mask w-full h-full overflow-hidden rounded-lg lg:rounded-2xl">
               <img src="/images/faltantes.webp" alt="Companies TreeHubly" width="1536" height="1024" class="w-full h-full object-cover object-center" decoding="async" loading="lazy"/>
             </div>
@@ -49,3 +49,52 @@ const { content } = Astro.props as Props;
     
   </div>
 </section>
+
+<script>
+  const section = document.getElementById("faltantes");
+  if (section) {
+    const title = section.querySelector<HTMLElement>("h2");
+    const imageTrigger = section.querySelector<HTMLElement>(".animation-image-reveal-trigger");
+    const image = imageTrigger?.querySelector<HTMLElement>(".animation-image-reveal");
+    const items = section.querySelector<HTMLElement>(".faltantes-items");
+    const description = section.querySelector<HTMLElement>(".faltantes-description");
+    const list = section.querySelector<HTMLElement>(".faltantes-list");
+    const tag = section.querySelector<HTMLElement>(".faltantes-tag");
+
+    const groups = [
+      { target: title, delay: 0, reveal: () => title?.classList.add("active") },
+      { target: imageTrigger, delay: 0, reveal: () => {
+        if (!image) return;
+        getComputedStyle(image).transform;
+        image.classList.add("active");
+      } },
+      { target: items, delay: 300, reveal: () => items?.querySelectorAll(".fade-up-a").forEach((el) => el.classList.add("active")) },
+      { target: description, delay: 1000, reveal: () => description?.classList.add("active") },
+      { target: list, delay: 1500, reveal: () => list?.classList.add("active") },
+      { target: tag, delay: 2000, reveal: () => tag?.classList.add("active") },
+    ];
+
+    const init = () => {
+      if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        groups.forEach((group) => group.reveal());
+        return;
+      }
+      let start: number | undefined;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const group = groups.find((item) => item.target === entry.target);
+          if (!group) return;
+          observer.unobserve(entry.target);
+          start ??= performance.now();
+          const remaining = Math.max(0, start + group.delay - performance.now());
+          if (remaining) window.setTimeout(group.reveal, remaining);
+          else group.reveal();
+        });
+      }, { threshold: 0.3 });
+      groups.forEach((group) => { if (group.target) observer.observe(group.target); });
+    };
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, { once: true });
+    else init();
+  }
+</script>

@@ -51,15 +51,16 @@ const { content } = Astro.props as Props;
     overflow: hidden; opacity: 0.3; pointer-events: none;
   }
   .call-action-marquee-track {
-    display: flex; width: 200%; height: 100%;
+    --marquee-gap: clamp(2rem, 6vw, 6rem);
+    display: flex; width: max-content; height: 100%; gap: var(--marquee-gap);
     animation: call-action-scroll 24s linear infinite;
   }
   .call-action-marquee-track img {
-    display: block; width: 50%; height: 100%; flex: none;
+    display: block; width: 100vw; height: 100%; flex: none;
     object-fit: contain; object-position: center;
   }
   @keyframes call-action-scroll {
-    to { transform: translateX(-50%); }
+    to { transform: translateX(calc(-100vw - var(--marquee-gap))); }
   }
   @media (prefers-reduced-motion: reduce) {
     .call-action-marquee-track { animation: none; }

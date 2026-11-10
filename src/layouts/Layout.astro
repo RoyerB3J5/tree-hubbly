@@ -45,21 +45,19 @@ const { lang, t, pageClass } = Astro.props;
       }
         html.desktop-menu-open { overflow: hidden; }
         body.desktop-menu-open .header-cta { display: none; }
-        #site-main { --menu-height: 320px; min-height: 100svh; background: var(--color-primary); transition: padding-top 0.5s ease; }
+        #page-content { --menu-height: 320px; width: 100%; transform-origin: center var(--menu-origin-y, 0px); transition: transform 0.5s ease; }
+        #site-main { min-height: 100svh; background: var(--color-primary); }
         #site-main > section:first-of-type:not(.hero-main) { position: relative; }
-        #site-main > section:first-of-type {
-          z-index: 1;
-          transition: width 0.5s ease, border-radius 0.5s ease;
+        #site-main > section:first-of-type { z-index: 1; }
+        body.desktop-menu-open #page-content {
+          transform: translateY(var(--menu-height)) scale(var(--menu-scale, 1));
+          clip-path: inset(var(--menu-origin-y, 0px) 0 0 round 16px 16px 0 0);
         }
-        body.desktop-menu-open #site-main { padding-top: var(--menu-height, 280px); }
-        body.desktop-menu-open #site-main > section:first-of-type {
-          width: min(1280px, calc(100% - 32px));
-          border-radius: 1rem;
-          overflow: hidden;
-        }
-      @media (min-width: 768px) { #site-main { --menu-height: 280px; } }
+        #desktop-menu { visibility: hidden; opacity: 0; transition: opacity 0.3s ease, visibility 0s linear 0.3s; }
+        body.desktop-menu-open #desktop-menu { visibility: visible; opacity: 1; transition-delay: 0s; }
+      @media (min-width: 768px) { #page-content { --menu-height: 280px; } }
       @media (prefers-reduced-motion: reduce) {
-        #site-main, #site-main > section:first-of-type { transition: none; }
+        #page-content, #desktop-menu { transition: none; }
       }
     </style>
 
@@ -143,17 +141,19 @@ const { lang, t, pageClass } = Astro.props;
     </script>
   </head>
   <body
-    class="font-family antialiased overflow-x-clip bg-white flex flex-col justify-center items-center w-full"
+    class="font-family antialiased overflow-x-clip bg-primary flex flex-col justify-center items-center w-full"
   >
     <Header content={t?.header} />
-    <main
-      id="site-main"
-      class:list={["relative flex flex-col w-full items-center", pageClass]}
-    >
-      {t && <DesktopMenu contentHeader={t.header} />}
-      <slot />
-    </main>
-    <Footer content={t?.footer} />
+    {t && <DesktopMenu contentHeader={t.header} />}
+    <div id="page-content">
+      <main
+        id="site-main"
+        class:list={["relative flex flex-col w-full items-center", pageClass]}
+      >
+        <slot />
+      </main>
+      <Footer content={t?.footer} />
+    </div>
     
     {/*<Chatbot />  */}
     
@@ -206,11 +206,13 @@ const { lang, t, pageClass } = Astro.props;
       );
 
       animationElements.forEach((element) => {
+        if (element.closest("[data-reveal-sequence]")) return;
+        if (element.closest(".reasons-section.is-pinned .reasons-slide, .system-reasons.is-pinned .system-reasons-slide")) return;
         animationObserver.observe(element);
       });
     }
 
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
@@ -220,8 +222,13 @@ const { lang, t, pageClass } = Astro.props;
           observer.unobserve(target);
           if (!element) return;
           const image = element.querySelector(":scope > img, :scope > .animation-image-reveal-mask > img");
-          const reveal = () => element.classList.add("active");
-          if (image && !image.complete) {
+          const reveal = () => {
+            // Commit the prepared scale before activating, even on a reload
+            // where the target is already visible and the image is cached.
+            getComputedStyle(element).transform;
+            element.classList.add("active");
+          };
+          if (image && !image.complete && !element.hasAttribute("data-reveal-without-image")) {
             image.addEventListener("load", reveal, { once: true });
             image.addEventListener("error", reveal, { once: true });
             if (image.complete) reveal();
@@ -234,6 +241,7 @@ const { lang, t, pageClass } = Astro.props;
       document.querySelectorAll(".animation-image-reveal").forEach((element) => {
         if (!element.querySelector(":scope > img, :scope > .animation-image-reveal-mask")) return;
         element.classList.add("reveal-ready");
+        if (element.closest("[data-reveal-sequence]")) return;
         if (element.closest(".reasons-section.is-pinned, .system-reasons.is-pinned")) return;
         imageObserver.observe(element.closest(".animation-image-reveal-trigger") || element);
       });

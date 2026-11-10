@@ -1,6 +1,6 @@
 // Shared text reveal for all page layouts.
 function initTextReveal() {
-    const textRevealSelector = "h1, h2, h3, h4, h5, h6, p, li";
+    const textRevealSelector = "h1, h2, h3, h4, h5, h6, p";
     const lineRevealElements = [...document.querySelectorAll(`main ${textRevealSelector.split(", ").join(", main ")}`)]
       .filter((element) => !element.matches(".numbers-counter") && !element.closest("a, button"));
     lineRevealElements.forEach((element) => element.classList.add("fade-up-lines-raw"));
@@ -129,7 +129,7 @@ function initTextReveal() {
       );
 
       lineRevealRoots.forEach((element) => {
-        if (!element.closest(".steps-scroll-controlled .steps-card, .reasons-section.is-pinned .reasons-slide, .system-reasons.is-pinned .system-reasons-slide, .numbers-reveal-controlled .numbers-card, .control-scroll-controlled .control-item")) lineRevealObserver.observe(element);
+        if (!element.closest("[data-reveal-sequence], .steps-scroll-controlled .steps-card, .reasons-section.is-pinned .reasons-slide, .system-reasons.is-pinned .system-reasons-slide, .numbers-reveal-controlled .numbers-card, .control-scroll-controlled .control-item")) lineRevealObserver.observe(element);
       });
     } else {
       lineRevealRoots.forEach((element) => element.classList.add("active"));

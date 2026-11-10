@@ -7,7 +7,7 @@ interface Props {
 const { content } = Astro.props as Props;
 ---
 <section class='control-section w-full flex justify-center items-center bg-third-light '>
-  <div class='container-full flex flex-col justify-between items-center py-12 md:py-20 gap-8 md:gap-10 h-auto xl:h-[100svh]'>
+  <div class='container-full flex flex-col justify-between xl:[@media(height_<_810px)]:justify-center items-center py-12 md:py-20 xl:[@media(height_<_810px)]:py-0 gap-8 md:gap-10 xl:[@media(height_<_810px)]:gap-6 h-auto xl:h-[100vh] '>
     <div class="w-full flex flex-col md:flex-row justify-center md:justify-between items-start md:items-center gap-8 md:gap-0">
       <div class='flex flex-col justify-center items-start gap-6 text-primary max-w-[411px]'>
         <p class="subtitle-lg">{content.tag}</p>
@@ -17,7 +17,7 @@ const { content } = Astro.props as Props;
         }
         
       </div>
-      <div class='animation-image-reveal-trigger w-full md:w-[55%]'>
+      <div class='animation-image-reveal-trigger w-full md:w-[55%] xl:[@media(height_<_810px)]:w-[50%]'>
         <div class='animation-image-reveal w-full h-auto relative overflow-hidden rounded-2xl aspect-398/240 md:aspect-737/411'>
           <div class='animation-image-reveal-mask w-full h-full overflow-hidden rounded-2xl'>
             <img src={`/images/${content.img}.webp`} alt="Control" width="1400" height="788" class="w-full h-full object-cover object-center" decoding="async" loading="lazy"/>

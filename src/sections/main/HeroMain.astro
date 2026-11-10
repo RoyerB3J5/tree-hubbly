@@ -17,9 +17,9 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
     <video class="hero-sequence__media hero-sequence__video object-cover object-center" muted playsinline preload="none" data-src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/video_hero.mp4" poster="/images/hero-frames/frame_0000.webp" aria-hidden="true" tabindex="-1"></video>
     <div class="absolute w-full h-full inset-0 z-3 back-hero"></div>
     <div
-      class="container-full flex flex-col justify-end items-center pb-12 md:py-14 relative z-10 h-full"
+      class="container-full flex flex-col justify-end items-center pb-12 md:py-14 xl:[@media(height_<_810px)]:py-10 relative z-10 h-full"
     >
-      <div class="flex flex-col justify-center items-center gap-8 md:gap-10">
+      <div class="flex flex-col justify-center items-center gap-8 md:gap-10 xl:[@media(height_<_810px)]:gap-6">
         <div class='flex flex-col justify-center items-center gap-6'>
           {
             content.tag !== "" && (
@@ -39,9 +39,9 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
               {
                 content.items.map((item,index) => (
                   <>
-                  <li class=" flex justify-center items-center gap-2">
+                  <li class=" flex justify-center items-center gap-2 fade-up-a">
                     
-                    <img src={`/images/icons/items-h-${index + 1}.svg`} alt={`Item ${index + 1}`} width="24" height="24" class="w-8 h-8 fade-up-a">
+                    <img src={`/images/icons/items-h-${index + 1}.svg`} alt={`Item ${index + 1}`} width="24" height="24" class="w-8 h-8 ">
                     <span class="fade-up-lines-raw text-[18px] font-semibold leading-[150%] text-paragraph text-center">{item}</span>
                   </li>
                   <div class='h-full w-[1px] bg-paragraph/40 last:hidden'></div>
@@ -88,6 +88,7 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
   import { gsap, ScrollTrigger } from "../../scripts/gsap";
 
   const FRAME_COUNT = 73;
+  const INTRO_START = 3;
   const INTRO_END = 5;
 
   document.querySelectorAll<HTMLElement>(".hero-sequence").forEach((hero) => {
@@ -198,9 +199,13 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
       window.addEventListener("resize", resize);
       video.addEventListener("ended", finishIntro);
       video.addEventListener("error", finishIntro);
+      const startIntro = () => {
+        video.currentTime = INTRO_START;
+        video.play().then(() => { if (active && !introFinished) introTick = requestAnimationFrame(checkIntro); }).catch(finishIntro);
+      };
+      video.addEventListener("loadedmetadata", startIntro, { once: true });
       video.src = video.dataset.src || "";
       video.classList.add("is-visible");
-      video.play().then(() => { if (active && !introFinished) introTick = requestAnimationFrame(checkIntro); }).catch(finishIntro);
 
       const state = { frame: 0 };
       const tween = gsap.to(state, {
@@ -237,6 +242,7 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
         window.removeEventListener("resize", resize);
         video.removeEventListener("ended", finishIntro);
         video.removeEventListener("error", finishIntro);
+        video.removeEventListener("loadedmetadata", startIntro);
         video.pause();
         video.removeAttribute("src");
         video.load();

@@ -16,6 +16,7 @@ const { content } = Astro.props as Props;
       {
         content.pc.map((item,index)=>(
           <div class={`marketing-card w-full flex flex-col justify-center items-start gap-8 py-8 md:py-10 px-4 md:px-6 border rounded-2xl text-paragraph ${index === 0 ? "bg-transparent border-[#FF4E4E]" : "back-prices border-secondary"}`} style={`--glow-color: ${index === 0 ? "255, 78, 78" : "145, 210, 0"}`} >
+            <div class="marketing-card-content w-full flex flex-col justify-center items-start gap-8">
             <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="50" height="50" class='w-10 h-10 fade-up-a' decoding="async" loading="lazy" />
             <h3 class={`body-lg ${index === 0 ? "" : "text-secondary"}`}>{item.title}</h3>
             <div class={`fade-up-a w-[51px] h-1 ${index === 0 ? "bg-[#FF4E4E]" : "bg-secondary"}`}></div>
@@ -29,6 +30,7 @@ const { content } = Astro.props as Props;
                 ))
               }
             </ul>
+            </div>
           </div>
         ))
       }
@@ -60,6 +62,8 @@ const { content } = Astro.props as Props;
 </style>
 
 <script>
+  import { gsap } from "../../scripts/gsap";
+
   document.querySelectorAll<HTMLElement>(".marketing-cards").forEach((container) => {
     const cards = container.querySelectorAll<HTMLElement>(".marketing-card");
     container.addEventListener("pointermove", (event) => {
@@ -74,5 +78,39 @@ const { content } = Astro.props as Props;
     container.addEventListener("pointerleave", () => {
       cards.forEach((card) => card.style.setProperty("--glow-opacity", "0"));
     });
+  });
+
+  const tiltMedia = gsap.matchMedia();
+  tiltMedia.add("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)", () => {
+    const cleanup: (() => void)[] = [];
+    document.querySelectorAll<HTMLElement>(".marketing-card").forEach((card) => {
+      const content = card.querySelector<HTMLElement>(".marketing-card-content");
+      if (!content) return;
+
+      gsap.set(card, { transformPerspective: 650 });
+      const rotateX = gsap.quickTo(card, "rotationX", { duration: 0.5, ease: "power3.out" });
+      const rotateY = gsap.quickTo(card, "rotationY", { duration: 0.5, ease: "power3.out" });
+      const moveX = gsap.quickTo(content, "x", { duration: 0.5, ease: "power3.out" });
+      const moveY = gsap.quickTo(content, "y", { duration: 0.5, ease: "power3.out" });
+
+      const onMove = (event: PointerEvent) => {
+        if (event.pointerType === "touch") return;
+        const rect = card.getBoundingClientRect();
+        const x = gsap.utils.clamp(0, 1, (event.clientX - rect.left) / rect.width);
+        const y = gsap.utils.clamp(0, 1, (event.clientY - rect.top) / rect.height);
+        rotateX(gsap.utils.interpolate(15, -15, y));
+        rotateY(gsap.utils.interpolate(-15, 15, x));
+        moveX(gsap.utils.interpolate(-20, 20, x));
+        moveY(gsap.utils.interpolate(-20, 20, y));
+      };
+      const onLeave = () => { rotateX(0); rotateY(0); moveX(0); moveY(0); };
+      card.addEventListener("pointermove", onMove);
+      card.addEventListener("pointerleave", onLeave);
+      cleanup.push(() => {
+        card.removeEventListener("pointermove", onMove);
+        card.removeEventListener("pointerleave", onLeave);
+      });
+    });
+    return () => cleanup.forEach((dispose) => dispose());
   });
 </script>

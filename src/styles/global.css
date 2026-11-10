@@ -50,26 +50,26 @@ html {
   .animation-image-reveal.reveal-ready {
     transform: scale(1.5);
     transform-origin: right center;
-    transition: transform 0.95s cubic-bezier(0.4, 0, 0.6, 1);
   }
 
   .animation-image-reveal.reveal-ready.active {
     transform: scale(1);
+    transition: transform 0.95s cubic-bezier(0.4, 0, 0.6, 1);
   }
 
   .animation-image-reveal.reveal-ready
     > :is(.animation-image-reveal-mask, img) {
-    clip-path: inset(0 0 0 100%);
+    clip-path: inset(0 0 0 100% round var(--image-reveal-radius, 1rem));
     opacity: 0.5;
-    transition:
-      clip-path 0.9s cubic-bezier(0.45, 0, 0.55, 1) 0.1s,
-      opacity 0.6s linear 0.1s;
   }
 
   .animation-image-reveal.reveal-ready.active
     > :is(.animation-image-reveal-mask, img) {
-    clip-path: inset(0);
+    clip-path: inset(0 round var(--image-reveal-radius, 1rem));
     opacity: 1;
+    transition:
+      clip-path 0.9s cubic-bezier(0.45, 0, 0.55, 1) 0.1s,
+      opacity 0.6s linear 0.1s;
   }
 }
 
@@ -535,7 +535,6 @@ html {
   }
 }
 
-.fade-up-lines-raw,
 .fade-up-lines-raw .fade-up-line-word,
 .fade-up-lines-raw .fade-up-line-fragment {
   text-box-trim: none;

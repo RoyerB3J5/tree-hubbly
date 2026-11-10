@@ -10,15 +10,15 @@ const heightFactor = 0.91;
 const anotherPage = content.tag =="" ? true : false;
 const baseHeight = anotherPage ? 523 : 424;
 ---
-<section class='home-steps w-full flex justify-center items-center bg-third-light min-h-[100svh] md:min-h-0 xl:min-h-[100svh]'>
-  <div class={`container-full flex flex-col justify-center md:justify-between ${anotherPage ? 'items-start' : 'items-start md:items-center'} gap-8 md:gap-10 py-12 md:py-20`}>
+<section data-reveal-sequence class='home-steps w-full flex justify-center items-center bg-third-light min-h-[100svh] md:min-h-0 h-auto xl:h-[100vh]'>
+  <div class={`container-full flex flex-col justify-center md:justify-between xl:[@media(height_<_810px)]:justify-center ${anotherPage ? 'items-start' : 'items-start md:items-center'} gap-8 md:gap-10 xl:[@media(height_<_810px)]:gap-6 py-12 md:py-20 xl:[@media(height_<_810px)]:py-0`}>
     <div class='flex flex-col justify-center items-start md:items-center gap-6'>
       {
-        !anotherPage && (<p class="subtitle-lg text-primary">{content.tag}</p>)
+      !anotherPage && (<p class="steps-tag fade-up-a subtitle-lg text-primary">{content.tag}</p>)
       }
-      <h2 set:html={content.title} class="heading-h4 text-primary text-start md:text-center"></h2>
+    <h2 set:html={content.title} class="steps-title fade-up-a heading-h4 text-primary text-start md:text-center"></h2>
     </div>
-    <p class='body-md text-primary text-start md:text-center' set:html={content.description}></p>
+  <p class='steps-description fade-up-a body-md text-primary text-start md:text-center' set:html={content.description}></p>
     <div class='w-full grid grid-cols-1 lg:grid-cols-5 justify-center items-center lg:items-end gap-4 md:gap-6 steps-card-list '>
       {
         content.reasons.map((item,index)=>(
@@ -79,37 +79,89 @@ const baseHeight = anotherPage ? 523 : 424;
 
   document.addEventListener("DOMContentLoaded", () => queueMicrotask(() => {
     if (!stepsSection) return;
+    const sequence = [
+      stepsSection.querySelector<HTMLElement>(".steps-tag"),
+      stepsSection.querySelector<HTMLElement>(".steps-title"),
+      stepsSection.querySelector<HTMLElement>(".steps-description"),
+    ].filter((element): element is HTMLElement => Boolean(element));
+    const revealSequence = () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        sequence.forEach((element) => element.classList.add("active"));
+        return;
+      }
+      const reveal = () => sequence.forEach((element, index) => {
+        window.setTimeout(() => element.classList.add("active"), index * 300);
+      });
+      if (!("IntersectionObserver" in window)) {
+        reveal();
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        reveal();
+      }, { threshold: 0.3 });
+      observer.observe(sequence[0]);
+    };
+    if (sequence.length) revealSequence();
+
     const cards = gsap.utils.toArray<HTMLElement>(stepsSection.querySelectorAll(".steps-card"));
     if (!cards.length) return;
 
-    const media = gsap.matchMedia();
-    media.add("(min-width: 768px) and (max-width: 1279px) and (prefers-reduced-motion: no-preference)", () => {
-      cards.forEach((card, index) => {
+    const observeCards = () => {
+      let disposed = false;
+      const animateCard = window.innerWidth >= 768;
+      cards.forEach((card) => card.querySelectorAll(".fade-up-lines-raw").forEach((text) => text.classList.remove("active")));
+      const reveal = (card: HTMLElement) => {
+        const text = card.querySelectorAll<HTMLElement>(".fade-up-lines-raw");
+        text.forEach((element, index) => element.style.setProperty("--fade-up-lines-delay", `${index * 0.18}s`));
+        if (!animateCard) {
+          text.forEach((element) => element.classList.add("active"));
+          return;
+        }
+        card.classList.add("active");
+        requestAnimationFrame(() => {
+          const animations = card.getAnimations().filter((animation) =>
+            "animationName" in animation && animation.playState === "running"
+          );
+          Promise.allSettled(animations.map((animation) => animation.finished)).then(() => {
+            if (!disposed) text.forEach((element) => element.classList.add("active"));
+          });
+        });
+      };
+      if (animateCard) cards.forEach((card, index) => {
         card.classList.add("fade-up-a");
         card.style.setProperty("--fade-up-delay", `${index * 0.2}s`);
       });
-      const observer = new IntersectionObserver((entries) => {
+      const observer = "IntersectionObserver" in window ? new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          entry.target.classList.add("active");
-          observer.unobserve(entry.target);
+          observer?.unobserve(entry.target);
+          reveal(entry.target as HTMLElement);
         });
-      }, { threshold: 0.3 });
-      cards.forEach((card) => observer.observe(card));
+      }, { threshold: 0.3 }) : null;
+      if (observer) cards.forEach((card) => observer.observe(card));
+      else cards.forEach(reveal);
       return () => {
-        observer.disconnect();
+        disposed = true;
+        observer?.disconnect();
         cards.forEach((card) => {
           card.classList.remove("fade-up-a", "active");
           card.style.removeProperty("--fade-up-delay");
+          card.querySelectorAll<HTMLElement>(".fade-up-lines-raw").forEach((text) => {
+            text.style.removeProperty("--fade-up-lines-delay");
+          });
         });
       };
-    });
+    };
+
+    const media = gsap.matchMedia();
+    media.add("(max-width: 1279px) and (prefers-reduced-motion: no-preference)", observeCards);
 
     media.add("(min-width: 1280px) and (prefers-reduced-motion: no-preference)", () => {
       if (!canPinSteps()) {
         stepsSection.classList.remove("steps-scroll-controlled");
-        stepsSection.querySelectorAll(".steps-card .fade-up-lines-raw").forEach((text) => text.classList.add("active"));
-        return;
+        return observeCards();
       }
 
       stepsSection.classList.add("steps-scroll-controlled");
@@ -137,7 +189,7 @@ const baseHeight = anotherPage ? 523 : 424;
         gsap.set(content, { autoAlpha: 0 });
         timeline.to(card, { yPercent: 0, duration: 0.45, ease: "none" }, index)
           .set(content, { autoAlpha: 1 }, index + 0.45)
-          .call(() => text.forEach((element) => element.classList.add("active")), [], index + 0.45)
+          .call(() => text.forEach((element) => element.classList.toggle("active", (timeline.scrollTrigger?.direction ?? 1) >= 0)), [], index + 0.45)
           .to({}, { duration: 0.55 }, index + 0.45);
       });
 
