@@ -1,20 +1,14 @@
-<link
-  rel="preconnect"
-  href="https://link.inkshapecrm.com"
-  crossorigin="anonymous"
-/>
-<div class="relative min-h-[750px] w-full max-w-[1280px] ">
+<div class="relative w-full">
   <div
-    id="booking-form-spinner"
+    id="spinner-contact"
     class="absolute inset-0 z-10 flex items-center justify-center"
-    aria-label="Cargando formulario"
   >
+    <!-- Ejemplo de spinner SVG o div animado con Tailwind -->
     <svg
-      class="h-8 w-8 animate-spin text-gray-500"
+      class="animate-spin h-8 w-8 text-gray-500"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      aria-hidden="true"
     >
       <circle
         class="opacity-25"
@@ -30,42 +24,23 @@
     </svg>
   </div>
   <iframe
-    src="https://link.inkshapecrm.com/widget/booking/pHdunwzN5jl2H4aBhNup"
-    class="relative z-20 h-auto w-full border-none"
-    style="width: 100%; border: none; overflow: hidden;"
-    scrolling="no"
-    loading="eager"
-    id="yFOH38N0H3OhKeWXG62l_1792264284443"
-    title="Formulario de reserva"
-    allow="payment"
-    onload={`document.getElementById('booking-form-spinner')?.style.setProperty('display', 'none');`}
-  ></iframe>
-  <p
-    id="booking-form-fallback"
-    class="absolute inset-x-4 top-1/2 z-10 hidden -translate-y-1/2 text-center text-white"
+    src="https://link.inkshapecrm.com/widget/form/Tz0iF33Tztl9w4XWATvR"
+    class="w-full h-full border-none relative z-40"
+    id="sticky-sidebar-left-Tz0iF33Tztl9w4XWATvR"
+    data-layout="{'id':'INLINE'}"
+    data-trigger-type="alwaysShow"
+    data-trigger-value=""
+    data-activation-type="alwaysActivated"
+    data-activation-value=""
+    data-deactivation-type="neverDeactivate"
+    data-deactivation-value=""
+    data-form-name="Form General Website"
+    data-height="616"
+    data-layout-iframe-id="sticky-sidebar-left-Tz0iF33Tztl9w4XWATvR"
+    data-form-id="Tz0iF33Tztl9w4XWATvR"
+    title="Form General Website"
+    onload={`document.getElementById('spinner-contact')?.style.setProperty('display','none');`}
   >
-    No se pudo cargar el formulario. <a
-      href="https://link.inkshapecrm.com/widget/booking/pHdunwzN5jl2H4aBhNup"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="underline">Abrir formulario</a
-    >
-  </p>
-  <script async defer src="https://link.inkshapecrm.com/js/form_embed.js"
-  ></script>
+  </iframe>
+  <script src="https://link.inkshapecrm.com/js/form_embed.js"></script>
 </div>
-
-<script is:inline>
-  const bookingIframe = document.getElementById(
-    "pHdunwzN5jl2H4aBhNup_1792430583731",
-  );
-  const bookingSpinner = document.getElementById("booking-form-spinner");
-  const bookingFallback = document.getElementById("booking-form-fallback");
-
-  window.setTimeout(() => {
-    if (bookingIframe && bookingSpinner?.style.display !== "none") {
-      bookingSpinner.style.display = "none";
-      if (bookingFallback) bookingFallback.style.display = "block";
-    }
-  }, 15000);
-</script>

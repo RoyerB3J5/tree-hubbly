@@ -1,4 +1,6 @@
 ---
+import Form from "../../components/Form.astro";
+
 type Translations = typeof import("../../i18n/en-2").default;
 type Content = Translations["main"]["guide"];
 interface Props {
@@ -57,6 +59,7 @@ const { content } = Astro.props as Props;
         <p class="subtitle-sm uppercase">{content.form.tag}</p>
         <h3 set:html={content.form.title} class="body-xl"></h3>
         <p set:html={content.form.description} class="body-md"></p>
+        <Form/>
       </div>
     </div>
   </div>

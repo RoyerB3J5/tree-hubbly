@@ -1,39 +1,48 @@
----
-interface Props {
-  title: string;
-}
-const { title } = Astro.props as Props;
----
-
-<div class="relative w-full md:w-[55%] lg:w-[55%] animation-fade-left bg-white rounded-3xl overflow-hidden py-6 md:py-10 px-4 md:px-8 border border-[#D3D3D3]">
-  <div id="spinner" class="absolute inset-0 z-10 flex items-center justify-center bg-white">
-    <!-- Spinner CSS puro más eficiente -->
-    <div class="w-8 h-8 border-4 border-gray-200 border-t-gray-500 rounded-full animate-spin"></div>
-  </div>
-  <div class="w-full flex flex-col justify-center items-start gap-10">
-    <h3 class="text-[24px] md:text-[32px] font-semibold leading-[150%] text-primary">{title}</h3>
-    <iframe
-      src="https://link.inkshapecrm.com/widget/form/QiDq3XVm3rXaOPeFOn8b"
-      class="w-full h-full border-none relative z-40"
-      id="inline-QiDq3XVm3rXaOPeFOn8b"
-      data-layout="{'id':'INLINE'}"
-      data-trigger-type="alwaysShow"
-      data-trigger-value=""
-      data-activation-type="alwaysActivated"
-      data-activation-value=""
-      data-deactivation-type="neverDeactivate"
-      data-deactivation-value=""
-      data-form-name="Form General Website"
-      data-height="926"
-      data-layout-iframe-id="inline-QiDq3XVm3rXaOPeFOn8b"
-      data-form-id="QiDq3XVm3rXaOPeFOn8b"
-      title="Form General Website"
-      onload="document.getElementById('spinner').style.display='none'"
-      sandbox="allow-forms allow-scripts allow-popups allow-same-origin"
-      loading="eager"
+<div class="relative w-full">
+  <div
+    id="spinner-pdf"
+    class="absolute inset-0 z-10 flex items-center justify-center"
+  >
+    <!-- Ejemplo de spinner SVG o div animado con Tailwind -->
+    <svg
+      class="animate-spin h-8 w-8 text-gray-500"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
     >
-    </iframe>
-    <script src="https://link.inkshapecrm.com/js/form_embed.js" defer></script>
+      <circle
+        class="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        stroke-width="4"></circle>
+      <path
+        class="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+    </svg>
   </div>
-  
+  <iframe
+    src="https://link.inkshapecrm.com/widget/form/jiL7jLyogaIRlB0zLLyI"
+    class="w-full h-full border-none relative z-40"
+    id="sticky-sidebar-left-jiL7jLyogaIRlB0zLLyI"
+    data-layout="{'id':'INLINE'}"
+    data-trigger-type="alwaysShow"
+    data-trigger-value=""
+    data-activation-type="alwaysActivated"
+    data-activation-value=""
+    data-deactivation-type="neverDeactivate"
+    data-deactivation-value=""
+    data-form-name="Formulario eBook"
+    data-height="616"
+    data-layout-iframe-id="sticky-sidebar-left-jiL7jLyogaIRlB0zLLyI"
+    data-form-id="jiL7jLyogaIRlB0zLLyI"
+    title="Formulario eBook"
+    data-cookie-consent="true"
+    data-cookie-consent-provider="auto"
+    onload={`document.getElementById('spinner-pdf')?.style.setProperty('display','none');`}
+  >
+  </iframe>
+  <script src="https://link.inkshapecrm.com/js/form_embed.js"></script>
 </div>

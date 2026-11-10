@@ -6,40 +6,40 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<section class="w-full flex justify-center items-center bg-primary">
+<section class="results-hero w-full flex justify-center items-center bg-primary">
   <div class="container-full flex flex-col justify-center items-center pb-12 md:pb-20 pt-26 md:pt-40 gap-8 md:gap-10">
     <div class="flex flex-col justify-center items-start md:items-center gap-6">
-      <p class="subtitle-lg text-secondary">{content.tag}</p>
-      <h1 set:html={content.title} class="heading-h4 text-paragraph text-start md:text-center"></h1>
-      <p class="body-md text-paragraph mt-2 text-start md:text-center">{content.description}</p>
+      <p class="results-reveal-item fade-up-a subtitle-lg text-secondary">{content.tag}</p>
+      <h1 set:html={content.title} class="results-reveal-item fade-up-a heading-h4 text-paragraph text-start md:text-center"></h1>
+      <p class="results-reveal-item fade-up-a body-md text-paragraph mt-2 text-start md:text-center">{content.description}</p>
     </div>
-    <div class='w-full flex flex-col justify-center items-center gap-20'>
-      <div class='w-full flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-8 md:gap-6'>
-        <div class="w-full lg:w-[45%] h-auto relative overflow-hidden rounded-2xl aspect-118/123 md:aspect-903/645 lg:aspect-603/645 bg-paragraph">
+    <div class='results-content w-full flex flex-col justify-center items-center gap-20'>
+      <div class='results-first-row w-full flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-8 md:gap-6'>
+        <div class="results-first-row-image fade-up-a w-full lg:w-[45%] h-auto relative overflow-hidden rounded-2xl aspect-118/123 md:aspect-903/645 lg:aspect-603/645 bg-paragraph">
         </div>
-        <div class='w-full lg:w-[55%] flex flex-col justify-center items-start gap-6 border border-[#263A4B] rounded-2xl px-4 py-12 md:p-6 back-main-4 fade-up-a'>
+        <div class='results-first-row-panel fade-up-a w-full lg:w-[55%] flex flex-col justify-center items-start gap-6 border border-[#263A4B] rounded-2xl px-4 py-12 md:p-6 back-main-4'>
           <p class="subtitle-lg text-secondary">{content.section.tag}</p>
           <h2 set:html={content.section.title} class="heading-h4 text-paragraph" ></h2>
           <p class="body-md text-paragraph mt-2">{content.section.description}</p>
-          <div class='bg-secondary w-[51px] h-1 mt-4 fade-up-a'></div>
+          <div class='bg-secondary w-[51px] h-1 mt-4'></div>
           <p class="text-paragraph text-start md:text-center subtitle-lg block md:hidden">{content.description2}</p>
         </div>
       </div>
-      <div class="w-full flex flex-col justify-center items-start md:items-center gap-10">
-        <div class='w-full flex flex-col lg:flex-row justify-center lg:justify-between items-start lg:items-center gap-6'>
+      <div class="results-section2 w-full flex flex-col justify-center items-start md:items-center gap-10">
+        <div class='results-section2-copy w-full flex flex-col lg:flex-row justify-center lg:justify-between items-start lg:items-center gap-6'>
           <h2 set:html={content.section2.title} class="heading-h4 text-paragraph "></h2>
           <p class="body-md text-paragraph max-w-none lg:max-w-[70%] text-start">{content.section2.description}</p>
         </div>
         <div class='w-full grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 justify-center items-center lg:items-stretch'>
           {
             content.section3.elements.map((item,index)=>(
-              <div class='w-full flex flex-col justify-center items-start gap-6 md:gap-8 px-4 py-6 md:p-6 rounded-2xl border border-[#263A4B] fade-up-a' style={`animation-delay: ${ index * 0.1}s`}>
+              <div class='w-full flex flex-col justify-center items-start gap-6 md:gap-8 px-4 py-6 md:p-6 rounded-2xl border border-[#263A4B] fade-up-a' style={`--fade-up-delay: ${ index * 0.3}s`}>
                 <h3 class='text-secondary body-lg'>{item.title}</h3>
                 <p class="body-md text-paragraph">{item.description}</p>
               </div>
             ))
           }
-          <div class='w-full flex flex-col justify-center items-start gap-8 px-4 py-6 md:p-6 rounded-2xl border border-secondary back-main-4 fade-up-a' style={`animation-delay: ${ content.section3.elements.length * 0.1}s`}>
+          <div class='w-full flex flex-col justify-center items-start gap-8 px-4 py-6 md:p-6 rounded-2xl border border-secondary back-main-4 fade-up-a' style={`--fade-up-delay: ${ content.section3.elements.length * 0.3}s`}>
             <h4 class='text-secondary body-lg'>{content.section3.statistics.title}</h4>
             <div class="w-full flex justify-between items-center">
               {
@@ -59,9 +59,84 @@ const { content } = Astro.props as Props;
         </div>
       </div>
     </div>
-    <div class="w-full md:flex flex-col justify-center items-center gap-8 py-10 px-20 rounded-2xl border border-[#263A4B] back-main-4 fade-up-a hidden">
+    <div class="results-footer fade-up-a w-full md:flex flex-col justify-center items-center gap-8 py-10 px-20 rounded-2xl border border-[#263A4B] back-main-4 hidden">
       <p class="text-paragraph text-center body-md">{content.description2}</p>
       <p class="subtitle-lg text-secondary italic">H&A Brother Tree Services</p>
     </div>
   </div>
 </section>
+
+<script>
+  const initResultsReveal = () => {
+    document.querySelectorAll<HTMLElement>(".results-hero").forEach((section) => {
+      const intro = Array.from(section.querySelectorAll<HTMLElement>(".results-reveal-item")).slice(0, 3);
+      const firstRowImage = section.querySelector<HTMLElement>(".results-first-row-image");
+      const firstRowPanel = section.querySelector<HTMLElement>(".results-first-row-panel");
+      const section2Copy = section.querySelector<HTMLElement>(".results-section2-copy");
+      const cards = Array.from(section.querySelectorAll<HTMLElement>(".results-section2 .fade-up-a"));
+      const firstCard = cards[0];
+      const footer = section.querySelector<HTMLElement>(".results-footer");
+      if (!firstRowImage || !firstRowPanel || !section2Copy || !firstCard || !footer) return;
+
+      const groups = [
+        ...intro.map((element, index) => ({
+          target: element,
+          delay: index * 300,
+          reveal: () => element.classList.add("active"),
+        })),
+        {
+          target: firstRowImage,
+          delay: 900,
+          reveal: () => firstRowImage.classList.add("active"),
+        },
+        {
+          target: firstRowPanel,
+          delay: 900,
+          reveal: () => firstRowPanel.classList.add("active"),
+        },
+        {
+          target: section2Copy,
+          delay: 1200,
+          reveal: () => section2Copy.querySelectorAll("h2, p").forEach((element) => element.classList.add("active")),
+        },
+        {
+          target: firstCard,
+          delay: 1500,
+          reveal: () => cards.forEach((card) => card.classList.add("active")),
+        },
+        {
+          target: footer,
+          delay: 1800,
+          reveal: () => footer.classList.add("active"),
+        },
+      ];
+
+      if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        groups.forEach((group) => group.reveal());
+        return;
+      }
+
+      let start: number | undefined;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const group = groups.find((item) => item.target === entry.target);
+          if (!group) return;
+          observer.unobserve(entry.target);
+          start ??= performance.now();
+          const remaining = Math.max(0, start + group.delay - performance.now());
+          if (remaining) window.setTimeout(group.reveal, remaining);
+          else group.reveal();
+        });
+      }, { threshold: 0.3 });
+
+      groups.forEach((group) => observer.observe(group.target));
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initResultsReveal, { once: true });
+  } else {
+    initResultsReveal();
+  }
+</script>

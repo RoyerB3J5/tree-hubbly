@@ -399,9 +399,9 @@ export default {
     guide: {
       tag: "¿Aún no sabes qué plan es para ti? Empieza gratis.",
       title:
-        'Descarga la guía gratis<br classs="hidden md:block"/> <span class="text-third">y recibe una consultoría de 30 minutos.</span>',
+        'Descarga la guía gratis<br class="hidden md:block"/> <span class="text-third">y recibe una consultoría de 30 minutos.</span>',
       description:
-        "Déjanos tus datos y te enviamos el eBook al instante. Luego un consultor especializado en <br classs='hidden md:block'/> Tree Services te ayuda a elegir el camino correcto para tu empresa.",
+        "Déjanos tus datos y te enviamos el eBook al instante. Luego un consultor especializado en <br class='hidden md:block'/> Tree Services te ayuda a elegir el camino correcto para tu empresa.",
       book: {
         tag: "EBOOK GRATIS",
         subtag: "PDF DESCARGA INMEDIATA",
