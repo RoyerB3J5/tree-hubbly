@@ -23,8 +23,8 @@ const { content } = Astro.props as Props;
             <ul class="flex flex-col justify-center items-start gap-8 md:gap-6 ">
               {
                 item.list.map((i)=>(
-                  <li class={` flex justify-start items-center gap-2`}>
-                    <div class={`w-1.5 h-1.5 fade-up-a ${index === 0 ? "bg-[#FF4E4E]" : "bg-secondary"}`}></div>
+                  <li class={` flex justify-start items-center gap-2 fade-up-a`}>
+                    <div class={`w-1.5 h-1.5  ${index === 0 ? "bg-[#FF4E4E]" : "bg-secondary"}`}></div>
                     <span class='body-md'>{i}</span>
                   </li>
                 ))

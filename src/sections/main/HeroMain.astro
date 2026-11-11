@@ -14,7 +14,7 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
   <div class="hero-sequence__viewport w-full flex items-center justify-center text-paragraph">
     <img src="/images/hero-frames/frame_0000.webp" alt="" aria-hidden="true" fetchpriority="high" width="1904" height="1072" class="hero-sequence__media object-cover object-center" />
     <canvas class="hero-sequence__media hero-sequence__canvas" aria-hidden="true"></canvas>
-    <video class="hero-sequence__media hero-sequence__video object-cover object-center" muted playsinline preload="none" data-src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/video_hero.mp4" poster="/images/hero-frames/frame_0000.webp" aria-hidden="true" tabindex="-1"></video>
+    <video class="hero-sequence__media hero-sequence__video object-cover object-center" muted playsinline preload="metadata" data-src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/video_hero.mp4" poster="/images/hero-frames/frame_0000.webp" aria-hidden="true" tabindex="-1"></video>
     <div class="absolute w-full h-full inset-0 z-3 back-hero"></div>
     <div
       class="container-full flex flex-col justify-end items-center pb-12 md:py-14 xl:[@media(height_<_810px)]:py-10 relative z-10 h-full"
@@ -103,7 +103,7 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
       const pending = new Set<number>();
       const failed = new Set<number>();
       const anchors = [0, 12, 24, 36, 48, 60, 72];
-      const maxFrames = 24;
+      const maxFrames = 16;
       let current = 0;
       let active = true;
       let introFinished = false;
@@ -153,10 +153,12 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
         }
       };
       const wantedFrames = () => {
+        // Do not compete with the intro video for bandwidth on initial load.
+        if (!introFinished) return [0];
         const nearby = [current];
-        for (let distance = 1; distance <= 8; distance++) nearby.push(current + distance, current - distance);
-        // A few distributed previews make large scroll jumps usable while nearby frames load.
-        return [current, ...anchors, ...nearby].filter((index, position, list) =>
+        for (let distance = 1; distance <= 4; distance++) nearby.push(current + distance, current - distance);
+        // Prioritize nearby frames; distributed previews support large scroll jumps.
+        return [...nearby, ...anchors].filter((index, position, list) =>
           index >= 0 && index < FRAME_COUNT && list.indexOf(index) === position);
       };
       const pump = () => {
@@ -200,11 +202,16 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
       video.addEventListener("ended", finishIntro);
       video.addEventListener("error", finishIntro);
       const startIntro = () => {
+        if (!active || introFinished) return;
         video.currentTime = INTRO_START;
-        video.play().then(() => { if (active && !introFinished) introTick = requestAnimationFrame(checkIntro); }).catch(finishIntro);
+        video.play().then(() => {
+          if (active && !introFinished) introTick = requestAnimationFrame(checkIntro);
+          else video.pause();
+        }).catch(finishIntro);
       };
       video.addEventListener("loadedmetadata", startIntro, { once: true });
       video.src = video.dataset.src || "";
+      video.load();
       video.classList.add("is-visible");
 
       const state = { frame: 0 };

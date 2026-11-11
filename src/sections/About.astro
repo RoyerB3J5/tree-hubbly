@@ -6,11 +6,11 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<section class="w-full flex justify-center items-center bg-primary">
+<section data-reveal-sequence class="about-section w-full flex justify-center items-center bg-primary">
   <div class='container-full flex flex-col justify-center items-center pb-12 md:pb-20 pt-26 md:pt-40 gap-20 md:gap-10'>
     <div class='w-full flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-6'>
       <div class="animation-image-reveal-trigger w-full lg:w-[47%]">
-        <div class="animation-image-reveal w-full h-full relative overflow-hidden rounded-2xl aspect-71/76 md:aspect-903/645 lg:aspect-603/645">
+        <div class="animation-image-reveal animation-image-reveal--left-to-right w-full h-full relative overflow-hidden rounded-2xl aspect-71/76 md:aspect-903/645 lg:aspect-603/645">
           <div class="animation-image-reveal-mask w-full h-full relative overflow-hidden rounded-2xl">
             <img src="/images/about.webp" alt="Results Hero" width="1200" height="1200" decoding="async" loading="lazy" class="w-full h-full object-cover absolute inset-0" />
           </div>
@@ -27,9 +27,9 @@ const { content } = Astro.props as Props;
     </div>
     <div class='w-full flex flex-col justify-center items-start gap-10'>
       <h2 set:html={content.title} class="text-white heading-h4"></h2>
-      <div class='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6 justify-center items-center md:items-stretch'>
-        {content.diferences.map((item,index) =>( 
-          <div class='w-full flex flex-col justify-center items-start gap-8 py-6 px-4 md:p-6 rounded-2xl border border-[#263A4B] fade-up-a' style={`animation-delay: ${ index * 0.1}s`}>
+      <div class='about-differences w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6 justify-center items-center md:items-stretch'>
+        {content.diferences.map((item) =>( 
+      <div class='w-full flex flex-col justify-center items-start gap-8 py-6 px-4 md:p-6 rounded-2xl border border-[#263A4B] fade-up-a'>
             <h3 class='text-secondary body-lg' set:html={item.title}></h3>
             <p class="body-md text-paragraph">{item.description}</p>
           </div>
@@ -38,3 +38,68 @@ const { content } = Astro.props as Props;
     </div>
   </div>
 </section>
+
+<script>
+  const initAboutReveal = () => {
+    document.querySelectorAll<HTMLElement>(".about-section").forEach((section) => {
+      const imageTrigger = section.querySelector<HTMLElement>(".animation-image-reveal-trigger");
+      const image = imageTrigger?.querySelector<HTMLElement>(".animation-image-reveal");
+      const panel = section.querySelector<HTMLElement>(".back-main-4");
+      const heading = section.querySelector<HTMLElement>("h2");
+      const cards = Array.from(section.querySelectorAll<HTMLElement>(".about-differences > .fade-up-a"));
+      if (!imageTrigger || !image || !panel || !heading) return;
+
+      const panelContent = Array.from(panel.querySelectorAll<HTMLElement>("p, h1, h2, h3, h4, h5, h6, .fade-up-a"));
+      const targets = [imageTrigger, panel, ...panelContent, heading, ...cards];
+      let panelStart: number | undefined;
+      const reveal = (element: HTMLElement, immediate = false) => {
+        if (element === imageTrigger) {
+          image.classList.add("active");
+        } else if (element === panel) {
+          panelStart ??= performance.now();
+          panel.classList.add("active");
+        } else if (cards.includes(element)) {
+          const revealCard = () => {
+            element.classList.add("active");
+            const revealText = () => element.querySelectorAll<HTMLElement>("p, h1, h2, h3, h4, h5, h6")
+              .forEach((child) => child.classList.add("active"));
+            if (immediate) revealText();
+            else window.setTimeout(revealText, 500);
+          };
+          if (immediate) revealCard();
+          else window.setTimeout(revealCard, cards.indexOf(element) * 200);
+        } else if (panelContent.includes(element)) {
+          // Preserve the panel's stagger while waiting for each item to enter the viewport.
+          panelStart ??= performance.now();
+          panel.classList.add("active");
+          const delay = Math.max(0, 1000 + panelContent.indexOf(element) * 200 - (performance.now() - panelStart));
+          if (immediate) element.classList.add("active");
+          else window.setTimeout(() => element.classList.add("active"), delay);
+        } else {
+          element.classList.add("active");
+        }
+      };
+
+      if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        targets.forEach((element) => reveal(element, true));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          observer.unobserve(entry.target);
+          reveal(entry.target as HTMLElement);
+        });
+      }, { threshold: 0 });
+
+      targets.forEach((element) => observer.observe(element));
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAboutReveal, { once: true });
+  } else {
+    initAboutReveal();
+  }
+</script>

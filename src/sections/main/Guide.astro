@@ -36,8 +36,8 @@ const { content } = Astro.props as Props;
         </div>
         <div class='guide-book-list flex flex-col justify-center items-start gap-6'>
           {
-            content.book.list10.map((item,index)=>(
-              <div class="flex justify-start items-center gap-2 fade-up-a" style={`animation-delay: ${index * 0.2}s`}>
+            content.book.list10.map((item)=>(
+              <div class="flex justify-start items-center gap-2 fade-up-a">
                   <img src="/images/icons/check-blue.svg" alt="Check" width="24" height="24" class="w-5 h-5">
                   <span class="text-primary body-md">{item}</span>
                 </div>
@@ -76,45 +76,52 @@ const { content } = Astro.props as Props;
 </style>
 
 <script>
-  const card = document.querySelector<HTMLElement>(".guide-book-card");
-  if (card) {
+  document.querySelectorAll<HTMLElement>(".guide-book-card").forEach((card) => {
     const header = card.querySelector<HTMLElement>(".guide-book-header");
+    const imageTrigger = card.querySelector<HTMLElement>(".animation-image-reveal-trigger");
     const image = card.querySelector<HTMLElement>(".guide-book-reveal");
-    const list = card.querySelector<HTMLElement>(".guide-book-list");
+    const listItems = Array.from(card.querySelectorAll<HTMLElement>(".guide-book-list > .fade-up-a"));
     const bonus = card.querySelector<HTMLElement>(".guide-book-bonus");
-    const steps = [header, image, list, bonus].filter((element): element is HTMLElement => Boolean(element));
+    if (!header || !imageTrigger || !image || !bonus) return;
 
-    const activateStep = (element: HTMLElement, includeChildren = true) => {
-      element.classList.add("active");
-      if (includeChildren) {
-        element.querySelectorAll(".fade-up-a").forEach((child) => child.classList.add("active"));
-        element.querySelectorAll(".fade-up-lines-raw").forEach((text) => text.classList.add("active"));
+    const targets = [header, imageTrigger, ...listItems, bonus];
+    const revealText = (container: HTMLElement, delay: number, immediate: boolean) => {
+      const texts = container.querySelectorAll<HTMLElement>("p, h1, h2, h3, h4, h5, h6");
+      texts.forEach((text, index) => {
+        if (immediate) text.classList.add("active");
+        else window.setTimeout(() => text.classList.add("active"), delay + index * 200);
+      });
+    };
+    const reveal = (element: HTMLElement, immediate = false) => {
+      if (element === imageTrigger) {
+        image.classList.add("active");
+        const revealImageContent = () => image.querySelectorAll<HTMLElement>(".fade-up-a")
+          .forEach((child) => child.classList.add("active"));
+        if (immediate) revealImageContent();
+        else window.setTimeout(revealImageContent, 1000);
+        revealText(image, 1000, immediate);
+      } else if (element === header || element === bonus) {
+        element.classList.add("active");
+        revealText(element, 500, immediate);
+      } else {
+        const delay = listItems.indexOf(element) * 200;
+        if (immediate) element.classList.add("active");
+        else window.setTimeout(() => element.classList.add("active"), delay);
       }
     };
-    const activateNestedContent = (element: HTMLElement | null) => {
-      element?.querySelectorAll(".fade-up-a, .fade-up-lines-raw").forEach((child) => child.classList.add("active"));
-    };
-    const reveal = () => {
-      steps.forEach((element) => activateStep(element));
-      activateNestedContent(image);
-      activateNestedContent(bonus);
-    };
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
-      reveal();
-    } else {
-      const observer = new IntersectionObserver((entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        observer.disconnect();
-        steps.forEach((element, index) => {
-          window.setTimeout(() => {
-            activateStep(element, element !== image);
-            if (element === image) window.setTimeout(() => activateNestedContent(image), 1000);
-            if (element === bonus) window.setTimeout(() => activateNestedContent(bonus), 500);
-          }, index * 300);
-        });
-      }, { threshold: 0.3 });
-      observer.observe(card);
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      targets.forEach((element) => reveal(element, true));
+      return;
     }
-  }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(entry.target);
+        reveal(entry.target as HTMLElement);
+      });
+    }, { threshold: 0.1 });
+    targets.forEach((element) => observer.observe(element));
+  });
 </script>

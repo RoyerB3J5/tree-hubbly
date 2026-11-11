@@ -56,21 +56,15 @@ function initTextReveal() {
       let lineIndex = -1;
       let previousTop = null;
 
-      words.forEach((word) => {
-        const top = word.getBoundingClientRect().top;
-
-        if (
-          previousTop === null ||
-          Math.abs(top - previousTop) > lineTolerance
-        ) {
+      // Read positions together before writing styles to avoid repeated layout work.
+      const tops = words.map((word) => word.getBoundingClientRect().top);
+      words.forEach((word, index) => {
+        const top = tops[index];
+        if (previousTop === null || Math.abs(top - previousTop) > lineTolerance) {
           lineIndex += 1;
           previousTop = top;
         }
-
-        word.firstElementChild.style.setProperty(
-          "--fade-up-line-delay",
-          `${lineIndex * 0.1}s`
-        );
+        word.firstElementChild.style.setProperty("--fade-up-line-delay", `${lineIndex * 0.1}s`);
       });
     };
 
@@ -135,8 +129,13 @@ function initTextReveal() {
       lineRevealRoots.forEach((element) => element.classList.add("active"));
     }
 
+    let lastWidth = window.innerWidth;
+    let resizeTimer;
     window.addEventListener("resize", () => {
-      lineRevealRoots.forEach(prepareLineReveal);
+      if (window.innerWidth === lastWidth) return;
+      lastWidth = window.innerWidth;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => lineRevealRoots.forEach(prepareLineReveal), 200);
     });
 
 }

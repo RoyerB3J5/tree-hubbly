@@ -68,7 +68,7 @@ const icons = [
           <div class="flex flex-col justify-center items-start gap-4">
             {
               content?.schedules.items.map((item) =>( 
-                <div class="flex flex-row justify-center items-center sm:items-start gap-4">
+                <div class="flex flex-row justify-center items-center t gap-4">
                   <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="16" height="16" class="w-6 h-6" />
                   <a href={item.href} set:html={item.title} class="text-paragraph body-md"></a>
                 </div>

@@ -6,7 +6,7 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<section class="results-hero w-full flex justify-center items-center bg-primary">
+<section data-reveal-sequence class="results-hero w-full flex justify-center items-center bg-primary">
   <div class="container-full flex flex-col justify-center items-center pb-12 md:pb-20 pt-26 md:pt-40 gap-8 md:gap-10">
     <div class="flex flex-col justify-center items-start md:items-center gap-6">
       <p class="results-reveal-item fade-up-a subtitle-lg text-secondary">{content.tag}</p>
@@ -33,13 +33,13 @@ const { content } = Astro.props as Props;
         <div class='w-full grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 justify-center items-center lg:items-stretch'>
           {
             content.section3.elements.map((item,index)=>(
-              <div class='w-full flex flex-col justify-center items-start gap-6 md:gap-8 px-4 py-6 md:p-6 rounded-2xl border border-[#263A4B] fade-up-a' style={`--fade-up-delay: ${ index * 0.3}s`}>
+              <div class='w-full flex flex-col justify-center items-start gap-6 md:gap-8 px-4 py-6 md:p-6 rounded-2xl border border-[#263A4B] fade-up-a' style={`--fade-up-delay: ${ index * 0.2}s`}>
                 <h3 class='text-secondary body-lg'>{item.title}</h3>
                 <p class="body-md text-paragraph">{item.description}</p>
               </div>
             ))
           }
-          <div class='w-full flex flex-col justify-center items-start gap-8 px-4 py-6 md:p-6 rounded-2xl border border-secondary back-main-4 fade-up-a' style={`--fade-up-delay: ${ content.section3.elements.length * 0.3}s`}>
+          <div class='w-full flex flex-col justify-center items-start gap-8 px-4 py-6 md:p-6 rounded-2xl border border-secondary back-main-4 fade-up-a' style={`--fade-up-delay: ${ content.section3.elements.length * 0.2}s`}>
             <h4 class='text-secondary body-lg'>{content.section3.statistics.title}</h4>
             <div class="w-full flex justify-between items-center">
               {
@@ -51,7 +51,7 @@ const { content } = Astro.props as Props;
                 ))
               }
             </div>
-            <div class="flex justify-start items-center gap-2 ">
+            <div class="flex justify-start items-center gap-2 fade-up-a" style={`--fade-up-delay: ${ (content.section3.elements.length + 1) * 0.2}s`}>
               <img src="/images/icons/check.svg" alt="Check" width="24" height="24" class="w-6 h-6">
               <p class="text-paragraph body-md">{content.section3.statistics.description}</p>
             </div>
@@ -69,7 +69,7 @@ const { content } = Astro.props as Props;
 <script>
   const initResultsReveal = () => {
     document.querySelectorAll<HTMLElement>(".results-hero").forEach((section) => {
-      const intro = Array.from(section.querySelectorAll<HTMLElement>(".results-reveal-item")).slice(0, 3);
+      const intro = Array.from(section.querySelectorAll<HTMLElement>(".results-reveal-item"));
       const firstRowImage = section.querySelector<HTMLElement>(".results-first-row-image");
       const firstRowPanel = section.querySelector<HTMLElement>(".results-first-row-panel");
       const section2Copy = section.querySelector<HTMLElement>(".results-section2-copy");
@@ -78,37 +78,28 @@ const { content } = Astro.props as Props;
       const footer = section.querySelector<HTMLElement>(".results-footer");
       if (!firstRowImage || !firstRowPanel || !section2Copy || !firstCard || !footer) return;
 
+      const activateText = (container: HTMLElement) => {
+        container.querySelectorAll<HTMLElement>("h1, h2, h3, h4, h5, h6, p").forEach((element) => {
+          element.classList.add("active");
+        });
+      };
+
+      const revealContainer = (container: HTMLElement) => {
+        container.classList.add("active");
+        window.setTimeout(() => activateText(container), 500);
+      };
+
       const groups = [
         ...intro.map((element, index) => ({
           target: element,
-          delay: index * 300,
+          delay: index * 200,
           reveal: () => element.classList.add("active"),
         })),
-        {
-          target: firstRowImage,
-          delay: 900,
-          reveal: () => firstRowImage.classList.add("active"),
-        },
-        {
-          target: firstRowPanel,
-          delay: 900,
-          reveal: () => firstRowPanel.classList.add("active"),
-        },
-        {
-          target: section2Copy,
-          delay: 1200,
-          reveal: () => section2Copy.querySelectorAll("h2, p").forEach((element) => element.classList.add("active")),
-        },
-        {
-          target: firstCard,
-          delay: 1500,
-          reveal: () => cards.forEach((card) => card.classList.add("active")),
-        },
-        {
-          target: footer,
-          delay: 1800,
-          reveal: () => footer.classList.add("active"),
-        },
+        { target: firstRowImage, delay: 600, reveal: () => firstRowImage.classList.add("active") },
+        { target: firstRowPanel, delay: 800, reveal: () => revealContainer(firstRowPanel) },
+        { target: section2Copy, delay: 1000, reveal: () => activateText(section2Copy) },
+        { target: firstCard, delay: 1200, reveal: () => cards.forEach((card) => revealContainer(card)) },
+        { target: footer, delay: 1400, reveal: () => revealContainer(footer) },
       ];
 
       if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -125,8 +116,7 @@ const { content } = Astro.props as Props;
           observer.unobserve(entry.target);
           start ??= performance.now();
           const remaining = Math.max(0, start + group.delay - performance.now());
-          if (remaining) window.setTimeout(group.reveal, remaining);
-          else group.reveal();
+          window.setTimeout(group.reveal, remaining);
         });
       }, { threshold: 0.3 });
 

@@ -63,6 +63,16 @@ html {
     opacity: 0.5;
   }
 
+  /* Mirror the same reveal for images that enter from the left. */
+  .animation-image-reveal.animation-image-reveal--left-to-right.reveal-ready {
+    transform-origin: left center;
+  }
+
+  .animation-image-reveal.animation-image-reveal--left-to-right.reveal-ready
+    > :is(.animation-image-reveal-mask, img) {
+    clip-path: inset(0 100% 0 0 round var(--image-reveal-radius, 1rem));
+  }
+
   .animation-image-reveal.reveal-ready.active
     > :is(.animation-image-reveal-mask, img) {
     clip-path: inset(0 round var(--image-reveal-radius, 1rem));
