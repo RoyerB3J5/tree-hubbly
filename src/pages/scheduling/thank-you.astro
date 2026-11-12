@@ -3,35 +3,9 @@ import ProgrammeFooter from "../../components/scheduling/programme/ProgrammeFoot
 import { programmeContent } from "../../content/schedulingProgramme";
 import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
 
-const thankYouUrl = "https://treehubly.com/scheduling/thank-you/";
-const thankYouDescription =
-  "Hemos recibido tu información. Revisa tu correo para conocer la confirmación y los siguientes pasos con Treehubly.";
-const thankYouSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": thankYouUrl,
-  name: "Gracias por completar el formulario | Treehubly",
-  description: thankYouDescription,
-  url: thankYouUrl,
-  inLanguage: "es",
-  isPartOf: { "@id": "https://treehubly.com/#website" },
-};
 ---
 
-<LayoutScheduling
-  lang="es"
-  title="Gracias por completar el formulario | Treehubly"
-  description={thankYouDescription}
-  keywords="confirmación de formulario, gracias Treehubly"
-  image="/images/portada.jpg"
-  canonicalUrl={thankYouUrl}
-  includeLanguageAlternates={false}
-  includeLocationMetadata={false}
-  websiteLanguage="es"
-  structuredData={thankYouSchema}
-  noindex={true}
-  mainClass="w-full flex flex-col justify-center items-center relative z-0 gap-10 bg-[#04121E]"
->
+<LayoutScheduling mainClass="w-full flex flex-col justify-center items-center relative z-0 gap-10 bg-[#04121E]">
   <section class="w-full h-[100vh] flex justify-center items-center px-5 pt-28 pb-16">
     <div class="container-full flex flex-col justify-center items-center gap-6 text-center text-[#F7F7F7]">
       <div class="w-16 h-16 rounded-full bg-secondary flex justify-center items-center" aria-hidden="true">

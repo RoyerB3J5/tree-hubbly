@@ -3,84 +3,19 @@ import "../styles/global.css";
 import SEOHead from "../components/SEOHead.astro";
 
 export interface Props {
-  lang?: string;
-  title?: string;
-  description?: string;
-  keywords?: string;
-  image?: string;
-  canonicalPath?: string;
-  canonicalUrl?: string;
-  includeLanguageAlternates?: boolean;
-  includeLocationMetadata?: boolean;
-  websiteLanguage?: string;
-  structuredData?: object | object[];
-  noindex?: boolean;
-  logoAlt?: string;
   mainClass?: string;
 }
-
-const contentUS = {
-  lang: "en",
-  title: "Schedule a Meeting | Treehubly - Generate More Leads & Booked Jobs",
-  description:
-    "Schedule your meeting with Treehubly. Discover the proven marketing system tree service owners use to generate more leads and booked jobs in just 60 days.",
-  keywords:
-    "schedule tree service consultation, tree service marketing, tree service leads, booked jobs, lead generation, tree company growth, Treehubly scheduling",
-  image: "/images/fondo.png",
-  canonicalPath: "/scheduling",
-  logoAlt: "Treehubly Logo",
-};
-
-const contentEs = {
-  lang: "es",
-  title: "Agenda una Reunión | Treehubly - Genera Más Leads y Trabajos Agendados",
-  description:
-    "Agenda tu reunión con Treehubly. Descubre el sistema de marketing probado que los dueños de tree services usan para generar más leads y trabajos agendados en solo 60 días.",
-  keywords:
-    "agendar consulta tree service, marketing para tree services, leads para tree services, trabajos agendados, generación de leads, crecimiento de tree services, Treehubly agenda",
-  image: "/images/fondo.png",
-  canonicalPath: "/scheduling",
-  logoAlt: "Logotipo de Treehubly",
-};
-
-const content = contentEs;
-
-const {
-  lang = content.lang,
-  title = content.title,
-  description = content.description,
-  keywords = content.keywords,
-  image = content.image,
-  canonicalPath = content.canonicalPath,
-  canonicalUrl,
-  includeLanguageAlternates,
-  includeLocationMetadata,
-  websiteLanguage,
-  structuredData,
-  noindex,
-  logoAlt = content.logoAlt,
-  mainClass = "flex flex-col w-full justify-center items-center relative z-0",
-} = Astro.props;
+const { mainClass = "flex flex-col w-full justify-center items-center relative z-0" } = Astro.props;
+const path = Astro.url.pathname.replace(/\/+$/, "");
+const lang = ["/scheduling", "/scheduling/evaluate"].includes(path) ? "en" : "es";
+const logoAlt = lang === "es" ? "Logotipo de Treehubly" : "Treehubly Logo";
 ---
 
 <!doctype html>
 <html lang={lang} class="overflow-x-clip">
   
   <head>
-    <SEOHead
-      lang={lang}
-      title={title}
-      description={description}
-      keywords={keywords}
-      image={image}
-      canonicalPath={canonicalPath}
-      canonicalUrl={canonicalUrl}
-      includeLanguageAlternates={includeLanguageAlternates}
-      includeLocationMetadata={includeLocationMetadata}
-      websiteLanguage={websiteLanguage}
-      structuredData={structuredData}
-      noindex={noindex}
-    />
+    <SEOHead />
     <!-- Meta Pixel Code -->
     <script is:inline>
       !(function (f, b, e, v, n, t, s) {

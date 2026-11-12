@@ -10,7 +10,7 @@ const { content } = Astro.props as Props;
   <div class="w-full flex flex-col justify-center items-center p-4 md:p-8 overflow-hidden max-w-[1536px] min-h-screen md:min-h-0 h-auto xl:h-screen">
     <div class="w-full flex-1 flex flex-col justify-between items-start md:items-center back-main-2 gap-8 md:gap-10 py-[74px] xl:[@media(height_<_810px)]:gap-4 xl:[@media(height_<_810px)]:justify-center rounded-2xl px-4 md:px-12 xl:[@media(height_<_810px)]:py-0">
       <h2 set:html={content.title} class='heading-h4 text-paragraph text-start md:text-center'></h2>
-    <div class='faltantes-items w-full md:flex justify-center items-center gap-10 xl:gap-40 py-6 border-y border-white/10 hidden block'>
+    <div class='faltantes-items w-full md:flex justify-center items-center gap-10 xl:gap-40 py-6 border-y border-white/10 hidden'>
       {
         content.items.map((item)=>(
           <div class="flex justify-center items-center gap-[5px] fade-up-a ">
@@ -53,46 +53,28 @@ const { content } = Astro.props as Props;
 <script>
   const section = document.getElementById("faltantes");
   if (section) {
-    const title = section.querySelector<HTMLElement>("h2");
-    const imageTrigger = section.querySelector<HTMLElement>(".animation-image-reveal-trigger");
-    const image = imageTrigger?.querySelector<HTMLElement>(".animation-image-reveal");
-    const items = section.querySelector<HTMLElement>(".faltantes-items");
-    const description = section.querySelector<HTMLElement>(".faltantes-description");
-    const list = section.querySelector<HTMLElement>(".faltantes-list");
-    const tag = section.querySelector<HTMLElement>(".faltantes-tag");
-
-    const groups = [
-      { target: title, delay: 0, reveal: () => title?.classList.add("active") },
-      { target: imageTrigger, delay: 0, reveal: () => {
-        if (!image) return;
-        getComputedStyle(image).transform;
-        image.classList.add("active");
-      } },
-      { target: items, delay: 300, reveal: () => items?.querySelectorAll(".fade-up-a").forEach((el) => el.classList.add("active")) },
-      { target: description, delay: 1000, reveal: () => description?.classList.add("active") },
-      { target: list, delay: 1500, reveal: () => list?.classList.add("active") },
-      { target: tag, delay: 2000, reveal: () => tag?.classList.add("active") },
-    ];
-
     const init = () => {
+      const targets = Array.from(section.querySelectorAll<HTMLElement>("h2, p, .fade-up-a, .animation-image-reveal"));
+      const reveal = () => {
+        targets.forEach((element, index) => {
+          element.style.setProperty("--fade-up-delay", `${Math.min(index, 5) * 0.12}s`);
+          element.style.setProperty("--fade-up-lines-delay", `${Math.min(index, 5) * 0.12}s`);
+          if (element.classList.contains("animation-image-reveal")) element.classList.add("reveal-ready");
+        });
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          targets.forEach(element => element.classList.add("active"));
+        }));
+      };
       if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        groups.forEach((group) => group.reveal());
+        reveal();
         return;
       }
-      let start: number | undefined;
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const group = groups.find((item) => item.target === entry.target);
-          if (!group) return;
-          observer.unobserve(entry.target);
-          start ??= performance.now();
-          const remaining = Math.max(0, start + group.delay - performance.now());
-          if (remaining) window.setTimeout(group.reveal, remaining);
-          else group.reveal();
-        });
-      }, { threshold: 0.3 });
-      groups.forEach((group) => { if (group.target) observer.observe(group.target); });
+      const observer = new IntersectionObserver(entries => {
+        if (!entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= 0.2)) return;
+        observer.disconnect();
+        reveal();
+      }, { threshold: 0.2 });
+      observer.observe(section);
     };
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init, { once: true });
     else init();

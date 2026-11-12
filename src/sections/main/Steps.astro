@@ -18,7 +18,7 @@ const baseHeight = anotherPage ? 523 : 424;
       }
     <h2 set:html={content.title} class="steps-title fade-up-a heading-h4 text-primary text-start md:text-center"></h2>
     </div>
-  <p class='steps-description fade-up-a body-md text-primary text-start md:text-center' set:html={content.description}></p>
+  <p class={`steps-description fade-up-a body-md text-primary text-start ${anotherPage ? '' : 'md:text-center'}`} set:html={content.description}></p>
     <div class='w-full grid grid-cols-1 lg:grid-cols-5 justify-center items-center lg:items-end gap-4 md:gap-6 steps-card-list '>
       {
         content.reasons.map((item,index)=>(
@@ -69,6 +69,7 @@ const baseHeight = anotherPage ? 523 : 424;
 </style>
 
 <script>
+  import { bindScrollSteps } from "../../scripts/scrollSteps";
   import { gsap, ScrollTrigger } from "../../scripts/gsap";
   const stepsSection = document.querySelector<HTMLElement>(".home-steps");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -170,8 +171,9 @@ const baseHeight = anotherPage ? 523 : 424;
           trigger: stepsSection,
           refreshPriority: 1,
           start: "top top",
-          end: () => `+=${window.innerHeight * cards.length * 0.6}`,
+          end: () => `+=${window.innerHeight * (cards.length + 0.6) * 0.9}`,
           pin: true,
+          anticipatePin: 1,
           pinSpacing: true,
           scrub: true,
           invalidateOnRefresh: true,
@@ -193,27 +195,14 @@ const baseHeight = anotherPage ? 523 : 424;
           .to({}, { duration: 0.55 }, index + 0.45);
       });
 
-      let lockedUntil = 0;
-      const onWheel = (event: WheelEvent) => {
-        const trigger = timeline.scrollTrigger;
-        if (!trigger || document.documentElement.classList.contains("section-transitioning") || event.ctrlKey || document.documentElement.classList.contains("desktop-menu-open") ||
-            document.getElementById("mobile-menu")?.classList.contains("translate-x-0")) return;
-        const now = performance.now();
-        if (!trigger.isActive || Math.abs(event.deltaY) < 2) return;
-        if (now < lockedUntil) { event.preventDefault(); return; }
-        if ((event.deltaY < 0 && trigger.progress <= 0.001) ||
-            (event.deltaY > 0 && trigger.progress >= 0.999)) return;
-        const current = Math.round(trigger.progress * cards.length);
-        const step = gsap.utils.clamp(0, cards.length, current + (event.deltaY > 0 ? 1 : -1));
-        event.preventDefault();
-        lockedUntil = now + 900;
-        window.scrollTo({ top: trigger.start + (trigger.end - trigger.start) * step / cards.length, behavior: "smooth" });
-      };
-      window.addEventListener("wheel", onWheel, { passive: false, capture: true });
+
+      // Keep the last card visible before releasing the section.
+      timeline.to({}, { duration: 0.6 });
+      const stopScrollSteps = bindScrollSteps(timeline, [0, ...cards.map((_, index) => (index + 1) / (cards.length + 0.6)), 1]);
       ScrollTrigger.sort();
       ScrollTrigger.refresh();
       return () => {
-        window.removeEventListener("wheel", onWheel, true);
+        stopScrollSteps();
         stepsSection.classList.remove("steps-scroll-controlled");
         stepsSection.querySelectorAll(".steps-card .fade-up-lines-raw").forEach((text) => text.classList.add("active"));
       };

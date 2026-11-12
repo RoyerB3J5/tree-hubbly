@@ -85,6 +85,7 @@ const { content } = Astro.props as Props;
 </style>
 
 <script>
+  import { bindScrollSteps } from "../../scripts/scrollSteps";
   import { gsap, ScrollTrigger } from "../../scripts/gsap";
 
   document.querySelectorAll<HTMLElement>(".reasons-section").forEach((section) => {
@@ -126,6 +127,23 @@ const { content } = Astro.props as Props;
       gsap.set(fill, { scaleY: 1 / slides.length });
       items[0]?.classList.add("is-active");
       let revealedIndex = -1;
+      let pendingFirstReveal = false;
+      let disposed = false;
+      const transitionObserver = new MutationObserver(() => {
+        if (pendingFirstReveal && !document.documentElement.classList.contains("section-transitioning")) {
+          pendingFirstReveal = false;
+          if (!disposed && revealedIndex === -1) revealSlide(0);
+        }
+      });
+      transitionObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+      const revealFirstSlide = () => {
+        if (revealedIndex !== -1 || disposed) return;
+        if (document.documentElement.classList.contains("section-transitioning")) {
+          pendingFirstReveal = true;
+        } else {
+          revealSlide(0);
+        }
+      };
       const revealSlide = (index: number) => {
         if (index === revealedIndex) return;
         const previousIndex = revealedIndex;
@@ -150,18 +168,22 @@ const { content } = Astro.props as Props;
         onUpdate(this: gsap.core.Animation) {
           const activeIndex = Math.min(slides.length - 1, Math.floor((this.time() + 0.225) / 0.5));
           items.forEach((item, index) => item.classList.toggle("is-active", index === activeIndex));
-          if (this.scrollTrigger && this.scrollTrigger.progress > 0) revealSlide(activeIndex);
+          if (this.scrollTrigger && this.scrollTrigger.progress > 0) {
+            if (activeIndex === 0) revealFirstSlide();
+            else revealSlide(activeIndex);
+          }
         },
         scrollTrigger: {
           trigger: section,
           refreshPriority: -1,
           start: "top top",
-          end: () => `+=${window.innerHeight * (slides.length - 1) * 0.35}`,
+          end: () => `+=${window.innerHeight * (slides.length - 1 + 0.7) * 0.9}`,
           pin: true,
+          anticipatePin: 1,
           pinSpacing: true,
           scrub: true,
           onEnter: () => {
-            if (revealedIndex === -1) revealSlide(0);
+            revealFirstSlide();
           },
           onEnterBack: () => revealSlide(slides.length - 1),
           invalidateOnRefresh: true,
@@ -170,51 +192,34 @@ const { content } = Astro.props as Props;
 
       slides.slice(1).forEach((slide, index) => {
         const at = 0.5 * index + 0.2;
-        timeline.to(slide, { autoAlpha: 1, duration: 0.15 }, at)
-          .set(slides[index], { autoAlpha: 0 }, at + 0.15);
+        // Finish hiding the outgoing slide before revealing the next one.
+        // A wheel stop must never leave two readable slides stacked together.
+        timeline.to(slides[index], { autoAlpha: 0, duration: 0.1, ease: "power1.in" }, at)
+          .to(slide, { autoAlpha: 1, duration: 0.15, ease: "power1.out" }, at + 0.1);
       });
       timeline.to(fill, { scaleY: 1, ease: "none", duration: timeline.duration() }, 0)
-        .to({}, { duration: 0.15 });
+        .to({}, { duration: 0.5 });
 
       const firstSlideObserver = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting) && revealedIndex === -1) {
-          revealSlide(0);
+          revealFirstSlide();
           firstSlideObserver.disconnect();
         }
       }, { rootMargin: "0px 0px -30% 0px", threshold: 0 });
       firstSlideObserver.observe(section);
 
-      let wheelLockedUntil = 0;
-      const onWheel = (event: WheelEvent) => {
-        const trigger = timeline.scrollTrigger;
-        if (!trigger?.isActive || document.documentElement.classList.contains("section-transitioning") || event.ctrlKey || Math.abs(event.deltaY) < 2 ||
-            document.documentElement.classList.contains("desktop-menu-open") ||
-            document.getElementById("mobile-menu")?.classList.contains("translate-x-0")) return;
-        const now = performance.now();
-        if (now < wheelLockedUntil) {
-          event.preventDefault();
-          return;
-        }
-        const direction = event.deltaY > 0 ? 1 : -1;
-        const current = Math.max(0, Math.min(slides.length - 1, revealedIndex));
-        const next = current + direction;
-        if (next < 0 || next >= slides.length) return;
-        event.preventDefault();
-        wheelLockedUntil = now + 900;
-        // Stay inside the pin range at both ends; scrolling exactly to end
-        // releases the pin while the last slide is still revealing.
-        const progress = 0.125 + (next / (slides.length - 1)) * 0.75;
-        window.scrollTo({ top: trigger.start + (trigger.end - trigger.start) * progress, behavior: "smooth" });
-      };
-      window.addEventListener("wheel", onWheel, { passive: false, capture: true });
+
 
       // Earlier pinned sections must be measured before this section.
+      const stopScrollSteps = bindScrollSteps(timeline, [0, ...slides.slice(1).map((_, index) => (0.5 * index + 0.5) / (0.5 * (slides.length - 2) + 0.95)), 1]);
       ScrollTrigger.sort();
       ScrollTrigger.refresh();
 
       return () => {
+        stopScrollSteps();
+        disposed = true;
+        transitionObserver.disconnect();
         firstSlideObserver.disconnect();
-        window.removeEventListener("wheel", onWheel, true);
         section.classList.remove("is-pinned");
         items.forEach((item) => item.classList.remove("is-active"));
         slides.forEach((slide) => {

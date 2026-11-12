@@ -51,6 +51,7 @@ const { content } = Astro.props as Props;
 </style>
 
 <script>
+  import { bindScrollSteps } from "../../scripts/scrollSteps";
   import { gsap, ScrollTrigger } from "../../scripts/gsap";
 
   document.querySelectorAll<HTMLElement>(".control-section").forEach((section) => {
@@ -94,8 +95,9 @@ const { content } = Astro.props as Props;
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: () => `+=${window.innerHeight * items.length * 0.6}`,
+          end: () => `+=${window.innerHeight * (items.length + 0.6) * 0.9}`,
           pin: true,
+          anticipatePin: 1,
           pinSpacing: true,
           scrub: true,
           refreshPriority: -2,
@@ -103,33 +105,35 @@ const { content } = Astro.props as Props;
         },
       });
       items.forEach((item, index) => {
+        // Select the content directly: the shared text reveal may initialize later.
+        const text = item.querySelectorAll<HTMLElement>("p, h3");
+        const icon = item.querySelector<HTMLElement>(".control-item-icon");
+        text.forEach((element, textIndex) => {
+          element.classList.remove("active");
+          element.style.setProperty("--fade-up-lines-delay", `${textIndex * 0.15}s`);
+        });
+        if (icon) gsap.set(icon, { x: 20, autoAlpha: 0 });
         timeline.to(item, { y: 0, autoAlpha: 1, duration: 0.45, ease: "power2.out" }, index)
-          .call(() => item.querySelectorAll(".fade-up-lines-raw").forEach((text) => text.classList.add("active")), [], index + 0.1)
-          .to({}, { duration: 0.55 }, index + 0.45);
+          .call(() => text.forEach((element) => element.classList.toggle("active", (timeline.scrollTrigger?.direction ?? 1) >= 0)), [], index + 0.15);
+        if (icon) timeline.to(icon, { x: 0, autoAlpha: 1, duration: 0.3, ease: "power2.out" }, index + 0.2);
+        timeline.to({}, { duration: 0.55 }, index + 0.45);
       });
-      let lockedUntil = 0;
-      const onWheel = (event: WheelEvent) => {
-        const trigger = timeline.scrollTrigger;
-        if (!trigger || event.ctrlKey || document.documentElement.classList.contains("desktop-menu-open") ||
-            document.getElementById("mobile-menu")?.classList.contains("translate-x-0")) return;
-        const now = performance.now();
-        if (trigger.isActive && now < lockedUntil) { event.preventDefault(); return; }
-        if (!trigger.isActive || Math.abs(event.deltaY) < 2) return;
-        if ((event.deltaY < 0 && trigger.progress <= 0.001) ||
-            (event.deltaY > 0 && trigger.progress >= 0.999)) return;
-        const current = Math.round(trigger.progress * items.length);
-        const next = gsap.utils.clamp(0, items.length, current + (event.deltaY > 0 ? 1 : -1));
-        event.preventDefault();
-        lockedUntil = now + 900;
-        window.scrollTo({ top: trigger.start + (trigger.end - trigger.start) * next / items.length, behavior: "smooth" });
-      };
-      window.addEventListener("wheel", onWheel, { passive: false, capture: true });
+
+      // Leave space to read the last metric before the section ends.
+      timeline.to({}, { duration: 0.6 });
+      const stopScrollSteps = bindScrollSteps(timeline, [0, ...items.map((_, index) => (index + 1) / (items.length + 0.6)), 1]);
       ScrollTrigger.sort();
       ScrollTrigger.refresh();
       return () => {
-        window.removeEventListener("wheel", onWheel, true);
+        stopScrollSteps();
         section.classList.remove("control-scroll-controlled");
-        items.forEach((item) => item.querySelectorAll(".fade-up-lines-raw").forEach((text) => text.classList.add("active")));
+        items.forEach((item) => {
+          item.querySelectorAll<HTMLElement>("p, h3").forEach((text) => {
+            text.classList.add("active");
+            text.style.removeProperty("--fade-up-lines-delay");
+          });
+          gsap.set(item.querySelectorAll(".control-item-icon"), { clearProps: "transform,opacity,visibility" });
+        });
       };
     });
   });

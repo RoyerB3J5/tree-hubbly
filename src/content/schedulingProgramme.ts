@@ -1,16 +1,4 @@
-const programmeUrl = "https://treehubly.com/scheduling/programme/";
-
 export const programmeContent = {
-  seo: {
-    lang: "es",
-    title: "Marketing para tree service en EE. UU. | Treehubly",
-    description:
-      "Genera reseñas, responde leads y agenda más trabajos para tu compañía de tree service en EE. UU. con el sistema de marketing y automatización de Treehubly.",
-    keywords:
-      "marketing para tree service, leads para tree service, automatización de citas, seguimiento de leads, más trabajos agendados",
-    image: "/images/portada.jpg",
-    canonicalUrl: programmeUrl,
-  },
   hero: {
     intro:
       "El sistema automatizado que usan compañías de tree service en EE. UU. para liderar su zona",
@@ -36,14 +24,7 @@ export const programmeContent = {
     logoAlt: "Logo de Treehubly",
     copyright: "© 2026 Treehubly · Privacy",
   },
-  structuredData: {
-    pageName: "Marketing para compañías de tree service en Estados Unidos",
-    serviceName: "Sistema de marketing para compañías de tree service",
-    serviceType:
-      "Marketing, seguimiento de leads y automatización de citas para empresas de tree service",
-    audienceType:
-      "Propietarios de compañías de tree service con equipos operativos en Estados Unidos",
-  },
+
 } as const;
 
 export type ProgrammeContent = typeof programmeContent;

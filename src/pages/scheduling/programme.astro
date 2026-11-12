@@ -5,52 +5,9 @@ import ProgrammeHero from "../../components/scheduling/programme/ProgrammeHero.a
 import { programmeContent } from "../../content/schedulingProgramme";
 import LayoutScheduling from "../../layouts/LayoutScheduling.astro";
 
-const { seo, structuredData: schemaContent } = programmeContent;
-const programmeUrl = seo.canonicalUrl;
-
-const programmeSchema = [
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": programmeUrl,
-    name: schemaContent.pageName,
-    description: seo.description,
-    url: programmeUrl,
-    inLanguage: seo.lang,
-    isPartOf: { "@id": "https://treehubly.com/#website" },
-    about: { "@id": `${programmeUrl}#service` },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": `${programmeUrl}#service`,
-    name: schemaContent.serviceName,
-    serviceType: schemaContent.serviceType,
-    description: seo.description,
-    url: programmeUrl,
-    provider: { "@id": "https://treehubly.com/#organization" },
-    areaServed: { "@type": "Country", name: "United States" },
-    audience: {
-      "@type": "BusinessAudience",
-      audienceType: schemaContent.audienceType,
-    },
-  },
-];
 ---
 
-<LayoutScheduling
-  lang={seo.lang}
-  title={seo.title}
-  description={seo.description}
-  keywords={seo.keywords}
-  image={seo.image}
-  canonicalUrl={programmeUrl}
-  includeLanguageAlternates={false}
-  includeLocationMetadata={false}
-  websiteLanguage={seo.lang}
-  structuredData={programmeSchema}
-  mainClass="w-full flex flex-col justify-center items-center relative z-0 gap-10 bg-[#04121E]"
->
+<LayoutScheduling mainClass="w-full flex flex-col justify-center items-center relative z-0 gap-10 bg-[#04121E]">
   <ProgrammeHero content={programmeContent.hero} />
   <section
       class="w-full flex justify-center items-center"

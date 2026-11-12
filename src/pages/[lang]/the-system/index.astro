@@ -27,69 +27,11 @@ const t = translations[lang];
 </Layout>
 
 <script>
-  import { ScrollTrigger } from "../../../scripts/gsap";
-
+  import { bindSectionTransitions } from "../../../scripts/sectionTransitions";
   const main = document.getElementById("site-main");
-  const hero = main?.querySelector<HTMLElement>(".hero-main");
-  const steps = main?.querySelector<HTMLElement>(".home-steps");
-  const reasons = main?.querySelector<HTMLElement>(".system-reasons");
-  const control = main?.querySelector<HTMLElement>(".control-section");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const desktopScroll = window.matchMedia("(min-width: 1280px)");
-  const pairs = [[hero, steps], [steps, reasons], [reasons, control]] as const;
-  let snapping = false;
-  let unlockTimer: ReturnType<typeof setTimeout>;
-  let touchStart: { y: number; destination: HTMLElement } | null = null;
-
-  const menuIsOpen = () => document.documentElement.classList.contains("desktop-menu-open") ||
-    document.getElementById("mobile-menu")?.classList.contains("translate-x-0");
-  const getDestination = (): HTMLElement | null => {
-    for (const [current, destination] of pairs) {
-      if (!current || !destination) continue;
-      if (current === hero && hero.classList.contains("is-sequence-ready") &&
-          destination.getBoundingClientRect().top > 8) continue;
-      const pin = ScrollTrigger.getAll().find(trigger => trigger.trigger === current && trigger.pin);
-      if (pin && window.scrollY < pin.end - 1) continue;
-      const currentTop = current.getBoundingClientRect().top + window.scrollY;
-      const destinationPin = ScrollTrigger.getAll().find(trigger => trigger.trigger === destination && trigger.pin);
-      const destinationTop = destinationPin ? destinationPin.start : destination.getBoundingClientRect().top + window.scrollY;
-      const nearEnd = Math.max(currentTop, destinationTop - window.innerHeight);
-      if (window.scrollY >= nearEnd - 8 && window.scrollY < destinationTop - 8) return destination;
-    }
-    return null;
-  };
-  const goToSection = (destination: HTMLElement) => {
-    snapping = true;
-    document.documentElement.classList.add("section-transitioning");
-    const pin = ScrollTrigger.getAll().find(trigger => trigger.trigger === destination && trigger.pin);
-    const top = pin ? pin.start : destination.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top, behavior: "smooth" });
-    clearTimeout(unlockTimer);
-    unlockTimer = setTimeout(() => { snapping = false; document.documentElement.classList.remove("section-transitioning"); }, 1100);
-  };
-
-  window.addEventListener("wheel", (event) => {
-    if (!desktopScroll.matches || reduceMotion.matches || menuIsOpen() || event.ctrlKey) return;
-    if (snapping) {
-      if (event.deltaY > 0) event.preventDefault();
-      else if (event.deltaY < 0) { snapping = false; document.documentElement.classList.remove("section-transitioning"); clearTimeout(unlockTimer); }
-      return;
-    }
-    if (event.deltaY <= 0) return;
-    const destination = getDestination();
-    if (!destination || (event.target instanceof Element && event.target.closest("input, textarea, select, [contenteditable='true']"))) return;
-    event.preventDefault();
-    goToSection(destination);
-  }, { passive: false });
-
-  window.addEventListener("touchstart", (event) => {
-    const destination = desktopScroll.matches && !snapping && !reduceMotion.matches && !menuIsOpen() ? getDestination() : null;
-    touchStart = destination && event.touches.length === 1 ? { y: event.touches[0].clientY, destination } : null;
-  }, { passive: true });
-  window.addEventListener("touchend", (event) => {
-    if (desktopScroll.matches && touchStart && event.changedTouches.length === 1 &&
-        touchStart.y - event.changedTouches[0].clientY > 50 && !menuIsOpen() &&
-        touchStart.destination.getBoundingClientRect().top > 8) goToSection(touchStart.destination);
-    touchStart = null;
-  }, { passive: true });
+  const section = (selector: string) => main?.querySelector<HTMLElement>(selector);
+  bindSectionTransitions([
+    [section(".home-steps"), section(".system-reasons")],
+    [section(".system-reasons"), section(".control-section")],
+  ]);
 </script>

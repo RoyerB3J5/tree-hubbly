@@ -1,0 +1,63 @@
+import { gsap, ScrollTrigger } from "./gsap";
+
+// Preview the next section on one gesture, enter it on the next one.
+export function bindSectionTransitions(pairs: readonly (readonly [(HTMLElement | null | undefined), (HTMLElement | null | undefined)])[]) {
+  const desktop = window.matchMedia("(min-width: 1280px) and (prefers-reduced-motion: no-preference)");
+  let motion: gsap.core.Tween | undefined;
+  let lastWheel = -Infinity;
+  let consumedGesture = false;
+  const root = document.documentElement;
+  const finish = () => root.classList.remove("section-transitioning");
+  const wheel = (event: WheelEvent) => {
+    if (event.defaultPrevented || !desktop.matches || event.ctrlKey ||
+        root.classList.contains("desktop-menu-open") ||
+        document.getElementById("mobile-menu")?.classList.contains("translate-x-0") ||
+        (event.target instanceof Element && event.target.closest("input, textarea, select, [contenteditable='true']"))) return;
+    const now = performance.now();
+    const sameGesture = now - lastWheel < 180;
+    lastWheel = now;
+    if (event.deltaY < 0) {
+      motion?.kill();
+      finish();
+      consumedGesture = false;
+      return;
+    }
+    if (event.deltaY === 0) return;
+    if (motion?.isActive() || (sameGesture && consumedGesture)) {
+      event.preventDefault();
+      return;
+    }
+    consumedGesture = false;
+    for (const [current, destination] of pairs) {
+      if (!current || !destination) continue;
+      const pins = ScrollTrigger.getAll();
+      const currentPin = pins.find(pin => pin.trigger === current && pin.pin);
+      if (currentPin && window.scrollY < currentPin.end - 1) continue;
+      const destinationPin = pins.find(pin => pin.trigger === destination && pin.pin);
+      if (destinationPin?.isActive) continue;
+      const top = destinationPin?.start ?? destination.getBoundingClientRect().top + window.scrollY;
+      const distance = top - window.scrollY;
+      if (distance <= 8 || distance > window.innerHeight + 8) continue;
+      // Never interpret the tail of a native wheel gesture as a second gesture.
+      if (sameGesture) return;
+      const visible = window.innerHeight - distance;
+      const target = visible < window.innerHeight * 0.12
+        ? top - window.innerHeight * 0.82
+        : top + (destinationPin ? 2 : 0);
+      event.preventDefault();
+      consumedGesture = true;
+      root.classList.add("section-transitioning");
+      const position = { y: window.scrollY };
+      motion = gsap.to(position, {
+        y: target, duration: 0.85, ease: "power2.inOut",
+        onUpdate: () => {
+          window.scrollTo({ top: position.y, behavior: "instant" });
+          ScrollTrigger.update();
+        },
+        onComplete: finish, onInterrupt: finish,
+      });
+      break;
+    }
+  };
+  window.addEventListener("wheel", wheel, { passive: false });
+}

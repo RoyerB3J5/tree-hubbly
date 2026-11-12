@@ -2,25 +2,25 @@ export default {
   header: {
     nav: [
       {
-        label: "El Sistema",
+        label: "The System",
         href: "/en/the-system",
       },
       {
-        label: "Resultados",
+        label: "Results",
         href: "/en/results",
       },
       {
-        label: "Planes",
+        label: "Plans",
         href: "/en/plans",
       },
       {
-        label: "Nosotros",
+        label: "About Us",
         href: "/en/about",
       },
     ],
     buttons: [
       {
-        label: "¡Hablemos!",
+        label: "Let's Talk!",
         href: "#",
       },
     ],
@@ -29,93 +29,93 @@ export default {
     hero: {
       tag: "",
       title:
-        'El sistema detrás de las empresas<br class="hidden md:block"/> de árboles que <span class="text-secondary"> dominan su ciudad.</span>',
+        'The system behind the tree companies<br class="hidden md:block"/> that <span class="text-secondary"> dominate their city.</span>',
       description:
-        "Clientes, seguimiento, reviews y crecimiento — conectados en un solo ecosistema creado exclusivamente para tree services.",
-      items: ["Mejores clientes", "Más trabajos agendados", "Más facturación"],
+        "Clients, follow-up, reviews and growth — connected in one ecosystem created exclusively for tree services.",
+      items: ["Better clients", "More jobs booked", "More revenue"],
       buttons: [
         {
-          label: "Agenda tu sesión de estrategia",
+          label: "Book your strategy session",
           href: "#",
         },
         {
-          label: "Mira cómo funciona",
+          label: "See how it works",
           href: "#",
         },
       ],
     },
     system: {
       title:
-        'A la mayoría de empresas de árboles no<br class="hidden lg:block"/> les faltan clientes. <span class="text-secondary">Les falta un sistema. </span>',
+        'Most tree companies do not<br class="hidden lg:block"/> lack clients. <span class="text-secondary">They lack a system. </span>',
       items: [
         {
           icon: "arbol",
-          title: "Arboristas",
+          title: "Arborists",
         },
         {
           icon: "axe",
-          title: "Remoción de árboles",
+          title: "Tree removal",
         },
         {
           icon: "gear",
-          title: "Remoción de tocones",
+          title: "Stump removal",
         },
       ],
       description:
-        "Una semana el teléfono no para. La siguiente, nada. Y la nómina llega igual cada viernes.",
+        "One week the phone never stops. The next, nothing. And payroll still comes every Friday.",
       list: [
-        "Llamadas perdidas mientras estás arriba del árbol",
-        "Cotizaciones a las que nadie les da seguimiento",
-        "Crecimiento que depende de referidos y del clima",
-        "No sabes cuánto te cuesta realmente ganar cada trabajo",
+        "Missed calls while you are up the tree",
+        "Quotes that no one follows up on",
+        "Growth that depends on referrals and the weather",
+        "You do not know what it really costs to win each job",
       ],
-      tag: 'El marketing sin sistema crea picos temporales, no<br class="hidden lg:block"/> <span class="text-secondary"> crecimiento <br class="md:hidden block"/> sostenible.</span>',
+      tag: 'Marketing without a system creates temporary spikes, not<br class="hidden lg:block"/> <span class="text-secondary"> sustainable <br class="md:hidden block"/> growth.</span>',
     },
     session: {
-      tag: "Empecemos",
+      tag: "Let's start",
       title:
-        'Agenda una sesión de <br class="hidden md:block"/> <span class="text-secondary">estrategia gratis.</span>',
+        'Book a free <br class="hidden md:block"/> <span class="text-secondary">strategy session.</span>',
       description:
-        "30 minutos. Encontramos dónde tu empresa está perdiendo trabajos y te<br class='hidden xl:block'/> mostramos cómo el Tree Profit System™ lo resuelve. Sin presión.",
+        "30 minutes. We find where your company is losing jobs and<br class='hidden xl:block'/> show you how the Tree Profit System™ solves it. No pressure.",
     },
     grow: {
-      title: "Donde las empresas de tree service escalan.",
+      title: "Where tree service companies scale.",
     },
     steps: {
-      tag: "Donde escalan las empresas de árboles",
+      tag: "Where tree companies scale",
       title:
-        'Un ecosistema de crecimiento completo.<br/><span class="text-third">No servicios sueltos.</span>',
+        'A complete growth ecosystem.<br/><span class="text-third">Not separate services.</span>',
       description:
-        "La mayoría de agencias se detienen en el lead. El Tree Profit System™ sigue — cada trabajo<br class='hidden md:block'/> terminado alimenta el siguiente.",
+        "Most agencies stop at the lead. The Tree Profit System™ continues — every job<br class='hidden md:block'/> completed feeds the next.",
       reasons: [
         {
-          title: "Diagnóstico",
-          description: "dónde se escapa el dinero",
-          tag: "Semana 1",
+          title: "Diagnosis",
+          description: "where money is slipping away",
+          tag: "Week 1",
           icon: "steps1",
         },
         {
-          title: "Atraer",
-          description: "anuncios + Google Maps",
-          tag: "Semana 2-3",
+          title: "Attract",
+          description: "ads + Google Maps",
+          tag: "Week 2-3",
           icon: "steps2",
         },
         {
-          title: "Cerrar",
-          description: "la IA responde en segundos",
-          tag: "Semana 3-4",
+          title: "Close",
+          description: "AI responds in seconds",
+          tag: "Week 3-4",
           icon: "steps3",
         },
         {
-          title: "Multiplicar",
-          description: "reviews, referidos, regreso",
-          tag: "Semana 5-6",
+          title: "Multiply",
+          description: "reviews, referrals, returns",
+          tag: "Week 5-6",
           icon: "steps4",
         },
         {
-          title: "Escalar",
-          description: "medir + reinvertir",
-          tag: "Semana 7-8",
+          title: "Scale",
+          description: "measure + reinvest",
+          tag: "Week 7-8",
           icon: "steps5",
         },
       ],
@@ -124,198 +124,198 @@ export default {
       items: [
         {
           title:
-            'Clientes nuevos de tu zona, <span class="text-secondary">de forma predecible.</span>',
+            'New clients from your area, <span class="text-secondary">predictably.</span>',
           description: "",
           list: [
-            "Campañas de clientes en Facebook, Instagram y TikTok",
-            "Google Ads conectado a tu tablero de trabajos",
-            "Perfil de Google Maps optimizado",
-            "Páginas de captura que convierten",
+            "Client campaigns on Facebook, Instagram and TikTok",
+            "Google Ads connected to your job dashboard",
+            "Optimized Google Maps profile",
+            "Landing pages that convert",
           ],
           list1: [
             {
               icon: "reasons1-1",
-              description: "Costo por lead predecible.",
+              description: "Predictable cost per lead.",
             },
             {
               icon: "reasons1-2",
-              description: "Visibilidad local.",
+              description: "Local visibility.",
             },
           ],
         },
         {
           title:
-            'Cada cliente atendido.<br/><span class="text-secondary">Cada cotización con<br/>seguimiento.</span>',
+            'Every client served.<br/><span class="text-secondary">Every quote with<br/>follow-up.</span>',
           description: "",
           list: [
-            "Asistente IA que responde por SMS, WhatsApp y Messenger en segundos, 24/7",
-            "ShapeHub — tu oficina digital y tablero de trabajos",
-            "Seguimiento automático y recordatorios de cita",
-            "Asesores que llaman y agendan por ti (Canopy)",
+            "AI assistant that responds by SMS, WhatsApp and Messenger in seconds, 24/7",
+            "ShapeHub — your digital office and job dashboard",
+            "Automatic follow-up and appointment reminders",
+            "Advisors who call and book for you (Canopy)",
           ],
           list1: [
             {
               icon: "reasons2-1",
-              description: "Mayores trabajos cerrados",
+              description: "More jobs closed",
             },
             {
               icon: "reasons2-2",
-              description: "Cero llamadas perdidas",
+              description: "Zero missed calls",
             },
           ],
         },
         {
           title:
-            'Cada trabajo terminado <br/>te <span class="text-secondary">trae el siguiente.</span>',
+            'Every completed job <br/><span class="text-secondary">brings you the next.</span>',
           description:
-            "Aquí es donde las otras agencias se detienen — y donde tu crecimiento se multiplica.",
+            "This is where other agencies stop — and where your growth multiplies.",
           list: [
-            "Review Shield: más reviews de 5 estrellas en Google y alerta inmediata si un cliente quedó inconforme",
-            "ShapeHub Link + tarjetas QR para cada trabajo",
-            "Programa de referidos y campañas por temporada (huracanes, poda)",
+            "Review Shield: more 5-star Google reviews and an immediate alert if a client was dissatisfied",
+            "ShapeHub Link + QR cards for each job",
+            "Referral program and seasonal campaigns (hurricanes, pruning)",
           ],
           list1: [
             {
               icon: "reasons3-1",
-              description: "Los mejores calificados de tu ciudad.",
+              description: "The best rated in your city.",
             },
             {
               icon: "reasons3-1",
-              description: "Menor costo por trabajo.",
+              description: "Lower cost per job.",
             },
           ],
         },
       ],
-      indicators: ["01 · ATRAER", "02 · CERRAR", "03 · MULTIPLICAR"],
+      indicators: ["01 · ATTRACT", "02 · CLOSE", "03 · MULTIPLY"],
     },
     numbers: {
-      tag: "Resultados reales",
+      tag: "Real results",
       title:
-        'Empresas de árboles reales. <br class="hidden md:block"/> <span class="text-secondary">Números reales.</span>',
+        'Real tree companies. <br class="hidden md:block"/> <span class="text-secondary">Real numbers.</span>',
       title2:
         'H&A Tree Brothers<br/><span class="text-secondary heading-h5">Orlando, FL.</span>',
       description:
-        "El crecimiento estructurado reemplazó al marketing inconsistente.",
+        "Structured growth replaced inconsistent marketing.",
       statistics: [
         {
           icon: "numbers1",
           title: "+38%",
-          description: "Clientes calificados",
+          description: "Qualified clients",
         },
         {
           icon: "numbers2",
           title: "+27%",
-          description: "Trabajos agendados",
+          description: "Jobs booked",
         },
       ],
       list: [
-        "Menor costo por trabajo agendado",
-        "Control total de clientes y facturación",
+        "Lower cost per booked job",
+        "Full control of clients and revenue",
       ],
       buttons: [
         {
-          label: "Agenda una llamada",
+          label: "Book a call",
           href: "#",
         },
         {
-          label: "Más resultados",
+          label: "More results",
           href: "#",
         },
       ],
     },
     control: {
       img: "main-control",
-      tag: "Métricas y control",
+      tag: "Metrics and control",
       title:
-        'Si no se puede medir, <span class="text-third">no se puede escalar.</span>',
+        'If it cannot be measured, <span class="text-third">it cannot be scaled.</span>',
       description:
-        "Sabrás cuánto te cuesta ganar cada trabajo — y cuánto te deja.",
+        "You will know what it costs to win each job — and what it earns you.",
       measuring: [
         {
-          tag: "Medimos",
-          description: "Costo por trabajo agendado",
+          tag: "We measure",
+          description: "Cost per booked job",
           icon: "control1",
         },
         {
-          tag: "Medimos",
-          description: "% cliente → cotización → trabajo",
+          tag: "We measure",
+          description: "% client → quote → job",
           icon: "control2",
         },
         {
-          tag: "Medimos",
-          description: "Facturación por canal",
+          tag: "We measure",
+          description: "Revenue by channel",
           icon: "control3",
         },
         {
-          tag: "Medimos",
-          description: "Reviews nuevos al mes",
+          tag: "We measure",
+          description: "New reviews per month",
           icon: "control4",
         },
       ],
     },
     path: {
-      tag: "Un camino estructurado para escalar",
+      tag: "A structured path to scale",
       title:
-        'Tus primeras 8 semanas <br/> <span class="text-secondary">con Treehubly.</span>',
+        'Your first 8 weeks <br/> <span class="text-secondary">with Treehubly.</span>',
       structure: [
         {
           icon: "path1",
-          title: "Diagnóstico",
-          tag: "SEMANA 1",
+          title: "Diagnosis",
+          tag: "WEEK 1",
           description:
-            "Auditamos tus clientes, tu proceso de venta y tus reviews.",
+            "We audit your clients, sales process and reviews.",
         },
         {
           icon: "path2",
-          title: "Atraer",
-          tag: "SEMANA 2-3",
-          description: "Lanzamos campañas y optimizamos Google Maps.",
+          title: "Attract",
+          tag: "WEEK 2-3",
+          description: "We launch campaigns and optimize Google Maps.",
         },
         {
           icon: "path3",
-          title: "Cerrar",
-          tag: "SEMANA 3-4",
-          description: "ShapeHub, asistente IA y seguimiento activos.",
+          title: "Close",
+          tag: "WEEK 3-4",
+          description: "ShapeHub, AI assistant and follow-up active.",
         },
         {
           icon: "path4",
-          title: "Multiplicar",
-          tag: "SEMANA 5-6",
-          description: "Reviews, referidos y reactivación funcionando.",
+          title: "Multiply",
+          tag: "WEEK 5-6",
+          description: "Reviews, referrals and reactivation running.",
         },
         {
           icon: "path5",
-          title: "Escalar",
-          tag: "SEMANA 7-8",
-          description: "Medimos cada dólar y reinvertimos en lo que funciona.",
+          title: "Scale",
+          tag: "WEEK 7-8",
+          description: "We measure every dollar and reinvest in what works.",
         },
       ],
     },
     ecosystem: {
-      tag: '<span class="text-secondary">Donde escalan las empresas de árboles</span>',
+      tag: '<span class="text-secondary">Where tree companies scale</span>',
       title:
-        'Un ecosistema de crecimiento completo.<br/><span class="text-secondary">No servicios sueltos.</span>',
+        'A complete growth ecosystem.<br/><span class="text-secondary">Not separate services.</span>',
       service: [
         {
-          tag: "PLAN RAÍZ",
-          tag2: "5 DÍAS GRATIS",
+          tag: "ROOT PLAN",
+          tag2: "5 DAYS FREE",
           title: "Start",
-          description: "Ningún cliente se te vuelve a perder.",
+          description: "You never lose another client.",
           lists: [
             {
               title: "Branding Kit",
-              description: "Logo, colores y plantillas de tu marca.",
+              description: "Your brand logo, colors and templates.",
             },
             {
               title: "ShapeHub Link",
-              description: "Tu propia app de contacto.",
+              description: "Your own contact app.",
             },
             {
-              title: "Landing page + Chatbot con IA",
+              title: "Landing page + AI Chatbot",
               description: "",
             },
             {
-              title: "Tableros de trabajo + respuestas automáticas",
+              title: "Job dashboards + automatic responses",
               description: "",
             },
             {
@@ -325,177 +325,177 @@ export default {
           ],
           button: [
             {
-              label: "Empieza ahora",
+              label: "Start now",
               href: "#",
             },
           ],
-          subtag: "Prueba 5 dias gratis, sin compromiso.",
+          subtag: "Try 5 days free, no commitment.",
         },
         {
-          tag: "PLAN TRONCO",
-          tag2: "MÁS POPULAR",
+          tag: "TRUNK PLAN",
+          tag2: "MOST POPULAR",
           title: "Grow",
-          description: "Trabajos nuevos todas las semanas.",
+          description: "New jobs every week.",
           lists: [
             {
-              title: "Todo lo de Start",
+              title: "Everything in Start",
               description: "",
             },
             {
-              title: "Anuncios en Facebook, Instagram y TikTok",
+              title: "Ads on Facebook, Instagram and TikTok",
               description: "",
             },
             {
-              title: "Asistente IA que responde y agenda 24/7",
+              title: "AI assistant that responds and books 24/7",
               description: "",
             },
             {
-              title: "Campañas de reactivación por temporada y días festivos",
+              title: "Seasonal and holiday reactivation campaigns",
               description: "",
             },
           ],
           button: [
             {
-              label: "Quiero más trabajos",
+              label: "I want more jobs",
               href: "#",
             },
           ],
-          subtag: "La inversión en anuncios se paga directo a la plataforma.",
+          subtag: "Ad spend is paid directly to the platform.",
         },
         {
-          tag: "PLAN COPA",
+          tag: "CANOPY PLAN",
           tag2: "",
           title: "Scale",
           description:
-            "Tú cortas arboles y lideras a tu equipo. Nosotros llenamos tu agenda.",
+            "You cut trees and lead your team. We fill your schedule.",
           lists: [
             {
-              title: "Todo lo de Grow",
+              title: "Everything in Grow",
               description: "",
             },
             {
-              title: "Asesores que llaman y agendan por ti",
+              title: "Advisors who call and book for you",
               description: "",
             },
             {
-              title: "Website + Chatbot con IA",
+              title: "Website + AI Chatbot",
               description: "",
             },
             {
-              title: "Asesoría comercial 1:1",
+              title: "1:1 sales consulting",
               description: "",
             },
           ],
           button: [
             {
-              label: "Hablemos de escalar",
+              label: "Let's talk scaling",
               href: "#",
             },
           ],
-          subtag: "Cupos limitados por zona.",
+          subtag: "Limited spots per area.",
         },
       ],
     },
     guide: {
-      tag: "¿Aún no sabes qué plan es para ti? Empieza gratis.",
+      tag: "Still unsure which plan is for you? Start free.",
       title:
-        'Descarga la guía gratis<br class="hidden md:block"/> <span class="text-third">y recibe una consultoría de 30 minutos.</span>',
+        'Download the free guide<br class="hidden md:block"/> <span class="text-third">and receive a 30-minute consultation.</span>',
       description:
-        "Déjanos tus datos y te enviamos el eBook al instante. Luego un consultor especializado en <br class='hidden md:block'/> Tree Services te ayuda a elegir el camino correcto para tu empresa.",
+        "Leave your details and we will send your eBook instantly. Then a consultant specializing in <br class='hidden md:block'/> Tree Services helps you choose the right path for your company.",
       book: {
-        tag: "EBOOK GRATIS",
-        subtag: "PDF DESCARGA INMEDIATA",
+        tag: "FREE EBOOK",
+        subtag: "PDF IMMEDIATE DOWNLOAD",
         title:
-          'La Guía de Crecimiento<br class="hidden xl:block"/> para<span class="text-third"> Empresas de Tree<br class="hidden xl:block"/> Services en EE.UU</span>',
+          'The Growth Guide<br class="hidden xl:block"/> for<span class="text-third"> Tree Service Companies<br class="hidden xl:block"/> in the USA</span>',
         description:
-          "Una guía paso a paso para conseguir más clientes potenciales, más trabajos y crecimiento sostenible.",
+          "A step-by-step guide to getting more leads, more jobs and sustainable growth.",
         list10: [
-          "Cómo atraer leads con Google y redes",
-          "Cómo multiplicar reseñas y referidos.",
-          "Cómo responder y cerrar más rápido.",
-          "El sistema para escalar tu agenda.",
+          "How to attract leads with Google and social media",
+          "How to multiply reviews and referrals.",
+          "How to respond and close faster.",
+          "The system to scale your schedule.",
         ],
       },
       bonus: {
-        tag: "BONO INCLUIDO",
-        title: "Consultoría gratuita de 30 min",
+        tag: "BONUS INCLUDED",
+        title: "Free 30-minute consultation",
         description:
-          "Con un consultor especializado en Tree Services. Revisamos tu negocio y te decimos qué plan te conviene.",
+          "With a consultant specializing in Tree Services. We review your business and tell you which plan suits you.",
         icon: "guide1",
       },
       form: {
-        tag: "DESCARGA GRATIS",
-        title: "¿A dónde te enviamos tu eBook?",
-        description: "Toma menos de 30 segundos.",
+        tag: "FREE DOWNLOAD",
+        title: "Where should we send your eBook?",
+        description: "Takes less than 30 seconds.",
       },
     },
     marketing: {
-      tag: '<span class="text-secondary">Por qué somos</span>',
+      tag: '<span class="text-secondary">Why we are</span>',
       title:
-        'Esto no es <span class="text-secondary">marketing profesional.</span>',
+        'This is not <span class="text-secondary">professional marketing.</span>',
       pc: [
         {
           icon: "equis",
-          title: "Agencia tradicional",
+          title: "Traditional agency",
           list: [
-            "Vende un website, anuncios o SEO",
-            "Se detiene cuando llega el lead",
-            "Campañas que se apagan",
-            "Reporta clics y alcance",
-            "Trabaja con cualquier industria",
+            "Sells a website, ads or SEO",
+            "Stops when the lead arrives",
+            "Campaigns that stop",
+            "Reports clicks and reach",
+            "Works with any industry",
           ],
         },
         {
           icon: "check",
           title: "Treehubly · Tree Profit System™",
           list: [
-            "Construye un sistema de crecimiento conectado",
-            "Responde, agenda y da seguimiento por ti",
-            "Un loop que crece con cada trabajo",
-            "Reporta costo por trabajo agendado y facturación",
-            "Trabaja solo con empresas de árboles",
+            "Builds a connected growth system",
+            "Responds, books and follows up for you",
+            "A loop that grows with each job",
+            "Reports cost per booked job and revenue",
+            "Works only with tree companies",
           ],
         },
       ],
     },
     business: {
       title:
-        "¿Listo para ser la empresa de árboles que <br/> domina tu ciudad?",
+        "Ready to be the tree company that <br/> dominates your city?",
       description:
-        "Trabajamos con solo 10 empresas de árboles a la vez. Garantía de implementación incluida.",
+        "We work with only 10 tree companies at a time. Implementation guarantee included.",
       buttons: [
         {
-          label: "Agenda tu sesión de estrategia gratis",
+          label: "Book your free strategy session",
           href: "#",
         },
         {
-          label: "Escríbenos por WhatsApp",
+          label: "Message us on WhatsApp",
           href: "#",
         },
       ],
     },
     ask: {
       title:
-        'Lo que nos preguntan los dueños<br/>de <span class="text-secondary">empresas de árboles</span>',
+        'What owners<br/>of <span class="text-secondary">tree companies</span> ask us',
       questions: [
         {
-          title: "No sé nada de marketing, ¿esto es para mí?",
+          title: "I know nothing about marketing, is this for me?",
           answer: "",
         },
         {
-          title: "¿Cuánto tengo que invertir en anuncios?",
+          title: "How much do I need to invest in ads?",
           answer: "",
         },
         {
-          title: "¿En cuánto tiempo veo resultados?",
+          title: "How soon will I see results?",
           answer: "",
         },
         {
-          title: "Ya tengo website, ¿necesito uno nuevo?",
+          title: "I already have a website, do I need a new one?",
           answer: "",
         },
         {
-          title: "¿Hay contrato a largo plazo?",
+          title: "Is there a long-term contract?",
           answer: "",
         },
       ],
@@ -505,75 +505,75 @@ export default {
     hero: {
       tag: "TREE PROFIT SYSTEM™",
       title:
-        'Un sistema. 3 pilares.<br/><span class="text-secondary">Cada trabajo trae el siguiente.</span>',
+        'One system. 3 pillars.<br/><span class="text-secondary">Each job brings the next.</span>',
       items: [],
       buttons: [],
       description:
-        "No vendemos piezas sueltas. Conectamos anuncios, respuesta inmediata y<br/> reputación en un solo loop que crece cada mes.",
+        "We do not sell separate pieces. We connect ads, immediate response and<br/> reputation in one loop that grows each month.",
     },
     profit: {
       tag: "",
-      title: 'El <span class="text-third">Tree Profit Loop™</span>',
+      title: 'The <span class="text-third">Tree Profit Loop™</span>',
       description:
-        "El diagnóstico se hace una vez. Atraer, Cerrar, Multiplicar y Escalar giran<br/>cada mes, y los reviews y referidos de cada vuelta abaratan la siguiente.",
+        "The diagnosis is done once. Attract, Close, Multiply and Scale cycle<br/>each month, and reviews and referrals from each round make the next cheaper.",
       reasons: [
         {
-          title: "Diagnóstico",
-          description: "dónde se escapa el dinero",
-          tag: "Semana 1",
+          title: "Diagnosis",
+          description: "where money is slipping away",
+          tag: "Week 1",
           icon: "steps1",
         },
         {
-          title: "Atraer",
-          description: "anuncios + Google Maps",
-          tag: "Semana 2-3",
+          title: "Attract",
+          description: "ads + Google Maps",
+          tag: "Week 2-3",
           icon: "steps2",
         },
         {
-          title: "Cerrar",
-          description: "la IA responde en segundos",
-          tag: "Semana 3-4",
+          title: "Close",
+          description: "AI responds in seconds",
+          tag: "Week 3-4",
           icon: "steps3",
         },
         {
-          title: "Multiplicar",
-          description: "reviews, referidos, regreso",
-          tag: "Semana 5-6",
+          title: "Multiply",
+          description: "reviews, referrals, returns",
+          tag: "Week 5-6",
           icon: "steps4",
         },
         {
-          title: "Escalar",
-          description: "medir + reinvertir",
-          tag: "Semana 7-8",
+          title: "Scale",
+          description: "measure + reinvest",
+          tag: "Week 7-8",
           icon: "steps5",
         },
       ],
     },
     reasons: {
-      index: ["01 · ATRAER", "02 · CERRAR", "03 · MULTIPLICAR"],
+      index: ["01 · ATTRACT", "02 · CLOSE", "03 · MULTIPLY"],
       items: [
         {
           title:
-            'Clientes nuevos que te llaman a ti,<span class="text-secondary"> no a tu competencia.</span>',
+            'New clients who call you,<span class="text-secondary"> not your competition.</span>',
           description:
-            "Ponemos tu empresa frente a dueños de casa de tu zona justo cuando necesitan cortar, podar o quitar un árbol,",
+            "We put your company in front of local homeowners just when they need to cut, prune or remove a tree,",
           what: [
             {
-              title: "¿Qué hacemos?",
+              title: "What do we do?",
               list: [
-                "Anuncios en Facebook e Instagram",
-                "Anuncios en TikTok",
-                "Conexión con Google Ads",
-                "Página de captura",
-                "Perfil de Google Maps optimizado",
+                "Ads on Facebook and Instagram",
+                "Ads on TikTok",
+                "Connection to Google Ads",
+                "Landing page",
+                "Optimized Google Maps profile",
               ],
             },
             {
-              title: "¿Qué ganas?",
+              title: "What do you gain?",
               list: [
-                "Llamadas de tu zona",
-                "No depender de referidos",
-                "Sabes cuánto cuesta cada cliente",
+                "Calls from your area",
+                "No reliance on referrals",
+                "You know what each client costs",
               ],
             },
           ],
@@ -581,26 +581,26 @@ export default {
         },
         {
           title:
-            'Tu asistente 24/7 contesta, cotiza y <span class="text-secondary">agenda por ti.</span>',
+            'Your 24/7 assistant answers, quotes and <span class="text-secondary">books for you.</span>',
           description:
-            "Mientras estás arriba del árbol, el sistema responde en segundos por SMS, WhatsApp o Messenger, y nadie se te escapa.",
+            "While you are up the tree, the system responds in seconds by SMS, WhatsApp or Messenger, and no one slips away.",
           what: [
             {
-              title: "¿Qué hacemos?",
+              title: "What do we do?",
               list: [
-                "ShapeHub, tu oficina digital",
-                "Respuesta automática",
-                "Asistente con IA",
-                "Recordatorios de cita y cotización",
-                "Scripts de venta",
+                "ShapeHub, your digital office",
+                "Automatic response",
+                "AI assistant",
+                "Appointment and quote reminders",
+                "Sales scripts",
               ],
             },
             {
-              title: "¿Qué ganas?",
+              title: "What do you gain?",
               list: [
-                "Cero llamadas perdidas",
-                "Más cotizaciones cerradas",
-                "Todo en un solo lugar",
+                "Zero missed calls",
+                "More quotes closed",
+                "Everything in one place",
               ],
             },
           ],
@@ -608,25 +608,25 @@ export default {
         },
         {
           title:
-            'Cada trabajo terminado te <span class="text-secondary">trae el siguiente.</span>',
+            'Every completed job <span class="text-secondary">brings the next.</span>',
           description:
-            "Aquí está lo que ninguna otra agencia hace: convertir a tus clientes de hoy en tu publicidad de mañana.",
+            "Here is what no other agency does: turn your clients today into your advertising tomorrow.",
           what: [
             {
-              title: "¿Qué hacemos?",
+              title: "What do we do?",
               list: [
                 "Review Shield",
-                "ShapeHub Link + tarjetas QR",
-                "Programa de referidos",
-                "Campañas por temporada: huracanes, poda",
+                "ShapeHub Link + QR cards",
+                "Referral program",
+                "Seasonal campaigns: hurricanes, pruning",
               ],
             },
             {
-              title: "¿Qué ganas?",
+              title: "What do you gain?",
               list: [
-                "Más estrellas en Google",
-                "Clientes que regresan",
-                "Cada cliente cuesta menos",
+                "More stars on Google",
+                "Returning clients",
+                "Each client costs less",
               ],
             },
           ],
@@ -634,9 +634,9 @@ export default {
             system: {
               title: "Treehubly · Tree Profit System™",
               list: [
-                "Después de cada trabajo, pedimos un review a todos tus clientes, con tu enlace de Google.",
-                "Si alguien tuvo una mala experiencia, te llega una alerta para llamarlo y arreglarlo.",
-                "Un problema bien resuelto se convierte en tu mejor review.",
+                "After each job, we ask all your clients for a review using your Google link.",
+                "If someone had a bad experience, you get an alert to call them and fix it.",
+                "A problem well resolved becomes your best review.",
               ],
             },
             links: {
@@ -655,15 +655,15 @@ export default {
                   href: "#",
                 },
                 {
-                  label: "Nuestros Servicios",
+                  label: "Our Services",
                   href: "#",
                 },
                 {
-                  label: "Guardar  contacto",
+                  label: "Save contact",
                   href: "#",
                 },
                 {
-                  label: "Realizar una reserva",
+                  label: "Make a booking",
                   href: "#",
                 },
               ],
@@ -674,43 +674,43 @@ export default {
     },
     mYe: {
       img: "system-control",
-      tag: "Medir y escalar",
+      tag: "Measure and scale",
       title:
-        'Sabes cuánto te cuesta cada trabajo y<span class="text-third"> cuánto te deja.</span>',
+        'You know what each job costs you and<span class="text-third"> what it earns you.</span>',
       description: "",
       measuring: [
         {
-          tag: "Métrica",
-          description: "Costo por lead",
+          tag: "Metric",
+          description: "Cost per lead",
           icon: "control1",
         },
         {
-          tag: "Métrica",
-          description: "% lead → cita → trabajo",
+          tag: "Metric",
+          description: "% lead → appointment → job",
           icon: "control2",
         },
         {
-          tag: "Métrica",
-          description: "Reviews nuevos al mes",
+          tag: "Metric",
+          description: "New reviews per month",
           icon: "control3",
         },
         {
-          tag: "Métrica",
-          description: "Costo por trabajo agendado",
+          tag: "Metric",
+          description: "Cost per booked job",
           icon: "control4",
         },
       ],
     },
     ready: {
-      title: "¿Listo para que tu agenda se<br/> llene sola?",
+      title: "Ready for your schedule to<br/> fill itself?",
       description: "",
       buttons: [
         {
-          label: "Quiero mi diagnóstico gratis",
+          label: "I want my free diagnosis",
           href: "#",
         },
         {
-          label: "Ver planes",
+          label: "View plans",
           href: "#",
         },
       ],
@@ -718,30 +718,30 @@ export default {
   },
   plans: {
     complete: {
-      tag: '<span class="text-secondary">Donde escalan las empresas de árboles</span>',
+      tag: '<span class="text-secondary">Where tree companies scale</span>',
       title:
-        'Un ecosistema de crecimiento completo.<br/><span class="text-secondary">No servicios sueltos.</span>',
+        'A complete growth ecosystem.<br/><span class="text-secondary">Not separate services.</span>',
       service: [
         {
-          tag: "PLAN RAÍZ",
-          tag2: "5 DÍAS GRATIS",
+          tag: "ROOT PLAN",
+          tag2: "5 DAYS FREE",
           title: "Start",
-          description: "Ningún cliente se te vuelve a perder.",
+          description: "You never lose another client.",
           lists: [
             {
               title: "Branding Kit",
-              description: "Logo, colores y plantillas de tu marca.",
+              description: "Your brand logo, colors and templates.",
             },
             {
               title: "ShapeHub Link",
-              description: "Tu propia app de contacto.",
+              description: "Your own contact app.",
             },
             {
-              title: "Landing page + Chatbot con IA",
+              title: "Landing page + AI Chatbot",
               description: "",
             },
             {
-              title: "Tableros de trabajo + respuestas automáticas",
+              title: "Job dashboards + automatic responses",
               description: "",
             },
             {
@@ -751,136 +751,136 @@ export default {
           ],
           button: [
             {
-              label: "Empieza ahora",
+              label: "Start now",
               href: "#",
             },
           ],
-          subtag: "Prueba 5 dias gratis, sin compromiso.",
+          subtag: "Try 5 days free, no commitment.",
           steps: [
             {
-              title: "Atraer",
+              title: "Attract",
               description:
-                "Branding Kit · Landing page con chatbot IA · perfil de Google optimizado · ShapeHub Link.",
+                "Branding Kit · Landing page with AI chatbot · optimized Google profile · ShapeHub Link.",
             },
             {
-              title: "Cerrar",
+              title: "Close",
               description:
-                "Tablero de trabajos (de lead a cobrado) · respuesta automática por SMS · recordatorios de cita.",
+                "Job dashboard (from lead to paid) · automatic SMS response · appointment reminders.",
             },
             {
-              title: "Multiplicar",
+              title: "Multiply",
               description:
-                "Review Shield 24/7 · tarjetas con QR para pedir reseñas.",
+                "Review Shield 24/7 · QR cards to request reviews.",
             },
             {
-              title: "Soporte",
+              title: "Support",
               description: "Kickoff",
             },
           ],
         },
         {
-          tag: "PLAN TRONCO",
-          tag2: "MÁS POPULAR",
+          tag: "TRUNK PLAN",
+          tag2: "MOST POPULAR",
           title: "Grow",
-          description: "Trabajos nuevos todas las semanas.",
+          description: "New jobs every week.",
           lists: [
             {
-              title: "Todo lo de Start",
+              title: "Everything in Start",
               description: "",
             },
             {
-              title: "Anuncios en Facebook, Instagram y TikTok",
+              title: "Ads on Facebook, Instagram and TikTok",
               description: "",
             },
             {
-              title: "Asistente IA que responde y agenda 24/7",
+              title: "AI assistant that responds and books 24/7",
               description: "",
             },
             {
-              title: "Campañas de reactivación por temporada y días festivos",
+              title: "Seasonal and holiday reactivation campaigns",
               description: "",
             },
           ],
           button: [
             {
-              label: "Quiero más trabajos",
+              label: "I want more jobs",
               href: "#",
             },
           ],
-          subtag: "La inversión en anuncios se paga directo a la plataforma.",
+          subtag: "Ad spend is paid directly to the platform.",
           steps: [
             {
-              title: "Atraer",
+              title: "Attract",
               description:
-                "Todo Start + anuncios en Facebook, Instagram y TikTok + página de captura.",
+                "Everything in Start + ads on Facebook, Instagram and TikTok + landing page.",
             },
             {
-              title: "Cerrar",
+              title: "Close",
               description:
-                "Todo Start + asistente IA que responde, califica y agenda por SMS, Messenger y WhatsApp.",
+                "Everything in Start + AI assistant that responds, qualifies and books by SMS, Messenger and WhatsApp.",
             },
             {
-              title: "Multiplicar",
+              title: "Multiply",
               description:
-                "Reactivación de clientes antiguos antes de tormentas, invierno y días festivos.",
+                "Reactivation of past clients before storms, winter and holidays.",
             },
             {
-              title: "Soporte",
-              description: "Grupo de WhatsApp + reunión semanal de 15 minutos.",
+              title: "Support",
+              description: "WhatsApp group + weekly 15-minute meeting.",
             },
           ],
         },
         {
-          tag: "PLAN COPA",
+          tag: "CANOPY PLAN",
           tag2: "",
           title: "Scale",
           description:
-            "Tú cortas arboles y lideras a tu equipo.<br/> Nosotros llenamos tu agenda.",
+            "You cut trees and lead your team.<br/> We fill your schedule.",
           lists: [
             {
-              title: "Todo lo de Grow",
+              title: "Everything in Grow",
               description: "",
             },
             {
-              title: "Asesores que llaman y agendan por ti",
+              title: "Advisors who call and book for you",
               description: "",
             },
             {
-              title: "Website + Chatbot con IA",
+              title: "Website + AI Chatbot",
               description: "",
             },
             {
-              title: "Asesoría comercial 1:1",
+              title: "1:1 sales consulting",
               description: "",
             },
           ],
           button: [
             {
-              label: "Hablemos de escalar",
+              label: "Let's talk scaling",
               href: "#",
             },
           ],
-          subtag: "Cupos limitados por zona.",
+          subtag: "Limited spots per area.",
           steps: [
             {
-              title: "Atraer",
+              title: "Attract",
               description:
-                "Todo Grow + website profesional + estrategia multicanal.",
+                "Everything in Grow + professional website + multichannel strategy.",
             },
             {
-              title: "Cerrar",
+              title: "Close",
               description:
-                "Todo Grow + chatbot IA en la web + asesores que llaman y agendan + asesoría comercial 1:1",
+                "Everything in Grow + AI chatbot on the website + advisors who call and book + 1:1 sales consulting",
             },
             {
-              title: "Multiplicar",
+              title: "Multiply",
               description:
-                "Todo Grow + programa de referidos + estrategia quincenal.",
+                "Everything in Grow + referral program + biweekly strategy.",
             },
             {
-              title: "Soporte",
+              title: "Support",
               description:
-                "Ejecutivo de cuenta + reunión semanal + sesión quincenal de 30 min.",
+                "Account executive + weekly meeting + biweekly 30-minute session.",
             },
           ],
         },
@@ -888,15 +888,15 @@ export default {
       plan: {
         icon: "complete1",
         title:
-          'Incluido en todos los planes:<span class="text-secondary"> 2 clases en vivo al mes</span>',
+          'Included in all plans:<span class="text-secondary"> 2 live classes per month</span>',
         description:
-          "Te enseñamos paso a paso cómo escalar tu empresa de tree services con un sistema comprobado.",
+          "We teach you step by step how to scale your tree services company with a proven system.",
         options: [
           {
-            title: "En español",
+            title: "In Spanish",
           },
           {
-            title: "En vivo  + grabación",
+            title: "Live  + recording",
           },
           {
             title: "Grow · Scale",
@@ -904,7 +904,7 @@ export default {
         ],
         button: [
           {
-            label: "Hablemos ahora",
+            label: "Let's talk now",
             href: "#",
           },
         ],
@@ -935,37 +935,37 @@ export default {
     },
     ask: {
       title:
-        'Lo que nos preguntan los dueños<br/>de <span class="text-secondary">empresas de árboles</span>',
+        'What owners<br/>of <span class="text-secondary">tree companies</span> ask us',
       questions: [
         {
-          title: "¿La inversión en anuncios está incluida?",
+          title: "Is ad spend included?",
           answer: "",
         },
         {
-          title: "¿Puedo empezar en Root y subir después?",
+          title: "Can I start in Root and upgrade later?",
           answer: "",
         },
         {
-          title: "¿Hay contrato mínimo?",
+          title: "Is there a minimum contract?",
           answer: "",
         },
         {
-          title: "¿Qué incluye el setup?  ",
+          title: "What does the setup include?  ",
           answer: "",
         },
         {
-          title: "¿Hay contrato a largo plazo?",
+          title: "Is there a long-term contract?",
           answer: "",
         },
       ],
     },
     diary: {
-      title: "¿No sabes cuál elegir?",
+      title: "Not sure which to choose?",
       description:
-        "En el diagnóstico gratis te decimos cuál plan te conviene, sin presión.",
+        "In the free diagnosis we tell you which plan suits you, no pressure.",
       buttons: [
         {
-          label: "Agregar diagnostico gratis",
+          label: "Add free diagnosis",
           href: "#",
         },
       ],
@@ -973,61 +973,61 @@ export default {
   },
   results: {
     numbers: {
-      tag: "Resultados reales",
+      tag: "Real results",
       title:
-        'Empresas de árboles reales.<span class="text-secondary"> Números reales.</span>',
+        'Real tree companies.<span class="text-secondary"> Real numbers.</span>',
       description:
-        "Crecimiento estructurado en lugar de marketing a la suerte.",
+        "Structured growth instead of marketing by chance.",
       section: {
-        tag: "Caso destacado",
+        tag: "Featured case",
         title:
           'H&A Tree Brothers<br/><span class="text-secondary">Orlando, FL.</span>',
         description:
-          "H&A Brother Tree Services es una empresa de servicios de árboles en crecimiento que atiende clientes residenciales y comerciales en el área de Orlando. A medida que la demanda creció, la empresa necesitaba una forma más estructurada de generar prospectos, gestionar consultas y rastrear el rendimiento del marketing.",
+          "H&A Brother Tree Services is a growing tree service company serving residential and commercial clients in the Orlando area. As demand grew, the company needed a more structured way to generate leads, manage inquiries and track marketing performance.",
       },
       section2: {
         title:
-          'La historia<br/><span class="text-secondary">del Negocio</span>',
+          'The story<br/><span class="text-secondary">of the Business</span>',
         description:
-          "H&A Brother Tree Services dependía principalmente de referencias y publicidad ocasional para atraer clientes, lo que generaba una demanda irregular y dificultaba su crecimiento constante. Además, carecía de un sistema centralizado para gestionar prospectos, automatizar seguimientos y medir el rendimiento de sus campañas de marketing.",
+          "H&A Brother Tree Services relied mainly on referrals and occasional advertising to attract clients, resulting in irregular demand and making steady growth difficult. It also lacked a centralized system to manage leads, automate follow-ups and measure marketing campaign performance.",
       },
       section3: {
         elements: [
           {
-            title: "Antes",
+            title: "Before",
             description:
-              "Dependía principalmente de referencias y publicidad ocasional.",
+              "It relied mainly on referrals and occasional advertising.",
           },
           {
-            title: "¿Qué hacemos?",
+            title: "What do we do?",
             description:
-              "Captación estructurada, seguimiento automático, pipeline y tracking de ingresos.",
+              "Structured acquisition, automatic follow-up, pipeline and revenue tracking.",
           },
         ],
         statistics: {
-          title: "Después",
+          title: "After",
           percentages: [
             {
               title: "+38%",
-              description: "Leads calificados",
+              description: "Qualified leads",
             },
             {
               title: "+27%",
-              description: "Trabajos agendados",
+              description: "Jobs booked",
             },
           ],
-          description: "Menor costo por trabajo agendado ",
+          description: "Lower cost per booked job ",
         },
       },
       description2:
-        "Trabajar con TreeHubly nos ayudó a estructurar cómo generamos y gestionamos prospectos. El sistema nos permitió responder más rápido a las consultas y mantenernos organizados mientras nuestro negocio sigue creciendo.",
+        "Working with TreeHubly helped us structure how we generate and manage leads. The system allowed us to respond to inquiries faster and stay organized as our business continues to grow.",
     },
     choose: {
-      title: "Tu empresa puede ser el próximo caso.",
+      title: "Your company could be the next case.",
       description: "",
       buttons: [
         {
-          label: "Quiero mi diagnóstico gratis",
+          label: "I want my free diagnosis",
           href: "#",
         },
       ],
@@ -1036,45 +1036,45 @@ export default {
   us: {
     history: {
       section: {
-        tag: '<span class="text-secondary">Nuestra Historia</span>',
+        tag: '<span class="text-secondary">Our Story</span>',
         title:
-          'Los negocios no crecen<br class="hidden xl:block"/> por suerte.<span class="text-secondary">Crecen con<br class="hidden xl:block"/>  sistemas.</span>',
+          'Businesses do not grow<br class="hidden xl:block"/> by luck.<span class="text-secondary">They grow with<br class="hidden xl:block"/>  systems.</span>',
         subtitle:
-          "TreeHubly fue creado con una misión: traer estructura, predictibilidad y crecimiento medible a la industria de servicios de árboles. <br/> Creemos que las empresas de árboles no necesitan más tácticas, necesitan infraestructura.",
+          "TreeHubly was created with a mission: to bring structure, predictability and measurable growth to the tree service industry. <br/> We believe tree companies do not need more tactics, they need infrastructure.",
         description:
-          "Después de años de prueba y error, encontramos la forma de estructurar negocios de servicios para que dejen de depender del caos. Así nació el Tree Profit System™.",
+          "After years of trial and error, we found a way to structure service businesses so they no longer depend on chaos. That is how the Tree Profit System™ was born.",
       },
-      title: 'Lo que nos hace<span class="text-secondary"> diferentes.</span>',
+      title: 'What makes us<span class="text-secondary"> different.</span>',
       diferences: [
         {
-          title: '<span class="text-secondary">Solo tree services</span>',
+          title: '<span class="text-secondary">Only tree services</span>',
           description:
-            "No trabajamos con restaurantes ni dentistas. Conocemos tu temporada, tus trucks y tus clientes.",
+            "We do not work with restaurants or dentists. We know your season, your trucks and your clients.",
         },
         {
-          title: '<span class="text-secondary">En tu idioma</span>',
+          title: '<span class="text-secondary">In your language</span>',
           description:
-            "Te explicamos todo en español, sin palabras raras y con números claros.",
-        },
-        {
-          title:
-            '<span class="text-secondary">Solo 10 empresas a la vez</span>',
-          description:
-            "Para darte atención directa con un ejecutivo de cuenta que conoce tu negocio.",
+            "We explain everything in Spanish, without strange words and with clear numbers.",
         },
         {
           title:
-            '<span class="text-secondary">Cumplimos lo que prometemos</span>',
-          description: "Por eso damos garantía de implementación.",
+            '<span class="text-secondary">Only 10 companies at a time</span>',
+          description:
+            "To give you direct attention from an account executive who knows your business.",
+        },
+        {
+          title:
+            '<span class="text-secondary">We deliver what we promise</span>',
+          description: "That is why we provide an implementation guarantee.",
         },
       ],
     },
     talk: {
-      title: "Hablemos de tu empresa.",
-      description: "30 minutos, sin compromiso. Salimos con un plan claro.",
+      title: "Let's talk about your company.",
+      description: "30 minutes, no commitment. We leave with a clear plan.",
       buttons: [
         {
-          label: "Agregar diagnostico gratis",
+          label: "Add free diagnosis",
           href: "#",
         },
       ],
@@ -1082,9 +1082,9 @@ export default {
   },
   footer: {
     description:
-      "El sistema de crecimiento definitivo para profesionales de servicios de árboles. No solo ofrecemos marketing: ofrecemos la infraestructura para tu éxito.",
+      "The ultimate growth system for tree service professionals. We do not just offer marketing: we offer the infrastructure for your success.",
     schedules: {
-      title: "Contáctanos",
+      title: "Contact us",
       items: [
         {
           href: "#",
@@ -1098,28 +1098,28 @@ export default {
         },
         {
           href: "#",
-          title: "Lun - Vie: 7AM - 7PM",
+          title: "Mon - Fri: 7AM - 7PM",
           icon: "clock",
         },
       ],
     },
     nav: {
-      title: "Menú Principal",
+      title: "Main Menu",
       items: [
         {
-          label: "El Sistema",
+          label: "The System",
           href: "/the-system",
         },
         {
-          label: "Planes",
+          label: "Plans",
           href: "/plans",
         },
         {
-          label: "Resultados",
+          label: "Results",
           href: "/results",
         },
         {
-          label: "Nosotros",
+          label: "About Us",
           href: "/about",
         },
       ],

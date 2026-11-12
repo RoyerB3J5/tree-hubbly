@@ -1,189 +1,96 @@
 ---
-import {
-  facebookLink,
-  instagramLink,
-  emailAddress,
-  phoneNumber,
-} from "../constants/info";
+const SITE = "https://treehubly.com";
+const image = `${SITE}/images/portada.jpg`;
+const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const localized = path.match(/^\/(en|es)(?:\/(.*))?$/);
+const locale = localized?.[1] === "es" ? "es" : "en";
+const page = localized?.[2] || "home";
 
-export interface Props {
-  lang?: string;
-  title?: string;
-  description?: string;
-  keywords?: string;
-  image?: string;
-  canonicalPath?: string;
-  canonicalUrl?: string;
-  includeLanguageAlternates?: boolean;
-  includeLocationMetadata?: boolean;
-  websiteLanguage?: string;
-  noindex?: boolean;
-  type?: string;
-  structuredData?: object | object[];
-}
-
-const SITE_URL = "https://treehubly.com";
-const SITE_NAME = "Treehubly";
-
-const {
-  lang = "en",
-  title = "Treehubly - The Growth System for Tree Services",
-  description = "Treehubly helps tree companies generate better leads, book more jobs, and scale with a structured growth ecosystem.",
-  keywords = "Tree Services, Lead Generation, Growth System, Marketing Automation, Tree Company Growth, Tree Service Marketing, Tree Service Leads, Tree Service Automation, Tree Service Performance, TreeHubly Growth System",
-  image = "/images/portada.jpg",
-  canonicalPath = "",
-  canonicalUrl,
-  includeLanguageAlternates = true,
-  includeLocationMetadata = true,
-  websiteLanguage,
-  noindex = false,
-  type = "website",
-  structuredData,
-} = Astro.props;
-
-// Normalize path format
-const cleanPath = canonicalPath.startsWith("/")
-  ? canonicalPath
-  : `/${canonicalPath}`;
-const formattedPath = cleanPath === "/" ? "" : cleanPath;
-
-// Formatted URLs for SEO & Hreflang
-const currentCanonical = canonicalUrl ?? `${SITE_URL}/${lang}${formattedPath}`;
-const enUrl = `${SITE_URL}/en${formattedPath}`;
-const esUrl = `${SITE_URL}/es${formattedPath}`;
-const defaultUrl = enUrl;
-
-// Absolute image URL
-const absoluteImage = image.startsWith("http")
-  ? image
-  : `${SITE_URL}${image.startsWith("/") ? "" : "/"}${image}`;
-const socialProfiles = [instagramLink, facebookLink].filter(
-  (profile) => profile && profile !== "#",
-);
-
-// Base Organization Schema
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": `${SITE_URL}/#organization`,
-  name: SITE_NAME,
-  legalName: SITE_NAME,
-  url: SITE_URL,
-  logo: `${SITE_URL}/favicon.svg`,
-  image: absoluteImage,
-  description: description,
-  ...(phoneNumber !== "#" ? { telephone: phoneNumber } : {}),
-  ...(emailAddress !== "#" ? { email: emailAddress } : {}),
-  ...(includeLocationMetadata
-    ? {
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Orlando",
-          addressRegion: "FL",
-          addressCountry: "US",
-        },
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: 28.5383,
-          longitude: -81.3792,
-        },
-      }
-    : {}),
-  ...(socialProfiles.length > 0 ? { sameAs: socialProfiles } : {}),
-};
-
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "@id": `${SITE_URL}/#website`,
-  url: SITE_URL,
-  name: SITE_NAME,
-  publisher: {
-    "@id": `${SITE_URL}/#organization`,
+type Metadata = { title: string; description: string; keywords: string; lang: "en" | "es"; noindex?: boolean };
+const localizedPages: Record<string, Record<"en" | "es", Omit<Metadata, "lang">>> = {
+  home: {
+    en: { title: "Tree Service Growth System | Treehubly", description: "Attract better clients, follow up on quotes and book more jobs with Treehubly's growth system for tree service companies.", keywords: "tree service marketing, tree service leads, tree company growth, booked jobs" },
+    es: { title: "Sistema de crecimiento para empresas de árboles | Treehubly", description: "Atrae mejores clientes, da seguimiento a cotizaciones y agenda más trabajos con el sistema de crecimiento de Treehubly.", keywords: "marketing para empresas de árboles, prospectos, trabajos agendados, crecimiento" },
   },
-  inLanguage: websiteLanguage
-    ? websiteLanguage
-    : [
-        { "@type": "Language", name: "English", alternateName: "en" },
-        { "@type": "Language", name: "Spanish", alternateName: "es" },
-      ],
+  "the-system": {
+    en: { title: "The Tree Profit System | Treehubly", description: "Discover how Treehubly connects advertising, client follow-up and reviews to help tree service companies grow.", keywords: "Tree Profit System, tree service marketing, client follow-up, reviews" },
+    es: { title: "Tree Profit System para empresas de árboles | Treehubly", description: "Conoce cómo Treehubly conecta anuncios, seguimiento de clientes y reseñas para ayudar a crecer a tu empresa de árboles.", keywords: "Tree Profit System, marketing para árboles, seguimiento de clientes, reseñas" },
+  },
+  plans: {
+    en: { title: "Tree Service Marketing Plans | Treehubly", description: "Compare Treehubly's Start, Grow and Scale plans for attracting clients, booking jobs and growing your tree service business.", keywords: "tree service marketing plans, Start, Grow, Scale, tree business growth" },
+    es: { title: "Planes para empresas de árboles | Treehubly", description: "Compara los planes Start, Grow y Scale de Treehubly para atraer clientes, agendar trabajos y hacer crecer tu empresa.", keywords: "planes para empresas de árboles, Start, Grow, Scale, marketing" },
+  },
+  results: {
+    en: { title: "Tree Service Marketing Results | Treehubly", description: "See how H&A Tree Brothers structured lead generation and follow-up to grow its tree service business in Orlando.", keywords: "tree service results, tree service case study, qualified leads, Orlando" },
+    es: { title: "Resultados para empresas de árboles | Treehubly", description: "Descubre cómo H&A Tree Brothers estructuró la captación y el seguimiento de prospectos para crecer en Orlando.", keywords: "resultados empresas de árboles, caso de éxito, prospectos calificados, Orlando" },
+  },
+  about: {
+    en: { title: "About Treehubly | Tree Service Growth", description: "Learn about Treehubly's mission to bring structure, predictable growth and personal support to tree service businesses.", keywords: "about Treehubly, tree service growth, tree service marketing" },
+    es: { title: "Nosotros | Crecimiento para empresas de árboles | Treehubly", description: "Conoce la misión de Treehubly: aportar estructura, crecimiento predecible y atención cercana a las empresas de árboles.", keywords: "Treehubly, nosotros, crecimiento para empresas de árboles, marketing" },
+  },
 };
-
-// Custom schemas passed via props
-const customSchemas = structuredData
-  ? Array.isArray(structuredData)
-    ? structuredData
-    : [structuredData]
-  : [];
-
-const allSchemas = [organizationSchema, websiteSchema, ...customSchemas];
+const schedulingPages: Record<string, Metadata> = {
+  "/scheduling": { lang: "en", title: "Tree Service Marketing and Growth | Treehubly", description: "Discover Treehubly's marketing system for tree service owners and see how it can help generate leads and book jobs.", keywords: "tree service marketing, qualified leads, booked jobs, tree company growth" },
+  "/scheduling/programme": { lang: "es", title: "Marketing para empresas de árboles | Treehubly", description: "Genera reseñas, responde prospectos y agenda más trabajos con el sistema de marketing y automatización de Treehubly.", keywords: "marketing para empresas de árboles, prospectos, automatización, citas" },
+  "/scheduling/questionnaire": { lang: "es", title: "Cuestionario para empresas de árboles | Treehubly", description: "Completa el cuestionario de Treehubly para conocer si tu empresa de servicios de árboles califica para el programa.", keywords: "cuestionario empresas de árboles, Treehubly, programa de crecimiento" },
+  "/scheduling/questions": { lang: "es", title: "Cuéntanos sobre tu empresa | Treehubly", description: "Comparte información sobre tu empresa con Treehubly para conocer los siguientes pasos.", keywords: "empresa, Treehubly, formulario" },
+  "/scheduling/calendar": { lang: "es", title: "Agenda una conversación | Treehubly", description: "Programa una conversación con un especialista de Treehubly sobre tu empresa de servicios de árboles.", keywords: "agendar conversación, Treehubly, servicios de árboles", noindex: true },
+  "/scheduling/evaluate": { lang: "en", title: "Explore the Treehubly System | Treehubly", description: "Learn how Treehubly helps tree service companies answer calls, follow up on leads and book jobs.", keywords: "tree service leads, calls, booked jobs, Treehubly" },
+  "/scheduling/greatfulness": { lang: "es", title: "Tu llamada está confirmada | Treehubly", description: "Consulta los siguientes pasos antes de tu llamada con Treehubly.", keywords: "llamada confirmada, Treehubly, próximos pasos", noindex: true },
+  "/scheduling/thank-you": { lang: "es", title: "Gracias por completar el formulario | Treehubly", description: "Recibimos tu información. Conoce los siguientes pasos para tu empresa con Treehubly.", keywords: "confirmación de formulario, Treehubly", noindex: true },
+  "/scheduling/partner": { lang: "es", title: "Programa para empresas de árboles | Treehubly", description: "Conoce el programa de Treehubly para empresas de servicios de árboles.", keywords: "programa Treehubly, empresas de árboles", noindex: true },
+};
+const home = localizedPages.home.en;
+const data: Metadata = localized
+  ? { ...(localizedPages[page]?.[locale] ?? home), lang: locale }
+  : schedulingPages[path] ?? { ...home, lang: "en", noindex: true };
+const canonical = `${SITE}${path === "/" ? "/" : `${path}/`}`;
+const suffix = page === "home" ? "" : `/${page}`;
+const enUrl = `${SITE}/en${suffix}/`;
+const esUrl = `${SITE}/es${suffix}/`;
+const organization = {
+  "@context": "https://schema.org", "@type": "Organization", "@id": `${SITE}/#organization`,
+  name: "Treehubly", url: SITE, logo: `${SITE}/favicon.svg`,
+};
+const website = {
+  "@context": "https://schema.org", "@type": "WebSite", "@id": `${SITE}/#website`,
+  name: "Treehubly", url: SITE, publisher: { "@id": `${SITE}/#organization` }, inLanguage: ["en", "es"],
+};
+const webpage = {
+  "@context": "https://schema.org", "@type": "WebPage", "@id": `${canonical}#webpage`,
+  url: canonical, name: data.title, description: data.description, inLanguage: data.lang,
+  isPartOf: { "@id": `${SITE}/#website` },
+};
 ---
-
-<!-- Basic Meta Tags -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<title>{title}</title>
-<meta name="description" content={description} />
-<meta name="keywords" content={keywords} />
-<meta name="author" content={SITE_NAME} />
-<meta
-  name="robots"
-  content={noindex
-    ? "noindex, nofollow"
-    : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
-/>
-
-{includeLocationMetadata && (
-  <>
-    <meta name="geo.region" content="US-FL" />
-    <meta name="geo.placename" content="Orlando" />
-    <meta name="geo.position" content="28.5383;-81.3792" />
-    <meta name="ICBM" content="28.5383, -81.3792" />
-  </>
-)}
-
-<!-- Links & Preconnect -->
+<title>{data.title}</title>
+<meta name="description" content={data.description} />
+<meta name="keywords" content={data.keywords} />
+<meta name="author" content="Treehubly" />
+<meta name="robots" content={data.noindex ? "noindex, follow" : "index, follow, max-image-preview:large"} />
+<link rel="canonical" href={canonical} />
+{localized && <>
+  <link rel="alternate" hreflang="en" href={enUrl} />
+  <link rel="alternate" hreflang="es" href={esUrl} />
+  <link rel="alternate" hreflang="x-default" href={enUrl} />
+</>}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preconnect" href="https://widgets.leadconnectorhq.com" />
 <link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com" />
 <link rel="preconnect" href="https://link.inkshapecrm.com" />
-<link rel="dns-prefetch" href="https://link.inkshapecrm.com" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-<!-- Canonical & Hreflang -->
-<link rel="canonical" href={currentCanonical} />
-{includeLanguageAlternates && (
-  <>
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="es" href={esUrl} />
-    <link rel="alternate" hreflang="x-default" href={defaultUrl} />
-  </>
-)}
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content={type} />
-<meta property="og:site_name" content={SITE_NAME} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:url" content={currentCanonical} />
-<meta property="og:image" content={absoluteImage} />
-<meta property="og:locale" content={lang === "es" ? "es_US" : "en_US"} />
-
-<!-- Twitter Card -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Treehubly" />
+<meta property="og:title" content={data.title} />
+<meta property="og:description" content={data.description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={image} />
+<meta property="og:locale" content={data.lang === "es" ? "es_US" : "en_US"} />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@Treehubly" />
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={absoluteImage} />
-
-<meta name="generator" content={Astro.generator} />
-
-<!-- Structured Data / JSON-LD -->
-{
-  allSchemas.map((schema) => (
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-  ))
-}
+<meta name="twitter:title" content={data.title} />
+<meta name="twitter:description" content={data.description} />
+<meta name="twitter:image" content={image} />
+{[organization, website, webpage].map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, "\\u003c")} />)}

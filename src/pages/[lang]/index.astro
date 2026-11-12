@@ -48,87 +48,16 @@ const t = translations[lang];
 </Layout>
 
 <script>
-  import { gsap, ScrollTrigger } from "../../scripts/gsap";
-
-  const hero = document.querySelector<HTMLElement>(".home-page-sections > .hero-main");
-  const nextSection = document.querySelector<HTMLElement>(".home-page-sections > #faltantes");
-  const bookSection = document.querySelector<HTMLElement>(".home-page-sections > #book");
-  const scaleSection = document.querySelector<HTMLElement>(".home-page-sections > .home-scale");
-  const stepsSection = document.querySelector<HTMLElement>(".home-page-sections > .home-steps");
-  const reasonsSection = document.querySelector<HTMLElement>(".home-page-sections .reasons-section");
-  const numbersSection = document.querySelector<HTMLElement>(".home-page-sections .numbers-section");
-  const controlSection = document.querySelector<HTMLElement>(".home-page-sections .control-section");
-  const pathSection = document.querySelector<HTMLElement>(".home-page-sections .path-section");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const desktopScroll = window.matchMedia("(min-width: 1280px)");
-  let snapping = false;
-
-  if (hero && nextSection) {
-    let unlockTimer: ReturnType<typeof setTimeout>;
-    let touchStart: { y: number; destination: HTMLElement } | null = null;
-
-    const menuIsOpen = () => document.documentElement.classList.contains("desktop-menu-open") ||
-      document.getElementById("mobile-menu")?.classList.contains("translate-x-0");
-    const getDestination = (): HTMLElement | null => {
-      const faltantesTop = nextSection.getBoundingClientRect().top + window.scrollY;
-      if (window.scrollY < faltantesTop - 8) {
-        if (hero.classList.contains("is-sequence-ready")) return null;
-        return nextSection;
-      }
-      const pairs = [
-        [nextSection, bookSection], [scaleSection, stepsSection],
-        [reasonsSection, numbersSection], [numbersSection, controlSection],
-        [controlSection, pathSection],
-      ] as const;
-      for (const [current, destination] of pairs) {
-        if (!current || !destination) continue;
-        const pin = ScrollTrigger.getAll().find((trigger) => trigger.trigger === current && trigger.pin);
-        if (pin && window.scrollY < pin.end - 1) continue;
-        const currentTop = current.getBoundingClientRect().top + window.scrollY;
-        const destinationTop = destination.getBoundingClientRect().top + window.scrollY;
-        const nearEnd = Math.max(currentTop, destinationTop - window.innerHeight);
-        if (window.scrollY >= nearEnd - 8 && window.scrollY < destinationTop - 8) return destination;
-      }
-      return null;
-    };
-    const goToNextSection = (destination: HTMLElement) => {
-      snapping = true;
-      document.documentElement.classList.add("section-transitioning");
-      const pin = ScrollTrigger.getAll().find((trigger) => trigger.trigger === destination && trigger.pin);
-      const top = pin ? pin.start : destination.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top, behavior: "smooth" });
-      clearTimeout(unlockTimer);
-      unlockTimer = setTimeout(() => { snapping = false; document.documentElement.classList.remove("section-transitioning"); }, 1100);
-    };
-
-    window.addEventListener("wheel", (event) => {
-      if (!desktopScroll.matches || reduceMotion.matches || menuIsOpen() || event.ctrlKey) return;
-      if (snapping) {
-        if (event.deltaY > 0) event.preventDefault();
-        else if (event.deltaY < 0) { snapping = false; document.documentElement.classList.remove("section-transitioning"); clearTimeout(unlockTimer); }
-        return;
-      }
-      if (event.deltaY <= 0) return;
-      const destination = getDestination();
-      if (!destination) return;
-      const target = event.target;
-      if (target instanceof Element && target.closest("input, textarea, select, [contenteditable='true']")) return;
-      event.preventDefault();
-      goToNextSection(destination);
-    }, { passive: false });
-
-    window.addEventListener("touchstart", (event) => {
-      const destination = desktopScroll.matches && !snapping && !reduceMotion.matches && !menuIsOpen() ? getDestination() : null;
-      touchStart = destination && event.touches.length === 1
-        ? { y: event.touches[0].clientY, destination } : null;
-    }, { passive: true });
-    window.addEventListener("touchend", (event) => {
-      if (desktopScroll.matches && touchStart && event.changedTouches.length === 1 &&
-          touchStart.y - event.changedTouches[0].clientY > 50 && !menuIsOpen() &&
-          touchStart.destination.getBoundingClientRect().top > 8) {
-        goToNextSection(touchStart.destination);
-      }
-      touchStart = null;
-    }, { passive: true });
-  }
+  import { bindSectionTransitions } from "../../scripts/sectionTransitions";
+  const main = document.querySelector(".home-page-sections");
+  const section = (selector: string) => main?.querySelector<HTMLElement>(selector);
+  bindSectionTransitions([
+    [section("#faltantes"), section("#book")],
+    [section("#book"), section(".home-scale")],
+    [section(".home-scale"), section(".home-steps")],
+    [section(".home-steps"), section(".reasons-section")],
+    [section(".reasons-section"), section(".numbers-section")],
+    [section(".numbers-section"), section(".control-section")],
+    [section(".control-section"), section(".path-section")],
+  ]);
 </script>

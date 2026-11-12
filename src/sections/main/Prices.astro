@@ -17,7 +17,7 @@ const { content } = Astro.props as Props;
       <div class:list={['prices-grid w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center items-stretch', { 'prices-grid-complete': 'plan' in content }]}>
       {
         content.service.map((item,index)=>(
-          <div class={`price-card w-full flex flex-col justify-start items-start gap-8 py-6 md:py-10 px-4 md:px-6 rounded-2xl border fade-up-a  ${index === 1 ? "back-prices border-secondary" : "bg-transparent border-[#263A4B]"}`} style={`animation-delay: ${index * 0.3}s`}>
+          <div data-reveal-sequence class={`price-card w-full flex flex-col justify-start items-start gap-8 py-6 md:py-10 px-4 md:px-6 rounded-2xl border fade-up-a  ${index === 1 ? "back-prices border-secondary" : "bg-transparent border-[#263A4B]"}`}>
             <div class="w-full flex justify-between items-center h-[27.8px]">
               <p class='subtitle-sm uppercase'>{item.tag}</p>
               {
@@ -32,7 +32,7 @@ const { content } = Astro.props as Props;
             <div class="flex flex-col justify-start items-start gap-6 ">
               {
                 item.lists.map((listItem,index)=>(
-                  <div class="flex justify-start items-center gap-2 fade-up-a " style={`animation-delay: ${index * 0.2}s`}>
+                  <div class="flex justify-start items-center gap-2 fade-up-a " style={`--fade-up-delay: ${index * 0.1}s`}>
                     <img src="/images/icons/check.svg" alt="Check" width="24" height="24" class="w-5 h-5 " decoding="async" loading="lazy" />
                     <div class='flex flex-col justify-center items-start gap-3'>
                       <span class="text-paragraph body-md">{listItem.title}</span>
@@ -123,3 +123,60 @@ const { content } = Astro.props as Props;
     }
   }
 </style>
+
+<script>
+  const initPrices = () => queueMicrotask(() => {
+    document.querySelectorAll<HTMLElement>(".prices-grid").forEach(grid => {
+      const cards = Array.from(grid.querySelectorAll<HTMLElement>(".price-card"));
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduced || !("IntersectionObserver" in window)) {
+        cards.forEach(card => {
+          card.classList.add("active");
+          card.querySelectorAll(".fade-up-a, .fade-up-lines-raw").forEach(child => child.classList.add("active"));
+        });
+        return;
+      }
+      let queue = Promise.resolve();
+      const waitForEntrance = (elements: HTMLElement[]) => new Promise<void>(resolve => {
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          const animations = elements.flatMap(element => element.getAnimations({ subtree: true }))
+            .filter(animation => animation.effect?.getComputedTiming().iterations !== Infinity);
+          Promise.allSettled(animations.map(animation => animation.finished)).then(() => resolve());
+        }));
+      });
+      const revealCard = async (card: HTMLElement) => {
+        card.classList.add("active");
+        await waitForEntrance([card]);
+        const children = Array.from(card.querySelectorAll<HTMLElement>(".fade-up-a, .fade-up-lines-raw"));
+        // Keep observing lower content as the user scrolls down the long card.
+        let firstBatch = true;
+        await new Promise<void>(resolve => {
+          const contentObserver = new IntersectionObserver(entries => {
+            const visible = entries.filter(entry => entry.isIntersecting && entry.intersectionRatio >= 0.3);
+            visible.forEach(entry => {
+              entry.target.classList.add("active");
+              contentObserver.unobserve(entry.target);
+            });
+            if (firstBatch) {
+              firstBatch = false;
+              waitForEntrance(visible.map(entry => entry.target as HTMLElement)).then(resolve);
+            }
+          }, { threshold: 0.3 });
+          if (!children.length) resolve();
+          children.forEach(child => contentObserver.observe(child));
+        });
+      };
+      const cardObserver = new IntersectionObserver(entries => {
+        entries.filter(entry => entry.isIntersecting && entry.intersectionRatio >= 0.3)
+          .sort((a, b) => cards.indexOf(a.target as HTMLElement) - cards.indexOf(b.target as HTMLElement))
+          .forEach(entry => {
+            cardObserver.unobserve(entry.target);
+            queue = queue.then(() => revealCard(entry.target as HTMLElement));
+          });
+      }, { threshold: 0.3 });
+      cards.forEach(card => cardObserver.observe(card));
+    });
+  });
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initPrices, { once: true });
+  else initPrices();
+</script>

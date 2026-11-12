@@ -112,6 +112,7 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
       let introTick = 0;
       let drawTick = 0;
       let lastDrawn = -1;
+      let introTimeout: ReturnType<typeof setTimeout>;
 
       const draw = (force = false) => {
         let nearest = -1;
@@ -184,6 +185,7 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
       const finishIntro = () => {
         if (!active || introFinished) return;
         introFinished = true;
+        clearTimeout(introTimeout);
         cancelAnimationFrame(introTick);
         video.pause();
         draw();
@@ -213,6 +215,8 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
       video.src = video.dataset.src || "";
       video.load();
       video.classList.add("is-visible");
+      // Fall back to the local frame if the remote intro stalls.
+      introTimeout = setTimeout(finishIntro, 8000);
 
       const state = { frame: 0 };
       const tween = gsap.to(state, {
@@ -242,6 +246,7 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
 
       return () => {
         active = false;
+        clearTimeout(introTimeout);
         cancelAnimationFrame(introTick);
         cancelAnimationFrame(drawTick);
         tween.scrollTrigger?.kill();

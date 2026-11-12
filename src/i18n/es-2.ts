@@ -31,7 +31,7 @@ export default {
       title:
         'El sistema detrás de las empresas<br class="hidden md:block"/> de árboles que <span class="text-secondary"> dominan su ciudad.</span>',
       description:
-        "Clientes, seguimiento, reviews y crecimiento — conectados en un solo ecosistema creado exclusivamente para tree services.",
+        "Clientes, seguimiento, reseñas y crecimiento — conectados en un solo ecosistema creado exclusivamente para servicios de árboles.",
       items: ["Mejores clientes", "Más trabajos agendados", "Más facturación"],
       buttons: [
         {
@@ -79,14 +79,14 @@ export default {
         "30 minutos. Encontramos dónde tu empresa está perdiendo trabajos y te<br class='hidden xl:block'/> mostramos cómo el Tree Profit System™ lo resuelve. Sin presión.",
     },
     grow: {
-      title: "Donde las empresas de tree service escalan.",
+      title: "Donde las empresas de servicios de árboles escalan.",
     },
     steps: {
       tag: "Donde escalan las empresas de árboles",
       title:
         'Un ecosistema de crecimiento completo.<br/><span class="text-third">No servicios sueltos.</span>',
       description:
-        "La mayoría de agencias se detienen en el lead. El Tree Profit System™ sigue — cada trabajo<br class='hidden md:block'/> terminado alimenta el siguiente.",
+        "La mayoría de agencias se detienen en el prospecto. El Tree Profit System™ sigue — cada trabajo<br class='hidden md:block'/> terminado alimenta el siguiente.",
       reasons: [
         {
           title: "Diagnóstico",
@@ -108,7 +108,7 @@ export default {
         },
         {
           title: "Multiplicar",
-          description: "reviews, referidos, regreso",
+          description: "reseñas, referidos, regreso",
           tag: "Semana 5-6",
           icon: "steps4",
         },
@@ -135,7 +135,7 @@ export default {
           list1: [
             {
               icon: "reasons1-1",
-              description: "Costo por lead predecible.",
+              description: "Costo por prospecto predecible.",
             },
             {
               icon: "reasons1-2",
@@ -170,7 +170,7 @@ export default {
           description:
             "Aquí es donde las otras agencias se detienen — y donde tu crecimiento se multiplica.",
           list: [
-            "Review Shield: más reviews de 5 estrellas en Google y alerta inmediata si un cliente quedó inconforme",
+            "Review Shield: más reseñas de 5 estrellas en Google y alerta inmediata si un cliente quedó inconforme",
             "ShapeHub Link + tarjetas QR para cada trabajo",
             "Programa de referidos y campañas por temporada (huracanes, poda)",
           ],
@@ -248,7 +248,7 @@ export default {
         },
         {
           tag: "Medimos",
-          description: "Reviews nuevos al mes",
+          description: "Reseñas nuevas al mes",
           icon: "control4",
         },
       ],
@@ -263,7 +263,7 @@ export default {
           title: "Diagnóstico",
           tag: "SEMANA 1",
           description:
-            "Auditamos tus clientes, tu proceso de venta y tus reviews.",
+            "Auditamos tus clientes, tu proceso de venta y tus reseñas.",
         },
         {
           icon: "path2",
@@ -281,7 +281,7 @@ export default {
           icon: "path4",
           title: "Multiplicar",
           tag: "SEMANA 5-6",
-          description: "Reviews, referidos y reactivación funcionando.",
+          description: "Reseñas, referidos y reactivación funcionando.",
         },
         {
           icon: "path5",
@@ -303,7 +303,7 @@ export default {
           description: "Ningún cliente se te vuelve a perder.",
           lists: [
             {
-              title: "Branding Kit",
+              title: "Kit de marca",
               description: "Logo, colores y plantillas de tu marca.",
             },
             {
@@ -311,7 +311,7 @@ export default {
               description: "Tu propia app de contacto.",
             },
             {
-              title: "Landing page + Chatbot con IA",
+              title: "Página de captura + asistente con IA",
               description: "",
             },
             {
@@ -378,7 +378,7 @@ export default {
               description: "",
             },
             {
-              title: "Website + Chatbot con IA",
+              title: "Sitio web + asistente con IA",
               description: "",
             },
             {
@@ -401,16 +401,16 @@ export default {
       title:
         'Descarga la guía gratis<br class="hidden md:block"/> <span class="text-third">y recibe una consultoría de 30 minutos.</span>',
       description:
-        "Déjanos tus datos y te enviamos el eBook al instante. Luego un consultor especializado en <br class='hidden md:block'/> Tree Services te ayuda a elegir el camino correcto para tu empresa.",
+        "Déjanos tus datos y te enviamos el libro digital al instante. Luego un consultor especializado en <br class='hidden md:block'/> servicios de árboles te ayuda a elegir el camino correcto para tu empresa.",
       book: {
-        tag: "EBOOK GRATIS",
+        tag: "LIBRO DIGITAL GRATIS",
         subtag: "PDF DESCARGA INMEDIATA",
         title:
-          'La Guía de Crecimiento<br class="hidden xl:block"/> para<span class="text-third"> Empresas de Tree<br class="hidden xl:block"/> Services en EE.UU</span>',
+          'La Guía de Crecimiento<br class="hidden xl:block"/> para<span class="text-third"> Empresas de Servicios<br class="hidden xl:block"/> de Árboles en EE.UU</span>',
         description:
           "Una guía paso a paso para conseguir más clientes potenciales, más trabajos y crecimiento sostenible.",
         list10: [
-          "Cómo atraer leads con Google y redes",
+          "Cómo atraer prospectos con Google y redes",
           "Cómo multiplicar reseñas y referidos.",
           "Cómo responder y cerrar más rápido.",
           "El sistema para escalar tu agenda.",
@@ -420,12 +420,12 @@ export default {
         tag: "BONO INCLUIDO",
         title: "Consultoría gratuita de 30 min",
         description:
-          "Con un consultor especializado en Tree Services. Revisamos tu negocio y te decimos qué plan te conviene.",
+          "Con un consultor especializado en servicios de árboles. Revisamos tu negocio y te decimos qué plan te conviene.",
         icon: "guide1",
       },
       form: {
         tag: "DESCARGA GRATIS",
-        title: "¿A dónde te enviamos tu eBook?",
+        title: "¿A dónde te enviamos tu libro digital?",
         description: "Toma menos de 30 segundos.",
       },
     },
@@ -438,8 +438,8 @@ export default {
           icon: "equis",
           title: "Agencia tradicional",
           list: [
-            "Vende un website, anuncios o SEO",
-            "Se detiene cuando llega el lead",
+            "Vende un sitio web, anuncios o SEO",
+            "Se detiene cuando llega el prospecto",
             "Campañas que se apagan",
             "Reporta clics y alcance",
             "Trabaja con cualquier industria",
@@ -451,7 +451,7 @@ export default {
           list: [
             "Construye un sistema de crecimiento conectado",
             "Responde, agenda y da seguimiento por ti",
-            "Un loop que crece con cada trabajo",
+            "Un ciclo que crece con cada trabajo",
             "Reporta costo por trabajo agendado y facturación",
             "Trabaja solo con empresas de árboles",
           ],
@@ -491,7 +491,7 @@ export default {
           answer: "",
         },
         {
-          title: "Ya tengo website, ¿necesito uno nuevo?",
+          title: "Ya tengo sitio web, ¿necesito uno nuevo?",
           answer: "",
         },
         {
@@ -509,13 +509,13 @@ export default {
       items: [],
       buttons: [],
       description:
-        "No vendemos piezas sueltas. Conectamos anuncios, respuesta inmediata y<br/> reputación en un solo loop que crece cada mes.",
+        "No vendemos piezas sueltas. Conectamos anuncios, respuesta inmediata y<br/> reputación en un solo ciclo que crece cada mes.",
     },
     profit: {
       tag: "",
       title: 'El <span class="text-third">Tree Profit Loop™</span>',
       description:
-        "El diagnóstico se hace una vez. Atraer, Cerrar, Multiplicar y Escalar giran<br/>cada mes, y los reviews y referidos de cada vuelta abaratan la siguiente.",
+        "El diagnóstico se hace una vez. Atraer, Cerrar, Multiplicar y Escalar giran<br/>cada mes, y las reseñas y referidos de cada vuelta abaratan la siguiente.",
       reasons: [
         {
           title: "Diagnóstico",
@@ -537,7 +537,7 @@ export default {
         },
         {
           title: "Multiplicar",
-          description: "reviews, referidos, regreso",
+          description: "reseñas, referidos, regreso",
           tag: "Semana 5-6",
           icon: "steps4",
         },
@@ -592,7 +592,7 @@ export default {
                 "Respuesta automática",
                 "Asistente con IA",
                 "Recordatorios de cita y cotización",
-                "Scripts de venta",
+                "Guiones de venta",
               ],
             },
             {
@@ -634,9 +634,9 @@ export default {
             system: {
               title: "Treehubly · Tree Profit System™",
               list: [
-                "Después de cada trabajo, pedimos un review a todos tus clientes, con tu enlace de Google.",
+                "Después de cada trabajo, pedimos una reseña a todos tus clientes, con tu enlace de Google.",
                 "Si alguien tuvo una mala experiencia, te llega una alerta para llamarlo y arreglarlo.",
-                "Un problema bien resuelto se convierte en tu mejor review.",
+                "Un problema bien resuelto se convierte en tu mejor reseña.",
               ],
             },
             links: {
@@ -651,7 +651,7 @@ export default {
                   href: "#",
                 },
                 {
-                  label: "Website",
+                  label: "Sitio web",
                   href: "#",
                 },
                 {
@@ -681,17 +681,17 @@ export default {
       measuring: [
         {
           tag: "Métrica",
-          description: "Costo por lead",
+          description: "Costo por prospecto",
           icon: "control1",
         },
         {
           tag: "Métrica",
-          description: "% lead → cita → trabajo",
+          description: "% prospecto → cita → trabajo",
           icon: "control2",
         },
         {
           tag: "Métrica",
-          description: "Reviews nuevos al mes",
+          description: "Reseñas nuevas al mes",
           icon: "control3",
         },
         {
@@ -729,7 +729,7 @@ export default {
           description: "Ningún cliente se te vuelve a perder.",
           lists: [
             {
-              title: "Branding Kit",
+              title: "Kit de marca",
               description: "Logo, colores y plantillas de tu marca.",
             },
             {
@@ -737,7 +737,7 @@ export default {
               description: "Tu propia app de contacto.",
             },
             {
-              title: "Landing page + Chatbot con IA",
+              title: "Página de captura + asistente con IA",
               description: "",
             },
             {
@@ -760,12 +760,12 @@ export default {
             {
               title: "Atraer",
               description:
-                "Branding Kit · Landing page con chatbot IA · perfil de Google optimizado · ShapeHub Link.",
+                "Kit de marca · Página de captura con asistente IA · perfil de Google optimizado · ShapeHub Link.",
             },
             {
               title: "Cerrar",
               description:
-                "Tablero de trabajos (de lead a cobrado) · respuesta automática por SMS · recordatorios de cita.",
+                "Tablero de trabajos (de prospecto a cobrado) · respuesta automática por SMS · recordatorios de cita.",
             },
             {
               title: "Multiplicar",
@@ -774,7 +774,7 @@ export default {
             },
             {
               title: "Soporte",
-              description: "Kickoff",
+              description: "Reunión inicial",
             },
           ],
         },
@@ -846,7 +846,7 @@ export default {
               description: "",
             },
             {
-              title: "Website + Chatbot con IA",
+              title: "Sitio web + asistente con IA",
               description: "",
             },
             {
@@ -865,12 +865,12 @@ export default {
             {
               title: "Atraer",
               description:
-                "Todo Grow + website profesional + estrategia multicanal.",
+                "Todo Grow + sitio web profesional + estrategia multicanal.",
             },
             {
               title: "Cerrar",
               description:
-                "Todo Grow + chatbot IA en la web + asesores que llaman y agendan + asesoría comercial 1:1",
+                "Todo Grow + asistente IA en la web + asesores que llaman y agendan + asesoría comercial 1:1",
             },
             {
               title: "Multiplicar",
@@ -890,7 +890,7 @@ export default {
         title:
           'Incluido en todos los planes:<span class="text-secondary"> 2 clases en vivo al mes</span>',
         description:
-          "Te enseñamos paso a paso cómo escalar tu empresa de tree services con un sistema comprobado.",
+          "Te enseñamos paso a paso cómo escalar tu empresa de servicios de árboles con un sistema comprobado.",
         options: [
           {
             title: "En español",
@@ -911,26 +911,26 @@ export default {
       },
     },
     clients: {
-      tag: "Calculator",
+      tag: "Calculadora",
       title:
-        'New customers call you, <span class="text-secondary">not your competition.</span>',
+        'Clientes nuevos te llaman a ti, <span class="text-secondary">no a tu competencia.</span>',
       description:
-        "Enter the value of an average job and how many extra jobs you think you can book per month.",
+        "Ingresa el valor de un trabajo promedio y cuántos trabajos adicionales crees que puedes agendar al mes.",
       section: {
         calculator: [
           {
-            title: "Average job value (USD)",
+            title: "Valor promedio por trabajo (USD)",
             placeholder: "1200",
           },
           {
-            title: "Extra jobs per month",
+            title: "Trabajos adicionales al mes",
             placeholder: "2",
           },
         ],
-        description: "Extra income per month:",
-        tag: "Covers the Grow Plan ($997) and leaves you {amount} more.",
+        description: "Ingresos adicionales al mes:",
+        tag: "Cubre el plan Grow ($997) y te deja {amount} adicionales.",
         shortfall:
-          "The Grow Plan costs $997; you need {amount} more to cover it.",
+          "El plan Grow cuesta $997; necesitas {amount} más para cubrirlo.",
       },
     },
     ask: {
@@ -950,7 +950,7 @@ export default {
           answer: "",
         },
         {
-          title: "¿Qué incluye el setup?  ",
+          title: "¿Qué incluye la configuración?  ",
           answer: "",
         },
         {
@@ -1001,7 +1001,7 @@ export default {
           {
             title: "¿Qué hacemos?",
             description:
-              "Captación estructurada, seguimiento automático, pipeline y tracking de ingresos.",
+              "Captación estructurada, seguimiento automático, flujo de ventas y seguimiento de ingresos.",
           },
         ],
         statistics: {
@@ -1009,7 +1009,7 @@ export default {
           percentages: [
             {
               title: "+38%",
-              description: "Leads calificados",
+              description: "Prospectos calificados",
             },
             {
               title: "+27%",
@@ -1047,9 +1047,9 @@ export default {
       title: 'Lo que nos hace<span class="text-secondary"> diferentes.</span>',
       diferences: [
         {
-          title: '<span class="text-secondary">Solo tree services</span>',
+          title: '<span class="text-secondary">Solo servicios de árboles</span>',
           description:
-            "No trabajamos con restaurantes ni dentistas. Conocemos tu temporada, tus trucks y tus clientes.",
+            "No trabajamos con restaurantes ni dentistas. Conocemos tu temporada, tus camiones y tus clientes.",
         },
         {
           title: '<span class="text-secondary">En tu idioma</span>',

@@ -42,7 +42,8 @@
 }
 html {
   -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
+  /* GSAP owns the section easing; native smooth scrolling also animates pin corrections. */
+  scroll-behavior: auto;
 }
 
 /* Scale the group; reveal its mask independently from the right. */

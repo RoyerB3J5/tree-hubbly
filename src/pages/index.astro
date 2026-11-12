@@ -1,19 +1,13 @@
+---
+import SEOHead from "../components/SEOHead.astro";
+---
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>Tree Hubly</title>
-    <meta
-      name="description"
-      content="Treehubly helps tree companies generate better leads, book more jobs, and scale with a structured growth ecosystem."
-    />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <SEOHead />
     <!-- Redirección inmediata para Bots/SEO (al idioma por defecto) -->
     <meta http-equiv="refresh" content="0;url=/en/" />
 
-    <!-- Evita que Google indexe esta raíz vacía -->
-    <meta name="robots" content="noindex, follow" />
 
     <!-- Redirección inmediata para usuarios reales -->
     <script is:inline>    
