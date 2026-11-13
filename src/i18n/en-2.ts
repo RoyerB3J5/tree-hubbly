@@ -21,7 +21,7 @@ export default {
     buttons: [
       {
         label: "Let's Talk!",
-        href: "#",
+        href: "tel:+14075023684",
       },
     ],
   },
@@ -36,11 +36,11 @@ export default {
       buttons: [
         {
           label: "Book your strategy session",
-          href: "#",
+          href: "#book",
         },
         {
           label: "See how it works",
-          href: "#",
+          href: "/en/the-system",
         },
       ],
     },
@@ -194,8 +194,7 @@ export default {
         'Real tree companies. <br class="hidden md:block"/> <span class="text-secondary">Real numbers.</span>',
       title2:
         'H&A Tree Brothers<br/><span class="text-secondary heading-h5">Orlando, FL.</span>',
-      description:
-        "Structured growth replaced inconsistent marketing.",
+      description: "Structured growth replaced inconsistent marketing.",
       statistics: [
         {
           icon: "numbers1",
@@ -215,11 +214,11 @@ export default {
       buttons: [
         {
           label: "Book a call",
-          href: "#",
+          href: "#book",
         },
         {
           label: "More results",
-          href: "#",
+          href: "/en/results",
         },
       ],
     },
@@ -262,8 +261,7 @@ export default {
           icon: "path1",
           title: "Diagnosis",
           tag: "WEEK 1",
-          description:
-            "We audit your clients, sales process and reviews.",
+          description: "We audit your clients, sales process and reviews.",
         },
         {
           icon: "path2",
@@ -326,7 +324,7 @@ export default {
           button: [
             {
               label: "Start now",
-              href: "#",
+              href: "https://wa.me/14075023684",
             },
           ],
           subtag: "Try 5 days free, no commitment.",
@@ -357,7 +355,7 @@ export default {
           button: [
             {
               label: "I want more jobs",
-              href: "#",
+              href: "https://wa.me/14075023684",
             },
           ],
           subtag: "Ad spend is paid directly to the platform.",
@@ -389,7 +387,7 @@ export default {
           button: [
             {
               label: "Let's talk scaling",
-              href: "#",
+              href: "https://wa.me/14075023684",
             },
           ],
           subtag: "Limited spots per area.",
@@ -459,18 +457,17 @@ export default {
       ],
     },
     business: {
-      title:
-        "Ready to be the tree company that <br/> dominates your city?",
+      title: "Ready to be the tree company that <br/> dominates your city?",
       description:
         "We work with only 10 tree companies at a time. Implementation guarantee included.",
       buttons: [
         {
           label: "Book your free strategy session",
-          href: "#",
+          href: "#book",
         },
         {
           label: "Message us on WhatsApp",
-          href: "#",
+          href: "https://wa.me/14075023684",
         },
       ],
     },
@@ -480,23 +477,28 @@ export default {
       questions: [
         {
           title: "Is ad spend included?",
-          answer: "No. Your Grow or Scale fee covers strategy, ad creation, campaign management and optimization. Ad spend goes straight from your card to Meta, TikTok or Google, so you own the ad account and you control the budget. The minimum is $30 a day, and we'll help you set the right amount for your area and goals. The Root plan doesn't include ads.",
+          answer:
+            "No. Your Grow or Scale fee covers strategy, ad creation, campaign management and optimization. Ad spend goes straight from your card to Meta, TikTok or Google, so you own the ad account and you control the budget. The minimum is $30 a day, and we'll help you set the right amount for your area and goals. The Root plan doesn't include ads.",
         },
         {
           title: "Can I start in Root and upgrade later?",
-          answer: "Yes, that's how the plans are built. Root sets up your foundation: Brand Kit, ShapeHub Link, a landing page with an AI chatbot, job boards with auto-replies, and Google My Business with Review Shield. When you want new jobs every week, move up to Trunk (Grow). When you want us to fill your schedule, move up to Canopy (Scale). Each plan includes everything in the one before it, so you keep everything you've already built.",
+          answer:
+            "Yes, that's how the plans are built. Root sets up your foundation: Brand Kit, ShapeHub Link, a landing page with an AI chatbot, job boards with auto-replies, and Google My Business with Review Shield. When you want new jobs every week, move up to Trunk (Grow). When you want us to fill your schedule, move up to Canopy (Scale). Each plan includes everything in the one before it, so you keep everything you've already built.",
         },
         {
           title: "Is there a minimum contract?",
-          answer: "No. Root is a one-time payment: you get 5 days free and you only pay after your kickoff. Grow and Scale are month-to-month, and you can cancel with 30 days' notice. Your brand, your Google profile, your reviews and your ad accounts stay yours. We do suggest giving the system at least 8 weeks, because that's how long it takes to get fully running.",
+          answer:
+            "No. Root is a one-time payment: you get 5 days free and you only pay after your kickoff. Grow and Scale are month-to-month, and you can cancel with 30 days' notice. Your brand, your Google profile, your reviews and your ad accounts stay yours. We do suggest giving the system at least 8 weeks, because that's how long it takes to get fully running.",
         },
         {
           title: "What does the setup include?",
-          answer: "<p>It covers your first 8 weeks, done for you:</p><ol><li>Diagnosis: we audit your business, your calls and how you get clients today.</li><li>Attract: we launch your ads and optimize your Google My Business.</li><li>Close: we set up ShapeHub and an AI assistant that answers and books jobs 24/7.</li><li>Multiply: we turn on review and referral systems.</li><li>Scale: we track metrics and keep improving every month.</li></ol>",
+          answer:
+            "<p>It covers your first 8 weeks, done for you:</p><ol><li>Diagnosis: we audit your business, your calls and how you get clients today.</li><li>Attract: we launch your ads and optimize your Google My Business.</li><li>Close: we set up ShapeHub and an AI assistant that answers and books jobs 24/7.</li><li>Multiply: we turn on review and referral systems.</li><li>Scale: we track metrics and keep improving every month.</li></ol>",
         },
         {
           title: "Do I need to know marketing?",
-          answer: "No. You don't need to know marketing or work more hours. You need a system that doesn't let a single client slip away, and we build it and run it for you. You keep cutting trees and leading your crew.",
+          answer:
+            "No. You don't need to know marketing or work more hours. You need a system that doesn't let a single client slip away, and we build it and run it for you. You keep cutting trees and leading your crew.",
         },
       ],
     },
@@ -644,27 +646,27 @@ export default {
               links: [
                 {
                   label: "Instagram",
-                  href: "#",
+                  href: "https://www.instagram.com/treehubly?igsh=dHFsbzB0NjdmdXpp&utm_source=qr",
                 },
                 {
                   label: "Facebook",
-                  href: "#",
+                  href: "https://www.facebook.com/treehubly",
                 },
                 {
                   label: "Website",
-                  href: "#",
+                  href: "/en/",
                 },
                 {
                   label: "Our Services",
-                  href: "#",
+                  href: "/en/plans",
                 },
                 {
                   label: "Save contact",
-                  href: "#",
+                  href: "/treehubly.vcf",
                 },
                 {
                   label: "Make a booking",
-                  href: "#",
+                  href: "/en/about#book",
                 },
               ],
             },
@@ -707,11 +709,11 @@ export default {
       buttons: [
         {
           label: "I want my free diagnosis",
-          href: "#",
+          href: "/en/about#book",
         },
         {
           label: "View plans",
-          href: "#",
+          href: "/en/plans",
         },
       ],
     },
@@ -752,7 +754,7 @@ export default {
           button: [
             {
               label: "Start now",
-              href: "#",
+              href: "https://wa.me/14075023684",
             },
           ],
           subtag: "Try 5 days free, no commitment.",
@@ -769,8 +771,7 @@ export default {
             },
             {
               title: "Multiply",
-              description:
-                "Review Shield 24/7 · QR cards to request reviews.",
+              description: "Review Shield 24/7 · QR cards to request reviews.",
             },
             {
               title: "Support",
@@ -804,7 +805,7 @@ export default {
           button: [
             {
               label: "I want more jobs",
-              href: "#",
+              href: "https://wa.me/14075023684",
             },
           ],
           subtag: "Ad spend is paid directly to the platform.",
@@ -857,7 +858,7 @@ export default {
           button: [
             {
               label: "Let's talk scaling",
-              href: "#",
+              href: "https://wa.me/14075023684",
             },
           ],
           subtag: "Limited spots per area.",
@@ -905,7 +906,7 @@ export default {
         button: [
           {
             label: "Let's talk now",
-            href: "#",
+            href: "tel:+14075023684",
           },
         ],
       },
@@ -966,7 +967,7 @@ export default {
       buttons: [
         {
           label: "Add free diagnosis",
-          href: "#",
+          href: "/en/about#book",
         },
       ],
     },
@@ -976,8 +977,7 @@ export default {
       tag: "Real results",
       title:
         'Real tree companies.<span class="text-secondary"> Real numbers.</span>',
-      description:
-        "Structured growth instead of marketing by chance.",
+      description: "Structured growth instead of marketing by chance.",
       section: {
         tag: "Featured case",
         title:
@@ -1028,7 +1028,7 @@ export default {
       buttons: [
         {
           label: "I want my free diagnosis",
-          href: "#",
+          href: "/en/about#book",
         },
       ],
     },
@@ -1075,7 +1075,7 @@ export default {
       buttons: [
         {
           label: "Add free diagnosis",
-          href: "#",
+          href: "/en/about#book",
         },
       ],
     },
@@ -1087,17 +1087,17 @@ export default {
       title: "Contact us",
       items: [
         {
-          href: "#",
+          href: "mailto:treehubly@gmail.com",
           title: "treehubly@gmail.com",
           icon: "mail",
         },
         {
-          href: "tel:+13212179445",
-          title: "321-217-9445",
+          href: "tel:+14075023684",
+          title: "407-502-3684",
           icon: "phone",
         },
         {
-          href: "#",
+          href: "",
           title: "Mon - Fri: 7AM - 7PM",
           icon: "clock",
         },

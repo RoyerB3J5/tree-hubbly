@@ -3,25 +3,25 @@ export default {
     nav: [
       {
         label: "El Sistema",
-        href: "/en/the-system",
+        href: "/es/the-system",
       },
       {
         label: "Resultados",
-        href: "/en/results",
+        href: "/es/results",
       },
       {
         label: "Planes",
-        href: "/en/plans",
+        href: "/es/plans",
       },
       {
         label: "Nosotros",
-        href: "/en/about",
+        href: "/es/about",
       },
     ],
     buttons: [
       {
         label: "¡Hablemos!",
-        href: "#",
+        href: "tel:+14075023684",
       },
     ],
   },
@@ -36,11 +36,11 @@ export default {
       buttons: [
         {
           label: "Agenda tu sesión de estrategia",
-          href: "#",
+          href: "#book",
         },
         {
           label: "Mira cómo funciona",
-          href: "#",
+          href: "/es/the-system",
         },
       ],
     },
@@ -215,11 +215,11 @@ export default {
       buttons: [
         {
           label: "Agenda una llamada",
-          href: "#",
+          href: "#book",
         },
         {
           label: "Más resultados",
-          href: "#",
+          href: "/es/results",
         },
       ],
     },
@@ -326,7 +326,7 @@ export default {
           button: [
             {
               label: "Empieza ahora",
-              href: "#",
+              href: "https://wa.me/14075023684",
             },
           ],
           subtag: "Prueba 5 dias gratis, sin compromiso.",
@@ -357,7 +357,7 @@ export default {
           button: [
             {
               label: "Quiero más trabajos",
-              href: "#",
+              href: "https://wa.me/14075023684",
             },
           ],
           subtag: "La inversión en anuncios se paga directo a la plataforma.",
@@ -389,7 +389,7 @@ export default {
           button: [
             {
               label: "Hablemos de escalar",
-              href: "#",
+              href: "https://wa.me/14075023684",
             },
           ],
           subtag: "Cupos limitados por zona.",
@@ -466,11 +466,11 @@ export default {
       buttons: [
         {
           label: "Agenda tu sesión de estrategia gratis",
-          href: "#",
+          href: "#book",
         },
         {
           label: "Escríbenos por WhatsApp",
-          href: "#",
+          href: "https://wa.me/14075023684",
         },
       ],
     },
@@ -644,27 +644,27 @@ export default {
               links: [
                 {
                   label: "Instagram",
-                  href: "#",
+                  href: "https://www.instagram.com/treehubly?igsh=dHFsbzB0NjdmdXpp&utm_source=qr",
                 },
                 {
                   label: "Facebook",
-                  href: "#",
+                  href: "https://www.facebook.com/treehubly",
                 },
                 {
                   label: "Sitio web",
-                  href: "#",
+                  href: "/es/",
                 },
                 {
                   label: "Nuestros Servicios",
-                  href: "#",
+                  href: "/es/plans",
                 },
                 {
                   label: "Guardar  contacto",
-                  href: "#",
+                  href: "/treehubly.vcf",
                 },
                 {
                   label: "Realizar una reserva",
-                  href: "#",
+                  href: "/es/about#book",
                 },
               ],
             },
@@ -707,11 +707,11 @@ export default {
       buttons: [
         {
           label: "Quiero mi diagnóstico gratis",
-          href: "#",
+          href: "/es/about#book",
         },
         {
           label: "Ver planes",
-          href: "#",
+          href: "/es/plans",
         },
       ],
     },
@@ -752,7 +752,7 @@ export default {
           button: [
             {
               label: "Empieza ahora",
-              href: "#",
+              href: "https://wa.me/14075023684",
             },
           ],
           subtag: "Prueba 5 dias gratis, sin compromiso.",
@@ -804,7 +804,7 @@ export default {
           button: [
             {
               label: "Quiero más trabajos",
-              href: "#",
+              href: "https://wa.me/14075023684",
             },
           ],
           subtag: "La inversión en anuncios se paga directo a la plataforma.",
@@ -857,7 +857,7 @@ export default {
           button: [
             {
               label: "Hablemos de escalar",
-              href: "#",
+              href: "https://wa.me/14075023684",
             },
           ],
           subtag: "Cupos limitados por zona.",
@@ -905,7 +905,7 @@ export default {
         button: [
           {
             label: "Hablemos ahora",
-            href: "#",
+            href: "tel:+14075023684",
           },
         ],
       },
@@ -966,7 +966,7 @@ export default {
       buttons: [
         {
           label: "Agregar diagnostico gratis",
-          href: "#",
+          href: "/es/about#book",
         },
       ],
     },
@@ -1028,7 +1028,7 @@ export default {
       buttons: [
         {
           label: "Quiero mi diagnóstico gratis",
-          href: "#",
+          href: "/es/about#book",
         },
       ],
     },
@@ -1075,7 +1075,7 @@ export default {
       buttons: [
         {
           label: "Agregar diagnostico gratis",
-          href: "#",
+          href: "/es/about#book",
         },
       ],
     },
@@ -1087,17 +1087,17 @@ export default {
       title: "Contáctanos",
       items: [
         {
-          href: "#",
+          href: "mailto:treehubly@gmail.com",
           title: "treehubly@gmail.com",
           icon: "mail",
         },
         {
-          href: "tel:+13212179445",
-          title: "321-217-9445",
+          href: "tel:+14075023684",
+          title: "407-502-3684",
           icon: "phone",
         },
         {
-          href: "#",
+          href: "",
           title: "Lun - Vie: 7AM - 7PM",
           icon: "clock",
         },

@@ -70,7 +70,11 @@ const icons = [
               content?.schedules.items.map((item) =>( 
                 <div class="flex flex-row justify-center items-center t gap-4">
                   <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="16" height="16" class="w-6 h-6" />
-                  <a href={item.href} set:html={item.title} class="text-paragraph body-md"></a>
+                  {item.href ? (
+                    <a href={item.href} set:html={item.title} class="text-paragraph body-md"></a>
+                  ) : (
+                    <span set:html={item.title} class="text-paragraph body-md"></span>
+                  )}
                 </div>
               ))
             }
@@ -99,8 +103,7 @@ const icons = [
         Copyright © 2026 by <a href="https://inkshapegroup.com"
           >Inkshape Group</a
         > | Privacy | <a href="/">TreeHubly</a> | Orlando | Call Now: <a
-          href="tel:+13212179445">321-217-9445</a
-        >
+          href="tel:+14072179445">407-217-9445</a>
       </p>
     </div>
   </div>

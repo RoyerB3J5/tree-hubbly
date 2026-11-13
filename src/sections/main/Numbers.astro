@@ -9,7 +9,7 @@ interface Props {
 const { content } = Astro.props as Props;
 ---
 <section data-reveal-sequence class='numbers-section w-full flex justify-center items-center bg-primary'>
-  <div class="container-full flex flex-col justify-center xl:justify-between xl:[@media(height_<_810px)]:justify-center items-center gap-8 md:gap-10 xl:[@media(height_<_810px)]:gap-6 py-12 md:py-20 xl:[@media(height_<_810px)]:py-0 h-auto xl:h-[100vh]">
+  <div class="container-full flex flex-col justify-center xl:justify-between 3xl:justify-center xl:[@media(height_<_810px)]:justify-center items-center gap-8 md:gap-10 xl:[@media(height_<_810px)]:gap-6 py-12 md:py-20 xl:[@media(height_<_810px)]:py-0 h-auto xl:h-[100vh]">
     <div class='w-full flex flex-col justify-center items-start md:items-center gap-6'>
       <p class='numbers-tag fade-up-a subtitle-lg text-secondary'>{content.tag}</p>
       <h2 set:html={content.title} class='numbers-title fade-up-a heading-h4 text-paragraph text-start md:text-center'></h2>

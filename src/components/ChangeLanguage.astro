@@ -2,19 +2,61 @@
 // Detect language from path like other components
 const currentPath = Astro.url.pathname;
 const match = currentPath.match(/^\/(en|es)/);
-const currentLang = match ? match[1] : 'en';
+const currentLang = match ? match[1] : "en";
 ---
-<div class="relative flex justify-center items-center gap-2 lang-switch-toggle" data-current-lang={currentLang}>
-  <button class="lang-switch-button flex justify-center items-center gap-2 cursor-pointer group transition-opacity" aria-label="Cambiar idioma" aria-expanded="false">
-    <p class="text-[16px] text-white group-hover:text-accent font-semibold leading-[150%] uppercase transition-all duration-300 ease-in-out">{currentLang}</p>
-    <img src="/images/arrow-d.svg" alt="Flecha hacia abajo" width="24" height="24" class="w-6 h-auto"/>
+
+<div
+  class="relative flex justify-center items-center gap-2 lang-switch-toggle"
+  data-current-lang={currentLang}
+>
+  <button
+    class="lang-switch-button flex justify-center items-center cursor-pointer group transition-opacity"
+    aria-label="Cambiar idioma"
+    aria-expanded="false"
+  >
+    <div
+      class={`text-[16px] text-white group-hover:[text-shadow:0_0_8px_rgba(255,255,255,0.7)] font-normal leading-[150%] uppercase transition-[text-shadow] duration-300 ease-in-out flex justify-center items-center gap-2 `}
+    >
+      {
+        currentLang === "en" ? (
+          <>
+            <p>EN</p>
+          </>
+        ) : (
+          <>
+            <p>ES</p>
+          </>
+        )
+      }
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M7 10L12 15L17 10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="white"/>
+    </svg>
   </button>
-  <div class="lang-switch-menu absolute top-[150%] left-1/2 transform -translate-x-1/2 bg-secondary rounded-lg shadow-lg flex flex-col justify-center items-center duration-300 z-10 text-white opacity-0 invisible pointer-events-none">
-    <button data-lang="en" class={`py-3 px-8 flex justify-center items-center cursor-pointer w-full hover:opacity-80 transition-opacity`} aria-pressed={currentLang === 'en' ? 'true' : 'false'}>
-      <p class={` leading-[150%] ${currentLang === 'en' ? 'text-accent font-bold text-[16px]' : 'font-normal text-[16px]'}`}>EN</p>
+  <div
+    class="lang-switch-menu absolute top-[200%] left-1/2 transform -translate-x-1/2 bg-secondary rounded-lg shadow-lg flex flex-col justify-center items-center duration-300 z-10 text-paragraph opacity-0 invisible pointer-events-none overflow-hidden"
+  >
+    <button
+      data-lang="en"
+      class={`py-3 px-8 flex justify-center items-center cursor-pointer w-full hover:opacity-80 transition-opacity ${currentLang === "en" ? "bg-primary font-semibold text-secondary" : "font-normal"}`}
+      aria-pressed={currentLang === "en" ? "true" : "false"}
+    >
+      <div
+        class={`text-[15px] leading-[150%] uppercase transition-all duration-300 ease-in-out gap-2 flex justify-center items-center text-white`}
+      >
+        <p>ENGLISH</p>
+      </div>
     </button>
-    <button data-lang="es" class={`cursor-pointer py-3 px-8 flex justify-center items-center w-full hover:opacity-80 transition-opacity`} aria-pressed={currentLang === 'es' ? 'true' : 'false'}>
-      <p class={` leading-[150%] ${currentLang === 'es' ? 'text-accent font-bold text-[16px]' : 'font-normal text-[16px]'}`}>ES</p>
+    <button
+      data-lang="es"
+      class={`cursor-pointer py-3 px-8 flex justify-center items-center w-full hover:opacity-80 transition-opacity ${currentLang === "es" ? "bg-primary font-semibold text-secondary" : "font-normal"}`}
+      aria-pressed={currentLang === "es" ? "true" : "false"}
+    >
+      <div
+        class={`text-[15px]  leading-[150%] uppercase transition-all duration-300 ease-in-out gap-2 flex justify-center items-center text-white`}
+      >
+        <p>ESPAÑOL</p>
+      </div>
     </button>
   </div>
 </div>
@@ -22,18 +64,18 @@ const currentLang = match ? match[1] : 'en';
 <script is:inline>
   // Toggle menu visibility and handle language switching
   (function () {
-    const toggle = document.querySelector('.lang-switch-toggle');
-    const button = document.querySelector('.lang-switch-button');
-    const menu = document.querySelector('.lang-switch-menu');
-    const langButtons = document.querySelectorAll('[data-lang]');
-    const currentLang = toggle?.getAttribute('data-current-lang');
+    const toggle = document.querySelector(".lang-switch-toggle");
+    const button = document.querySelector(".lang-switch-button");
+    const menu = document.querySelector(".lang-switch-menu");
+    const langButtons = document.querySelectorAll("[data-lang]");
+    const currentLang = toggle?.getAttribute("data-current-lang");
 
     if (!toggle || !button || !menu) return;
 
     // Toggle menu visibility
-    button.addEventListener('click', (e) => {
+    button.addEventListener("click", (e) => {
       e.stopPropagation();
-      const isOpen = menu.classList.contains('opacity-100');
+      const isOpen = menu.classList.contains("opacity-100");
       if (isOpen) {
         closeMenu();
       } else {
@@ -42,41 +84,41 @@ const currentLang = match ? match[1] : 'en';
     });
 
     function openMenu() {
-      menu.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
-      menu.classList.add('opacity-100');
-      button.setAttribute('aria-expanded', 'true');
+      menu.classList.remove("opacity-0", "invisible", "pointer-events-none");
+      menu.classList.add("opacity-100");
+      button.setAttribute("aria-expanded", "true");
     }
 
     function closeMenu() {
-      menu.classList.add('opacity-0', 'invisible', 'pointer-events-none');
-      menu.classList.remove('opacity-100');
-      button.setAttribute('aria-expanded', 'false');
+      menu.classList.add("opacity-0", "invisible", "pointer-events-none");
+      menu.classList.remove("opacity-100");
+      button.setAttribute("aria-expanded", "false");
     }
 
     // Handle language selection
     langButtons.forEach((btn) => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener("click", (e) => {
         e.preventDefault();
-        const lang = btn.getAttribute('data-lang');
-        
+        const lang = btn.getAttribute("data-lang");
+
         if (!lang || lang === currentLang) {
           closeMenu();
           return;
         }
 
-        sessionStorage.setItem('langScroll', window.scrollY);
+        sessionStorage.setItem("langScroll", window.scrollY);
         const newPath = window.location.pathname.replace(
           /^\/(es|en)/,
-          `/${lang}`
+          `/${lang}`,
         );
-        
+
         setTimeout(() => {
           window.location.href = newPath;
         }, 150);
       });
 
-      btn.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+      btn.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           btn.click();
         }
@@ -84,15 +126,15 @@ const currentLang = match ? match[1] : 'en';
     });
 
     // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
+    document.addEventListener("click", (e) => {
       if (!toggle.contains(e.target)) {
         closeMenu();
       }
     });
 
     // Close menu on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
         closeMenu();
       }
     });
@@ -101,19 +143,19 @@ const currentLang = match ? match[1] : 'en';
 
 <script is:inline>
   // Restauración de posición con prevención de parpadeo
-  document.addEventListener('DOMContentLoaded', () => {
-    const savedPosition = sessionStorage.getItem('langScroll');
+  document.addEventListener("DOMContentLoaded", () => {
+    const savedPosition = sessionStorage.getItem("langScroll");
 
     if (savedPosition !== null) {
       // Restaurar posición antes de mostrar contenido
       window.scrollTo({
         top: parseInt(savedPosition, 10),
-        behavior: 'instant',
+        behavior: "instant",
       });
-      sessionStorage.removeItem('langScroll');
+      sessionStorage.removeItem("langScroll");
     }
 
     // Mostrar contenido después de restaurar posición
-    document.body.classList.add('visible');
+    document.body.classList.add("visible");
   });
 </script>

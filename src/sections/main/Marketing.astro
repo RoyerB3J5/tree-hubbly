@@ -15,7 +15,7 @@ const { content } = Astro.props as Props;
     <div class="marketing-cards w-full grid grid-cols-1 md:grid-cols-2 gap-6 justify-center items-center md:items-stretch">
       {
         content.pc.map((item,index)=>(
-          <div class={`marketing-card w-full flex flex-col justify-center items-start gap-8 py-8 md:py-10 px-4 md:px-6 border rounded-2xl text-paragraph ${index === 0 ? "bg-transparent border-[#FF4E4E]" : "back-prices border-secondary"}`} style={`--glow-color: ${index === 0 ? "255, 78, 78" : "145, 210, 0"}`} >
+          <div class={`marketing-card w-full flex flex-col justify-center items-start gap-8 py-8 md:py-10 px-4 md:px-6 border rounded-2xl text-paragraph ${index === 0 ? "bg-transparent border-[#FF4E4E]" : "back-prices border-secondary"}`}>
             <div class="marketing-card-content w-full flex flex-col justify-center items-start gap-8">
             <img src={`/images/icons/${item.icon}.svg`} alt={item.title} width="50" height="50" class='w-10 h-10 fade-up-a' decoding="async" loading="lazy" />
             <h3 class={`body-lg ${index === 0 ? "" : "text-secondary"}`}>{item.title}</h3>
@@ -38,47 +38,8 @@ const { content } = Astro.props as Props;
   </div>
 </section>
 
-
-<style>
-  .marketing-card { position: relative; isolation: isolate; }
-  .marketing-card::before, .marketing-card::after {
-    content: ""; position: absolute; pointer-events: none; border-radius: inherit;
-    opacity: var(--glow-opacity, 0); transition: opacity 0.25s ease;
-  }
-  .marketing-card::before {
-    inset: -1px; padding: 2px; z-index: 1;
-    background: radial-gradient(circle 55px at var(--glow-x, 0px) var(--glow-y, 0px), rgba(255, 255, 255, 0.45), transparent),
-      radial-gradient(circle 150px at var(--glow-x, 0px) var(--glow-y, 0px), rgba(var(--glow-color), 1), transparent);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-  }
-  .marketing-card::after {
-    inset: 0; z-index: -1;
-    background: radial-gradient(circle 120px at var(--glow-x, 0px) var(--glow-y, 0px), rgba(var(--glow-color), 0.28), transparent);
-  }
-  @media (hover: none) { .marketing-card::before, .marketing-card::after { display: none; } }
-</style>
-
 <script>
   import { gsap } from "../../scripts/gsap";
-
-  document.querySelectorAll<HTMLElement>(".marketing-cards").forEach((container) => {
-    const cards = container.querySelectorAll<HTMLElement>(".marketing-card");
-    container.addEventListener("pointermove", (event) => {
-      if (event.pointerType === "touch") return;
-      cards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty("--glow-x", `${event.clientX - rect.left}px`);
-        card.style.setProperty("--glow-y", `${event.clientY - rect.top}px`);
-        card.style.setProperty("--glow-opacity", "1");
-      });
-    });
-    container.addEventListener("pointerleave", () => {
-      cards.forEach((card) => card.style.setProperty("--glow-opacity", "0"));
-    });
-  });
 
   const tiltMedia = gsap.matchMedia();
   tiltMedia.add("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)", () => {

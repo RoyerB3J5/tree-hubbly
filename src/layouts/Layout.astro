@@ -70,7 +70,7 @@ const { lang, t, pageClass } = Astro.props;
 
   </head>
   <body
-    class="font-family antialiased overflow-x-clip bg-primary flex flex-col justify-center items-center w-full"
+    class="font-family antialiased overflow-x-clip bg-primary flex flex-col justify-center items-center w-full scroll-smooth"
   >
     <Header content={t?.header} />
     {t && <DesktopMenu contentHeader={t.header} />}
@@ -201,4 +201,5 @@ const { lang, t, pageClass } = Astro.props;
 
 <script>
   import "../scripts/textReveal.js";
+  import "../scripts/smoothAnchors";
 </script>

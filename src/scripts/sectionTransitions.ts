@@ -17,7 +17,7 @@ export function bindSectionTransitions(pairs: readonly (readonly [(HTMLElement |
         document.getElementById("mobile-menu")?.classList.contains("translate-x-0") ||
         (event.target instanceof Element && event.target.closest("input, textarea, select, [contenteditable='true']"))) return;
     const now = performance.now();
-    const sameGesture = now - lastWheel < 180;
+    const sameGesture = now - lastWheel < 100;
     lastWheel = now;
     if (event.deltaY < 0) {
       motion?.kill();
@@ -44,8 +44,10 @@ export function bindSectionTransitions(pairs: readonly (readonly [(HTMLElement |
       const top = destinationPin?.start ?? destination.getBoundingClientRect().top + window.scrollY;
       const distance = top - window.scrollY;
       if (distance <= 8 || distance > window.innerHeight + 8) continue;
-      // Never interpret the tail of a native wheel gesture as a second gesture.
-      if (sameGesture) return;
+      // A pinned section can still be finishing its last step; don't interpret
+      // the tail of that gesture as a request to leave it. Ordinary sections
+      // can transition as soon as the next section is within reach.
+      if (currentPin && sameGesture) return;
       const visible = window.innerHeight - distance;
       const target = visible < window.innerHeight * 0.12
         ? top - window.innerHeight * 0.82

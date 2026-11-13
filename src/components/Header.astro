@@ -51,13 +51,14 @@ const lang = match ? match[1] : "en";
         />
       </a>
       <div class="flex justify-center items-center gap-2 md:gap-6">
+        <ChangeLanguage /> 
         <Button
           text={content?.buttons[0].label}
           href={content?.buttons[0].href}
           textClass="text-primary"
           extraBtnClass="header-cta hidden lg:flex bg-secondary border-secondary"
         />
-        {/*<ChangeLanguage /> */}
+        {/**/}
         <button
           type="button"
           aria-label="Abrir menú de navegación"

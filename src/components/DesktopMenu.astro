@@ -1,4 +1,6 @@
 ---
+import Button from "./Button.astro";
+
 type Translations = typeof import("../i18n/en-2").default;
 interface Props { contentHeader: Translations["header"]; }
 const { contentHeader } = Astro.props as Props;
@@ -57,5 +59,11 @@ const icons = [
           }
         </div>
       </div>
+      <Button
+          text={contentHeader?.buttons[0].label}
+          href={contentHeader?.buttons[0].href}
+          textClass="text-primary"
+          extraBtnClass="md:hidden flex bg-secondary border-secondary"
+        />
     </div>
   </div>
