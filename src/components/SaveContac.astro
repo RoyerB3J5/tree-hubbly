@@ -1,0 +1,103 @@
+---
+interface Props {
+  label?: string;
+  buttonClass?: string;
+  contact?: {
+    firstName: string;
+    lastName: string;
+    org: string;
+    title: string;
+    phone: string;
+    email: string;
+    url: string;
+    street: string;
+    city: string;
+    region: string;
+    postal: string;
+    country: string;
+    note: string;
+  };
+}
+
+const defaultContact = {
+  firstName: "",
+  lastName: "",
+  org: "",
+  title: "",
+  phone: "",
+  email: "",
+  url: "",
+  street: "",
+  city: "",
+  region: "FL",
+  postal: "",
+  country: "United States",
+  note: "",
+};
+
+const { contact = defaultContact, label = "Save to contacts", buttonClass = "px-6 py-2.5 rounded-[10px] w-full text-[14px] font-bold leading-4.5 cursor-pointer bg-secondary text-white" } = Astro.props;
+---
+
+<div class="w-full">
+  <button
+    id="test-dataurl"
+    type="button"
+    class={buttonClass}
+    data-contact={JSON.stringify(contact)}><span class="body-md text-paragraph text-center">{label}</span></button
+  >
+</div>
+
+<script type="module">
+  // contact JSON is embedded on the button's data-contact attribute
+  function buildVCard(c) {
+    const lines = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      `FN:${c.firstName} ${c.lastName}`,
+      `N:${c.lastName};${c.firstName};;;`,
+      c.org ? `ORG:${c.org}` : "",
+      c.title ? `TITLE:${c.title}` : "",
+      c.phone ? `TEL;TYPE=CELL,VOICE:${c.phone}` : "",
+      c.email ? `EMAIL;TYPE=INTERNET:${c.email}` : "",
+      c.url ? `URL:${c.url}` : "",
+      c.street || c.city
+        ? `ADR;TYPE=WORK:;;${c.street || ""};${c.city || ""};${c.region || ""};${c.postal || ""};${c.country || ""}`
+        : "",
+      c.note ? `NOTE:${c.note}` : "",
+      "END:VCARD",
+    ];
+    return lines.filter(Boolean).join("\r\n"); // usar CRLF para compatibilidad
+  }
+
+  // Download a vCard that can be opened by the device's contacts app.
+  function openDataUrlForContact(c) {
+    const vcard = buildVCard(c || {});
+    const url = URL.createObjectURL(new Blob([vcard], { type: "text/vcard;charset=utf-8" }));
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "treehubly.vcf";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  // Install click handler for the single button
+  try {
+    const btn = document.getElementById("test-dataurl");
+    if (btn) {
+      btn.addEventListener("click", () => {
+        let c = null;
+        try {
+          c = btn.dataset.contact ? JSON.parse(btn.dataset.contact) : null;
+        } catch (err) {
+          console.error("Failed to parse contact dataset", err);
+        }
+        if (!c) return alert("No contact data");
+        openDataUrlForContact(c);
+      });
+    }
+  } catch (err) {
+    console.error("Failed to install dataurl click handler:", err);
+  }
+</script>
