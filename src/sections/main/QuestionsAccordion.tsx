@@ -59,9 +59,8 @@ export default function QuestionsAccordion({ content }: Props) {
           {content.questions.map((item, index) => (
             <div
               key={index}
-              className={`question-item fade-up-a w-full flex justify-between px-4 py-6 md:p-6 bg-white rounded-3xl transition-all duration-300 ease-in-out ${
-                openIndexes.has(index) ? "items-start" : "items-center"
-              }`}
+              className="question-item fade-up-a w-full flex justify-between px-4 py-6 md:p-6 bg-white rounded-3xl transition-all duration-300 ease-in-out"
+              style={{ alignItems: openIndexes.has(index) ? "flex-start" : "center" }}
             >
               <div
                 className={`flex flex-col justify-start items-start w-full transition-all duration-300 ease-in-out ${
@@ -72,6 +71,7 @@ export default function QuestionsAccordion({ content }: Props) {
                   <h3 className="subtitle-lg text-primary w-full">{item.title}</h3>
                   <button
                     onClick={() => toggleAccordion(index)}
+                    aria-expanded={openIndexes.has(index)}
                     className="shrink-0 md:ml-4 bg-none border-none cursor-pointer p-0 hover:opacity-80 transition-opacity block md:hidden"
                     aria-label={
                       openIndexes.has(index) ? "Cerrar pregunta" : "Abrir pregunta"
@@ -110,6 +110,7 @@ export default function QuestionsAccordion({ content }: Props) {
               </div>
               <button
                 onClick={() => toggleAccordion(index)}
+                aria-expanded={openIndexes.has(index)}
                 className="shrink-0 ml-4 bg-none border-none cursor-pointer p-0 hover:opacity-80 transition-opacity hidden md:block"
                 aria-label={
                   openIndexes.has(index) ? "Cerrar pregunta" : "Abrir pregunta"
