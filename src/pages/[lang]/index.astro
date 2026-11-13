@@ -48,6 +48,7 @@ const t = translations[lang];
 </Layout>
 
 <script>
+  import { observeSectionLayout } from "../../scripts/sectionLayout";
   import { bindSectionTransitions } from "../../scripts/sectionTransitions";
   const main = document.querySelector(".home-page-sections");
   const section = (selector: string) => main?.querySelector<HTMLElement>(selector);
@@ -60,4 +61,5 @@ const t = translations[lang];
     [section(".numbers-section"), section(".control-section")],
     [section(".control-section"), section(".path-section")],
   ]);
+  if (main instanceof HTMLElement) observeSectionLayout(main);
 </script>

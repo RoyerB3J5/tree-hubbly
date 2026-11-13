@@ -479,24 +479,24 @@ export default {
         'Lo que nos preguntan los dueños<br/>de <span class="text-secondary">empresas de árboles</span>',
       questions: [
         {
-          title: "No sé nada de marketing, ¿esto es para mí?",
-          answer: "",
+          title: "¿La inversión en anuncios está incluida?",
+          answer: "No. La tarifa de Grow o Scale cubre la estrategia, la creación de los anuncios y la gestión y optimización de las campañas. La inversión en anuncios se paga directo de tu tarjeta a Meta, TikTok o Google, así que la cuenta es tuya y el presupuesto lo controlas tú. El mínimo es de $30 al día, y te ayudamos a definir el monto ideal para tu zona y tus metas. El plan Raíz no incluye anuncios.",
         },
         {
-          title: "¿Cuánto tengo que invertir en anuncios?",
-          answer: "",
+          title: "¿Puedo empezar en Raíz y subir de plan después?",
+          answer: "Sí, así están pensados los planes. En Raíz armamos la base: Branding Kit, ShapeHub Link, una landing page con chatbot con IA, tableros de trabajo con respuestas automáticas, y Google My Business con Review Shield. Cuando quieras trabajos nuevos cada semana, subes a Tronco (Grow). Cuando quieras que nosotros llenemos tu agenda, subes a Copa (Scale). Cada plan incluye todo lo del anterior, así que no pierdes nada de lo que ya construiste.",
         },
         {
-          title: "¿En cuánto tiempo veo resultados?",
-          answer: "",
+          title: "¿Hay un contrato mínimo?",
+          answer: "No. Raíz es un pago único: tienes 5 días gratis y pagas después de tu kickoff. Grow y Scale son mes a mes, y puedes cancelar avisando con 30 días de anticipación. Tu marca, tu perfil de Google, tus reseñas y tus cuentas de anuncios siguen siendo tuyas. Eso sí, te recomendamos darle al sistema al menos 8 semanas, que es lo que tarda en quedar funcionando completo.",
         },
         {
-          title: "Ya tengo sitio web, ¿necesito uno nuevo?",
-          answer: "",
+          title: "¿Qué incluye el setup?",
+          answer: "<p>Incluye tus primeras 8 semanas, y todo lo hacemos nosotros:</p><ol><li>Diagnóstico: revisamos tu negocio, tus llamadas y cómo consigues clientes hoy.</li><li>Atraer: lanzamos tus anuncios y optimizamos tu Google My Business.</li><li>Cerrar: configuramos ShapeHub y un asistente con IA que responde y agenda 24/7.</li><li>Multiplicar: activamos sistemas de reseñas y referidos.</li><li>Escalar: medimos resultados y seguimos mejorando cada mes.</li></ol>",
         },
         {
-          title: "¿Hay contrato a largo plazo?",
-          answer: "",
+          title: "¿Necesito saber de marketing?",
+          answer: "No. No necesitas saber de marketing ni trabajar más horas. Necesitas un sistema que no deje escapar a ningún cliente, y nosotros lo armamos y lo manejamos por ti. Tú sigues cortando árboles y liderando a tu equipo.",
         },
       ],
     },

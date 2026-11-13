@@ -1,5 +1,7 @@
 import { gsap, ScrollTrigger } from "./gsap";
 
+export const PIN_EDGE_INSET = 2;
+
 // One gesture advances to one complete state at a fixed animation speed.
 export function bindScrollSteps(timeline: gsap.core.Timeline, stops: number[]) {
   let movement: gsap.core.Tween | undefined;
@@ -32,7 +34,7 @@ export function bindScrollSteps(timeline: gsap.core.Timeline, stops: number[]) {
     const position = { y: window.scrollY };
     // Stay inside the pin at both ends. Exact start/end positions release it
     // while the first/last content animation is finishing.
-    const inset = Math.min(2, (trigger.end - trigger.start) / 4);
+    const inset = Math.min(PIN_EDGE_INSET, (trigger.end - trigger.start) / 4);
     const target = Math.max(trigger.start + inset,
       Math.min(trigger.end - inset, trigger.start + (trigger.end - trigger.start) * next));
     movement = gsap.to(position, {
@@ -63,11 +65,19 @@ export function bindScrollSteps(timeline: gsap.core.Timeline, stops: number[]) {
   const settle = () => {
     if (disposed || movement?.isActive()) return;
     const trigger = timeline.scrollTrigger;
-    if (!trigger?.isActive || document.documentElement.classList.contains("section-transitioning")) return;
+    if (!trigger?.isActive || document.documentElement.classList.contains("section-transitioning") ||
+        document.documentElement.classList.contains("desktop-menu-open")) return;
     if (stops.some(stop => Math.abs(stop - trigger.progress) < 0.005)) return;
     lastInput = -Infinity;
     advance(trigger.direction || 1);
   };
+  const stopForMenu = () => {
+    movement?.kill();
+    clearTimeout(settleTimer);
+    lastInput = -Infinity;
+    direction = 0;
+  };
+  document.addEventListener("site-scroll-stop", stopForMenu);
   const scroll = () => {
     clearTimeout(settleTimer);
     if (!movement?.isActive()) settleTimer = setTimeout(settle, 150);
@@ -79,6 +89,7 @@ export function bindScrollSteps(timeline: gsap.core.Timeline, stops: number[]) {
   window.addEventListener("touchend", end);
   return () => {
     disposed = true;
+    document.removeEventListener("site-scroll-stop", stopForMenu);
     clearTimeout(settleTimer);
     window.removeEventListener("scroll", scroll);
     movement?.kill();

@@ -15,7 +15,10 @@ const { content } = Astro.props as Props;
       <h2 set:html={content.title} class="heading-h4"></h2>
     </div>
     <p set:html={content.description} class="book-description body-md"></p>
-    <div class="book-card fade-up-a w-full relative h-auto rounded-2xl overflow-hidden bg-secondary" style="aspect-ratio: 628 / 413;">
+    <div class="book-card animation-image-reveal-trigger w-full relative h-auto rounded-2xl " style="aspect-ratio: 628 / 413;">
+      <div class="book-image animation-image-reveal animation-image-reveal--left-to-right w-full h-full relative rounded-2xl overflow-hidden">
+      <img src="/images/book-1.webp" alt="Book Cover" width="1000" height="563" class="w-full h-full object-cover absolute inset-0 " decoding="async" loading="lazy"/>
+      </div>
     </div>
   </div>
   <div class="book-panel w-full md:w-1/2 h-auto fade-up-a  rounded-2xl bg-white px-6 py-8">
@@ -24,6 +27,7 @@ const { content } = Astro.props as Props;
 </div>
 
 <script>
+  import { prepareImageReveal } from "../../scripts/imageReveal";
   const initBookSequences = () => {
     document.querySelectorAll<HTMLElement>(".book-sequence").forEach((book) => {
       const heading = book.querySelector<HTMLElement>(".book-heading");
@@ -31,11 +35,14 @@ const { content } = Astro.props as Props;
       const description = book.querySelector<HTMLElement>(".book-description");
       const card = book.querySelector<HTMLElement>(".book-card");
 
+      const image = book.querySelector<HTMLElement>(".book-image");
+      const revealImage = image ? prepareImageReveal(image) : () => {};
+
       const groups = [
         { target: heading, delay: 0, reveal: () => heading?.querySelectorAll("p, h2").forEach((element) => element.classList.add("active")) },
         { target: panel, delay: 0, reveal: () => panel?.classList.add("active") },
         { target: description, delay: 500, reveal: () => description?.classList.add("active") },
-        { target: card, delay: 1000, reveal: () => card?.classList.add("active") },
+        { target: card, delay: 1000, reveal: revealImage },
       ];
 
       if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {

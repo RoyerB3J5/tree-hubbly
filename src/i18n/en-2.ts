@@ -479,24 +479,24 @@ export default {
         'What owners<br/>of <span class="text-secondary">tree companies</span> ask us',
       questions: [
         {
-          title: "I know nothing about marketing, is this for me?",
-          answer: "",
+          title: "Is ad spend included?",
+          answer: "No. Your Grow or Scale fee covers strategy, ad creation, campaign management and optimization. Ad spend goes straight from your card to Meta, TikTok or Google, so you own the ad account and you control the budget. The minimum is $30 a day, and we'll help you set the right amount for your area and goals. The Root plan doesn't include ads.",
         },
         {
-          title: "How much do I need to invest in ads?",
-          answer: "",
+          title: "Can I start in Root and upgrade later?",
+          answer: "Yes, that's how the plans are built. Root sets up your foundation: Brand Kit, ShapeHub Link, a landing page with an AI chatbot, job boards with auto-replies, and Google My Business with Review Shield. When you want new jobs every week, move up to Trunk (Grow). When you want us to fill your schedule, move up to Canopy (Scale). Each plan includes everything in the one before it, so you keep everything you've already built.",
         },
         {
-          title: "How soon will I see results?",
-          answer: "",
+          title: "Is there a minimum contract?",
+          answer: "No. Root is a one-time payment: you get 5 days free and you only pay after your kickoff. Grow and Scale are month-to-month, and you can cancel with 30 days' notice. Your brand, your Google profile, your reviews and your ad accounts stay yours. We do suggest giving the system at least 8 weeks, because that's how long it takes to get fully running.",
         },
         {
-          title: "I already have a website, do I need a new one?",
-          answer: "",
+          title: "What does the setup include?",
+          answer: "<p>It covers your first 8 weeks, done for you:</p><ol><li>Diagnosis: we audit your business, your calls and how you get clients today.</li><li>Attract: we launch your ads and optimize your Google My Business.</li><li>Close: we set up ShapeHub and an AI assistant that answers and books jobs 24/7.</li><li>Multiply: we turn on review and referral systems.</li><li>Scale: we track metrics and keep improving every month.</li></ol>",
         },
         {
-          title: "Is there a long-term contract?",
-          answer: "",
+          title: "Do I need to know marketing?",
+          answer: "No. You don't need to know marketing or work more hours. You need a system that doesn't let a single client slip away, and we build it and run it for you. You keep cutting trees and leading your crew.",
         },
       ],
     },

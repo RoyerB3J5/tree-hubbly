@@ -15,7 +15,10 @@ const { content } = Astro.props as Props;
     </div>
     <div class='results-content w-full flex flex-col justify-center items-center gap-20'>
       <div class='results-first-row w-full flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-8 md:gap-6'>
-        <div class="results-first-row-image fade-up-a w-full lg:w-[45%] h-auto relative overflow-hidden rounded-2xl aspect-118/123 md:aspect-903/645 lg:aspect-603/645 bg-paragraph">
+        <div class="results-first-row-image animation-image-reveal-trigger w-full lg:w-[45%] h-auto relative rounded-2xl aspect-118/123 md:aspect-903/645 lg:aspect-603/645 ">
+          <div class="results-image animation-image-reveal animation-image-reveal--left-to-right w-full h-full relative overflow-hidden rounded-2xl">
+          <img src="/images/numbers-1.webp" alt="Numbers Illustration" width="1254" height="1254" class='w-full h-full object-cover absolute inset-0' decoding="async" loading="lazy" />
+          </div>
         </div>
         <div class='results-first-row-panel fade-up-a w-full lg:w-[55%] flex flex-col justify-center items-start gap-6 border border-[#263A4B] rounded-2xl px-4 py-12 md:p-6 back-main-4'>
           <p class="subtitle-lg text-secondary">{content.section.tag}</p>
@@ -67,6 +70,7 @@ const { content } = Astro.props as Props;
 </section>
 
 <script>
+  import { prepareImageReveal } from "../scripts/imageReveal";
   const initResultsReveal = () => {
     document.querySelectorAll<HTMLElement>(".results-hero").forEach((section) => {
       const intro = Array.from(section.querySelectorAll<HTMLElement>(".results-reveal-item"));
@@ -77,6 +81,9 @@ const { content } = Astro.props as Props;
       const firstCard = cards[0];
       const footer = section.querySelector<HTMLElement>(".results-footer");
       if (!firstRowImage || !firstRowPanel || !section2Copy || !firstCard || !footer) return;
+
+      const image = firstRowImage.querySelector<HTMLElement>(".results-image");
+      const revealImage = image ? prepareImageReveal(image) : () => {};
 
       const activateText = (container: HTMLElement) => {
         container.querySelectorAll<HTMLElement>("h1, h2, h3, h4, h5, h6, p").forEach((element) => {
@@ -95,7 +102,7 @@ const { content } = Astro.props as Props;
           delay: index * 200,
           reveal: () => element.classList.add("active"),
         })),
-        { target: firstRowImage, delay: 600, reveal: () => firstRowImage.classList.add("active") },
+        { target: firstRowImage, delay: 600, reveal: revealImage },
         { target: firstRowPanel, delay: 800, reveal: () => revealContainer(firstRowPanel) },
         { target: section2Copy, delay: 1000, reveal: () => activateText(section2Copy) },
         { target: firstCard, delay: 1200, reveal: () => cards.forEach((card) => revealContainer(card)) },

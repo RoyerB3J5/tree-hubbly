@@ -176,12 +176,22 @@ const { content } = Astro.props as Props;
       // Text wrapping and font loading can change the content height after setup.
       let measureFrame = 0;
       let disposed = false;
+      const measurementKey = () => details.map(detail => {
+        const inner = detail.querySelector<HTMLElement>(".path-details-inner")!;
+        return `${inner.scrollWidth}:${inner.scrollHeight}`;
+      }).join("|");
+      let lastMeasurement = measurementKey();
       const updateMeasurements = () => {
         cancelAnimationFrame(measureFrame);
         measureFrame = requestAnimationFrame(() => {
           if (disposed || !timeline.scrollTrigger) return;
+          const measurement = measurementKey();
+          if (measurement === lastMeasurement) return;
+          lastMeasurement = measurement;
           if (timeline.scrollTrigger.progress === 0) gsap.set(details[0], { height: detailHeight() });
-          ScrollTrigger.refresh();
+          // A refresh temporarily reverts every pin. Do it only for a real
+          // geometry change, after the browser has committed the new layout.
+          ScrollTrigger.refresh(true);
         });
       };
       const sizeObserver = new ResizeObserver(updateMeasurements);

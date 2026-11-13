@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function QuestionsAccordion({ content }: Props) {
-  const [openIndex, setOpenIndex] = useState(-1);
+  const [openIndexes, setOpenIndexes] = useState<Set<number>>(() => new Set());
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -36,7 +36,12 @@ export default function QuestionsAccordion({ content }: Props) {
   }, []);
 
   const toggleAccordion = (index: number) => {
-    setOpenIndex(openIndex === index ? -1 : index);
+    setOpenIndexes((current) => {
+      const next = new Set(current);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
+    });
   };
 
   return (
@@ -49,16 +54,18 @@ export default function QuestionsAccordion({ content }: Props) {
         ></h2>
         <div
           ref={containerRef}
-          className="w-full flex flex-col justify-center items-center gap-4 md:gap-8"
+          className="w-full flex flex-col justify-start items-center gap-4 md:gap-8"
         >
           {content.questions.map((item, index) => (
             <div
               key={index}
-              className="question-item fade-up-a w-full flex justify-between items-center px-4 py-6 md:p-6 bg-white rounded-3xl transition-all duration-300 ease-in-out"
+              className={`question-item fade-up-a w-full flex justify-between px-4 py-6 md:p-6 bg-white rounded-3xl transition-all duration-300 ease-in-out ${
+                openIndexes.has(index) ? "items-start" : "items-center"
+              }`}
             >
               <div
                 className={`flex flex-col justify-start items-start w-full transition-all duration-300 ease-in-out ${
-                  openIndex === index ? "gap-6" : "gap-0"
+                  openIndexes.has(index) ? "gap-6" : "gap-0"
                 }`}
               >
                 <div className="w-full flex justify-between items-center md:items-start gap-3 md:gap-18.25">
@@ -67,16 +74,16 @@ export default function QuestionsAccordion({ content }: Props) {
                     onClick={() => toggleAccordion(index)}
                     className="shrink-0 md:ml-4 bg-none border-none cursor-pointer p-0 hover:opacity-80 transition-opacity block md:hidden"
                     aria-label={
-                      openIndex === index ? "Cerrar pregunta" : "Abrir pregunta"
+                      openIndexes.has(index) ? "Cerrar pregunta" : "Abrir pregunta"
                     }
                   >
                     <img
                       src={
-                        openIndex === index
+                        openIndexes.has(index)
                           ? "/images/minus.svg"
                           : "/images/plus.svg"
                       }
-                      alt={openIndex === index ? "Menos" : "Más"}
+                      alt={openIndexes.has(index) ? "Menos" : "Más"}
                       width="24"
                       height="24"
                       className="w-8 h-8"
@@ -87,31 +94,34 @@ export default function QuestionsAccordion({ content }: Props) {
                 </div>
 
                 <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out w-full md:w-[60%] ${
-                    openIndex === index
-                      ? "max-h-96 opacity-100"
-                      : "max-h-0 opacity-0"
+                  className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out w-full md:w-[80%] ${
+                    openIndexes.has(index)
+                      ? "grid-rows-[1fr] opacity-100"
+                      : "grid-rows-[0fr] opacity-0"
                   }`}
                 >
-                  <p className="text-[14px] font-normal leading-[150%] text-primary">
-                    {item.answer}
-                  </p>
+                  <div className="overflow-hidden">
+                    <div
+                      className="body-md text-primary py-1 [text-box-trim:none] [&_*]:[text-box-trim:none] [&_ol]:mt-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_li+li]:mt-2"
+                      dangerouslySetInnerHTML={{ __html: item.answer }}
+                    />
+                  </div>
                 </div>
               </div>
               <button
                 onClick={() => toggleAccordion(index)}
                 className="shrink-0 ml-4 bg-none border-none cursor-pointer p-0 hover:opacity-80 transition-opacity hidden md:block"
                 aria-label={
-                  openIndex === index ? "Cerrar pregunta" : "Abrir pregunta"
+                  openIndexes.has(index) ? "Cerrar pregunta" : "Abrir pregunta"
                 }
               >
                 <img
                   src={
-                    openIndex === index
+                    openIndexes.has(index)
                       ? "/images/minus.svg"
                       : "/images/plus.svg"
                   }
-                  alt={openIndex === index ? "Menos" : "Más"}
+                  alt={openIndexes.has(index) ? "Menos" : "Más"}
                   width="24"
                   height="24"
                   className="w-8 h-8"

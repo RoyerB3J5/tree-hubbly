@@ -15,8 +15,10 @@ const { content } = Astro.props as Props;
       <h2 set:html={content.title} class='numbers-title fade-up-a heading-h4 text-paragraph text-start md:text-center'></h2>
     </div>
     <div class="w-full flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-8 md:gap-6">
-      <div class="w-full lg:w-[40%] overflow-hidden rounded-2xl relative bg-secondary aspect-398/414 md:aspect-798/414 lg:aspect-auto">
-
+      <div class="numbers-image-trigger animation-image-reveal-trigger w-full lg:w-[40%] rounded-2xl relative  aspect-398/414 md:aspect-798/414 lg:aspect-auto">
+        <div class="numbers-image animation-image-reveal animation-image-reveal--left-to-right absolute inset-0 w-full h-full rounded-2xl overflow-hidden">
+        <img src="/images/numbers-1.webp" alt="Numbers Illustration" width="1254" height="1254" class='w-full h-full object-cover absolute inset-0' decoding="async" loading="lazy" />
+        </div>
       </div>
       <div class='numbers-card-frame fade-up-a w-full lg:w-[60%] overflow-hidden rounded-2xl'>
       <div class='numbers-card flex flex-col justify-center items-start gap-8 w-full h-full py-12 md:py-14 xl:[@media(height_<_810px)]:py-8 px-4 md:px-6 back-main-4 rounded-2xl border border-[#263A4B]'>
@@ -74,6 +76,7 @@ const { content } = Astro.props as Props;
 </section>
 
 <script>
+  import { prepareImageReveal } from "../../scripts/imageReveal";
   import { gsap } from "../../scripts/gsap";
 
   document.querySelectorAll<HTMLElement>(".numbers-section").forEach((section) => {
@@ -85,8 +88,12 @@ const { content } = Astro.props as Props;
     const revealItems = Array.from(section.querySelectorAll<HTMLElement>(".numbers-reveal-item"));
     if (!frame || !card || !content || !tag || !title) return;
 
+    const imageTrigger = section.querySelector<HTMLElement>(".numbers-image-trigger");
+    const image = section.querySelector<HTMLElement>(".numbers-image");
+    const revealImage = image ? prepareImageReveal(image) : () => {};
     const activate = (element: HTMLElement) => element.classList.add("active");
     const finishReveal = () => {
+      revealImage();
       activate(tag);
       activate(title);
       activate(frame);
@@ -116,61 +123,29 @@ const { content } = Astro.props as Props;
       });
     };
 
-    if (window.matchMedia("(max-width: 1023px)").matches) {
-      const revealVisible = (element: HTMLElement) => {
-        activate(element);
-        if (element.classList.contains("numbers-reveal-item")) {
-          element.querySelectorAll<HTMLElement>(".fade-up-a, .fade-up-lines-raw").forEach(activate);
-          animateCounters(element);
-        }
-      };
-      const targets = [tag, title, frame, ...revealItems];
-      if (!("IntersectionObserver" in window)) {
-        targets.forEach(revealVisible);
-        return;
+    const revealVisible = (element: HTMLElement) => {
+      if (element === imageTrigger) revealImage();
+      else activate(element);
+      if (element === frame) {
+        gsap.fromTo(card, { y: 40 }, { y: 0, duration: 0.7, ease: "power2.out" });
       }
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          observer.unobserve(entry.target);
-          revealVisible(entry.target as HTMLElement);
-        });
-      }, { threshold: 0.1 });
-      targets.forEach((target) => observer.observe(target));
+      if (element.classList.contains("numbers-reveal-item")) {
+        element.querySelectorAll<HTMLElement>(".fade-up-a, .fade-up-lines-raw").forEach(activate);
+        animateCounters(element);
+      }
+    };
+    const targets = [tag, title, ...(imageTrigger ? [imageTrigger] : []), frame, ...revealItems];
+    if (!("IntersectionObserver" in window)) {
+      targets.forEach(revealVisible);
       return;
     }
-
-    section.classList.add("numbers-reveal-controlled");
-    gsap.set(card, { yPercent: 100 });
-    gsap.set(content, { autoAlpha: 0 });
-
-    const reveal = () => {
-      const timeline = gsap.timeline({ delay: 0.1 });
-      activate(tag);
-      timeline.call(() => activate(title), [], 0.1)
-        .call(() => activate(frame), [], 0.2)
-        .to(card, { yPercent: 0, duration: 0.7, ease: "power2.out" }, 0.2)
-        .set(content, { autoAlpha: 1 }, 0.9)
-        .call(() => revealItems.forEach((element, index) => {
-          activate(element);
-          element.querySelectorAll<HTMLElement>(".fade-up-a").forEach((child, childIndex) => {
-            window.setTimeout(() => activate(child), childIndex * 100);
-          });
-        }), [], 0.9)
-        .call(() => {
-          content.querySelectorAll<HTMLElement>(".fade-up-lines-raw").forEach((text, index) => {
-            text.style.setProperty("--fade-up-lines-delay", `${index * 0.08}s`);
-            text.classList.add("active");
-          });
-          animateCounters(content);
-        });
-    };
-    if (!("IntersectionObserver" in window)) { reveal(); return; }
     const observer = new IntersectionObserver((entries) => {
-      if (!entries.some((entry) => entry.isIntersecting)) return;
-      observer.disconnect();
-      reveal();
-    }, { threshold: 0.3 });
-    observer.observe(frame);
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(entry.target);
+        revealVisible(entry.target as HTMLElement);
+      });
+    }, { threshold: 0, rootMargin: "0px 0px -5% 0px" });
+    targets.forEach((target) => observer.observe(target));
   });
 </script>

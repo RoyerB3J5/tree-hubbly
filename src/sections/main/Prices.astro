@@ -137,16 +137,10 @@ const { content } = Astro.props as Props;
         return;
       }
       let queue = Promise.resolve();
-      const waitForEntrance = (elements: HTMLElement[]) => new Promise<void>(resolve => {
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          const animations = elements.flatMap(element => element.getAnimations({ subtree: true }))
-            .filter(animation => animation.effect?.getComputedTiming().iterations !== Infinity);
-          Promise.allSettled(animations.map(animation => animation.finished)).then(() => resolve());
-        }));
-      });
       const revealCard = async (card: HTMLElement) => {
         card.classList.add("active");
-        await waitForEntrance([card]);
+        // Start the content during the card entrance so the sequence stays brisk.
+        await new Promise<void>(resolve => window.setTimeout(resolve, 250));
         const children = Array.from(card.querySelectorAll<HTMLElement>(".fade-up-a, .fade-up-lines-raw"));
         // Keep observing lower content as the user scrolls down the long card.
         let firstBatch = true;
@@ -159,7 +153,8 @@ const { content } = Astro.props as Props;
             });
             if (firstBatch) {
               firstBatch = false;
-              waitForEntrance(visible.map(entry => entry.target as HTMLElement)).then(resolve);
+              // Let the next card enter without waiting for every text animation to finish.
+              window.setTimeout(resolve, 200);
             }
           }, { threshold: 0.3 });
           if (!children.length) resolve();

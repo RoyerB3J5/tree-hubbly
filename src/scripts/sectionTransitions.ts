@@ -1,4 +1,5 @@
 import { gsap, ScrollTrigger } from "./gsap";
+import { PIN_EDGE_INSET } from "./scrollSteps";
 
 // Preview the next section on one gesture, enter it on the next one.
 export function bindSectionTransitions(pairs: readonly (readonly [(HTMLElement | null | undefined), (HTMLElement | null | undefined)])[]) {
@@ -7,7 +8,9 @@ export function bindSectionTransitions(pairs: readonly (readonly [(HTMLElement |
   let lastWheel = -Infinity;
   let consumedGesture = false;
   const root = document.documentElement;
-  const finish = () => root.classList.remove("section-transitioning");
+  const finish = () => {
+    root.classList.remove("section-transitioning");
+  };
   const wheel = (event: WheelEvent) => {
     if (event.defaultPrevented || !desktop.matches || event.ctrlKey ||
         root.classList.contains("desktop-menu-open") ||
@@ -32,7 +35,10 @@ export function bindSectionTransitions(pairs: readonly (readonly [(HTMLElement |
       if (!current || !destination) continue;
       const pins = ScrollTrigger.getAll();
       const currentPin = pins.find(pin => pin.trigger === current && pin.pin);
-      if (currentPin && window.scrollY < currentPin.end - 1) continue;
+      // Take over at the same inset where the final scroll step stops.
+      // Requiring a native wheel event to cross the pin end releases it abruptly.
+      const edgeInset = currentPin ? Math.min(PIN_EDGE_INSET, (currentPin.end - currentPin.start) / 4) : 0;
+      if (currentPin && window.scrollY < currentPin.end - edgeInset - 0.5) continue;
       const destinationPin = pins.find(pin => pin.trigger === destination && pin.pin);
       if (destinationPin?.isActive) continue;
       const top = destinationPin?.start ?? destination.getBoundingClientRect().top + window.scrollY;
@@ -59,5 +65,11 @@ export function bindSectionTransitions(pairs: readonly (readonly [(HTMLElement |
       break;
     }
   };
-  window.addEventListener("wheel", wheel, { passive: false });
+  document.addEventListener("site-scroll-stop", () => {
+    motion?.kill();
+    finish();
+    consumedGesture = false;
+    lastWheel = -Infinity;
+  });
+  window.addEventListener("wheel", wheel, { passive: false, capture: true });
 }

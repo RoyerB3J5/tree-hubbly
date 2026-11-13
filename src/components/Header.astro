@@ -35,7 +35,7 @@ const lang = match ? match[1] : "en";
     class={`w-full flex justify-center items-center h-18 md:h-20 transition-colors duration-300`}
   >
     <div
-      class="max-w-[1280px] px-4 xl:px-0 w-full flex justify-between items-center relative"
+      class="header-content w-full flex justify-between items-center relative"
     >
       <a
         href={`/${lang}`}
@@ -92,17 +92,36 @@ const lang = match ? match[1] : "en";
     function updateMenuScale() {
       if (!pageContent) return;
       const width = document.documentElement.clientWidth;
-      pageContent.style.setProperty("--menu-scale", String(Math.min(1, (width - 32) / width, 1280 / width)));
+      const gutter = (width <= 728 ? 1 : 2) * parseFloat(getComputedStyle(pageContent).fontSize);
+      pageContent.style.setProperty("--menu-scale", String(Math.max(0, (width - 2 * gutter) / width)));
     }
 
     function setDesktopMenu(open) {
       if (open && pageContent) {
-        pageContent.style.setProperty("--menu-origin-y", `${-pageContent.getBoundingClientRect().top}px`);
+        // Stop scripted scrolling before measuring the visible page edge.
+        document.dispatchEvent(new Event("site-scroll-stop"));
+        document.dispatchEvent(new Event("site-menu-opening"));
+        if (!body.classList.contains("menu-transitioning")) {
+          pageContent.style.transition = "none";
+          pageContent.style.setProperty("--menu-origin-y", `${-pageContent.getBoundingClientRect().top}px`);
+          body.classList.add("menu-transitioning");
+          updateMenuScale();
+          void pageContent.offsetWidth;
+          pageContent.style.removeProperty("transition");
+          void pageContent.offsetWidth;
+        }
         updateMenuScale();
+        // Establish the visible edge before animating its radius and position.
+        void pageContent.offsetWidth;
       }
       desktopOpen = open;
       body.classList.toggle("desktop-menu-open", open);
       document.documentElement.classList.toggle("desktop-menu-open", open);
+      if (!open && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        pageContent?.style.removeProperty("--menu-origin-y");
+        body.classList.remove("menu-transitioning");
+        document.dispatchEvent(new Event("site-menu-closed"));
+      }
       if (desktopMenu) {
         desktopMenu.inert = !open;
         desktopMenu.setAttribute("aria-hidden", String(!open));
@@ -113,6 +132,14 @@ const lang = match ? match[1] : "en";
       openIcon?.classList.toggle("hidden", open);
       closeIcon?.classList.toggle("hidden", !open);
     }
+
+    pageContent?.addEventListener("transitionend", (event) => {
+      if (event.target === pageContent && event.propertyName === "transform" && !desktopOpen) {
+        pageContent.style.removeProperty("--menu-origin-y");
+        body.classList.remove("menu-transitioning");
+        document.dispatchEvent(new Event("site-menu-closed"));
+      }
+    });
 
     openBtn?.addEventListener("click", () => {
       setDesktopMenu(!desktopOpen);
@@ -126,6 +153,11 @@ const lang = match ? match[1] : "en";
     desktopMenu?.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => setDesktopMenu(false));
     });
+
+    // Prevent the page from moving on touch devices while keeping the menu usable.
+    document.addEventListener("touchmove", (event) => {
+      if (desktopOpen && !event.target.closest("#desktop-menu")) event.preventDefault();
+    }, { passive: false });
 
     // Header: height var + hide on scroll down / show on scroll up
     const header = document.getElementById("site-header");

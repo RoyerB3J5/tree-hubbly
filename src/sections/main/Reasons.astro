@@ -123,6 +123,7 @@ const { content } = Astro.props as Props;
         };
       }
 
+      gsap.set(slides[0], { autoAlpha: 1 });
       gsap.set(slides.slice(1), { autoAlpha: 0 });
       gsap.set(fill, { scaleY: 1 / slides.length });
       items[0]?.classList.add("is-active");
@@ -132,12 +133,12 @@ const { content } = Astro.props as Props;
       const transitionObserver = new MutationObserver(() => {
         if (pendingFirstReveal && !document.documentElement.classList.contains("section-transitioning")) {
           pendingFirstReveal = false;
-          if (!disposed && revealedIndex === -1) revealSlide(0);
+          if (!disposed) revealSlide(0);
         }
       });
       transitionObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
       const revealFirstSlide = () => {
-        if (revealedIndex !== -1 || disposed) return;
+        if (disposed) return;
         if (document.documentElement.classList.contains("section-transitioning")) {
           pendingFirstReveal = true;
         } else {
@@ -145,7 +146,12 @@ const { content } = Astro.props as Props;
         }
       };
       const revealSlide = (index: number) => {
-        if (index === revealedIndex) return;
+        pendingFirstReveal = false;
+        if (index === revealedIndex) {
+          slides[index].querySelectorAll("h1, h2, h3, h4, h5, p, .fade-up-a, .animation-image-reveal")
+            .forEach(element => element.classList.add("active"));
+          return;
+        }
         const previousIndex = revealedIndex;
         revealedIndex = index;
         slides.forEach((slide, slideIndex) => {
@@ -168,7 +174,7 @@ const { content } = Astro.props as Props;
         onUpdate(this: gsap.core.Animation) {
           const activeIndex = Math.min(slides.length - 1, Math.floor((this.time() + 0.225) / 0.5));
           items.forEach((item, index) => item.classList.toggle("is-active", index === activeIndex));
-          if (this.scrollTrigger && this.scrollTrigger.progress > 0) {
+          if (this.scrollTrigger?.isActive) {
             if (activeIndex === 0) revealFirstSlide();
             else revealSlide(activeIndex);
           }
@@ -186,6 +192,13 @@ const { content } = Astro.props as Props;
             revealFirstSlide();
           },
           onEnterBack: () => revealSlide(slides.length - 1),
+          onRefresh: self => {
+            if (self.isActive) {
+              const index = Math.min(slides.length - 1, Math.floor(((self.animation?.time() ?? 0) + 0.225) / 0.5));
+              if (index === 0) revealFirstSlide();
+              else revealSlide(index);
+            }
+          },
           invalidateOnRefresh: true,
         },
       });
@@ -194,8 +207,8 @@ const { content } = Astro.props as Props;
         const at = 0.5 * index + 0.2;
         // Finish hiding the outgoing slide before revealing the next one.
         // A wheel stop must never leave two readable slides stacked together.
-        timeline.to(slides[index], { autoAlpha: 0, duration: 0.1, ease: "power1.in" }, at)
-          .to(slide, { autoAlpha: 1, duration: 0.15, ease: "power1.out" }, at + 0.1);
+        timeline.fromTo(slides[index], { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.1, ease: "power1.in", immediateRender: false }, at)
+          .fromTo(slide, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.15, ease: "power1.out", immediateRender: false }, at + 0.1);
       });
       timeline.to(fill, { scaleY: 1, ease: "none", duration: timeline.duration() }, 0)
         .to({}, { duration: 0.5 });

@@ -150,6 +150,16 @@ html {
   letter-spacing: 0;
 }
 
+.heading-h5.menu-p {
+  font-size: 36px;
+}
+
+@media (min-width: 729px) {
+  .heading-h5.menu-p {
+    font-size: 32px;
+  }
+}
+
 /* --- SUBTITLES --- */
 .subtitle-lg {
   font-family: var(--font-family-poppins);
@@ -233,7 +243,6 @@ html {
     font-size: 40px;
     line-height: 110%;
   }
-
   /* --- BODY TEXT --- */
   .body-lg {
     font-size: 20px;
