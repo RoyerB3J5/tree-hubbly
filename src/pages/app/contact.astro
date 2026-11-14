@@ -1,0 +1,93 @@
+---
+
+import Button from "../../components/Button.astro";
+import LayoutSec from "../../layouts/LayoutSec.astro";
+// Edita aquí los textos, enlaces e imágenes de la página /app.
+const content = {
+  tag:"CREZCAMOS JUNTOS",
+  title:"Reserva una <span class='text-secondary'>Llamada Estratégica gratis</span>",
+  description:"Una llamada de 30 minutos para hablar sobre tus metas, desafíos y cómo Treehubly puede ayudarte a conseguir más leads y crecer.",
+  highlights: [
+    { description: "Más Leads", icon: "scale" },
+    {  description: "Mejores Sistemas", icon: "tool" },
+    {  description: "Crecimiento Real", icon: "up" },
+  ],
+  buttons:{
+    title:'OTRAS FORMAS DE CONECTAR',
+    items:[
+      {
+        icon:"whats",
+        title:'WhatsApp',
+        href:'https://wa.me/14075023684'
+      },
+      {
+        icon:"mail",
+        title:'Escríbenos',
+        href:'https://mail.google.com/mail/?view=cm&fs=1&to=treehubly@gmail.com'
+      },
+    ]
+  }
+};
+
+---
+<LayoutSec>
+  <section class="w-full flex flex-col justify-center items-start gap-6 py-6 px-4 md:w-[500px] md:px-0 text-paragraph">
+    <a href="/app/" data-back-link aria-label="Volver">
+        <img src="/images/icons/back.svg" alt="Back" class="w-[46px] h-[46px]" width="24" height="24" decoding="async" loading="lazy" />
+      </a>
+    <div class='w-full h-auto aspect-398/243  rounded-2xl relative overflow-hidden'>
+      <video class="w-full h-full absolute inset-0 object-cover object-center" src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/video_hero.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+    </div>
+    <div class="w-full flex flex-col justify-center items-center gap-6">
+      <p class="text-[14px] font-semibold leading-[150%] text-paragraph">{content.tag}</p>
+      <h1 set:html={content.title} class='text-[32px] font-bold leading-[120%] text-center'></h1>
+      <p class='text-[14px] font-normal leading-[150%] text-[#8DA2B8] text-center'>{content.description}</p>
+    </div>
+    <div class='w-full flex justify-center items-stretch gap-4 p-4 rounded-2xl bg-[#071E31] border border-[#152D47]'>
+      {
+        content.highlights.map((item,index)=>(
+          <>
+            <div class='flex flex-col justify-center items-center gap-3 w-[100px] md:w-[150px]'>
+              {
+                item.icon !== "" && (
+                  <img src={`/images/icons/${item.icon}.svg`} alt={item.icon} class="w-auto h-6" decoding="async" loading="lazy" />
+                )
+              }
+              <p class="text-[12px] font-normal leading-[150%] text-[#8DA2B8] text-center">{item.description}</p>
+            </div>
+            <div class="w-[1px] bg-[#152D47] last:hidden"></div>
+          </>
+          
+        ))
+      }
+    </div>
+    <div class="w-full flex flex-col justify-center items-center gap-4">
+      <p class="uppercase text-[14px] font-normal leading-[150%] text-paragraph">{content.buttons.title}</p>
+      <div class="w-full flex justify-center items-center gap-2">
+        <a href={content.buttons.items[0].href} target="_blank" rel="noopener noreferrer" class='h-20 bg-secondary rounded-2xl border border-secondary flex flex-col justify-center items-center gap-4 w-1/2'>
+          <img src={`/images/icons/${content.buttons.items[0].icon}.svg`} alt={content.buttons.items[0].icon} class="w-auto h-6" decoding="async" loading="lazy" />
+          <p class="text-[14px] font-normal leading-[150%] text-primary">{content.buttons.items[0].title}</p>
+        </a>
+        <a href={content.buttons.items[1].href} target="_blank" rel="noopener noreferrer" class='h-20 bg-transparent rounded-2xl border border-secondary flex flex-col justify-center items-center gap-4 w-1/2'>
+          <img src={`/images/icons/${content.buttons.items[1].icon}.svg`} alt={content.buttons.items[1].icon} class="w-auto h-6" decoding="async" loading="lazy" />
+          <p class="text-[14px] font-normal leading-[150%] text-[#8DA2B8]">{content.buttons.items[1].title}</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</LayoutSec>
+
+<style>
+  .app-profile-description :global(span) {
+    text-box-trim: none;
+    text-box-edge: auto;
+  }
+</style>
+<script is:inline>
+  document.querySelector("[data-back-link]")?.addEventListener("click", (event) => {
+    if (window.history.length > 1) {
+      event.preventDefault();
+      window.history.back();
+    }
+  });
+</script>

@@ -1,0 +1,49 @@
+---
+const links = [
+  {
+    icon:'house',
+    text:'Inicio',
+    href:'/app/',
+  },
+  {
+    icon:'about',
+    text:'Nosotros',
+    href:'/app/about-us'
+  },
+  {
+    icon:'ebook',
+    text:'Ebook',
+    href:'/app/ebook'
+  },
+  {
+    icon:'contact',
+    text:'Hablemos',
+    href:'/app/contact'
+  }
+]
+---
+<footer class="app-footer w-full flex justify-center items-center bg-[#071E31] fixed bottom-0 left-0 right-0 z-50">
+  <nav aria-label="Navegación principal" class="w-full max-w-[500px] px-6 h-[72px] flex justify-between items-center">
+    {
+      links.map((item)=>(
+        <a class="flex flex-col justify-center items-center gap-1.5 w-[66px] md:w-[77px]" href={item.href} aria-current={Astro.url.pathname.replace(/\/+$/, "") === item.href.replace(/\/+$/, "") ? "page" : undefined}>
+          <img
+            src={`/images/icons/${item.icon}${Astro.url.pathname.replace(/\/+$/, "") === item.href.replace(/\/+$/, "") ? "-active" : ""}.svg`}
+            alt=""
+            class="w-6 h-6 shrink-0"
+            width="24"
+            height="24"
+            decoding="async"
+          />
+          <p class="text-[12px] font-medium leading-[150%] text-[#8DA2B8]">{item.text}</p>
+        </a>
+      ))
+    }
+  </nav>
+</footer>
+
+<style>
+  .app-footer {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+</style>

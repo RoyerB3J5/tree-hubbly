@@ -1,0 +1,102 @@
+---
+
+import Button from "../../components/Button.astro";
+import LayoutSec from "../../layouts/LayoutSec.astro";
+// Edita aquí los textos, enlaces e imágenes de la página /app.
+const content = {
+  profile: {
+    logo: { src: "/images/icons/logo-app.svg", alt: "Logo App" },
+    location: { label: "Estados Unidos", icon: "/images/icons/map.svg", iconAlt: "Map" },
+    description: 'Ayudamos a empresas de <span class="font-semibold text-paragraph "> tree services</span> a crecer con marleting, leads, sistemas y automatización',
+  },
+  buttons: {
+    contact: { text: "¡Hablemos!", href: "tel:+14075023684" },
+    about: { text: "Nosotros", href: "/app/about-us" },
+  },
+  highlights: [
+    { text: "+97", description: "Tree Pros apoyados", icon: "" },
+    { text: "", description: "Enfoque nacional en EE.UU.", icon: "country" },
+    { text: "", description: "Resultados de marketing real", icon: "scale" },
+  ],
+  ebook: {
+    tag: "RECURSOS GRATUITOS",
+    title: "Obtén nuestro eBook gratis",
+    description: "Estrategias prácticas para hacer crecer tu empresa de tree services.",
+    href: "/app/ebook",
+    icon: "/images/icons/arrow-book.svg",
+    iconAlt: "Arrow Book",
+  },
+};
+
+---
+<LayoutSec>
+  <section class="w-full flex flex-col justify-center items-center gap-6 py-6 px-4 md:w-[500px] md:px-0 text-paragraph">
+    <div class='flex flex-col justify-center items-center gap-4 py-6 back-app rounded-2xl border border-[#152D47] w-full'>
+      <img src={content.profile.logo.src} alt={content.profile.logo.alt} class="w-40 h-30 my-5" width="160" height="120" decoding="async" loading="lazy"  />
+      <div class="flex justify-center items-center gap-2 px-4 bg-primary h-8 rounded-lg">
+        <img src={content.profile.location.icon} alt={content.profile.location.iconAlt} class="w-4.5 h-4.5" width="24" height="24" decoding="async" loading="lazy" />
+        <p class='subtitle-sm'>{content.profile.location.label}</p>
+      </div>
+      <p class="app-profile-description w-[290px] md:w-[70%] body-sm text-[#8DA2B8] text-center" set:html={content.profile.description}></p>
+    </div>
+    <div class="w-full flex flex-row justify-center items-center gap-2">
+      <Button
+        text={content.buttons.contact.text}
+        href={content.buttons.contact.href}
+        extraBtnClass="bg-secondary border-secondary w-1/2"
+        textClass="text-primary"
+      />
+      <Button
+        text={content.buttons.about.text}
+        href={content.buttons.about.href}
+        extraBtnClass="bg-transparent border-white w-1/2"
+        textClass="text-white"
+      />
+    </div>
+    <div class='w-full h-auto aspect-398/243  rounded-2xl relative overflow-hidden'>
+      <video class="w-full h-full absolute inset-0 object-cover object-center" src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/video_hero.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+    </div>
+    <div class='w-full flex justify-center items-stretch gap-4 p-4 rounded-2xl bg-[#071E31] border border-[#152D47]'>
+      {
+        content.highlights.map((item,index)=>(
+          <>
+            <div class='flex flex-col justify-center items-center gap-3 w-[100px] md:w-[150px]'>
+              {
+                item.text !== "" && (
+                  <p class="text-[24px] font-bold leading-[140%] text-paragraph">{item.text}</p>
+                )
+              }
+              {
+                item.icon !== "" && (
+                  <img src={`/images/icons/${item.icon}.svg`} alt={item.icon} class="w-auto h-6" decoding="async" loading="lazy" />
+                )
+              }
+              <p class="text-[12px] font-normal leading-[150%] text-[#8DA2B8] text-center">{item.description}</p>
+            </div>
+            <div class="w-[1px] bg-[#152D47] last:hidden"></div>
+          </>
+          
+        ))
+      }
+    </div>
+    <div class='w-full flex justify-between items-center py-6 px-4 rounded-2xl border border-secondary bg-[#071E31] shadow-app gap-3 md:gap-5'>
+      <div class="min-w-0 flex-1 flex flex-col justify-center items-start gap-4">
+        <div class="flex justify-center items-center p-2 bg-secondary/20 rounded-lg" >
+          <p class="text-[12px] font-semibold leading-[150%] text-secondary">{content.ebook.tag}</p>
+        </div>
+        <p class='subtitle-lg text-paragraph'>{content.ebook.title}</p>
+        <p class="body-sm text-[#8DA2B8]">{content.ebook.description}</p>
+      </div>
+      <a href={content.ebook.href} class="shrink-0">
+        <img src={content.ebook.icon} alt={content.ebook.iconAlt} class="w-[46px] h-[46px]" width="24" height="24" decoding="async" loading="lazy" />
+      </a>
+    </div>
+  </section>
+</LayoutSec>
+
+<style>
+  .app-profile-description :global(span) {
+    text-box-trim: none;
+    text-box-edge: auto;
+  }
+</style>

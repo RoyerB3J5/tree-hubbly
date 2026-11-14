@@ -428,6 +428,20 @@ html {
     #051725;
 }
 
+.back-app {
+  background:
+    linear-gradient(
+      0deg,
+      rgba(7, 152, 240, 0.2) 0%,
+      rgba(7, 152, 240, 0.04) 65%,
+      rgba(7, 152, 240, 0) 100%
+    ),
+    #04121e;
+}
+
+.shadow-app {
+  box-shadow: 0 0 20px 0 rgba(145, 210, 0, 0.3);
+}
 .results-back {
   background: linear-gradient(
     180deg,

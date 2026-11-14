@@ -1087,7 +1087,7 @@ export default {
       title: "Contact us",
       items: [
         {
-          href: "mailto:treehubly@gmail.com",
+          href: "https://mail.google.com/mail/?view=cm&fs=1&to=treehubly@gmail.com",
           title: "treehubly@gmail.com",
           icon: "mail",
         },

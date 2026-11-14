@@ -1,5 +1,6 @@
 ---
 // Imports optimizados - solo lo esencial al inicio
+import FooterApp from "../components/FooterApp.astro";
 import "../styles/global.css";
 ---
 
@@ -7,7 +8,7 @@ import "../styles/global.css";
 <html lang="en" class="overflow-x-hidden">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
     <!-- SEO Local para Orlando -->
     <meta name="geo.region" content="US-FL" />
@@ -89,10 +90,17 @@ import "../styles/global.css";
     </script>
   </head>
   <body
-    class="font-family antialiased overflow-x-hidden bg-back flex flex-col justify-center items-center w-screen"
+    class="font-family antialiased overflow-x-hidden bg-primary flex flex-col justify-center items-center w-screen"
   >
-    <main class="flex flex-col w-full items-center h-full">
+    <main class="app-main flex flex-col w-full items-center h-full justify-center">
       <slot />
     </main>
+    <FooterApp />
   </body>
 </html>
+
+<style>
+  .app-main {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  }
+</style>

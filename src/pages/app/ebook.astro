@@ -1,0 +1,54 @@
+---
+import Form from "../../components/Form.astro";
+import LayoutSec from "../../layouts/LayoutSec.astro";
+// Edita aquí los textos, enlaces e imágenes de la página /app.
+const content = {
+  title:"Obtén un <span class='text-secondary'>eBook gratis</span> ",
+  description:"Una guía paso a paso para empresas de servicios de árboles en Estados Unidos que quieren conseguir más clientes potenciales, más trabajos y crecimiento sostenible.",
+  book:{
+    title:"La Guía de Crecimiento para <br/> <span class='text-secondary'>Empresas de Tree Services en EE.UU</span>",
+    description:"Estrategias prácticas para <br/> crecimiento real."
+  },
+  form:{
+    tag:"DESCARGA GRATIS",
+    title:"¿A dónde te enviamos tu eBook?",
+    description:"Toma menos de 30 segundos.",
+  }
+  
+};
+
+---
+<LayoutSec>
+  <section class="w-full flex flex-col justify-center items-center gap-6 py-6  md:w-[500px] md:px-0 text-paragraph">
+    <div class="w-full flex flex-col justify-center items-start gap-6 px-4 md:px-0">
+      <a href="/app/" data-back-link aria-label="Volver">
+        <img src="/images/icons/back.svg" alt="Back" class="w-[46px] h-[46px]" width="24" height="24" decoding="async" loading="lazy" />
+      </a>
+      
+      <h1 class="text-paragraph text-[32px] font-bold leading-[120%]" set:html={content.title}></h1>
+      <p class='body-sm text-[#8DA2B8]'>{content.description}</p>
+      <div class='flex flex-col justify-center items-center gap-4 py-8 back-app rounded-2xl border border-[#152D47] w-full'>
+        <h2 set:html={content.book.title} class="text-center text-[16px] font-semibold leading-[150%] text-paragraph"></h2>
+        <div class=" relative w-[43%] md:w-[40%] aspect-[91/137] h-auto">
+          <img src="/images/book.webp" alt="Book Cover" width="600" height="900" class=" absolute inset-0 w-full h-full object-contain" decoding="async" loading="lazy"/>
+        </div>
+        <p class='text-[14px] font-medium leading-[150%] text-paragraph text-center' set:html={content.book.description}></p>
+      </div>
+      <div class='w-full bg-white py-8  px-4  flex flex-col justify-start items-start gap-6  rounded-2xl text-primary'>
+        <p class="text-[14px] font-semibold leading-[150%] uppercase">{content.form.tag}</p>
+        <h3 set:html={content.form.title} class="text-[20px] font-bold leadong-[154%]"></h3>
+        <p set:html={content.form.description} class=" text-[16px] font-normal leading-[150%] mb-4"></p>
+        <Form/>
+      </div>
+    </div>
+  </section>
+</LayoutSec>
+
+<script is:inline>
+  document.querySelector("[data-back-link]")?.addEventListener("click", (event) => {
+    if (window.history.length > 1) {
+      event.preventDefault();
+      window.history.back();
+    }
+  });
+</script>
