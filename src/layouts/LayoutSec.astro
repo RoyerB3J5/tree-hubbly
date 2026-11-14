@@ -1,93 +1,14 @@
 ---
 // Imports optimizados - solo lo esencial al inicio
 import FooterApp from "../components/FooterApp.astro";
+import SEOHead from "../components/SEOHead.astro";
 import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="en" class="overflow-x-hidden">
+<html lang="es" class="overflow-x-hidden">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-
-    <!-- SEO Local para Orlando -->
-    <meta name="geo.region" content="US-FL" />
-    <meta name="geo.placename" content="Orlando" />
-    <meta name="geo.position" content="28.5383;-81.3792" />
-    <meta name="ICBM" content="28.5383, -81.3792" />
-
-    <!-- Preconnect para DNS lookup temprano -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Preconnect para widget de chat - optimización de terceros -->
-    <link rel="preconnect" href="https://widgets.leadconnectorhq.com" />
-    <link rel="dns-prefetch" href="https://widgets.leadconnectorhq.com" />
-    <!-- Icons -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-    <meta name="generator" content={Astro.generator} />
-    <title>Treehubly - The Growth System for Tree Services</title>
-    <meta
-      name="description"
-      content="Treehubly helps tree companies generate better leads, book more jobs, and scale with a structured growth ecosystem."
-    />
-    <!-- SEO additions -->
-    <meta
-      name="keywords"
-      content="Tree Services, Lead Generation, Growth System, Marketing Automation, Tree Company Growth, Tree Service Marketing, Tree Service Leads, Tree Service Automation, Tree Service Performance, TreeHubly Growth System"
-    />
-    <meta name="author" content="Treehubly" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://treehubly.com/" />
-
-    <!-- Alternate language versions -->
-    <link rel="alternate" hreflang="en" href="https://treehubly.com/en/" />
-    <link rel="alternate" hreflang="es" href="https://treehubly.com/es/" />
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href="https://treehubly.com/en/"
-    />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:title"
-      content="Treehubly - The Growth System for Tree Services"
-    />
-    <meta
-      property="og:description"
-      content="Treehubly helps tree companies generate better leads, book more jobs, and scale with a structured growth ecosystem."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://treehubly.com/" />
-    <meta property="og:image" content="/images/fondo.png" />
-    <meta property="og:locale" content="en_US" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Treehubly" />
-    <meta
-      name="twitter:title"
-      content="Treehubly - The Growth System for Tree Services"
-    />
-    <meta
-      name="twitter:description"
-      content="Treehubly helps tree companies generate better leads, book more jobs, and scale with a structured growth ecosystem."
-    />
-    <meta name="twitter:image" content="/images/fondo.png" />
-
-    <!-- JSON-LD Organization -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Treehubly",
-        "url": "https://treehubly.com/",
-        "logo": "https://treehubly.com/favicon.svg"
-      }
-    </script>
+    <SEOHead viewportFitCover />
   </head>
   <body
     class="font-family antialiased overflow-x-hidden bg-primary flex flex-col justify-center items-center w-screen"

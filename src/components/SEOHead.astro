@@ -1,4 +1,8 @@
 ---
+interface Props {
+  viewportFitCover?: boolean;
+}
+const { viewportFitCover = false } = Astro.props;
 const SITE = "https://treehubly.com";
 const image = `${SITE}/images/portada.jpg`;
 const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
@@ -40,10 +44,16 @@ const schedulingPages: Record<string, Metadata> = {
   "/scheduling/thank-you": { lang: "es", title: "Gracias por completar el formulario | Treehubly", description: "Recibimos tu información. Conoce los siguientes pasos para tu empresa con Treehubly.", keywords: "confirmación de formulario, Treehubly", noindex: true },
   "/scheduling/partner": { lang: "es", title: "Programa para empresas de árboles | Treehubly", description: "Conoce el programa de Treehubly para empresas de servicios de árboles.", keywords: "programa Treehubly, empresas de árboles", noindex: true },
 };
+const appPages: Record<string, Metadata> = {
+  "/app": { lang: "es", title: "Treehubly | Crecimiento para empresas de tree services", description: "Conoce los recursos de Treehubly para conseguir más clientes y hacer crecer tu empresa de tree services en Estados Unidos.", keywords: "tree services, marketing, prospectos, crecimiento, Treehubly" },
+  "/app/about-us": { lang: "es", title: "Nosotros | Treehubly", description: "Conoce Treehubly y cómo ayudamos a empresas de tree services a crecer con marketing, sistemas y automatización.", keywords: "Treehubly, nosotros, marketing, tree services" },
+  "/app/ebook": { lang: "es", title: "eBook gratis para empresas de tree services | Treehubly", description: "Solicita una guía gratuita con estrategias para conseguir más clientes y hacer crecer tu empresa de tree services en Estados Unidos.", keywords: "ebook gratis, guía de crecimiento, tree services, marketing" },
+  "/app/contact": { lang: "es", title: "Agenda una llamada estratégica | Treehubly", description: "Reserva una llamada estratégica gratuita con Treehubly para hablar sobre los objetivos y desafíos de tu empresa de tree services.", keywords: "contacto Treehubly, llamada estratégica, tree services" },
+};
 const home = localizedPages.home.en;
 const data: Metadata = localized
   ? { ...(localizedPages[page]?.[locale] ?? home), lang: locale }
-  : schedulingPages[path] ?? { ...home, lang: "en", noindex: true };
+  : appPages[path] ?? schedulingPages[path] ?? { ...home, lang: "en", noindex: true };
 const canonical = `${SITE}${path === "/" ? "/" : `${path}/`}`;
 const suffix = page === "home" ? "" : `/${page}`;
 const enUrl = `${SITE}/en${suffix}/`;
@@ -63,7 +73,7 @@ const webpage = {
 };
 ---
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content={`width=device-width, initial-scale=1.0${viewportFitCover ? ", viewport-fit=cover" : ""}`} />
 <title>{data.title}</title>
 <meta name="description" content={data.description} />
 <meta name="keywords" content={data.keywords} />
