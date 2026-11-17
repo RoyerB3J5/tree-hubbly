@@ -17,7 +17,9 @@ const { content } = Astro.props as Props;
     <p set:html={content.description} class="book-description body-md"></p>
     <div class="book-card animation-image-reveal-trigger w-full relative h-auto rounded-2xl " style="aspect-ratio: 628 / 413;">
       <div class="book-image animation-image-reveal animation-image-reveal--left-to-right w-full h-full relative rounded-2xl overflow-hidden">
-      <img src="/images/book-1.webp" alt="Book Cover" width="1000" height="563" class="w-full h-full object-cover absolute inset-0 " decoding="async" loading="lazy"/>
+        <video class="book-video absolute inset-0 w-full h-full object-cover object-center" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
+          <source data-src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/video_main_2.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </div>
@@ -37,6 +39,35 @@ const { content } = Astro.props as Props;
 
       const image = book.querySelector<HTMLElement>(".book-image");
       const revealImage = image ? prepareImageReveal(image) : () => {};
+      const video = book.querySelector<HTMLVideoElement>(".book-video");
+      const source = video?.querySelector<HTMLSourceElement>("source[data-src]");
+      let videoVisible = false;
+
+      const updateVideo = () => {
+        if (!video || !source) return;
+        if (videoVisible && !document.hidden && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          if (!source.src && source.dataset.src) {
+            source.src = source.dataset.src;
+            video.load();
+          }
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      };
+
+      if (video && "IntersectionObserver" in window) {
+        const videoObserver = new IntersectionObserver(([entry]) => {
+          videoVisible = Boolean(entry?.isIntersecting);
+          updateVideo();
+        }, { rootMargin: "200px 0px", threshold: 0 });
+        videoObserver.observe(video);
+      } else {
+        videoVisible = true;
+        updateVideo();
+      }
+
+      document.addEventListener("visibilitychange", updateVideo);
 
       const groups = [
         { target: heading, delay: 0, reveal: () => heading?.querySelectorAll("p, h2").forEach((element) => element.classList.add("active")) },
