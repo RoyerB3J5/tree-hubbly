@@ -21,7 +21,7 @@ const content = {
 <LayoutSec>
   <section class="w-full flex flex-col justify-center items-center gap-6 py-6  md:w-[500px] md:px-0 text-paragraph">
     <div class="w-full flex flex-col justify-center items-start gap-6 px-4 md:px-0">
-      <a href="/app/" data-back-link aria-label="Volver">
+      <a href="/app/"  aria-label="Volver">
         <img src="/images/icons/back.svg" alt="Back" class="w-[46px] h-[46px]" width="24" height="24" decoding="async" loading="lazy" />
       </a>
       
@@ -44,11 +44,3 @@ const content = {
   </section>
 </LayoutSec>
 
-<script is:inline>
-  document.querySelector("[data-back-link]")?.addEventListener("click", (event) => {
-    if (window.history.length > 1) {
-      event.preventDefault();
-      window.history.back();
-    }
-  });
-</script>

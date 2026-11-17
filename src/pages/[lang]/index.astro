@@ -54,7 +54,6 @@ const t = translations[lang];
   const section = (selector: string) => main?.querySelector<HTMLElement>(selector);
   bindSectionTransitions([
     [section("#faltantes"), section("#book")],
-    [section("#book"), section(".home-scale")],
     [section(".home-scale"), section(".home-steps")],
     [section(".home-steps"), section(".reasons-section")],
     [section(".reasons-section"), section(".numbers-section")],

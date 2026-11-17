@@ -297,8 +297,9 @@ export default {
         {
           tag: "ROOT PLAN",
           tag2: "5 DAYS FREE",
+          tag3: "",
           title: "Start",
-          description: "You never lose another client.",
+          description: "Never lose another client.",
           lists: [
             {
               title: "Branding Kit",
@@ -309,11 +310,11 @@ export default {
               description: "Your own contact app.",
             },
             {
-              title: "Landing page + AI Chatbot",
+              title: "Landing page + AI chatbot",
               description: "",
             },
             {
-              title: "Job dashboards + automatic responses",
+              title: "CRM job boards + automatic responses",
               description: "",
             },
             {
@@ -331,24 +332,33 @@ export default {
         },
         {
           tag: "TRUNK PLAN",
-          tag2: "MOST POPULAR",
+          tag2: "5 DAYS FREE",
+          tag3: "MOST POPULAR",
           title: "Grow",
           description: "New jobs every week.",
           lists: [
-            {
-              title: "Everything in Start",
-              description: "",
-            },
             {
               title: "Ads on Facebook, Instagram and TikTok",
               description: "",
             },
             {
-              title: "AI assistant that responds and books 24/7",
+              title: "Funnel + AI assistant that answers and books 24/7",
               description: "",
             },
             {
               title: "Seasonal and holiday reactivation campaigns",
+              description: "",
+            },
+            {
+              title: "ShapeHub Link",
+              description: "Your own contact app.",
+            },
+            {
+              title: "CRM job boards + automatic responses",
+              description: "",
+            },
+            {
+              title: "Google My Business + Review Shield 24/7",
               description: "",
             },
           ],
@@ -362,10 +372,11 @@ export default {
         },
         {
           tag: "CANOPY PLAN",
-          tag2: "",
+          tag2: "5 DAYS FREE",
+          tag3: "",
           title: "Scale",
           description:
-            "You cut trees and lead your team. We fill your schedule.",
+            "You cut trees and lead your crew. We fill your schedule.",
           lists: [
             {
               title: "Everything in Grow",
@@ -376,7 +387,7 @@ export default {
               description: "",
             },
             {
-              title: "Website + AI Chatbot",
+              title: "Custom dashboard with real-time metrics",
               description: "",
             },
             {
@@ -386,7 +397,7 @@ export default {
           ],
           button: [
             {
-              label: "Let's talk scaling",
+              label: "Let's talk about scaling",
               href: "https://wa.me/14075023684",
             },
           ],
@@ -727,8 +738,9 @@ export default {
         {
           tag: "ROOT PLAN",
           tag2: "5 DAYS FREE",
+          tag3: "",
           title: "Start",
-          description: "You never lose another client.",
+          description: "Never lose another client.",
           lists: [
             {
               title: "Branding Kit",
@@ -739,11 +751,11 @@ export default {
               description: "Your own contact app.",
             },
             {
-              title: "Landing page + AI Chatbot",
+              title: "Landing page + AI chatbot",
               description: "",
             },
             {
-              title: "Job dashboards + automatic responses",
+              title: "CRM job boards + automatic responses",
               description: "",
             },
             {
@@ -767,38 +779,48 @@ export default {
             {
               title: "Close",
               description:
-                "Job dashboard (from lead to paid) · automatic SMS response · appointment reminders.",
+                "Job board (from lead to payment) · automatic SMS responses · appointment reminders.",
             },
             {
               title: "Multiply",
-              description: "Review Shield 24/7 · QR cards to request reviews.",
+              description:
+                "Review Shield 24/7 · QR cards to request reviews.",
             },
             {
               title: "Support",
-              description: "Kickoff",
+              description: "Onboarding kickoff · chat within the system.",
             },
           ],
         },
         {
           tag: "TRUNK PLAN",
-          tag2: "MOST POPULAR",
+          tag2: "5 DAYS FREE",
+          tag3: "MOST POPULAR",
           title: "Grow",
           description: "New jobs every week.",
           lists: [
-            {
-              title: "Everything in Start",
-              description: "",
-            },
             {
               title: "Ads on Facebook, Instagram and TikTok",
               description: "",
             },
             {
-              title: "AI assistant that responds and books 24/7",
+              title: "Funnel + AI assistant that answers and books 24/7",
               description: "",
             },
             {
               title: "Seasonal and holiday reactivation campaigns",
+              description: "",
+            },
+            {
+              title: "ShapeHub Link",
+              description: "Your own contact app.",
+            },
+            {
+              title: "CRM job boards + automatic responses",
+              description: "",
+            },
+            {
+              title: "Google My Business + Review Shield 24/7",
               description: "",
             },
           ],
@@ -813,17 +835,17 @@ export default {
             {
               title: "Attract",
               description:
-                "Everything in Start + ads on Facebook, Instagram and TikTok + landing page.",
+                "Everything in Start + ads on Facebook, Instagram and TikTok + lead capture page.",
             },
             {
               title: "Close",
               description:
-                "Everything in Start + AI assistant that responds, qualifies and books by SMS, Messenger and WhatsApp.",
+                "Everything in Start + AI assistant that answers, qualifies and books via SMS, Messenger and WhatsApp.",
             },
             {
               title: "Multiply",
               description:
-                "Reactivation of past clients before storms, winter and holidays.",
+                "Past client reactivation before storms, winter and holidays.",
             },
             {
               title: "Support",
@@ -833,10 +855,11 @@ export default {
         },
         {
           tag: "CANOPY PLAN",
-          tag2: "",
+          tag2: "5 DAYS FREE",
+          tag3: "",
           title: "Scale",
           description:
-            "You cut trees and lead your team.<br/> We fill your schedule.",
+            "You cut trees and lead your crew. We fill your schedule.",
           lists: [
             {
               title: "Everything in Grow",
@@ -847,7 +870,7 @@ export default {
               description: "",
             },
             {
-              title: "Website + AI Chatbot",
+              title: "Custom dashboard with real-time metrics",
               description: "",
             },
             {
@@ -857,7 +880,7 @@ export default {
           ],
           button: [
             {
-              label: "Let's talk scaling",
+              label: "Let's talk about scaling",
               href: "https://wa.me/14075023684",
             },
           ],
@@ -871,7 +894,7 @@ export default {
             {
               title: "Close",
               description:
-                "Everything in Grow + AI chatbot on the website + advisors who call and book + 1:1 sales consulting",
+                "Everything in Grow + website AI chatbot + advisors who call and book + 1:1 sales consulting",
             },
             {
               title: "Multiply",

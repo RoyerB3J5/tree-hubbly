@@ -3,7 +3,7 @@ import { gsap, ScrollTrigger } from "./gsap";
 export const PIN_EDGE_INSET = 2;
 
 // One gesture advances to one complete state at a fixed animation speed.
-export function bindScrollSteps(timeline: gsap.core.Timeline, stops: number[]) {
+export function bindScrollSteps(timeline: gsap.core.Timeline, stops: number[], options: { releaseAtEnd?: boolean } = {}) {
   let movement: gsap.core.Tween | undefined;
   let lastInput = 0;
   let direction = 0;
@@ -32,11 +32,13 @@ export function bindScrollSteps(timeline: gsap.core.Timeline, stops: number[]) {
     lastInput = now;
     direction = sign;
     const position = { y: window.scrollY };
-    // Stay inside the pin at both ends. Exact start/end positions release it
-    // while the first/last content animation is finishing.
+    // Normally keep both ends inside the pin. Sequences with no final pause
+    // can release at the exact end as their final content finishes.
     const inset = Math.min(PIN_EDGE_INSET, (trigger.end - trigger.start) / 4);
-    const target = Math.max(trigger.start + inset,
-      Math.min(trigger.end - inset, trigger.start + (trigger.end - trigger.start) * next));
+    const target = options.releaseAtEnd && next === 1
+      ? trigger.end
+      : Math.max(trigger.start + inset,
+        Math.min(trigger.end - inset, trigger.start + (trigger.end - trigger.start) * next));
     movement = gsap.to(position, {
       y: target,
       duration: 0.65, ease: "power2.inOut",

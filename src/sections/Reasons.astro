@@ -20,7 +20,7 @@ const { content } = Astro.props as Props;
         <div class="system-reasons-copy flex flex-col justify-end items-start gap-8 max-w-[40%]">
           <h2 set:html={item.title} class="heading-h4 text-paragraph"></h2>
           <p set:html={item.description} class="body-md text-paragraph"></p>
-          <div class='system-reasons-what w-full flex flex-col md:flex-row justify-center items-start gap-6'>
+          <div class='system-reasons-what w-full grid grid-col-1 md:grid-cols-2 justify-center items-start gap-6'>
             {
               item.what.map((item)=>(
                 <div class='flex flex-col justify-start items-start gap-6 text-paragraph'>
@@ -28,7 +28,7 @@ const { content } = Astro.props as Props;
                   <ul class='flex flex-col justify-start items-start gap-6 text-paragraph'>
                     {
                       item.list.map((i)=>(
-                      <li class='fade-up-a flex justify-start items-start gap-2'> <div class={`w-1.5 h-1.5 bg-secondary shrink-0`}></div><p class='body-md'>{i}</p></li>
+                      <li class='fade-up-a flex justify-start items-start gap-2'> <div class={`w-1.5 h-1.5 bg-secondary shrink-0`}></div><p class='body-md '>{i}</p></li>
                       ))
                     }
                   </ul>

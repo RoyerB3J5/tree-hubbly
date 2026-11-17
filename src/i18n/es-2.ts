@@ -299,11 +299,12 @@ export default {
         {
           tag: "PLAN RAÍZ",
           tag2: "5 DÍAS GRATIS",
+          tag3: "",
           title: "Start",
           description: "Ningún cliente se te vuelve a perder.",
           lists: [
             {
-              title: "Kit de marca",
+              title: "Branding Kit",
               description: "Logo, colores y plantillas de tu marca.",
             },
             {
@@ -311,11 +312,11 @@ export default {
               description: "Tu propia app de contacto.",
             },
             {
-              title: "Página de captura + asistente con IA",
+              title: "Landing page + Chatbot con IA",
               description: "",
             },
             {
-              title: "Tableros de trabajo + respuestas automáticas",
+              title: "CRM Tableros de trabajo + respuestas automáticas",
               description: "",
             },
             {
@@ -333,24 +334,33 @@ export default {
         },
         {
           tag: "PLAN TRONCO",
-          tag2: "MÁS POPULAR",
+          tag2: "5 DÍAS GRATIS",
+          tag3: "MÁS POPULAR",
           title: "Grow",
           description: "Trabajos nuevos todas las semanas.",
           lists: [
-            {
-              title: "Todo lo de Start",
-              description: "",
-            },
             {
               title: "Anuncios en Facebook, Instagram y TikTok",
               description: "",
             },
             {
-              title: "Asistente IA que responde y agenda 24/7",
+              title: "Funnel + Asistente IA que responde y agenda 24/7",
               description: "",
             },
             {
               title: "Campañas de reactivación por temporada y días festivos",
+              description: "",
+            },
+            {
+              title: "ShapeHub Link",
+              description: "Tu propia app de contacto.",
+            },
+            {
+              title: "CRM Tableros de trabajo + respuestas automáticas",
+              description: "",
+            },
+            {
+              title: "Google My Business + Review Shield 24/7",
               description: "",
             },
           ],
@@ -364,7 +374,8 @@ export default {
         },
         {
           tag: "PLAN COPA",
-          tag2: "",
+          tag2: "5 DÍAS GRATIS",
+          tag3: "",
           title: "Scale",
           description:
             "Tú cortas arboles y lideras a tu equipo. Nosotros llenamos tu agenda.",
@@ -378,7 +389,7 @@ export default {
               description: "",
             },
             {
-              title: "Sitio web + asistente con IA",
+              title: "Dashboard personalizado con métricas en tiempo real",
               description: "",
             },
             {
@@ -480,23 +491,28 @@ export default {
       questions: [
         {
           title: "¿La inversión en anuncios está incluida?",
-          answer: "No. La tarifa de Grow o Scale cubre la estrategia, la creación de los anuncios y la gestión y optimización de las campañas. La inversión en anuncios se paga directo de tu tarjeta a Meta, TikTok o Google, así que la cuenta es tuya y el presupuesto lo controlas tú. El mínimo es de $30 al día, y te ayudamos a definir el monto ideal para tu zona y tus metas. El plan Raíz no incluye anuncios.",
+          answer:
+            "No. La tarifa de Grow o Scale cubre la estrategia, la creación de los anuncios y la gestión y optimización de las campañas. La inversión en anuncios se paga directo de tu tarjeta a Meta, TikTok o Google, así que la cuenta es tuya y el presupuesto lo controlas tú. El mínimo es de $30 al día, y te ayudamos a definir el monto ideal para tu zona y tus metas. El plan Raíz no incluye anuncios.",
         },
         {
           title: "¿Puedo empezar en Raíz y subir de plan después?",
-          answer: "Sí, así están pensados los planes. En Raíz armamos la base: Branding Kit, ShapeHub Link, una landing page con chatbot con IA, tableros de trabajo con respuestas automáticas, y Google My Business con Review Shield. Cuando quieras trabajos nuevos cada semana, subes a Tronco (Grow). Cuando quieras que nosotros llenemos tu agenda, subes a Copa (Scale). Cada plan incluye todo lo del anterior, así que no pierdes nada de lo que ya construiste.",
+          answer:
+            "Sí, así están pensados los planes. En Raíz armamos la base: Branding Kit, ShapeHub Link, una landing page con chatbot con IA, tableros de trabajo con respuestas automáticas, y Google My Business con Review Shield. Cuando quieras trabajos nuevos cada semana, subes a Tronco (Grow). Cuando quieras que nosotros llenemos tu agenda, subes a Copa (Scale). Cada plan incluye todo lo del anterior, así que no pierdes nada de lo que ya construiste.",
         },
         {
           title: "¿Hay un contrato mínimo?",
-          answer: "No. Raíz es un pago único: tienes 5 días gratis y pagas después de tu kickoff. Grow y Scale son mes a mes, y puedes cancelar avisando con 30 días de anticipación. Tu marca, tu perfil de Google, tus reseñas y tus cuentas de anuncios siguen siendo tuyas. Eso sí, te recomendamos darle al sistema al menos 8 semanas, que es lo que tarda en quedar funcionando completo.",
+          answer:
+            "No. Raíz es un pago único: tienes 5 días gratis y pagas después de tu kickoff. Grow y Scale son mes a mes, y puedes cancelar avisando con 30 días de anticipación. Tu marca, tu perfil de Google, tus reseñas y tus cuentas de anuncios siguen siendo tuyas. Eso sí, te recomendamos darle al sistema al menos 8 semanas, que es lo que tarda en quedar funcionando completo.",
         },
         {
           title: "¿Qué incluye el setup?",
-          answer: "<p>Incluye tus primeras 8 semanas, y todo lo hacemos nosotros:</p><ol><li>Diagnóstico: revisamos tu negocio, tus llamadas y cómo consigues clientes hoy.</li><li>Atraer: lanzamos tus anuncios y optimizamos tu Google My Business.</li><li>Cerrar: configuramos ShapeHub y un asistente con IA que responde y agenda 24/7.</li><li>Multiplicar: activamos sistemas de reseñas y referidos.</li><li>Escalar: medimos resultados y seguimos mejorando cada mes.</li></ol>",
+          answer:
+            "<p>Incluye tus primeras 8 semanas, y todo lo hacemos nosotros:</p><ol><li>Diagnóstico: revisamos tu negocio, tus llamadas y cómo consigues clientes hoy.</li><li>Atraer: lanzamos tus anuncios y optimizamos tu Google My Business.</li><li>Cerrar: configuramos ShapeHub y un asistente con IA que responde y agenda 24/7.</li><li>Multiplicar: activamos sistemas de reseñas y referidos.</li><li>Escalar: medimos resultados y seguimos mejorando cada mes.</li></ol>",
         },
         {
           title: "¿Necesito saber de marketing?",
-          answer: "No. No necesitas saber de marketing ni trabajar más horas. Necesitas un sistema que no deje escapar a ningún cliente, y nosotros lo armamos y lo manejamos por ti. Tú sigues cortando árboles y liderando a tu equipo.",
+          answer:
+            "No. No necesitas saber de marketing ni trabajar más horas. Necesitas un sistema que no deje escapar a ningún cliente, y nosotros lo armamos y lo manejamos por ti. Tú sigues cortando árboles y liderando a tu equipo.",
         },
       ],
     },
@@ -725,11 +741,12 @@ export default {
         {
           tag: "PLAN RAÍZ",
           tag2: "5 DÍAS GRATIS",
+          tag3: "",
           title: "Start",
           description: "Ningún cliente se te vuelve a perder.",
           lists: [
             {
-              title: "Kit de marca",
+              title: "Branding Kit",
               description: "Logo, colores y plantillas de tu marca.",
             },
             {
@@ -737,11 +754,11 @@ export default {
               description: "Tu propia app de contacto.",
             },
             {
-              title: "Página de captura + asistente con IA",
+              title: "Landing page + Chatbot con IA",
               description: "",
             },
             {
-              title: "Tableros de trabajo + respuestas automáticas",
+              title: "CRM Tableros de trabajo + respuestas automáticas",
               description: "",
             },
             {
@@ -760,12 +777,12 @@ export default {
             {
               title: "Atraer",
               description:
-                "Kit de marca · Página de captura con asistente IA · perfil de Google optimizado · ShapeHub Link.",
+                "Branding Kit · Landing page con chatbot IA · perfil de Google optimizado · ShapeHub Link.",
             },
             {
               title: "Cerrar",
               description:
-                "Tablero de trabajos (de prospecto a cobrado) · respuesta automática por SMS · recordatorios de cita.",
+                "Tablero de trabajos (de lead a cobrado) · respuesta automática por SMS · recordatorios de cita.",
             },
             {
               title: "Multiplicar",
@@ -774,30 +791,39 @@ export default {
             },
             {
               title: "Soporte",
-              description: "Reunión inicial",
+              description: "Kickoff de onboarding · chat dentrl del sistema.",
             },
           ],
         },
         {
           tag: "PLAN TRONCO",
-          tag2: "MÁS POPULAR",
+          tag2: "5 DÍAS GRATIS",
+          tag3: "MÁS POPULAR",
           title: "Grow",
           description: "Trabajos nuevos todas las semanas.",
           lists: [
-            {
-              title: "Todo lo de Start",
-              description: "",
-            },
             {
               title: "Anuncios en Facebook, Instagram y TikTok",
               description: "",
             },
             {
-              title: "Asistente IA que responde y agenda 24/7",
+              title: "Funnel + Asistente IA que responde y agenda 24/7",
               description: "",
             },
             {
               title: "Campañas de reactivación por temporada y días festivos",
+              description: "",
+            },
+            {
+              title: "ShapeHub Link",
+              description: "Tu propia app de contacto.",
+            },
+            {
+              title: "CRM Tableros de trabajo + respuestas automáticas",
+              description: "",
+            },
+            {
+              title: "Google My Business + Review Shield 24/7",
               description: "",
             },
           ],
@@ -832,10 +858,11 @@ export default {
         },
         {
           tag: "PLAN COPA",
-          tag2: "",
+          tag2: "5 DÍAS GRATIS",
+          tag3: "",
           title: "Scale",
           description:
-            "Tú cortas arboles y lideras a tu equipo.<br/> Nosotros llenamos tu agenda.",
+            "Tú cortas arboles y lideras a tu equipo. Nosotros llenamos tu agenda.",
           lists: [
             {
               title: "Todo lo de Grow",
@@ -846,7 +873,7 @@ export default {
               description: "",
             },
             {
-              title: "Sitio web + asistente con IA",
+              title: "Dashboard personalizado con métricas en tiempo real",
               description: "",
             },
             {
@@ -865,12 +892,12 @@ export default {
             {
               title: "Atraer",
               description:
-                "Todo Grow + sitio web profesional + estrategia multicanal.",
+                "Todo Grow + website profesional + estrategia multicanal.",
             },
             {
               title: "Cerrar",
               description:
-                "Todo Grow + asistente IA en la web + asesores que llaman y agendan + asesoría comercial 1:1",
+                "Todo Grow + chatbot IA en la web + asesores que llaman y agendan + asesoría comercial 1:1",
             },
             {
               title: "Multiplicar",
@@ -1047,7 +1074,8 @@ export default {
       title: 'Lo que nos hace<span class="text-secondary"> diferentes.</span>',
       diferences: [
         {
-          title: '<span class="text-secondary">Solo servicios de árboles</span>',
+          title:
+            '<span class="text-secondary">Solo servicios de árboles</span>',
           description:
             "No trabajamos con restaurantes ni dentistas. Conocemos tu temporada, tus camiones y tus clientes.",
         },

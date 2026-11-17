@@ -183,7 +183,7 @@ const { content } = Astro.props as Props;
           trigger: section,
           refreshPriority: -1,
           start: "top top",
-          end: () => `+=${window.innerHeight * (slides.length - 1 + 0.7) * 0.9}`,
+          end: () => `+=${window.innerHeight * (slides.length - 1) * 0.9}`,
           pin: true,
           anticipatePin: 1,
           pinSpacing: true,
@@ -210,8 +210,7 @@ const { content } = Astro.props as Props;
         timeline.fromTo(slides[index], { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.1, ease: "power1.in", immediateRender: false }, at)
           .fromTo(slide, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.15, ease: "power1.out", immediateRender: false }, at + 0.1);
       });
-      timeline.to(fill, { scaleY: 1, ease: "none", duration: timeline.duration() }, 0)
-        .to({}, { duration: 0.5 });
+      timeline.to(fill, { scaleY: 1, ease: "none", duration: timeline.duration() }, 0);
 
       const firstSlideObserver = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting) && revealedIndex === -1) {
@@ -224,7 +223,7 @@ const { content } = Astro.props as Props;
 
 
       // Earlier pinned sections must be measured before this section.
-      const stopScrollSteps = bindScrollSteps(timeline, [0, ...slides.slice(1).map((_, index) => (0.5 * index + 0.5) / (0.5 * (slides.length - 2) + 0.95)), 1]);
+      const stopScrollSteps = bindScrollSteps(timeline, [0, ...slides.slice(1).map((_, index) => Math.min(1, (0.5 * index + 0.5) / timeline.duration()))]);
       ScrollTrigger.sort();
       ScrollTrigger.refresh();
 

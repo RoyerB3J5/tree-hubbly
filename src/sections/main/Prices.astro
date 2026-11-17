@@ -18,14 +18,22 @@ const { content } = Astro.props as Props;
       {
         content.service.map((item,index)=>(
           <div data-reveal-sequence class={`price-card w-full flex flex-col justify-start items-start gap-8 py-6 md:py-10 px-4 md:px-6 rounded-2xl border fade-up-a  ${index === 1 ? "back-prices border-secondary" : "bg-transparent border-[#263A4B]"}`}>
-            <div class="w-full flex justify-between items-center h-[27.8px]">
+            <div class="w-full flex flex-col justify-center items-start gap-6 ">
+              <div class="w-full flex justify-end items-center gap-2">
+                {
+                  item.tag3 !== "" && (<div class={`flex justify-center items-center py-2 px-3 border border-paragraph rounded-full bg-paragraph text-primary`}>
+                  <p class="uppercase subtitle-sm">{item.tag3}</p>
+                </div>)
+                }
+                {
+                  item.tag2 !== "" && (<div class={`flex justify-center items-center py-2 px-3 border border-secondary rounded-full bg-secondary text-primary`}>
+                  <p class="uppercase subtitle-sm">{item.tag2}</p>
+                </div>)
+                }
+              </div>
               <p class='subtitle-sm uppercase'>{item.tag}</p>
-              {
-                item.tag2 !== "" && (<div class={`flex justify-center items-center py-2 px-3 border border-secondary rounded-full ${index === 1 ? "bg-secondary text-primary" : "bg-transparent "}`}>
-                <p class="uppercase subtitle-sm">{item.tag2}</p>
-              </div>)
-              }
               
+ 
             </div>
             <h3 class='heading-h5 text-start'>{item.title}</h3>
             <p class="body-md text-start" set:html={item.description}></p>

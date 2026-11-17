@@ -153,10 +153,10 @@ const { content } = Astro.props as Props;
       };
 
       const timeline = gsap.timeline({ scrollTrigger: {
-        trigger: section, start: "top top", end: () => `+=${window.innerHeight * (items.length - 1 + 0.7) * 0.9}`,
+        trigger: section, start: "top top", end: () => `+=${window.innerHeight * (items.length - 1) * 0.9}`,
         pin: true, pinSpacing: true, scrub: true, refreshPriority: -3, invalidateOnRefresh: true, anticipatePin: 1,
-        onUpdate: self => updateIndicator(Math.min(1, self.progress * (items.length - 1 + 0.35) / (items.length - 1))),
-        onRefresh: self => updateIndicator(Math.min(1, self.progress * (items.length - 1 + 0.35) / (items.length - 1))),
+        onUpdate: self => updateIndicator(self.progress),
+        onRefresh: self => updateIndicator(self.progress),
       }});
       for (let i = 0; i < items.length - 1; i++) {
         timeline.to(details[i], { height: 0, autoAlpha: 0, duration: 0.5, ease: "none" }, i * 0.5)
@@ -166,11 +166,10 @@ const { content } = Astro.props as Props;
           .to(targets[i + 1], { color: "#051725", duration: 0.5, ease: "none" }, i * 0.5)
           .to(dots[i + 1], { backgroundColor: "#051725", duration: 0.5, ease: "none" }, i * 0.5);
       }
-      // Keep the final step visible during the last part of the scroll.
-      timeline.to({}, { duration: 0.175 });
+      // The final detail and indicator finish at the pin boundary.
       updateIndicator(0);
 
-      const stopScrollSteps = bindScrollSteps(timeline, [...items.map((_, index) => index / (items.length - 1 + 0.35)), 1]);
+      const stopScrollSteps = bindScrollSteps(timeline, items.map((_, index) => index / (items.length - 1)), { releaseAtEnd: true });
       ScrollTrigger.sort();
       ScrollTrigger.refresh();
       // Text wrapping and font loading can change the content height after setup.

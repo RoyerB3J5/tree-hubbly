@@ -1,7 +1,12 @@
 <!-- Chatbot lazy-load widget: carga bajo demanda para mejorar UX -->
 <div class="chatbot-wrapper" aria-hidden="false">
-  <button id="chatbot-toggle" aria-label="Abrir chat" class="chatbot-button">💬</button>
-  <div id="chatbot-loading" class="chatbot-loading" aria-hidden="true" hidden>...</div>
+  <!-- El botón inicial comienza oculto (opacity:0) para ser animado por CSS -->
+  <button
+    id="chatbot-toggle"
+    aria-label="Abrir chat"
+    class="chatbot-button"
+    style="opacity: 0; pointer-events: none;">💬</button
+  >
 </div>
 
 <noscript>
@@ -9,32 +14,46 @@
 </noscript>
 
 <style>
+  /* Fuerza a los elementos dinámicos externos a quedarse en z-index 40 */
+  :global(#chat-widget-container),
+  :global(.lc_chat-widget),
+  :global(div[id*="chat-widget"]),
+  :global(iframe[id*="leadconnector-chat"]),
+  :global(iframe[id*="chat-widget"]) {
+    z-index: 40 !important;
+  }
+
+  /* Configuración base del contenedor de Astro */
   .chatbot-wrapper {
     position: fixed;
     right: 20px;
     bottom: 20px;
-    z-index: 9999;
-  }
-
-  .chatbot-wrapper.hidden-mobile {
-    display: none;
-  }
-
-  .chatbot-wrapper.visible-mobile {
-    display: block;
+    z-index: 40 !important;
   }
 
   .chatbot-button {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: #1B8911FF;
+    background: #051725;
     color: #fff;
     border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease;
+  }
+
+  .chatbot-wrapper.animate-button .chatbot-button {
+    animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    pointer-events: auto !important;
+  }
+
+  .chatbot-wrapper.hidden-mobile {
+    display: none;
   }
 
   @media (max-width: 640px) {
@@ -47,37 +66,36 @@
     }
   }
 
-  .chatbot-loading {
-    position: fixed;
-    right: 86px;
-    bottom: 28px;
-    background: #fff;
-    color: #333;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 14px;
-  }
-
   .chatbot-noscript {
     position: fixed;
     right: 20px;
     bottom: 20px;
-    background: #1B8911FF;
+    background: #051725;
     color: #fff;
     padding: 8px 12px;
     border-radius: 8px;
     text-decoration: none;
   }
+
+  @keyframes slideInUp {
+    from {
+      transform: translateY(80px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 </style>
 
 <script>
   (() => {
-    const WIDGET_ID = "69e93b6939177153a74f091e";
+    const WIDGET_ID = "6afc83f1a68c8c5d035dd5b4";
     const RES_URL = "https://widgets.leadconnectorhq.com/chat-widget/loader.js";
     const SRC = "https://widgets.leadconnectorhq.com/loader.js";
     let loaded = false;
     const btn = document.getElementById("chatbot-toggle");
-    const spinner = document.getElementById("chatbot-loading");
     const wrapper = document.querySelector(".chatbot-wrapper");
     let idleTimer: any;
     let scrollDetected = false;
@@ -87,24 +105,25 @@
     function insertScript() {
       if (loaded) return;
       loaded = true;
-      if (spinner) spinner.hidden = false;
       const s = document.createElement("script");
       s.src = SRC;
       s.setAttribute("data-resources-url", RES_URL);
       s.setAttribute("data-widget-id", WIDGET_ID);
       s.async = true;
-      s.onload = () => {
-        if (spinner) spinner.hidden = true;
-      };
-      s.onerror = () => {
-        if (spinner) spinner.hidden = true;
-        console.error("Chat widget failed to load");
-      };
       document.body.appendChild(s);
+    }
+
+    // --- NUEVO: Función para activar la animación ---
+    function triggerAnimation() {
+      if (wrapper && !wrapper.classList.contains("animate-button")) {
+        // Añadimos la clase CSS que ejecuta la animación Keyframe en el BOTÓN
+        wrapper.classList.add("animate-button");
+      }
     }
 
     function onFirstInteraction() {
       clearTimeout(idleTimer);
+      triggerAnimation(); // Gatillo de animación en escritorio
       insertScript();
       removeInteractionListeners();
     }
@@ -115,32 +134,36 @@
     }
 
     function onScroll() {
-      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      const currentScroll =
+        window.pageYOffset || document.documentElement.scrollTop;
 
-      // Solo mostrar si se hizo scroll hacia ABAJO (scrollPosition > 0)
       if (isMobile && !scrollDetected && currentScroll > 200) {
         scrollDetected = true;
         if (wrapper) {
           wrapper.classList.remove("hidden-mobile");
           wrapper.classList.add("visible-mobile");
+          // Gatillo de animación en móvil al mostrar el contenedor
+          triggerAnimation();
         }
-        // Comienza a cargar el widget cuando aparece en móvil
         insertScript();
         window.removeEventListener("scroll", onScroll);
       }
       lastScrollPosition = currentScroll;
     }
 
-    // Si es móvil, ocultar chatbot hasta que haga scroll
     if (isMobile && wrapper) {
       wrapper.classList.add("hidden-mobile");
       window.addEventListener("scroll", onScroll, { passive: true });
     } else {
-      // En desktop, mantener comportamiento original
-      // Load after a short idle as fallback (adjust ms as desired)
-      idleTimer = setTimeout(() => insertScript(), 3000);
+      // Escritorio: Mismo comportamiento lazy pero activando la animación
 
-      // Load on first user interaction (tap/scroll/keyboard)
+      // Gatillo por idle (3s)
+      idleTimer = setTimeout(() => {
+        triggerAnimation();
+        insertScript();
+      }, 3000);
+
+      // Gatillo por interacción
       window.addEventListener("pointerdown", onFirstInteraction, {
         once: true,
       });
@@ -152,16 +175,22 @@
         e.preventDefault();
         if (!loaded) {
           clearTimeout(idleTimer);
+          triggerAnimation(); // Asegurar animación si se clickea antes del idle
           insertScript();
           return;
         }
-        // Si el widget ya está cargado, intentamos abrirlo si expone API común
         try {
           if (window.LC_API && typeof window.LC_API.open_chat === "function") {
             window.LC_API.open_chat();
-          } else if (window.LC_API && typeof window.LC_API.toggle === "function") {
+          } else if (
+            window.LC_API &&
+            typeof window.LC_API.toggle === "function"
+          ) {
             window.LC_API.toggle();
-          } else if (window.leadconnector && typeof window.leadconnector.open === "function") {
+          } else if (
+            window.leadconnector &&
+            typeof window.leadconnector.open === "function"
+          ) {
             window.leadconnector.open();
           }
         } catch (err) {

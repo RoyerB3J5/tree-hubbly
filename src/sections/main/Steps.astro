@@ -171,7 +171,7 @@ const baseHeight = anotherPage ? 523 : 424;
           trigger: stepsSection,
           refreshPriority: 1,
           start: "top top",
-          end: () => `+=${window.innerHeight * (cards.length + 0.6) * 0.9}`,
+          end: () => `+=${window.innerHeight * cards.length * 0.9}`,
           pin: true,
           anticipatePin: 1,
           pinSpacing: true,
@@ -196,9 +196,8 @@ const baseHeight = anotherPage ? 523 : 424;
       });
 
 
-      // Keep the last card visible before releasing the section.
-      timeline.to({}, { duration: 0.6 });
-      const stopScrollSteps = bindScrollSteps(timeline, [0, ...cards.map((_, index) => (index + 1) / (cards.length + 0.6)), 1]);
+      // The last card is the final stop; the next gesture leaves the pin.
+      const stopScrollSteps = bindScrollSteps(timeline, [0, ...cards.map((_, index) => (index + 1) / cards.length)]);
       ScrollTrigger.sort();
       ScrollTrigger.refresh();
       return () => {
