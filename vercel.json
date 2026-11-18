@@ -1,4 +1,8 @@
 {
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/", "destination": "/en/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/images/(.*).mp4",

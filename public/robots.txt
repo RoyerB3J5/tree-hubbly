@@ -1,16 +1,4 @@
 User-agent: *
-Disallow: /
-Allow: /scheduling/programme$
-Allow: /scheduling/programme/$
-Allow: /scheduling/questionnaire$
-Allow: /scheduling/questionnaire/$
-Allow: /scheduling/thank-you$
-Allow: /scheduling/thank-you/$
-Allow: /_astro/
-Allow: /images/
-Allow: /favicon.ico
-Allow: /favicon.svg
-Allow: /robots.txt
-Allow: /sitemap.xml
+Allow: /
 
-Sitemap: https://treehubly.com/sitemap.xml
+Sitemap: https://treehubly.com/sitemap-index.xml
