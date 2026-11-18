@@ -6,10 +6,10 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<section class='control-section w-full flex justify-center items-center bg-third-light '>
+<section data-reveal-sequence class='control-section w-full flex justify-center items-center bg-third-light '>
   <div class='container-full flex flex-col justify-between 3xl:justify-center xl:[@media(height_<_810px)]:justify-center items-center py-12 md:py-20 xl:[@media(height_<_810px)]:py-0 gap-8 md:gap-10 3xl:gap-18 xl:[@media(height_<_810px)]:gap-6 h-auto xl:h-[100vh] '>
     <div class="w-full flex flex-col md:flex-row justify-center md:justify-between items-start md:items-center gap-8 md:gap-0">
-      <div class='flex flex-col justify-center items-start gap-6 text-primary max-w-[411px]'>
+      <div class='control-intro flex flex-col justify-center items-start gap-6 text-primary max-w-[411px]'>
         <p class="subtitle-lg">{content.tag}</p>
         <h2 set:html={content.title} class='heading-h4'></h2>
         {
@@ -31,7 +31,7 @@ const { content } = Astro.props as Props;
           <div class="control-item w-full flex flex-col justify-center items-start gap-4 md:gap-6 bg-white px-4 py-8 md:p-6 rounded-2xl">
             <p class="body-md order-2 md:order-1">{item.tag}</p>
             <h3 class='body-lg grow order-3 md:order-2'>{item.description}</h3>
-            <div class={`control-item-icon fade-left-a w-12 h-12 rounde-lg flex justify-center items-center rounded-lg bg-third-light self-end order-1 md:order-3`}>
+            <div class={`control-item-icon w-12 h-12 rounde-lg flex justify-center items-center rounded-lg bg-third-light self-end order-1 md:order-3`}>
                 <img src={`/images/icons/${item.icon}.svg`} alt={item.description} width="20" height="20" class='w-5 h-5' decoding="async" loading="lazy"/>
               </div>
           </div>
@@ -41,102 +41,6 @@ const { content } = Astro.props as Props;
   </div>
 </section>
 
-<style>
-  @media (min-width: 728px) {
-    .control-item-icon.fade-left-a {
-      opacity: 1;
-      animation: none;
-    }
-  }
-</style>
-
 <script>
-  import { bindScrollSteps } from "../../scripts/scrollSteps";
-  import { gsap, ScrollTrigger } from "../../scripts/gsap";
-
-  document.querySelectorAll<HTMLElement>(".control-section").forEach((section) => {
-    const items = gsap.utils.toArray<HTMLElement>(section.querySelectorAll(".control-item"));
-    if (!items.length) return;
-    const media = gsap.matchMedia();
-    media.add("(min-width: 728px) and (max-width: 1279px) and (prefers-reduced-motion: no-preference)", () => {
-      items.forEach((item, index) => {
-        item.classList.add("fade-up-a");
-        item.style.setProperty("--fade-up-delay", `${index * 0.2}s`);
-      });
-      if (!("IntersectionObserver" in window)) {
-        items.forEach((item) => item.classList.add("active"));
-        return () => items.forEach((item) => {
-          item.classList.remove("fade-up-a", "active");
-          item.style.removeProperty("--fade-up-delay");
-        });
-      }
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("active");
-          observer.unobserve(entry.target);
-        });
-      }, { threshold: 0.3 });
-      items.forEach((item) => observer.observe(item));
-      return () => {
-        observer.disconnect();
-        items.forEach((item) => {
-          item.classList.remove("fade-up-a", "active");
-          item.style.removeProperty("--fade-up-delay");
-        });
-      };
-    });
-
-    media.add("(min-width: 1280px) and (prefers-reduced-motion: no-preference)", () => {
-      if (section.scrollHeight > window.innerHeight + 1) return;
-      section.classList.add("control-scroll-controlled");
-      gsap.set(items, { y: 50, autoAlpha: 0 });
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: () => `+=${window.innerHeight * items.length * 0.9}`,
-          pin: true,
-          anticipatePin: 1,
-          pinSpacing: true,
-          scrub: true,
-          refreshPriority: -2,
-          invalidateOnRefresh: true,
-        },
-      });
-      items.forEach((item, index) => {
-        // Select the content directly: the shared text reveal may initialize later.
-        const text = item.querySelectorAll<HTMLElement>("p, h3");
-        const icon = item.querySelector<HTMLElement>(".control-item-icon");
-        text.forEach((element, textIndex) => {
-          element.classList.remove("active");
-          element.style.setProperty("--fade-up-lines-delay", `${textIndex * 0.15}s`);
-        });
-        if (icon) gsap.set(icon, { x: 20, autoAlpha: 0 });
-        timeline.to(item, { y: 0, autoAlpha: 1, duration: 0.45, ease: "power2.out" }, index)
-          .call(() => text.forEach((element) => element.classList.toggle("active", (timeline.scrollTrigger?.direction ?? 1) >= 0)), [], index + 0.15);
-        if (icon) timeline.to(icon, { x: 0, autoAlpha: 1, duration: 0.3, ease: "power2.out" }, index + 0.2);
-        // Intermediate cards keep their existing pauses. The final card ends
-        // with its icon, so there is no invisible tail before releasing the pin.
-        if (index < items.length - 1) timeline.to({}, { duration: 0.55 }, index + 0.45);
-      });
-
-      // The last metric is the final stop; no extra gesture is needed to release it.
-      const stopScrollSteps = bindScrollSteps(timeline, [0, ...items.map((_, index) =>
-        Math.min(1, (index + 1) / timeline.duration()))], { releaseAtEnd: true });
-      ScrollTrigger.sort();
-      ScrollTrigger.refresh();
-      return () => {
-        stopScrollSteps();
-        section.classList.remove("control-scroll-controlled");
-        items.forEach((item) => {
-          item.querySelectorAll<HTMLElement>("p, h3").forEach((text) => {
-            text.classList.add("active");
-            text.style.removeProperty("--fade-up-lines-delay");
-          });
-          gsap.set(item.querySelectorAll(".control-item-icon"), { clearProps: "transform,opacity,visibility" });
-        });
-      };
-    });
-  });
+  import "../../scripts/timedCardReveals";
 </script>

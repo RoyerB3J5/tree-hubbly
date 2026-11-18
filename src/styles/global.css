@@ -586,7 +586,7 @@ html {
   display: inline-block;
   vertical-align: baseline;
   transform: translateY(calc(100% + 0.3em));
-  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform var(--fade-up-line-duration, 0.75s) cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: calc(
     var(--zoom-out-duration, 0s) + var(--fade-up-lines-delay, 0s) +
       var(--fade-up-line-delay, 0s)

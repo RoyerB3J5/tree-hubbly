@@ -37,9 +37,7 @@ const { lang, t, pageClass } = Astro.props;
         #site-main > .hero-main { position: sticky; top: 0; z-index: 1; }
         #site-main > .hero-main ~ section,
         #site-main > .hero-main ~ .questions-section { position: relative; z-index: 2; }
-        #site-main > .pin-spacer:has(> .home-steps),
         #site-main.home-page-sections > .pin-spacer:has(> .reasons-section),
-        #site-main.home-page-sections > .pin-spacer:has(> .control-section),
         #site-main.home-page-sections > .pin-spacer:has(> .path-section),
         #site-main > .pin-spacer:has(> .system-reasons) { position: relative; z-index: 3; flex-shrink: 0; }
       }

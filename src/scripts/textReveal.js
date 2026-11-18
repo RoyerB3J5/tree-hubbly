@@ -123,7 +123,7 @@ function initTextReveal() {
       );
 
       lineRevealRoots.forEach((element) => {
-        if (!element.closest("[data-reveal-sequence], .steps-scroll-controlled .steps-card, .reasons-section.is-pinned .reasons-slide, .system-reasons.is-pinned .system-reasons-slide, .numbers-reveal-controlled .numbers-card, .control-scroll-controlled .control-item")) lineRevealObserver.observe(element);
+        if (!element.closest("[data-reveal-sequence], .reasons-section.is-pinned .reasons-slide, .system-reasons.is-pinned .system-reasons-slide, .numbers-reveal-controlled .numbers-card")) lineRevealObserver.observe(element);
       });
     } else {
       lineRevealRoots.forEach((element) => element.classList.add("active"));
