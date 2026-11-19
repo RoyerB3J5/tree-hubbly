@@ -10,10 +10,10 @@ const { content } = Astro.props as Props;
 ---
 <section class='w-full bg-third-light flex justify-center items-center'>
   <div class="container-full flex flex-col justify-center items-center gap-10 py-12 md:py-20 text-primary">
-    <div class="flex flex-col justify-center items-center gap-6 ">
-      <p class='subtitle-lg text-center'>{content.tag}</p>
-      <h2 set:html={content.title} class="heading-h4 text-center"></h2>
-      <p set:html={content.description} class="body-md text-center"></p>
+    <div class="flex flex-col justify-center items-start md:items-center gap-6 ">
+      <p class='subtitle-lg text-start md:text-center'>{content.tag}</p>
+      <h2 set:html={content.title} class="heading-h4 text-start md:text-center"></h2>
+      <p set:html={content.description} class="body-md tert-strart md:text-center"></p>
     </div>
     <div class="w-full flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-6">
       <div data-reveal-sequence class='guide-book-card w-full lg:w-1/2 bg-white py-8 md:py-10 px-4 md:px-6 flex flex-col justify-center items-start gap-6 md:gap-8 rounded-2xl'>
@@ -23,15 +23,17 @@ const { content } = Astro.props as Props;
             <p class="uppercase subtitle-sm">{content.book.subtag}</p>
           </div>
         </div>
+        
         <div class="animation-image-reveal-trigger w-full">
           <div class="guide-book-reveal animation-image-reveal w-full rounded-lg overflow-hidden [--image-reveal-radius:0.5rem]" data-reveal-without-image>
           <div class="animation-image-reveal-mask w-full bg-third-light px-4 py-6 md:p-6 rounded-lg flex flex-col md:flex-row justify-center items-center gap-6">
+            <h3 set:html={content.book.title} class="body-xl text-start md:hidden block"></h3>
           <div class="guide-book-cover relative w-[60%] md:w-[35%] aspect-[2/3] shrink-0">
             <img src="/images/book.webp" alt="Book Cover" width="600" height="900" class="guide-book-image fade-up-a absolute inset-0 w-full h-full object-contain" decoding="async" loading="lazy"/>
           </div>
           <div class="w-full md:w-auto min-w-0 md:flex-1 flex flex-col justify-center items-center md:items-start gap-6">
-            <h3 set:html={content.book.title} class="body-xl text-center md:text-start"></h3>
-            <p class='body-md text-center md:text-start'>{content.book.description}</p>
+            <h3 set:html={content.book.title} class="body-xl text-center md:text-start hidden md:block"></h3>
+            <p class='body-md text-start'>{content.book.description}</p>
           </div>
           </div>
           </div>
@@ -47,7 +49,7 @@ const { content } = Astro.props as Props;
           }
         </div>
         <div class="guide-book-bonus w-full px-4 py-6 lg:p-6 flex justify-center items-center gap-6 border border-[#05172526] rounded-2xl fade-up-a">
-          <div class='w-20 h-20 shrink-0 flex justify-center items-center bg-third-light rounded-lg '>
+          <div class='w-20 h-20 shrink-0 md:flex justify-center items-center bg-third-light rounded-lg hidden'>
             <img src="/images/icons/calendar.svg" alt="Check" width="24" height="24" class="w-10 h-10"/>
           </div>
           <div class='flex flex-col justify-center items-start gap-6 md:gap-4'>

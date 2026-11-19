@@ -1,10 +1,7 @@
 RewriteEngine On
 
-# Keep the published pages, confirmation page, and static assets available.
-RewriteRule ^scheduling/(programme|questionnaire|thank-you)/?$ - [L]
-RewriteRule ^(_astro|images)(/|$) - [L]
-RewriteRule ^(robots\.txt|sitemap\.xml|favicon\.ico|favicon\.svg)$ - [L]
-RewriteRule ^\.well-known(/|$) - [L]
+# Normalize the app entry point before Apache resolves the directory.
+RewriteRule ^app$ /app/ [R=301,L]
 
-# Send every other page path to the questionnaire.
-RewriteRule ^.*$ /scheduling/questionnaire/ [R=302,L,NE]
+# Redirect the site root to the default locale.
+RewriteRule ^$ /en/ [R=302,L]
