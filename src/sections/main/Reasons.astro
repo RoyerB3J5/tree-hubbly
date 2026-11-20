@@ -16,13 +16,13 @@ const { content } = Astro.props as Props;
   {
     content.items.map((item,index)=>(
       <div class="reasons-slide flex justify-end items-center gap-14 md:h-auto xl:[@media(height_<_810px)]:h-screen md:py-20 xl:[@media(height_<_810px)]:py-0">
-        <div class="flex flex-col justify-center items-start gap-4 md:gap-10 max-w-[520px]">
-          <h2 set:html={item.title.replace(/<br\s*\/?>/gi, '<br class="reasons-title-break"> ')} class="heading-h4 text-paragraph mb-0 md:mb-3 lg:mb-0"></h2>
+        <div class="flex flex-col justify-center items-start gap-8 md:gap-10 max-w-[520px]">
+          <h2 set:html={item.title} class="heading-h4 text-paragraph mb-0 md:mb-3 lg:mb-0"></h2>
           {
             item.description !== "" && <p set:html={item.description} class="body-md text-paragraph"></p>
           }
           
-          <ul class="flex flex-col justify-center items-start gap-3 md:gap-6">
+          <ul class="flex flex-col justify-center items-start gap-6">
             {
               item.list.map((listItem,index)=>(
                 <li class="flex justify-center items-center gap-2 fade-up-a" style={{ "--fade-up-delay": `${index * 100}ms` }}>
@@ -33,7 +33,7 @@ const { content } = Astro.props as Props;
             }
           </ul>
           <div class="w-[51px] h-1 bg-secondary fade-up-a"></div>
-          <ul class='flex flex-col  justify-center items-start gap-3 md:gap-6'>
+          <ul class='flex flex-col  justify-center items-start gap-6'>
             {
               item.list1.map((listItem,i)=>(
                 <li class="flex justify-center items-center gap-1.25 fade-up-a" style={{ "--fade-up-delay": `${i * 100}ms` }}>
@@ -79,19 +79,20 @@ const { content } = Astro.props as Props;
   @media (width < 48rem), (pointer: coarse) and (orientation: landscape) and (width <= 60rem) {
     .reasons-section,
     .reasons-section.is-pinned { padding-block: 1rem; min-height: 100svh; }
-    .reasons-section.is-pinned { height: 100svh; }
+    .reasons-section.is-pinned { --reasons-header-height: 4.5rem; height: 100svh; }
     /* The fixed header reappears when scrolling back up. */
-    .reasons-section.is-pinned .reasons-inner { margin-top: 3.5rem; }
+    .reasons-section.is-pinned .reasons-inner { margin-top: calc(var(--reasons-header-height) - 1rem); }
     .reasons-index { position: relative; top: auto; transform: none; margin-bottom: 1.5rem; }
-    .reasons-slides { padding-left: 0; gap: 1.5rem; }
-    .reasons-slide { flex-direction: column; align-items: stretch; }
+    .reasons-slides { padding-left: 0; }
+    .reasons-slide { flex-direction: column; align-items: stretch; gap: 2rem; }
     .reasons-slide > div { width: 100%; max-width: none; }
     .reasons-section.is-pinned .reasons-slide { padding-block: 0; }
+    .reasons-section.is-pinned .reasons-slide > div:first-child { gap: 2rem; }
     .reasons-section.is-pinned .animation-image-reveal-trigger { display: none; }
     .reasons-section.is-compact .reasons-inner {
       display: flex;
       flex-direction: column;
-      max-height: calc(100svh - 5.5rem);
+      max-height: calc(100svh - var(--reasons-header-height) - 1rem);
     }
     .reasons-section.is-compact .reasons-index { flex: none; padding-bottom: .5rem; }
     .reasons-section.is-compact .reasons-index ol {
@@ -105,13 +106,10 @@ const { content } = Astro.props as Props;
     .reasons-section.is-compact .reasons-index-track { top: auto; bottom: 0; height: 2px; width: 100%; }
     .reasons-section.is-compact .reasons-index-fill { transform: scaleX(.3333); }
     .reasons-section.is-compact .reasons-slides { min-height: 0; overflow: clip; grid-auto-rows: minmax(0, 1fr); }
-    .reasons-section.is-compact .reasons-slide { align-self: start; gap: 0; }
-    .reasons-section.is-compact .reasons-slide > div:first-child { gap: .375rem; }
-    .reasons-section.is-compact .heading-h4 { font-size: 1.375rem; line-height: 1.12; }
-    .reasons-section.is-compact :global(.reasons-title-break) { display: none; }
-    .reasons-section.is-compact .body-md { font-size: .875rem; line-height: 1.25; }
-    .reasons-section.is-compact .reasons-slide > div:first-child > ul { gap: .25rem; }
-    .reasons-section.is-compact .reasons-slide > div:first-child li img { width: 1rem; height: 1rem; flex-shrink: 0; }
+    .reasons-section.is-compact .reasons-slide { align-self: start; }
+  }
+  @media (width >= 48rem) and (pointer: coarse) and (orientation: landscape) and (width <= 60rem) {
+    .reasons-section.is-pinned { --reasons-header-height: 5rem; }
   }
 </style>
 
@@ -137,6 +135,8 @@ const { content } = Astro.props as Props;
         + 2 * parseFloat(getComputedStyle(section).paddingTop) > section.clientHeight;
       section.classList.toggle("is-compact", compact);
       const fillAxis = compact ? "scaleX" : "scaleY";
+      const overflows = compact ? slides.map((slide) => Math.max(0, slide.offsetHeight - deck.clientHeight)) : [];
+      const readingDistance = Math.max(0, ...overflows) * slides.length / 0.8;
 
       if (!mobile && section.scrollHeight > window.innerHeight) {
         section.classList.remove("is-pinned");
@@ -223,7 +223,11 @@ const { content } = Astro.props as Props;
           trigger: section,
           refreshPriority: -1,
           start: "top top",
-          end: () => `+=${(mobile ? section.clientHeight : window.innerHeight) * (slides.length - 1 + (mobile ? 0.7 : 0)) * 0.9}`,
+          end: () => {
+            const viewportHeight = mobile ? section.clientHeight : window.innerHeight;
+            const stageDistance = viewportHeight * (slides.length - 1 + (mobile ? 0.7 : 0)) * 0.9;
+            return `+=${Math.max(stageDistance, readingDistance)}`;
+          },
           pin: true,
           anticipatePin: 1,
           pinSpacing: true,
@@ -259,13 +263,10 @@ const { content } = Astro.props as Props;
           .fromTo(slide, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.15, ease: "power1.out", immediateRender: false }, at + 0.1);
       });
       if (mobile) timeline.to({}, { duration: 0.5 });
-      if (compact) {
-        // Use the same page scroll to reveal the rest of an oversized stage.
-        slides.forEach((slide, index) => {
-          const overflow = slide.offsetHeight - deck.clientHeight;
-          if (overflow > 0) timeline.to(slide, { y: -overflow, duration: 0.4, ease: "none" }, index * 0.5 + 0.06);
-        });
-      }
+      // Use the same page scroll to reveal the rest of an oversized stage.
+      overflows.forEach((overflow, index) => {
+        if (overflow > 0) timeline.to(slides[index], { y: -overflow, duration: 0.4, ease: "none" }, index * 0.5 + 0.06);
+      });
       timeline.to(fill, { [fillAxis]: 1, ease: "none", duration: timeline.duration() }, 0);
 
       const firstSlideObserver = new IntersectionObserver((entries) => {

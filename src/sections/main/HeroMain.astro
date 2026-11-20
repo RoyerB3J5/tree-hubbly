@@ -1,5 +1,6 @@
 ---
 import BackgroundVideo from "../../components/BackgroundVideo.astro";
+import { backgroundVideos } from "../../constants/backgroundVideos";
 import Button from "../../components/Button.astro";
 type Translations = typeof import("../../i18n/en-2").default;
 type HeroContent = Translations["main"]["hero"];
@@ -11,11 +12,11 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
 
 ---
 
-<section class="hero-main hero-sequence w-full relative bg-primary">
+<section class="hero-main hero-sequence w-full relative bg-primary" data-video-viewport data-sticky-video>
   <div class="hero-sequence__viewport w-full flex items-center justify-center text-paragraph">
     <BackgroundVideo
       class="absolute inset-0 w-full h-full object-cover object-center"
-      src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/video_hero.mp4"
+      {...backgroundVideos.hero}
       poster="/images/hero-frames/frame_0000.webp"
       eager
       sound={false}

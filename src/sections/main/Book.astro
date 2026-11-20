@@ -1,5 +1,6 @@
 ---
 import BackgroundVideo from "../../components/BackgroundVideo.astro";
+import { backgroundVideos } from "../../constants/backgroundVideos";
 import FormContact from "../../components/FormContact.astro";
 
 type Translations = typeof import("../../i18n/en-2").default;
@@ -16,12 +17,13 @@ const { content } = Astro.props as Props;
       <h2 set:html={content.title} class="heading-h4"></h2>
     </div>
     <p set:html={content.description} class="book-description body-md"></p>
-    <div class="book-card animation-image-reveal-trigger w-full relative h-auto rounded-2xl " style="aspect-ratio: 628 / 413;">
+    <div class="book-card animation-image-reveal-trigger w-full relative h-auto rounded-2xl " style="aspect-ratio: 628 / 413;" data-video-viewport>
       <div class="book-image animation-image-reveal animation-image-reveal--left-to-right w-full h-full relative rounded-2xl overflow-hidden">
         <div class="animation-image-reveal-mask w-full h-full relative overflow-hidden rounded-2xl">
           <BackgroundVideo
             class="absolute inset-0 w-full h-full object-cover object-center"
-            src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/video_main_2.mp4"
+            {...backgroundVideos.book}
+            poster="/images/book-video-poster.webp"
           />
         </div>
       </div>
@@ -34,6 +36,7 @@ const { content } = Astro.props as Props;
 
 <script>
   import { prepareImageReveal } from "../../scripts/imageReveal";
+
   const initBookSequences = () => {
     document.querySelectorAll<HTMLElement>(".book-sequence").forEach((book) => {
       const heading = book.querySelector<HTMLElement>(".book-heading");

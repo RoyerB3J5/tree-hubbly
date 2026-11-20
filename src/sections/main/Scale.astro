@@ -1,5 +1,6 @@
 ---
 import BackgroundVideo from "../../components/BackgroundVideo.astro";
+import { backgroundVideos } from "../../constants/backgroundVideos";
 type Translations = typeof import("../../i18n/en-2").default;
 type Content = Translations["main"]["grow"];
 interface Props {
@@ -7,10 +8,10 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<section class="home-scale w-full flex justify-center items-center relative h-[600px] md:h-[40dvh] xl:h-[80dvh] bg-white">
+<section class="home-scale w-full flex justify-center items-center relative h-[600px] md:h-[40dvh] xl:h-[80dvh] bg-white" data-video-viewport>
   <BackgroundVideo
     class="home-scale__video absolute inset-0 z-0 w-full h-full object-cover object-center"
-    src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/banner.mp4"
+    {...backgroundVideos.scale}
     poster="/images/fondo-hero.webp"
     sound={false}
   />

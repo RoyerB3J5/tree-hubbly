@@ -3,21 +3,23 @@ import { FiVolume2, FiVolumeX } from "react-icons/fi";
 
 interface Props {
   src: string;
+  desktopSrc?: string;
   poster?: string;
   class?: string;
   eager?: boolean;
   sound?: boolean;
 }
 
-const { src, poster, class: videoClass, eager = false, sound = true } = Astro.props;
+const { src, desktopSrc, poster, class: videoClass, eager = false, sound = true } = Astro.props;
+const desktopMedia = "(min-width: 728px)";
 const english = Astro.params.lang === "en";
 const enableSound = english ? "Enable sound" : "Activar sonido";
 const muteSound = english ? "Mute sound" : "Silenciar";
 ---
-<background-video data-src={src}>
+<background-video data-src={src} data-desktop-src={desktopSrc} data-desktop-media={desktopSrc ? desktopMedia : undefined}>
   <video
     class={videoClass}
-    src={eager ? src : undefined}
+    src={eager && !desktopSrc ? src : undefined}
     poster={poster}
     autoplay={eager}
     muted
@@ -26,7 +28,14 @@ const muteSound = english ? "Mute sound" : "Silenciar";
     preload={eager ? "auto" : "none"}
     aria-hidden="true"
     tabindex="-1"
-  ></video>
+  >
+    {eager && desktopSrc && (
+      <>
+        <source src={desktopSrc} type="video/mp4" media={desktopMedia} />
+        <source src={src} type="video/mp4" />
+      </>
+    )}
+  </video>
   {eager && poster && (
     <img class={videoClass} src={poster} alt="" fetchpriority="high" data-video-poster hidden />
   )}
@@ -83,17 +92,24 @@ const muteSound = english ? "Mute sound" : "Silenciar";
       const button = this.querySelector("button");
       const poster = this.querySelector<HTMLImageElement>("[data-video-poster]");
       const src = this.dataset.src;
+      const { desktopSrc, desktopMedia } = this.dataset;
       if (this.#cleanup || !video || !src) return;
 
       const events = new AbortController();
       const { signal } = events;
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-      const bounds = video.getBoundingClientRect();
+      const viewport = this.closest<HTMLElement>("[data-video-viewport]") ?? video;
+      const cover = viewport.hasAttribute("data-sticky-video") ? viewport.nextElementSibling : null;
+      const bounds = viewport.getBoundingClientRect();
       let visible = bounds.bottom > 0 && bounds.top < window.innerHeight;
+      let covered = false;
+      let autoplayDenied = false;
       let retries = 0;
       let retryTimer: ReturnType<typeof setTimeout>;
+      let resumeTimer: ReturnType<typeof setTimeout>;
 
       const eager = video.autoplay;
+      const hasSources = Boolean(video.querySelector("source"));
       video.defaultMuted = true;
       video.muted = true;
       if (reducedMotion.matches) video.autoplay = false;
@@ -108,34 +124,58 @@ const muteSound = english ? "Mute sound" : "Silenciar";
         if (!button) return;
         button.toggleAttribute("data-muted", video.muted);
         button.setAttribute("aria-label", (video.muted ? button.dataset.enable : button.dataset.mute) ?? "");
+        button.hidden = Boolean(video.error) || !(
+          video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA || reducedMotion.matches || autoplayDenied
+        );
       };
 
       const play = () => {
         if (video.error) return;
-        if (!video.hasAttribute("src")) video.src = src;
+        if (!hasSources && !video.hasAttribute("src")) {
+          const useDesktop = desktopSrc && desktopMedia && window.matchMedia(desktopMedia).matches;
+          video.src = useDesktop ? desktopSrc : src;
+        }
         if (video.paused) return video.play();
       };
 
+      const onScreen = () => visible && !covered && !document.hidden;
       const syncPlayback = () => {
-        if (!visible || document.hidden) {
+        if (!onScreen()) {
           mute();
           video.pause();
         } else if (!reducedMotion.matches || !video.muted) {
-          play()?.catch(() => {});
+          play()?.catch((error: DOMException) => {
+            if (error.name !== "NotAllowedError" || signal.aborted) return;
+            autoplayDenied = true;
+            updateButton();
+          });
         } else {
           video.pause();
         }
+        updateButton();
       };
 
       const observer = "IntersectionObserver" in window ? new IntersectionObserver(([entry]) => {
         visible = Boolean(entry?.isIntersecting);
         syncPlayback();
       }) : undefined;
-      observer?.observe(video);
+      observer?.observe(viewport);
       if (!observer) visible = true;
 
+      if (cover) {
+        const updateCover = () => {
+          // A sticky hero can still intersect the viewport under the next section.
+          const next = cover.getBoundingClientRect().top <= (covered ? 48 : 0);
+          if (next === covered) return;
+          covered = next;
+          syncPlayback();
+        };
+        window.addEventListener("scroll", updateCover, { passive: true, signal });
+        window.addEventListener("resize", updateCover, { signal });
+        updateCover();
+      }
+
       if (button) {
-        button.hidden = false;
         button.addEventListener("click", () => {
           if (video.error) return;
           if (!video.muted) {
@@ -156,20 +196,27 @@ const muteSound = english ? "Mute sound" : "Silenciar";
       }
 
       video.addEventListener("volumechange", updateButton, { signal });
-      video.addEventListener("canplay", syncPlayback, { once: true, signal });
+      video.addEventListener("loadeddata", updateButton, { signal });
+      video.addEventListener("canplay", syncPlayback, { signal });
       video.addEventListener("playing", () => {
         if (poster) poster.hidden = true;
+        clearTimeout(resumeTimer);
+        updateButton();
         retries = 0;
       }, { signal });
       video.addEventListener("pause", () => {
-        if (poster) poster.hidden = false;
+        if (!eager || !onScreen() || reducedMotion.matches || video.error) return;
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(syncPlayback, 250);
       }, { signal });
+      video.addEventListener("emptied", updateButton, { signal });
       video.addEventListener("error", () => {
         if (poster) poster.hidden = false;
-        if (!visible || retries >= 3 || video.error?.code !== MediaError.MEDIA_ERR_NETWORK) return;
+        updateButton();
+        if (!onScreen() || retries >= 3 || video.error?.code !== MediaError.MEDIA_ERR_NETWORK) return;
         const resumeTime = video.currentTime;
         retryTimer = setTimeout(() => {
-          if (!visible || document.hidden) return;
+          if (!onScreen()) return;
           if (resumeTime > 0) video.addEventListener("loadedmetadata", () => {
             if (resumeTime < video.duration) video.currentTime = resumeTime;
           }, { once: true, signal });
@@ -190,6 +237,7 @@ const muteSound = english ? "Mute sound" : "Silenciar";
         events.abort();
         observer?.disconnect();
         clearTimeout(retryTimer);
+        clearTimeout(resumeTimer);
         mute();
         video.pause();
         this.#cleanup = undefined;

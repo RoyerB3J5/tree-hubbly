@@ -1,5 +1,6 @@
 ---
 import BackgroundVideo from "../../components/BackgroundVideo.astro";
+import { backgroundVideos } from "../../constants/backgroundVideos";
 
 import Button from "../../components/Button.astro";
 import LayoutSec from "../../layouts/LayoutSec.astro";
@@ -34,7 +35,6 @@ const content = {
     }
   ],
   videoDescription:'Más Tree Pros. Negocios más fuertes. <span class="text-secondary"> <br /> Un mañana más verde.</span>',
-  videoUrl: "https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/banner.mp4",
 };
 
 ---
@@ -68,7 +68,7 @@ const content = {
     <div class='w-full flex justify-start items-end h-[30vh] md:h-[30vh] relative'>
       <BackgroundVideo
         class="absolute inset-0 w-full h-full object-cover object-center"
-        src={content.videoUrl}
+        {...backgroundVideos.scale}
         poster="/images/fondo-hero.webp"
         sound={false}
       />
