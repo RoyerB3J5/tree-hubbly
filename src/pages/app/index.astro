@@ -1,4 +1,5 @@
 ---
+import BackgroundVideo from "../../components/BackgroundVideo.astro";
 
 import Button from "../../components/Button.astro";
 import LayoutSec from "../../layouts/LayoutSec.astro";
@@ -54,7 +55,12 @@ const content = {
       />
     </div>
     <div class='w-full h-auto aspect-398/243  rounded-2xl relative overflow-hidden'>
-      <video class="w-full h-full absolute inset-0 object-cover object-center" src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/video_hero.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+      <BackgroundVideo
+        class="absolute inset-0 w-full h-full object-cover object-center"
+        src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/video_hero.mp4"
+        poster="/images/hero-frames/frame_0000.webp"
+        sound={false}
+      />
     </div>
     <div class='w-full flex justify-center items-stretch gap-4 p-4 rounded-2xl bg-[#071E31] border border-[#152D47]'>
       {

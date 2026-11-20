@@ -1,0 +1,206 @@
+---
+import { FiVolume2, FiVolumeX } from "react-icons/fi";
+
+interface Props {
+  src: string;
+  poster?: string;
+  class?: string;
+  eager?: boolean;
+  sound?: boolean;
+}
+
+const { src, poster, class: videoClass, eager = false, sound = true } = Astro.props;
+const english = Astro.params.lang === "en";
+const enableSound = english ? "Enable sound" : "Activar sonido";
+const muteSound = english ? "Mute sound" : "Silenciar";
+---
+<background-video data-src={src}>
+  <video
+    class={videoClass}
+    src={eager ? src : undefined}
+    poster={poster}
+    autoplay={eager}
+    muted
+    playsinline
+    loop
+    preload={eager ? "auto" : "none"}
+    aria-hidden="true"
+    tabindex="-1"
+  ></video>
+  {eager && poster && (
+    <img class={videoClass} src={poster} alt="" fetchpriority="high" data-video-poster hidden />
+  )}
+  {sound && (
+    <button type="button" aria-label={enableSound} data-enable={enableSound} data-mute={muteSound} data-muted hidden>
+      <span data-sound-off aria-hidden="true"><FiVolumeX size={20} /></span>
+      <span data-sound-on aria-hidden="true"><FiVolume2 size={20} /></span>
+    </button>
+  )}
+</background-video>
+
+<style>
+  background-video { display: contents; }
+
+  video { pointer-events: none; }
+  video::-webkit-media-controls-start-playback-button { display: none !important; }
+  video::-webkit-media-controls-overlay-play-button { display: none !important; }
+
+  button {
+    position: absolute;
+    top: .75rem;
+    right: .75rem;
+    z-index: 15;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgb(255 255 255 / .55);
+    border-radius: .5rem;
+    background: rgb(5 23 37 / .9);
+    color: white;
+    cursor: pointer;
+  }
+  button:not([hidden]) {
+    display: grid;
+    place-items: center;
+  }
+  button[data-muted] [data-sound-on],
+  button:not([data-muted]) [data-sound-off] {
+    display: none;
+  }
+  button:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+  }
+</style>
+
+<script>
+  let audibleVideo: HTMLVideoElement | undefined;
+
+  class BackgroundVideo extends HTMLElement {
+    #cleanup?: () => void;
+
+    connectedCallback() {
+      const video = this.querySelector("video");
+      const button = this.querySelector("button");
+      const poster = this.querySelector<HTMLImageElement>("[data-video-poster]");
+      const src = this.dataset.src;
+      if (this.#cleanup || !video || !src) return;
+
+      const events = new AbortController();
+      const { signal } = events;
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const bounds = video.getBoundingClientRect();
+      let visible = bounds.bottom > 0 && bounds.top < window.innerHeight;
+      let retries = 0;
+      let retryTimer: ReturnType<typeof setTimeout>;
+
+      const eager = video.autoplay;
+      video.defaultMuted = true;
+      video.muted = true;
+      if (reducedMotion.matches) video.autoplay = false;
+      if (poster) poster.hidden = !video.paused && video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA;
+
+      const mute = () => {
+        video.muted = true;
+        if (audibleVideo === video) audibleVideo = undefined;
+      };
+
+      const updateButton = () => {
+        if (!button) return;
+        button.toggleAttribute("data-muted", video.muted);
+        button.setAttribute("aria-label", (video.muted ? button.dataset.enable : button.dataset.mute) ?? "");
+      };
+
+      const play = () => {
+        if (video.error) return;
+        if (!video.hasAttribute("src")) video.src = src;
+        if (video.paused) return video.play();
+      };
+
+      const syncPlayback = () => {
+        if (!visible || document.hidden) {
+          mute();
+          video.pause();
+        } else if (!reducedMotion.matches || !video.muted) {
+          play()?.catch(() => {});
+        } else {
+          video.pause();
+        }
+      };
+
+      const observer = "IntersectionObserver" in window ? new IntersectionObserver(([entry]) => {
+        visible = Boolean(entry?.isIntersecting);
+        syncPlayback();
+      }) : undefined;
+      observer?.observe(video);
+      if (!observer) visible = true;
+
+      if (button) {
+        button.hidden = false;
+        button.addEventListener("click", () => {
+          if (video.error) return;
+          if (!video.muted) {
+            mute();
+            syncPlayback();
+          } else {
+            if (audibleVideo) audibleVideo.muted = true;
+            audibleVideo = video;
+            video.muted = false;
+            play()?.catch(() => {
+              if (signal.aborted || audibleVideo !== video) return;
+              mute();
+              syncPlayback();
+            });
+          }
+          updateButton();
+        }, { signal });
+      }
+
+      video.addEventListener("volumechange", updateButton, { signal });
+      video.addEventListener("canplay", syncPlayback, { once: true, signal });
+      video.addEventListener("playing", () => {
+        if (poster) poster.hidden = true;
+        retries = 0;
+      }, { signal });
+      video.addEventListener("pause", () => {
+        if (poster) poster.hidden = false;
+      }, { signal });
+      video.addEventListener("error", () => {
+        if (poster) poster.hidden = false;
+        if (!visible || retries >= 3 || video.error?.code !== MediaError.MEDIA_ERR_NETWORK) return;
+        const resumeTime = video.currentTime;
+        retryTimer = setTimeout(() => {
+          if (!visible || document.hidden) return;
+          if (resumeTime > 0) video.addEventListener("loadedmetadata", () => {
+            if (resumeTime < video.duration) video.currentTime = resumeTime;
+          }, { once: true, signal });
+          video.load();
+          syncPlayback();
+        }, 1000 * ++retries);
+      }, { signal });
+
+      reducedMotion.addEventListener("change", syncPlayback, { signal });
+      document.addEventListener("visibilitychange", syncPlayback, { signal });
+      window.addEventListener("pageshow", syncPlayback, { signal });
+      if (eager) {
+        // Retry inside a real gesture when the browser blocks background autoplay.
+        document.addEventListener("click", syncPlayback, { capture: true, signal });
+        document.addEventListener("touchend", syncPlayback, { passive: true, signal });
+      }
+      this.#cleanup = () => {
+        events.abort();
+        observer?.disconnect();
+        clearTimeout(retryTimer);
+        mute();
+        video.pause();
+        this.#cleanup = undefined;
+      };
+      syncPlayback();
+    }
+
+    disconnectedCallback() {
+      this.#cleanup?.();
+    }
+  }
+
+  if (!customElements.get("background-video")) customElements.define("background-video", BackgroundVideo);
+</script>

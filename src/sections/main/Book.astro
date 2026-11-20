@@ -1,4 +1,5 @@
 ---
+import BackgroundVideo from "../../components/BackgroundVideo.astro";
 import FormContact from "../../components/FormContact.astro";
 
 type Translations = typeof import("../../i18n/en-2").default;
@@ -18,9 +19,10 @@ const { content } = Astro.props as Props;
     <div class="book-card animation-image-reveal-trigger w-full relative h-auto rounded-2xl " style="aspect-ratio: 628 / 413;">
       <div class="book-image animation-image-reveal animation-image-reveal--left-to-right w-full h-full relative rounded-2xl overflow-hidden">
         <div class="animation-image-reveal-mask w-full h-full relative overflow-hidden rounded-2xl">
-          <video class="book-video absolute inset-0 w-full h-full object-cover object-center" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1">
-            <source src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/video_main_2.mp4" type="video/mp4">
-          </video>
+          <BackgroundVideo
+            class="absolute inset-0 w-full h-full object-cover object-center"
+            src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/video_main_2.mp4"
+          />
         </div>
       </div>
     </div>
@@ -41,19 +43,6 @@ const { content } = Astro.props as Props;
 
       const image = book.querySelector<HTMLElement>(".book-image");
       const revealImage = image ? prepareImageReveal(image) : () => {};
-      const video = book.querySelector<HTMLVideoElement>(".book-video");
-      const playVideo = () => {
-        if (!video || document.hidden || !video.paused) return;
-        video.play().catch(() => {});
-      };
-
-      video?.addEventListener("loadeddata", playVideo, { once: true });
-      video?.addEventListener("canplay", playVideo, { once: true });
-      video?.addEventListener("pause", playVideo);
-      document.addEventListener("visibilitychange", playVideo);
-      window.addEventListener("pageshow", playVideo);
-      document.addEventListener("pointerdown", playVideo, { passive: true });
-      playVideo();
 
       const groups = [
         { target: heading, delay: 0, reveal: () => heading?.querySelectorAll("p, h2").forEach((element) => element.classList.add("active")) },

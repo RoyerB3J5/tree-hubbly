@@ -16,16 +16,16 @@ const { content } = Astro.props as Props;
     <div class="system-reasons-slides">
   {
     content.items.map((item,index)=>(
-      <div class="system-reasons-slide flex justify-between items-end gap-8 lg:gap-14 h-full md:h-auto xl:[@media(height_<_810px)]:h-screen py-12 md:py-20 xl:[@media(height_<_810px)]:py-0">
-        <div class="system-reasons-copy flex flex-col justify-end items-start gap-8 max-w-[40%]">
+      <div class="system-reasons-slide flex justify-between items-end gap-8 lg:gap-14 md:h-auto xl:[@media(height_<_810px)]:h-screen md:py-20 xl:[@media(height_<_810px)]:py-0">
+        <div class="system-reasons-copy flex flex-col justify-end items-start gap-4 md:gap-8 max-w-[40%]">
           <h2 set:html={item.title} class="heading-h4 text-paragraph"></h2>
           <p set:html={item.description} class="body-md text-paragraph"></p>
-          <div class='system-reasons-what w-full grid grid-col-1 md:grid-cols-2 justify-center items-start gap-6'>
+          <div class='system-reasons-what w-full grid grid-cols-1 md:grid-cols-2 justify-center items-start gap-3 md:gap-6'>
             {
               item.what.map((item)=>(
-                <div class='flex flex-col justify-start items-start gap-6 text-paragraph'>
+                <div class='flex flex-col justify-start items-start gap-3 md:gap-6 text-paragraph'>
                   <h3 class="body-md mb-0 md:mb-3 lg:mb-0">{item.title}</h3>
-                  <ul class='flex flex-col justify-start items-start gap-6 text-paragraph'>
+                  <ul class='flex flex-col justify-start items-start gap-3 md:gap-6 text-paragraph'>
                     {
                       item.list.map((i)=>(
                       <li class='fade-up-a flex justify-start items-start gap-2'> <div class={`w-1.5 h-1.5 bg-secondary shrink-0`}></div><p class='body-md '>{i}</p></li>
@@ -135,10 +135,49 @@ const { content } = Astro.props as Props;
     .system-reasons.is-pinned .system-reasons-panel a { padding-block: 0.5rem; }
     .system-reasons.is-pinned .animation-image-reveal-trigger { max-width: min(50%, calc((100svh - 160px) * 628 / 650)); }
   }
-  @media (max-width: 767px) {
-    .system-reasons-index { margin-bottom: 2rem; }
-    .system-reasons-slide { flex-direction: column; align-items: stretch; gap: 2rem; }
+  @media (width < 48rem), (pointer: coarse) and (orientation: landscape) and (width <= 60rem) {
+    .system-reasons,
+    .system-reasons.is-pinned { padding-block: 1rem; min-height: 100svh; }
+    .system-reasons.is-pinned { height: 100svh; }
+    /* The fixed header reappears when scrolling back up. */
+    .system-reasons.is-pinned .system-reasons-inner { margin-top: 3.5rem; }
+    .system-reasons-index { position: relative; top: auto; transform: none; margin-bottom: 1.5rem; }
+    .system-reasons-slides { padding-left: 0; gap: 1.5rem; }
+    .system-reasons-slide { flex-direction: column; align-items: stretch; }
     .system-reasons-slide > div { width: 100%; max-width: none; }
+    .system-reasons.is-pinned .system-reasons-slide { padding-block: 0; }
+    .system-reasons.is-pinned .animation-image-reveal-trigger { display: none; }
+    .system-reasons.is-pinned .system-reasons-index { margin-bottom: 1.5rem; }
+    .system-reasons.is-pinned .system-reasons-copy { max-width: none; }
+    .system-reasons.is-pinned .system-reasons-panels { display: none; }
+    .system-reasons.is-compact .system-reasons-copy > div,
+    .system-reasons.is-compact .system-reasons-copy ul,
+    .system-reasons.is-compact .system-reasons-copy > div > div { gap: .25rem; }
+    .system-reasons.is-compact .system-reasons-inner {
+      display: flex;
+      flex-direction: column;
+      max-height: calc(100svh - 5.5rem);
+    }
+    .system-reasons.is-compact .system-reasons-index { flex: none; padding-bottom: .5rem; }
+    .system-reasons.is-compact .system-reasons-index ol {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: .25rem .5rem;
+      padding-left: 0;
+    }
+    .system-reasons.is-compact .system-reasons-index-item { font-size: .75rem; }
+    .system-reasons.is-compact .system-reasons-index-track { top: auto; bottom: 0; height: 2px; width: 100%; }
+    .system-reasons.is-compact .system-reasons-index-fill { transform: scaleX(.3333); }
+    .system-reasons.is-compact .system-reasons-slides { min-height: 0; overflow: clip; grid-auto-rows: minmax(0, 1fr); }
+    .system-reasons.is-compact .system-reasons-slide { align-self: start; gap: 0; }
+    .system-reasons.is-compact .system-reasons-copy { gap: .375rem; }
+    .system-reasons.is-compact .heading-h4 { font-size: 1.375rem; line-height: 1.12; }
+    .system-reasons.is-compact .body-md { font-size: .875rem; line-height: 1.25; }
+    .system-reasons.is-compact .system-reasons-what { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: .5rem; }
+    .system-reasons.is-compact .system-reasons-what > div,
+    .system-reasons.is-compact .system-reasons-what ul { gap: .25rem; }
+    .system-reasons.is-compact .system-reasons-what h3 { font-weight: 600; }
   }
 </style>
 
@@ -151,21 +190,31 @@ const { content } = Astro.props as Props;
     const slides = gsap.utils.toArray<HTMLElement>(section.querySelectorAll(".system-reasons-slide"));
     const items = gsap.utils.toArray<HTMLElement>(section.querySelectorAll(".system-reasons-index-item"));
     const fill = section.querySelector<HTMLElement>(".system-reasons-index-fill");
-    if (!slides.length || !fill) return;
+    const inner = section.querySelector<HTMLElement>(".system-reasons-inner");
+    const deck = section.querySelector<HTMLElement>(".system-reasons-slides");
+    if (!slides.length || !fill || !inner || !deck) return;
 
-    const media = gsap.matchMedia();
-    media.add("(prefers-reduced-motion: no-preference)", () => {
-      // Keep the normal document flow when the content cannot fit on screen.
+    let media = gsap.matchMedia();
+    const motionQuery = "(prefers-reduced-motion: no-preference)";
+    const mobileQuery = window.matchMedia("(width < 48rem), (pointer: coarse) and (orientation: landscape) and (width <= 60rem)");
+    const setup = () => {
+      const mobile = mobileQuery.matches;
       section.classList.add("is-pinned");
-      if (section.scrollHeight > window.innerHeight + 1) {
+      const compact = mobile && inner.offsetHeight + parseFloat(getComputedStyle(inner).marginTop)
+        + 2 * parseFloat(getComputedStyle(section).paddingTop) > section.clientHeight;
+      section.classList.toggle("is-compact", compact);
+      const fillAxis = compact ? "scaleX" : "scaleY";
+
+      if (!mobile && section.scrollHeight > window.innerHeight + 1) {
         section.classList.remove("is-pinned");
         if (window.innerWidth > 1028) return;
 
-        // On short screens, keep every slide readable in the normal flow.
         const setActiveSlide = (index: number) => {
           items.forEach((item, itemIndex) => item.classList.toggle("is-active", itemIndex === index));
-          gsap.set(fill, { scaleY: (index + 1) / slides.length });
+          fill.style.transform = `scaleY(${(index + 1) / slides.length})`;
         };
+        setActiveSlide(0);
+
         const triggers = slides.map((slide, index) => ScrollTrigger.create({
           trigger: slide,
           start: "top center",
@@ -173,17 +222,16 @@ const { content } = Astro.props as Props;
           onEnter: () => setActiveSlide(index),
           onEnterBack: () => setActiveSlide(index),
         }));
-        setActiveSlide(0);
         ScrollTrigger.refresh();
         return () => {
           triggers.forEach((trigger) => trigger.kill());
           items.forEach((item) => item.classList.remove("is-active"));
-          gsap.set(fill, { clearProps: "transform" });
+          fill.style.removeProperty("transform");
         };
       }
 
       gsap.set(slides.slice(1), { autoAlpha: 0 });
-      gsap.set(fill, { scaleY: 1 / slides.length });
+      gsap.set(fill, { [fillAxis]: 1 / slides.length });
       items[0]?.classList.add("is-active");
       let revealedIndex = -1;
       let revealVersion = 0;
@@ -227,15 +275,15 @@ const { content } = Astro.props as Props;
       const timeline = gsap.timeline({
         onUpdate(this: gsap.core.Animation) {
           // Start the entrance after the incoming slide has finished fading in.
-          const activeIndex = Math.min(slides.length - 1, Math.floor((this.time() + 0.15) / 0.5));
+          const activeIndex = Math.min(slides.length - 1, Math.floor((this.time() + (mobile ? 0 : 0.15)) / 0.5));
           items.forEach((item, index) => item.classList.toggle("is-active", index === activeIndex));
-          if (this.scrollTrigger && this.scrollTrigger.progress > 0) revealSlide(activeIndex);
+          if (this.scrollTrigger && (this.scrollTrigger.progress > 0 || (mobile && revealedIndex !== -1))) revealSlide(activeIndex);
         },
         scrollTrigger: {
           trigger: section,
           refreshPriority: -1,
           start: "top top",
-          end: () => `+=${window.innerHeight * (slides.length - 1 + 0.7) * 0.9}`,
+          end: () => `+=${(mobile ? section.clientHeight : window.innerHeight) * (slides.length - 1 + 0.7) * 0.9}`,
           pin: true,
           anticipatePin: 1,
           pinSpacing: true,
@@ -243,20 +291,37 @@ const { content } = Astro.props as Props;
           onEnter: () => {
             if (revealedIndex === -1) revealSlide(0);
           },
-          onEnterBack: () => revealSlide(slides.length - 1),
+          onEnterBack: () => { if (!mobile) revealSlide(slides.length - 1); },
           invalidateOnRefresh: true,
         },
       });
 
       slides.slice(1).forEach((slide, index) => {
+        // Native touch scrolling can stop anywhere in the timeline.
+        if (mobile) {
+          const changeAt = 0.5 * (index + 1);
+          timeline.set(slides[index], { autoAlpha: 0 }, changeAt)
+            .set(slide, { autoAlpha: 1 }, changeAt);
+          return;
+        }
+
         const at = 0.5 * index + 0.2;
         // Finish hiding the outgoing slide before revealing the next one.
         // A wheel stop must never leave two readable slides stacked together.
         timeline.to(slides[index], { autoAlpha: 0, duration: 0.1, ease: "power1.in" }, at)
           .to(slide, { autoAlpha: 1, duration: 0.15, ease: "power1.out" }, at + 0.1);
       });
-      timeline.to(fill, { scaleY: 1, ease: "none", duration: timeline.duration() }, 0)
-        .to({}, { duration: 0.5 });
+      if (mobile) timeline.to({}, { duration: 0.5 });
+      if (compact) {
+        // Use the same page scroll to reveal the rest of an oversized stage.
+        slides.forEach((slide, index) => {
+          const overflow = slide.offsetHeight - deck.clientHeight;
+          if (overflow > 0) timeline.to(slide, { y: -overflow, duration: 0.4, ease: "none" }, index * 0.5 + 0.06);
+        });
+      }
+      const fillDuration = timeline.duration();
+      timeline.to(fill, { [fillAxis]: 1, ease: "none", duration: fillDuration }, 0);
+      if (!mobile) timeline.to({}, { duration: 0.5 });
 
       const firstSlideObserver = new IntersectionObserver((entries) => {
         if (entries.some((entry) => entry.isIntersecting) && revealedIndex === -1) {
@@ -269,27 +334,41 @@ const { content } = Astro.props as Props;
 
 
       // Earlier pinned sections must be measured before this section.
-      const stopScrollSteps = bindScrollSteps(timeline, [0, ...slides.slice(1).map((_, index) => (0.5 * index + 0.5) / (0.5 * (slides.length - 2) + 0.95)), 1]);
+      const stopScrollSteps = mobile ? undefined : bindScrollSteps(timeline, [0, ...slides.slice(1).map((_, index) => (0.5 * index + 0.5) / (0.5 * (slides.length - 2) + 0.95)), 1]);
       ScrollTrigger.sort();
       ScrollTrigger.refresh();
 
       return () => {
-        stopScrollSteps();
+        stopScrollSteps?.();
         revealVersion++;
+        revealedIndex = -1;
         firstSlideObserver.disconnect();
-        section.classList.remove("is-pinned");
+        section.classList.remove("is-pinned", "is-compact");
         items.forEach((item) => item.classList.remove("is-active"));
         slides.forEach((slide) => {
           slide.querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, .fade-up-a, .animation-image-reveal").forEach((element) => { if (!element.closest("a, button")) element.classList.add("active"); });
         });
       };
-    });
+    };
+    media.add(motionQuery, setup);
 
-    // Re-evaluate whether the section fits after viewport resizing.
+    const rebuild = () => {
+      media.revert();
+      media = gsap.matchMedia();
+      media.add(motionQuery, setup);
+    };
+    let width = window.innerWidth;
+    let stableHeight = getComputedStyle(section).minHeight;
     let resizeTimer: ReturnType<typeof setTimeout>;
     window.addEventListener("resize", () => {
+      // Safari can emit resize as its toolbars move. The mobile pin uses svh.
+      const nextHeight = getComputedStyle(section).minHeight;
+      if (mobileQuery.matches && window.innerWidth === width && stableHeight === nextHeight) return;
+      width = window.innerWidth;
+      stableHeight = nextHeight;
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => gsap.matchMediaRefresh(), 150);
+      resizeTimer = setTimeout(rebuild, 150);
     });
+    document.fonts.ready.then(rebuild);
   });
 </script>

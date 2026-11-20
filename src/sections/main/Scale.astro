@@ -1,4 +1,5 @@
 ---
+import BackgroundVideo from "../../components/BackgroundVideo.astro";
 type Translations = typeof import("../../i18n/en-2").default;
 type Content = Translations["main"]["grow"];
 interface Props {
@@ -7,18 +8,12 @@ interface Props {
 const { content } = Astro.props as Props;
 ---
 <section class="home-scale w-full flex justify-center items-center relative h-[600px] md:h-[40dvh] xl:h-[80dvh] bg-white">
-  <video
-    loop
-    muted
-    playsinline
-    preload="metadata"
+  <BackgroundVideo
+    class="home-scale__video absolute inset-0 z-0 w-full h-full object-cover object-center"
+    src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/banner.mp4"
     poster="/images/fondo-hero.webp"
-    aria-label="Where Tree Companies Scale"
-    class="home-scale__video w-full h-full object-cover object-center z-0 absolute inset-0"
-  >
-    <source data-src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/banner.mp4" type="video/mp4">
-    Tu navegador no puede reproducir este video.
-  </video>
+    sound={false}
+  />
   <div class="absolute w-full h-full inset-0 z-1 back-main-3"></div>
   <div class=" container-full py-10 md:py-20 flex justify-start items-end gap-6 h-full relative z-10">
     <div class="flex jusitfy-center items-center gap-6">
@@ -34,31 +29,6 @@ const { content } = Astro.props as Props;
   document.querySelectorAll<HTMLElement>(".home-scale").forEach((section) => {
     const video = section.querySelector<HTMLVideoElement>(".home-scale__video");
     if (!video) return;
-
-    const source = video.querySelector<HTMLSourceElement>("source[data-src]");
-    const playVideo = () => {
-      if (source?.dataset.src && !source.src) {
-        source.src = source.dataset.src;
-        video.load();
-      }
-      if (!document.hidden) video.play().catch(() => {});
-    };
-    let visible = false;
-    const updatePlayback = () => {
-      if (visible && !document.hidden && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) playVideo();
-      else video.pause();
-    };
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(([entry]) => {
-        visible = Boolean(entry?.isIntersecting);
-        updatePlayback();
-      }, { threshold: 0 });
-      observer.observe(section);
-    } else {
-      visible = true;
-      updatePlayback();
-    }
-    document.addEventListener("visibilitychange", updatePlayback);
 
     const media = gsap.matchMedia();
     media.add("(prefers-reduced-motion: no-preference)", () => {

@@ -1,4 +1,5 @@
 ---
+import BackgroundVideo from "../../components/BackgroundVideo.astro";
 import Button from "../../components/Button.astro";
 type Translations = typeof import("../../i18n/en-2").default;
 type HeroContent = Translations["main"]["hero"];
@@ -12,7 +13,13 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
 
 <section class="hero-main hero-sequence w-full relative bg-primary">
   <div class="hero-sequence__viewport w-full flex items-center justify-center text-paragraph">
-    <video class="hero-sequence__media object-cover object-center" src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/video_hero.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+    <BackgroundVideo
+      class="absolute inset-0 w-full h-full object-cover object-center"
+      src="https://pub-9825dca4a1fb47b09d6ba9861c502df4.r2.dev/video_hero.mp4"
+      poster="/images/hero-frames/frame_0000.webp"
+      eager
+      sound={false}
+    />
     <div class="absolute w-full h-full inset-0 z-3 back-hero"></div>
     <div
       class="container-full flex flex-col justify-end items-center pb-12 md:py-14 xl:[@media(height_<_810px)]:py-10 relative z-10 h-full"
@@ -77,46 +84,4 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
 <style>
   .hero-sequence { height: 100svh; }
   .hero-sequence__viewport { position: relative; height: 100svh; overflow: hidden; }
-  .hero-sequence__media { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .hero-sequence__media { pointer-events: none; }
 </style>
-
-<script>
-  document.querySelectorAll<HTMLVideoElement>(".hero-sequence video").forEach((video) => {
-    let retries = 0;
-    let retryTimer: ReturnType<typeof setTimeout> | undefined;
-    let resumeTime = 0;
-
-    const resume = () => {
-      if (document.hidden || video.error || !video.paused) return;
-      video.play().catch(() => {
-        // Autoplay can be temporarily blocked by the browser; retry on return or interaction.
-      });
-    };
-
-    video.addEventListener("pause", () => {
-      if (!document.hidden && !video.ended) {
-        clearTimeout(retryTimer);
-        retryTimer = setTimeout(resume, 500);
-      }
-    });
-    video.addEventListener("timeupdate", () => { resumeTime = video.currentTime; });
-    video.addEventListener("playing", () => { retries = 0; });
-    video.addEventListener("error", () => {
-      if (retries >= 3) return;
-      retries++;
-      clearTimeout(retryTimer);
-      retryTimer = setTimeout(() => {
-        video.load();
-        video.addEventListener("loadedmetadata", () => {
-          if (resumeTime && resumeTime < video.duration) video.currentTime = resumeTime;
-          resume();
-        }, { once: true });
-      }, 2000 * retries);
-    });
-    document.addEventListener("visibilitychange", resume);
-    window.addEventListener("pageshow", resume);
-    document.addEventListener("pointerdown", resume, { passive: true });
-    resume();
-  });
-</script>

@@ -1,4 +1,5 @@
 ---
+import BackgroundVideo from "../../components/BackgroundVideo.astro";
 
 import Button from "../../components/Button.astro";
 import LayoutSec from "../../layouts/LayoutSec.astro";
@@ -65,19 +66,12 @@ const content = {
       </div>
     </div>
     <div class='w-full flex justify-start items-end h-[30vh] md:h-[30vh] relative'>
-      <video
-        autoplay
-        loop
-        muted
-        playsinline
-        preload="metadata"
+      <BackgroundVideo
+        class="absolute inset-0 w-full h-full object-cover object-center"
+        src={content.videoUrl}
         poster="/images/fondo-hero.webp"
-        aria-label="Where Tree Companies Scale"
-        class="home-scale__video w-full h-full object-cover object-center z-0 absolute inset-0"
-      >
-        <source src={content.videoUrl} type="video/mp4">
-        Tu navegador no puede reproducir este video.
-      </video>
+        sound={false}
+      />
       <div class="absolute w-full h-full inset-0 z-1 back-main-3"></div>
       <div class="w-full flex justify-start items-center p-6 gap-2.5 relative z-5">
           <img src="/images/icons/logo-white.svg" alt="Logo" class="w-auto h-[36px]" width="24" height="36" decoding="async" loading="lazy" />
