@@ -20,7 +20,9 @@ const { content, showDescriptionOnMobile = false } = Astro.props as Props;
       poster="/images/hero-frames/frame_0000.webp"
       eager
       sound={false}
-    />
+    >
+      <source slot="mobile-source" src="/videos/hero-portrait.mp4?v=2" type="video/mp4" media="(max-aspect-ratio: 3/4)" />
+    </BackgroundVideo>
     <div class="absolute w-full h-full inset-0 z-3 back-hero"></div>
     <div
       class="container-full flex flex-col justify-end items-center pb-12 md:py-14 xl:[@media(height_<_810px)]:py-10 relative z-10 h-full"

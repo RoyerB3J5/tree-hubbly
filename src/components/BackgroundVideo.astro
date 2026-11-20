@@ -32,6 +32,7 @@ const muteSound = english ? "Mute sound" : "Silenciar";
     {eager && desktopSrc && (
       <>
         <source src={desktopSrc} type="video/mp4" media={desktopMedia} />
+        <slot name="mobile-source" />
         <source src={src} type="video/mp4" />
       </>
     )}
