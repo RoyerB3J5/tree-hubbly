@@ -1,0 +1,20 @@
+---
+import "../styles/global.css";
+import "../styles/onboarding.css";
+import FooterCopyright from "../components/FooterCopyright.astro";
+interface Props { title: string; }
+const { title } = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title} | Treehubly</title>
+  </head>
+  <body class="onboarding-body">
+    <main class="onboarding-main"><slot /><noscript>Activa JavaScript para usar el onboarding.</noscript></main>
+    <FooterCopyright />
+  </body>
+</html>

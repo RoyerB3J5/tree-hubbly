@@ -28,3 +28,33 @@ document.addEventListener("click", (event) => {
     block: "start",
   });
 });
+
+function scrollToInitialHash(attempt = 0) {
+  if (!window.location.hash) return;
+
+  let id: string;
+  try {
+    id = decodeURIComponent(window.location.hash.slice(1));
+  } catch {
+    return;
+  }
+
+  const destination = document.getElementById(id);
+  if (destination) {
+    destination.scrollIntoView({
+      behavior: "instant",
+      block: "start",
+    });
+    return;
+  }
+
+  if (attempt < 20) {
+    window.setTimeout(() => scrollToInitialHash(attempt + 1), 100);
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => scrollToInitialHash(), { once: true });
+} else {
+  scrollToInitialHash();
+}

@@ -18,13 +18,13 @@ export default defineConfig({
   i18n: {
     defaultLocale: "en",
     locales: ["es", "en"],
-    routing: {
-      prefixDefaultLocale: true,
-      redirectToDefaultLocale: false,
-    },
+    routing: "manual",
   },
 
   integrations: [react(), icon(), sitemap({
-    filter: (page) => new URL(page).pathname !== "/",
+    filter: (page) => {
+      const { pathname } = new URL(page);
+      return pathname !== "/" && !pathname.startsWith("/onboarding/");
+    },
   })],
 });

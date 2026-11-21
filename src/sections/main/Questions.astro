@@ -7,6 +7,6 @@ interface Props {
 }
 const { content } = Astro.props as Props;
 ---
-<div class="questions-section w-full">
+<div class="questions-section w-full" id="questions">
   <QuestionsAccordion content={content} client:load />
 </div>

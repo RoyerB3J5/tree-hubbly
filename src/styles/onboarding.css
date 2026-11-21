@@ -1,0 +1,109 @@
+.onboarding-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    linear-gradient(180deg, rgba(7, 152, 240, 0.04), rgba(7, 152, 240, 0.2)),
+    #04121e;
+  color: #f7f7f7;
+}
+.onboarding-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.onboarding-button {
+  background: #91d200;
+  color: #04121e;
+  border: 0;
+  border-radius: 8px;
+  min-height: 48px;
+  padding: 0 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.onboarding-button:disabled {
+  cursor: not-allowed;
+}
+.onboarding-progress {
+  appearance: none;
+  -webkit-appearance: none;
+}
+.onboarding-progress::-webkit-progress-bar {
+  background: #1e293b;
+  border-radius: 9999px;
+}
+.onboarding-progress::-webkit-progress-value {
+  background: #91d200;
+  border-radius: 9999px;
+}
+.onboarding-progress::-moz-progress-bar {
+  background: #91d200;
+  border-radius: 9999px;
+}
+.onboarding-login > img {
+  width: 164px;
+  height: auto;
+}
+.onboarding-login {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+  padding: 48px 24px;
+  overflow-y: auto;
+}
+.onboarding-login > div {
+  width: min(100%, 628px);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.onboarding-login input {
+  box-sizing: border-box;
+
+  text-box-trim: none;
+  text-box-edge: auto;
+}
+.login-card {
+  width: min(100%, 620px);
+  background: #f7f7f7;
+  color: #051725;
+  border-radius: 8px;
+  padding: 24px;
+}
+.login-card h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.login-card p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.login-card form {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+.login-card label {
+  font-size: 13px;
+  display: grid;
+  gap: 6px;
+}
+.login-card input {
+  height: 44px;
+  border: 1px solid #c6c6c6;
+  border-radius: 5px;
+  padding: 0 14px;
+  width: 100%;
+}
+.login-card input::placeholder {
+  color: #aaa;
+}
+.login-card form .onboarding-button {
+  width: 100%;
+  margin-top: 8px;
+}
